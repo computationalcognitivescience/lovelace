@@ -1,0 +1,52 @@
+---
+# Jekyll needs front matter for SCSS files
+---
+
+#toc-wrapper {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+#markdown-toc {
+  list-style-type: none;
+  overflow-y: hidden;
+  background-color: #202020;
+}
+
+#markdown-toc li ul {
+  display: none;
+}
+
+#markdown-toc li {
+  float: left;
+}
+
+#markdown-toc li a {
+  display: block;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+
+#markdown-toc li a:hover {
+  background-color: #333;
+}
+
+
+@import "hydeout";
+
+/* Overriding container and content defaults to support sticky navigation bar.
+*/
+.container {
+  padding: 0rem 0rem 0rem;
+
+  > .content {
+    padding-top: $section-spacing;
+    padding-left: $section-spacing;
+    padding-right: $section-spacing;
+  }
+}
