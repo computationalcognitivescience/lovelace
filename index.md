@@ -23,12 +23,18 @@ val p3 = Person.random
 val p4 = Person.random
 
 val relations = Set(
-    Relation(p1, p2, true),
-    Relation(p1, p3, false),
-    Relation(p1, p4, true),
-    Relation(p2, p3, false),
-    Relation(p2, p4, true),
-    Relation(p3, p4, false)
+  p1 likes p2,
+  p1 dislikes p3,
+  p1 likes p4,
+  p2 dislikes p3,
+  p2 likes p4,
+  p3 dislikes p4
+    // Relation(p1, p2, true),
+    // Relation(p1, p3, false),
+    // Relation(p1, p4, true),
+    // Relation(p2, p3, false),
+    // Relation(p2, p4, true),
+    // Relation(p3, p4, false)
 )
 
 def r(a: Person, b: Person): Boolean = {
