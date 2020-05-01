@@ -32,8 +32,13 @@ val data2: List[Map[String, Any]] = List(
   Map("a" -> "G", "b" -> 9), Map("a" -> "H", "b" -> 78), Map("a" -> "I", "b" -> 72)
 )
 
-render(plotSeries(List(Trace("data1", data1), Trace("data2", data2)),
-  "a", "xAxis", "b", "yAxis", "myTitle", PlotType.Line))
+render(traces = List(Trace("data1", data1), Trace("data2", data2)),
+       xValue = "a",
+       xLabel = "xAxis",
+       yValue = "b",
+       yLabel = "yAxis",
+       title = "myTitle",
+       plotType = PlotType.Line)
 ```
 {% endscalafiddle %}
 
