@@ -11,16 +11,56 @@ sidebar_sort_order: 2
 {:toc}
 </div>
 
-# Theory version 1
-<span style="font-variant:small-caps;">Theory version 1</span><br/>
+# Selecting invitees V1
+<span style="font-variant:small-caps;">Selecting invitees V1</span><br/>
 *Input:* A set of people $$P$$, some of whom you like ($$L \subseteq P$$) and some of whom you dislike ($$D \subseteq P$$), and a relationship $$r: P \times P \rightarrow \{like, dislike\}$$ specifying for each pair of persons $$(p_i, p_j) \in P$$ whether or not they like each other.<br/>
 *Output:* A set of invited guests $$G \subseteq L$$ that all like each other (i.e., for each pair $$(p_i, p_j)$$ with $$p_i,p_j \in G$$, $$r(p_i,p_j) = like$$).
 
 Note that there may be multiple possible outputs consistent for any given input, our simulation below generates all of them.
 
-{% scalafiddle template="Persons" %}
+{% scalafiddle template="Persons", minheight="700", layout="v50" %}
 ```scala
-def theoryV1(p: Set[Person],
+def selectingInvitees1(p: Set[Person],
+             l: Set[Person],
+             d: Set[Person],
+             like: (Person, Person) => Boolean): Set[Person] = {
+    assert(l.subsetOf(p), "l is not a subset of p")
+    assert(d.subsetOf(p), "d is not a subset of p")
+
+    val solutions =
+      for(subset <- l.subsets if subset.uniquepairs.forall(Function.tupled(like)))
+        yield subset
+
+    solutions(Random.nextInt(solutions.size))
+}
+
+val a = Person.random
+val b = Person.random
+val c = Person.random
+val d = Person.random
+val e = Person.random
+val f = Person.random
+
+val relations = Set(
+  a likes b, b likes c, c likes d, c likes f, d likes e, d likes f, e likes f
+)
+
+val P = Set(a, b, c, d, e, f)
+val L = P
+val D = Set[Person]()
+
+val output = selectingInvitees1(P, L, D, relations.deriveFun)
+
+println(P)
+// println(relations.toString(P))
+println(output)
+```
+{% endscalafiddle %}
+
+# Selecting invitees V2
+{% scalafiddle template="Persons", minheight="700", layout="v50" %}
+```scala
+def selectingInvitees2(p: Set[Person],
              l: Set[Person],
              d: Set[Person],
              r: (Person, Person) => Boolean): Set[Person] = {
@@ -30,46 +70,39 @@ def theoryV1(p: Set[Person],
     val solutions = (for(subset <- l.subsets if forallUniquePairs(subset, r)) yield subset).toVector
     solutions(Random.nextInt(solutions.size))
 }
+
+val a = Person.random
+val b = Person.random
+val c = Person.random
+val d = Person.random
+val e = Person.random
+val f = Person.random
+
+val relations = Set(
+  a likes b, b likes c, c likes d, c likes f, d likes e, d likes f, e likes f
+)
+
+val P = Set(a, b, c, d, e, f)
+val L = P
+val D = Set[Person]()
+
+val output = theoryV1(P, L, D, relations.deriveFun)
+
+println(P)
+println(relations.toString(P))
+println(output)
 ```
 {% endscalafiddle %}
 
-# Another section
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 
 ## Subsections aren't listed on topics
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-{% scalafiddle template="Persons" %}
+{% scalafiddle template="Persons", minheight="800", layout="v65" %}
 ```scala
-import scalatags.JsDom.all._
-
-Fiddle.loadJS("https://cdn.jsdelivr.net/npm/vega@5")
-Fiddle.loadJS("https://cdn.jsdelivr.net/npm/vega-lite@4")
-Fiddle.loadJS("https://cdn.jsdelivr.net/npm/vega-embed@5")
-
-val ht = div("Results:",tag("iframe")(
-    html(
-    head(
-      script(src := "https://cdn.jsdelivr.net/npm/vega@5"),
-      script(src := "https://cdn.jsdelivr.net/npm/vega-lite@4"),
-      script(src := "https://cdn.jsdelivr.net/npm/vega-embed@6")
-      ),
-      body(
-      h1("I'm a title."),
-      div(id := "link-wrapper")(
-        a(href := "#", target := "_blank")(
-          "I'm a link."
-        )
-      )
-    )
-    ))
-  )
-
-val visdiv = div(id := "vis")
-val visscript = script(`type` := "text/javascript",
+VegaRenderer.render(
 """
-  var yourVlSpec = {
     $schema: 'https://vega.github.io/schema/vega-lite/v2.0.json',
     description: 'A simple bar chart with embedded data.',
     data: {
@@ -90,17 +123,7 @@ val visscript = script(`type` := "text/javascript",
       x: {field: 'a', type: 'ordinal'},
       y: {field: 'b', type: 'quantitative'}
     }
-  };
-  vg.embed('#vis', yourVlSpec, function(error, result) {
-  // Callback receiving the View instance and parsed Vega spec
-  // result.view is the View, which resides under the '#vis' element
-  // result.spec is the parsed spec
-});
 """
 )
-val wrapper = div(visdiv, visscript)
-Fiddle.print(wrapper.render)
-
-
 ```
 {% endscalafiddle %}
