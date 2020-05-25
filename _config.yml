@@ -18,14 +18,14 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Theory for Social Psycholgy
+title: Academic Jekyll
 email: m.blokpoel@donders.ru.nl
 description: >- # this means to ignore newlines until "baseurl:"
-  Companion website with interactive exercises for the manuscript.
-baseurl: "/lovelace" # the subpath of your site, e.g. /blog
+  Academic Jekyll based on Hydeout with custom extensions.
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: irisvanrooij
-github_username:  markblokpoel
+twitter_username:
+github_username:
 
 # Build settings
 theme: jekyll-theme-hydeout
@@ -33,6 +33,11 @@ remote_theme: fongandrew/hydeout
 plugins:
   - jekyll-feed
   - jekyll-scalafiddle
+  - jekyll/scholar
+
+scholar:
+  style: apa
+  sort_by: author
 
 # Exclude from processing.
 # The following items will not be processed, by default.

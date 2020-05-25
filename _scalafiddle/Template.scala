@@ -124,7 +124,71 @@ case object VegaRenderer {
         }
       }
   }.replace(" ","").replace("\n","")
-
 }
+
+/**
+  * Implementation of basic set theory as implicits
+  */
+  object Math {
+    implicit class ImplSet[A](set: Set[A]) {
+      // for set membership, use set.contains(element)
+
+      def isSubsetOf(set2: Set[A]): Boolean = set != set2 && set.subsetOf(set2)
+
+      def isSubsetEqTo(set2: Set[A]): Boolean = set.subsetOf(set2)
+
+      def isSupersetOf(set2: Set[A]): Boolean = set2 isSubsetOf set
+
+      def isSupersetEqTo(set2: Set[A]): Boolean = set2 isSubsetEqTo set
+
+      // for intersection use set.intersection(set2)
+
+      // for union use set.union(set2)
+
+      // for difference use set.diff(set2)
+
+      def build(f: A => Boolean): Set[A] = set.filter(f(_))
+
+      def diff(set2: Set[A]): Set[A] = (set diff set2) union (set2 diff set)
+
+      def cardinalProduct[B](set2: Set[B]): Set[(A,B)] =
+        for(x <- set; y <- set2) yield (x,y)
+
+      def cardinalProduct[B](set2: Set[B], condition: (A, B) => Boolean): Set[(A,B)] =
+        for(x <- set; y <- set2 if condition(x,y)) yield (x,y)
+
+      def pairs: Set[(A,A)] = for(x <- set; y <- set) yield (x,y)
+
+      def uniquepairs: Set[(A,A)] = for(x <- set; y <- set if x!=y) yield (x,y)
+
+      def powerset: Set[Set[A]] = set.subsets.toSet
+
+      def argmax(f: A => Double): Option[A] = {
+        val seq = set.toSeq // convert to sequence to preserve ordering in zip function
+        val valSeq = seq map f
+        val maxValue = valSeq.max
+        val maxValSet = seq zip valSeq filter (_._2 == maxValue)
+        if(maxValSet.nonEmpty) Some(maxValSet(new Random().nextInt(maxValSet.length))._1) // if one or more maxima exist return random
+        else None
+      }
+    }
+
+    implicit class Impl2Set[A,B](sets: Tuple2[Set[A],Set[B]]) {
+      // Example (set, set2) build((a: Int, b: Int) => a/2==0 && b%2==0)
+      def build(f: (A, B) => Boolean): Set[(A,B)] =
+        (sets._1 cardinalProduct sets._2) build Function.tupled(f)
+    }
+
+    implicit class ImplSetSet[A](setOfSets: Set[Set[A]]) {
+      def bigUnion: Set[A] =
+        if(setOfSets.nonEmpty) setOfSets.reduce(_ union _) else Set.empty
+
+      def bigIntersection: Set[A] =
+        if(setOfSets.nonEmpty) setOfSets.reduce(_ intersect _) else Set.empty
+    }
+  }
+
+import Math._
+import VegaRenderer._
 
 ////
