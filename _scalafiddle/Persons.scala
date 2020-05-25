@@ -1,6 +1,13 @@
 import scala.util.Random
+import scalatags.JsDom.all._
 
-case class Person(name: String)
+
+case class Person(name: String) {
+  def likes(other: Person): Relation = Relation(this, other, true)
+  def dislikes(other: Person): Relation = Relation(this, other, false)
+
+  override def toString: String = name
+}
 
 case object Person {
     val names = List("Nettie Baldwin","Lester Peters","Brian Estrada","Cody Brock","Erik Mccarthy","William Bowers","Molly Fernandez","Joey Chapman","Thelma Casey","Edgar Miller","Emanuel Bass","Sergio Warner","Herman Rodriquez","Kelley Taylor","Wilfred Matthews","Guadalupe Morrison","Paula Snyder","Sheila Mendez","Javier Curtis","Kelly Harrington","Jason Hughes","Gilbert Dixon","Harriet Price","Meghan Santiago","Kenneth Clayton","Holly Sanchez","Rose Frazier","Lela Kennedy","Brenda Lamb","Constance Perkins","Vera George","Ramiro Sutton","Diana Holland","Charlene Wallace","Betty Mcgee","Michelle Hamilton","Frederick Mathis","Elmer Mckenzie","Byron Christensen","Randal Ward","Roderick Rhodes","Clark Marsh","Mathew Mendoza","Sammy Tran","Colleen Harvey","Marian Bailey","Tyrone Klein","Keith Stanley","Tonya Byrd","John Parsons","Kayla Aguilar","Johanna Stevenson","Dwayne Long","Antonia Curry","Kerry Perry","Fannie Hammond","Nichole Strickland","Jeanne Salazar","Roberto Barber","Vicky Oliver","Jesus Brady","Angela Shaw","Fredrick Munoz","Fernando Payne","Vivian Garcia","Natalie Guerrero","Johnnie Bennett","Monica Thompson","Angelica Armstrong","Anna Holt","Carlos Kelley","Marion Welch","Henry Fields","Lawrence Craig","Alexis Beck","Garry Mills","Bernard Parks","Jana Kim","Ernestine Rios","Deborah Phillips","Willard Cox","Eileen Knight","Erica Anderson","Elvira Steele","Myron Robertson","Elena Mckinney","Ervin Owens","Jeannette Pierce","Veronica Gross","Abraham Harrison","Lamar Thornton","Wanda Richardson","Lorraine Tate","Doris Foster","Leigh Henry","Devin Keller","Lindsay Moss","Isabel Stone","Marlene Hudson","Betsy Day")
@@ -8,16 +15,46 @@ case object Person {
     def randomSet(size: Int): Set[Person] = List.tabulate(size)(_ => Person.random).toSet
 }
 
-case class Relation(a: Person, b: Person, likes: Boolean) {
+case class Relation(a: Person, b: Person, liking: Boolean) {
     def canEqual(a: Any) = a.isInstanceOf[Relation]
 
     override def equals(that: Any): Boolean = that match {
         case that: Relation => {
-            this.likes == that.likes && (this.a == that.a && this.b == that.b || this.a == that.b && this.b == that.a)
+            this.liking == that.liking && (this.a == that.a && this.b == that.b || this.a == that.b && this.b == that.a)
         }
         case _ => false
     }
-
 }
+
+object Helpers {
+  import Math._
+
+  implicit class ImplRelation(personA: String) {
+    def likes(personB: String): Relation = Relation(Person(personA), Person(personB), true)
+
+    def dislikes(personB: String): Relation = Relation(Person(personA), Person(personB), false)
+  }
+
+  implicit class ImplRelFun(relations: Set[Relation]) {
+    def deriveFun: ((Person, Person) => Boolean) = {
+      (a: Person, b: Person) => {
+        val rel = relations.find(p => p.a == a && p.b == b || p.a == b && p.b == a)
+        if(rel.isDefined) rel.get.liking
+        else false
+      }
+    }
+
+  //   def toString(persons: Set[Person]): String =
+  //     cross(persons, persons, (a: Person, b: Person) => a!=b)
+  //       .map(p => {
+  //         if(relations.deriveFun(p._1, p._2)) s"${p._1} like ${p._2}"
+  //         else s"${p._1} dislike ${p._2}"
+  //       })
+  //       .mkString("\n")
+  }
+}
+
+import Math._
+import Helpers._
 
 ////
