@@ -22,7 +22,7 @@ title: Academic Jekyll
 email: m.blokpoel@donders.ru.nl
 description: >- # this means to ignore newlines until "baseurl:"
   Academic Jekyll based on Hydeout with custom extensions.
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/lovelace" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username:
 github_username:
