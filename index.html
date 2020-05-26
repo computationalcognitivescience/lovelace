@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Academic Jekyll
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</head>
+
+
+  <body class="index home">
+
+    <div id="sidebar">
+  <header>
+    <h1 class="site-title">
+      <a href="/">
+        
+        Academic Jekyll
+      </a>
+    </h1>
+    <p class="lead">Academic Jekyll based on Hydeout with custom extensions.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+    
+      <a class="page-link  active"
+          href="/">Home</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/chapter1/">Chapter 1 - Scala</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/chapter2/">Chapter 2 - Citations</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/chapter3/">Chapter 3 - LaTeX</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/about/">About</a>
+    
+  
+
+
+  
+
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  &#169; Mark Blokpoel. This material has been released under a <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL v3</a> license.
+
+</div>
+
+    <main class="container">
+      <div class="content">
+  
+
+
+  <div id="toc-wrapper">
+<ul id="markdown-toc">
+  <li><a href="#installation-and-setup" id="markdown-toc-installation-and-setup">Installation and setup</a></li>
+  <li><a href="#publishing-the-site" id="markdown-toc-publishing-the-site">Publishing the site</a></li>
+  <li><a href="#modifications" id="markdown-toc-modifications">Modifications</a></li>
+</ul>
+
+</div>
+
+<h1 id="installation-and-setup">Installation and setup</h1>
+<ol>
+  <li>Clone the repository (you probably already have)</li>
+  <li>Install a <a href="https://jekyllrb.com/docs/installation/">Ruby environment</a></li>
+  <li>Install jekyll and bundler gems: <code class="highlighter-rouge">gem install jekyll bundler</code></li>
+  <li>Navigate to the cloned repository</li>
+  <li>Install jekyll site plugins: <code class="highlighter-rouge">bundle install</code></li>
+  <li>Serve the site: <code class="highlighter-rouge">bundle exec jekyll serve</code></li>
+  <li>Browse to <a href="http://localhost:4000">http://localhost:4000</a></li>
+</ol>
+
+<h1 id="publishing-the-site">Publishing the site</h1>
+<ol>
+  <li>Make sure you have a target repository and GitHub account</li>
+  <li>Enter your GitHub credentials and info in <code class="highlighter-rouge">deploy.env</code></li>
+  <li>When publishing for the first time, give execution rights to the script:
+<code class="highlighter-rouge">chmod +x ./deploy.sh</code></li>
+  <li>Run the deployment script: <code class="highlighter-rouge">./deploy.sh</code>, it may ask for your GitHub password.</li>
+</ol>
+
+<h1 id="modifications">Modifications</h1>
+
+<p>Add your bibtex files to <code class="highlighter-rouge">_bibliography</code>, by default only <code class="highlighter-rouge">references.bib</code>
+is used.</p>
+
+<p>Update the copyright message in <code class="highlighter-rouge">_includes/copyright.html</code>.</p>
+
+<p>If using Scalafiddle and you want to add more templates, add them to
+<code class="highlighter-rouge">_scalafiddle</code>. The default template file <code class="highlighter-rouge">_scalafiddle/Template.scala</code>
+can be used as a base and contains basic plotting functionality.</p>
+
+
+  
+
+  
+
+</div>
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>
