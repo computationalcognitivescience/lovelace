@@ -319,4 +319,60 @@ case object VegaRenderer {
 import Math._
 import VegaRenderer._
 
+
+case class Person(name: String) {
+  def likes(other: Person): Relation = Relation(this, other, true)
+  def dislikes(other: Person): Relation = Relation(this, other, false)
+
+  override def toString: String = name
+}
+
+case object Person {
+    val names = List("Nettie","Lester","Brian","Cody","Erik","William","Molly","Joey","Thelma","Edgar","Emanuel","Sergio","Herman","Kelley","Wilfred","Guadalupe","Paula","Sheila","Javier","Kelly","Jason","Gilbert","Harriet","Meghan","Kenneth","Holly","Rose","Lela","Brenda","Constance","Vera","Ramiro","Diana","Charlene","Betty","Michelle","Frederick","Elmer","Byron","Randal","Roderick","Clark","Mathew","Sammy","Colleen","Marian","Tyrone","Keith","Tonya","John","Kayla","Johanna","Dwayne","Antonia","Kerry","Fannie","Nichole","Jeanne","Roberto","Vicky","Jesus","Angela","Fredrick","Fernando","Vivian","Natalie","Johnnie","Monica","Angelica","Anna","Carlos","Marion","Henry","Lawrence","Alexis","Garry","Bernard","Jana","Ernestine","Deborah","Willard","Eileen","Erica","Elvira","Myron","Elena","Ervin","Jeannette","Veronica","Abraham","Lamar","Wanda","Lorraine","Doris","Leigh","Devin","Lindsay","Isabel","Marlene","Betsy")
+    def random: Person = Person(names(Random.nextInt(names.length)))
+    def randomSet(size: Int): Set[Person] = List.tabulate(size)(_ => Person.random).toSet
+}
+
+case class Relation(a: Person, b: Person, liking: Boolean) {
+    def canEqual(a: Any) = a.isInstanceOf[Relation]
+
+    override def equals(that: Any): Boolean = that match {
+        case that: Relation => {
+            this.liking == that.liking && (this.a == that.a && this.b == that.b || this.a == that.b && this.b == that.a)
+        }
+        case _ => false
+    }
+}
+
+object Helpers {
+  import Math._
+
+  implicit class ImplRelation(personA: String) {
+    def likes(personB: String): Relation = Relation(Person(personA), Person(personB), true)
+
+    def dislikes(personB: String): Relation = Relation(Person(personA), Person(personB), false)
+  }
+
+  implicit class ImplRelFun(relations: Set[Relation]) {
+    def deriveFun: ((Person, Person) => Boolean) = {
+      (a: Person, b: Person) => {
+        val rel = relations.find(p => p.a == a && p.b == b || p.a == b && p.b == a)
+        if(rel.isDefined) rel.get.liking
+        else false
+      }
+    }
+
+    def deriveGraph(persons: Set[Person]): Graph = {
+      val edges = for(p1 <- persons; p2 <- persons if p1 != p2) yield {
+        val col = if(deriveFun(p1, p2)) "likes" else "dislikes"
+        (p1, p2, col)
+      }
+      Graph(persons.toList, edges.toList)
+    }
+  }
+}
+
+import Math._
+import Helpers._
+
 ////
