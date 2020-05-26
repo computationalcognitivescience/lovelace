@@ -15,6 +15,18 @@ case object VegaRenderer {
     def toVegaString: String = data.map(convertValues(label, _)).mkString(", ")
   }
 
+  case class Graph(nodes: List[Any], edges: List[(Any, Any, String)]) {
+    private def toVegaData: (Trace, Trace) = {
+      val nDat: List[Map[String, Any]] = (nodes zip nodes.indices).map(ni => Map("lab" -> ni._1.toString, "id" -> ni._2, "maxId" -> nodes.length))
+      val nodesTrace = Trace("node", nDat)
+      val eDat: List[Map[String, Any]] = edges.map(e => Map("id1" -> nodes.indexOf(e._1), "id2" -> nodes.indexOf(e._2), "lab" -> e._3, "maxId" -> nodes.length))
+      val edgesTrace = Trace("edge", eDat)
+      (nodesTrace, edgesTrace)
+    }
+
+    def toVegaString: String = toVegaData._1.toVegaString + ",\n" + toVegaData._2.toVegaString
+  }
+
   def convertValues(label: String, values: Map[String, Any]): String =
     values.toSeq.map(v => {
       if(v._2.isInstanceOf[String])
@@ -59,6 +71,8 @@ case object VegaRenderer {
     plotCounter = plotCounter + 1
   }
 
+  def render(graph: Graph): Unit = render(genGraphSpec(graph))
+
   def render(traces: List[Trace],
     xValue: String,
     xLabel: String,
@@ -87,43 +101,140 @@ case object VegaRenderer {
     plotType: PlotType = PlotType.Line): String = {
       s"""
       "$$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+      "height": 340,
+      "autosize": {
+        "type": "fit",
+        "contains": "padding"
+      },
       "data": { "values": [
           ${traces.map(_.toVegaString).mkString(",\n")}
       ]},
       """ + {
         if(plotType==PlotType.Bar && traces.length==1) {
           s"""
+          "width": 300,
           "mark": "bar",
           "encoding": {
             "x": {"field": "$xValue", "type": "ordinal"},
             "y": {"field": "$yValue", "type": "quantitative"},
-            "color": {"field": "label", "type": "nominal"}
+            "color": {
+              "field": "label",
+              "type": "nominal",
+              "legend": {"orient": "bottom", "title": null}
+            }
           }
           """
         } else if(plotType==PlotType.Bar && traces.length>1) {
           s"""
+          "width": 10,
           "mark": "bar",
           "encoding": {
             "column": {
-              "field": "$xValue", "type": "nominal", "spacing": 10
+              "field": "$xValue", "type": "nominal", "spacing": 0
             },
             "x": {"field": "label", "type": "ordinal", "axis": {"title": ""}},
             "y": {"field": "$yValue", "type": "quantitative"},
-            "color": {"field": "label", "type": "nominal"}
+            "color": {
+              "field": "label",
+              "type": "nominal",
+              "legend": null
+            }
           }
           """
         } else if(plotType==PlotType.Line || plotType==PlotType.Point) {
           s"""
+          "width": 300,
           "mark": "${plotType.toString.toLowerCase}",
           "encoding": {
             "x": {"field": "$xValue", "type": "ordinal"},
             "y": {"field": "$yValue", "type": "quantitative"},
-            "color": {"field": "label", "type": "nominal"}
+            "color": {
+              "field": "label",
+              "type": "nominal",
+              "legend": {"orient": "bottom", "title": null}
+            }
           }
           """
         }
       }
   }.replace(" ","").replace("\n","")
+
+  def genGraphSpec(graph: Graph): String = {
+    s"""
+      "$$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+      "width": 300,
+      "height": 340,
+      "autosize": {
+        "type": "fit",
+        "contains": "padding"
+      },
+      "data": {
+        "values": [
+              ${graph.toVegaString}
+            ]
+      },
+      "layer": [
+            {
+            "transform": [
+                  {"filter": "datum.label == 'edge'"},
+                  {"calculate": "sin(datum.id1 / datum.maxId * 2 * PI)+1.5", "as": "x"},
+                  {"calculate": "cos(datum.id1 / datum.maxId * 2 * PI)+1.5", "as": "y"},
+                  {"calculate": "sin(datum.id2 / datum.maxId * 2 * PI)+1.5", "as": "x2"},
+                  {"calculate": "cos(datum.id2 / datum.maxId * 2 * PI)+1.5", "as": "y2"}
+                ],
+            "mark": {
+                "type": "rule",
+                "size": 3
+            },
+            "encoding": {
+                "x": {"field": "x", "type": "quantitative", "axis": null, "scale": {"domain": [0, 3]}},
+                "y": {"field": "y", "type": "quantitative", "axis": null, "scale": {"domain": [0, 3]}},
+                "x2": {"field": "x2", "type": "quantitative"},
+                "y2": {"field": "y2", "type": "quantitative"},
+                "color": {
+                  "field": "lab",
+                  "type": "nominal",
+                  "scale": {"scheme": "set1"},
+                  "legend": {"orient": "bottom", "title": null}
+                }
+            }
+          },
+          {
+            "transform": [
+                {"filter": "datum.label == 'node'"},
+                {"calculate": "sin(datum.id / datum.maxId * 2 * PI)+1.5", "as": "x"},
+                {"calculate": "1.2*sin(datum.id / datum.maxId * 2 * PI + 0.1)+1.5", "as": "dx"},
+                {"calculate": "cos(datum.id / datum.maxId * 2 * PI)+1.5", "as": "y"},
+                {"calculate": "1.2*cos(datum.id / datum.maxId * 2 * PI + 0.1)+1.5", "as": "dy"}
+            ],
+            "layer": [
+                {
+                    "encoding": {
+                        "x": {"field": "x", "type": "quantitative", "axis": null},
+                        "y": {"field": "y", "type": "quantitative", "axis": null}
+                    },
+                    "mark": {
+                        "type": "circle",
+                        "opacity": 1,
+                        "size": 200
+                    }
+                },
+                {
+                    "mark": {
+                        "type": "text",
+                        "baseline": "middle"
+                    },
+                    "encoding": {
+                        "x": {"field": "dx", "type": "quantitative", "axis": null},
+                        "y": {"field": "dy", "type": "quantitative", "axis": null},
+                        "text": {"field": "lab", "type": "nominal"}
+                    }
+                }
+            ]
+          }
+      ]
+    """
+  }
 }
 
 /**
