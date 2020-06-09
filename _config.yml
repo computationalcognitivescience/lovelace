@@ -35,6 +35,12 @@ plugins:
   - jekyll-scalafiddle
   - jekyll/scholar
 
+defaults:
+  - scope:
+      path: "assets/img"
+    values:
+      image: true
+
 scholar:
   style: apa
   sort_by: author

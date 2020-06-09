@@ -147,7 +147,7 @@ case object VegaRenderer {
           "mark": "${plotType.toString.toLowerCase}",
           "encoding": {
             "x": {"field": "$xValue", "type": "ordinal"},
-            "y": {"field": "$yValue", "type": "quantitative"},
+            "y": {"field": "$yValue", "aggregate": "mean", "type": "quantitative"},
             "color": {
               "field": "label",
               "type": "nominal",
