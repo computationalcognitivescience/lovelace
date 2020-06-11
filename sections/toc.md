@@ -26,7 +26,7 @@ sidebar_sort_order: 2
 **Conceptual foundations**
 * TBD
 
-**Mathematical concepts and notation**
+**Math concepts and notation**
 * Sets
 * Functions
 * Logic
@@ -44,4 +44,10 @@ sidebar_sort_order: 2
 * Subset Choice revisited
 
 **Advanced topics**
+* TBD
+
+**Programming in Scala**
+* TBD
+
+**Simulating theories**
 * TBD

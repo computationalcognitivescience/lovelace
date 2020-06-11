@@ -1,9 +1,9 @@
 ---
 layout: index
-title: Chapter 2 - Concepts and Notation
+title: Math concepts and notation
 permalink: /chapter2/
 sidebar_link: true
-sidebar_sort_order: 2
+sidebar_sort_order: 5
 ---
 
 <div id="toc-wrapper" markdown="1">
