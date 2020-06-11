@@ -1,9 +1,9 @@
 ---
 layout: index
-title: Chapter 1 - Scala
-permalink: /chapter1/
-sidebar_link: true
-sidebar_sort_order: 1
+title: Scala
+permalink: /scala/
+sidebar_link: false
+sidebar_sort_order: 1000
 ---
 
 <div id="toc-wrapper" markdown="1">

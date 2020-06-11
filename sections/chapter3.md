@@ -1,9 +1,9 @@
 ---
 layout: index
-title: Chapter 3 - Formalizing
-permalink: /chapter3/
-sidebar_link: true
-sidebar_sort_order: 3
+title: Draft - Formalizing
+permalink: /draft/
+sidebar_link: false
+sidebar_sort_order: 1000
 ---
 
 <div id="toc-wrapper" markdown="1">
