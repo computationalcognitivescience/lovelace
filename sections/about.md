@@ -1,7 +1,7 @@
 ---
 layout: index
 title: About
-permalink: /about/
+permalink: /
 sidebar_link: true
 sidebar_sort_order: 1
 ---
