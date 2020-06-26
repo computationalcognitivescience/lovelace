@@ -20,4 +20,8 @@ Under construction.
 
 # Scala
 
-Under construction. 
+The simulations in this book are written using functional programming in Scala.
+This choice is deliberate. Functional programming makes interpreting the
+semantics of the code transparent, making it easy to understand the relationship
+between computational-level theory and simulation. We provide an accessible
+introduction to basic functional programming in Scala.
