@@ -18,14 +18,14 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Online Book
+title: Theoretical modeling for psychology and cognitive science
 email: m.blokpoel@donders.ru.nl
 description: >- # this means to ignore newlines until "baseurl:"
-  Theoretical modeling for psychology and cognitive science
+  
 baseurl: "/lovelace" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username:
-github_username:
+github_username: computationalcognitivescience
 
 # Build settings
 theme: jekyll-theme-hydeout

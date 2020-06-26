@@ -12,6 +12,6 @@ sidebar_sort_order: 10
 </div>
 
 
-# Functional programming
+# Simulating theories
 
 Under construction.
