@@ -869,6 +869,11 @@ button.disqus-load {
     padding-left: 2rem;
     padding-right: 2rem;
     text-align: justify; }
+  .container > .content img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; }
 
 h1:before {
   content: '';
@@ -877,3 +882,11 @@ h1:before {
   width: 0;
   height: 3rem;
   margin-top: -3rem; }
+
+.home #sidebar .site-title {
+  font-size: 2.25rem;
+  color: #ffffff; }
+
+#sidebar .site-title {
+  font-size: 2.25rem;
+  color: #ffffff; }

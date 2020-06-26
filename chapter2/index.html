@@ -11,7 +11,7 @@
 
   <title>
     
-      Chapter 2 - Concepts and Notation &middot; Academic Jekyll
+      Math concepts and notation &middot; Theoretical modeling for psychology and cognitive science
     
   </title>
 
@@ -48,10 +48,10 @@
   <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
 </svg></span>
         
-        Academic Jekyll
+        Theoretical modeling for psychology and cognitive science
       </a>
     </h1>
-    <p class="lead">Academic Jekyll based on Hydeout with custom extensions.</p>
+    <p class="lead"></p>
   </header>
   <nav id="sidebar-nav-links">
   
@@ -71,35 +71,70 @@
   
     
       <a class="page-link "
-          href="/lovelace/">Home</a>
+          href="/lovelace/about/">About</a>
     
   
 
   
     
       <a class="page-link "
-          href="/lovelace/chapter1/">Chapter 1 - Scala</a>
+          href="/lovelace/">Table of contents</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/lovelace/introduction/">Introduction</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/lovelace/foundations/">Conceptual foundations</a>
     
   
 
   
     
       <a class="page-link  active"
-          href="/lovelace/chapter2/">Chapter 2 - Concepts and Notation</a>
+          href="/lovelace/chapter2/">Math concepts and notation</a>
     
   
 
   
     
       <a class="page-link "
-          href="/lovelace/chapter3/">Chapter 3 - Formalizing</a>
+          href="/lovelace/learningtoformalize/">Learning to formalize</a>
     
   
 
   
     
       <a class="page-link "
-          href="/lovelace/about/">About</a>
+          href="/lovelace/levels/">Comparing levels of explanation</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/lovelace/advancedtopics/">Advanced topics</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/lovelace/programming/">Programming in Scala</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/lovelace/simulations/">Simulating theories</a>
     
   
 
@@ -111,6 +146,26 @@
 
   
 
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
   
 
   
@@ -165,7 +220,7 @@
   <!-- Optional additional links to insert for icons links -->
 </nav>
 
-  &#169; Mark Blokpoel and Iris van Rooij. This material has been released under a <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL v3</a> license.
+  &#169; 2020, Mark Blokpoel and Iris van Rooij. This material has been released under a CC-BY 4.0 license and a GNU GPL v3 license. 
 
 </div>
 
@@ -176,7 +231,25 @@
 
   <div id="toc-wrapper">
 <ul id="markdown-toc">
-  <li><a href="#set-theory" id="markdown-toc-set-theory">Set theory</a></li>
+  <li><a href="#set-theory" id="markdown-toc-set-theory">Set theory</a>    <ul>
+      <li><a href="#set-membership" id="markdown-toc-set-membership">Set membership</a></li>
+      <li><a href="#subset-and-superset" id="markdown-toc-subset-and-superset">Subset and superset</a></li>
+      <li><a href="#intersection-union-and-difference" id="markdown-toc-intersection-union-and-difference">Intersection, union and difference</a></li>
+      <li><a href="#set-builder" id="markdown-toc-set-builder">Set builder</a></li>
+      <li><a href="#cardinal-product" id="markdown-toc-cardinal-product">Cardinal product</a></li>
+      <li><a href="#special-sets" id="markdown-toc-special-sets">Special sets</a></li>
+    </ul>
+  </li>
+  <li><a href="#functions" id="markdown-toc-functions">Functions</a>    <ul>
+      <li><a href="#advanced-functions" id="markdown-toc-advanced-functions">Advanced functions</a></li>
+      <li><a href="#sum-and-product" id="markdown-toc-sum-and-product">Sum and product</a></li>
+    </ul>
+  </li>
+  <li><a href="#logic" id="markdown-toc-logic">Logic</a>    <ul>
+      <li><a href="#universal-quantifier-for-all" id="markdown-toc-universal-quantifier-for-all">Universal quantifier (for all)</a></li>
+      <li><a href="#existential-quantifier-exists" id="markdown-toc-existential-quantifier-exists">Existential quantifier (exists)</a></li>
+    </ul>
+  </li>
 </ul>
 
 </div>
@@ -184,53 +257,154 @@
 <p>Like sculpting, theoretical modeling requires its own set of dedicated tools. The theoretical modeler’s tools are mathematical concepts, formal expressions, and notational conventions. One can already get quite far with the basics in <em>set theory</em>, <em>functions</em> and <em>logic</em>. Below we present a brief primer. Readers who have taken introductory classes on these topics can skip this section without loss of continuity.</p>
 
 <h1 id="set-theory">Set theory</h1>
-<p>A set is a collection of distinct objects. For example, a set of people, animals or numbers. Sets are usually denoted by a capital letter and their elements listed between curly brackets. They can also be visualized as circles.</p>
+<p>A set is a collection of distinct objects. For example, a set of people <script type="math/tex">P=\{\text{Ramiro},\text{Brenda},\text{Molly}\}</script>, animals <script type="math/tex">A=\{\text{cat},\text{turtle},\text{blue whale}, \text{cuttlefish}\}</script> or numbers N={1,5,7,12}. Sets are usually denoted by a capital letter and their elements listed between curly brackets. They can also be visualized as circles.</p>
 
-<div data-scalafiddle="" data-template="Template" data-minheight="150">
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">persons</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"Ramiro"</span><span class="o">,</span> <span class="s">"Brenda"</span><span class="o">,</span> <span class="s">"Molly"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">animals</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"cat"</span><span class="o">,</span> <span class="s">"turtle"</span><span class="o">,</span> <span class="s">"blue whale"</span><span class="o">,</span> <span class="s">"cuttlefish"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">numbers</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">7</span><span class="o">,</span><span class="mi">12</span><span class="o">)</span>
-</code></pre></div></div>
-</div>
+<p><img src="../assets/img/set-eg.svg" alt="Basis sets" title="Sets can be visualized as circles." /></p>
 
+<p>Sets can contain an infinite number of objects, e.g. all positive odd numbers <script type="math/tex">O=\{1,3,5, 7,\dots\}</script>.</p>
+
+<h2 id="set-membership">Set membership</h2>
 <p>When we want to write that an object <script type="math/tex">x</script> is (or is not) part of a set <script type="math/tex">X</script>, we use <em>set membership</em> notation:</p>
 
-<div data-scalafiddle="" data-template="Template" data-minheight="150">
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">persons</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"Ramiro"</span><span class="o">,</span> <span class="s">"Brenda"</span><span class="o">,</span> <span class="s">"Molly"</span><span class="o">)</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">persons</span><span class="o">.</span><span class="py">contains</span><span class="o">(</span><span class="s">"Ramiro"</span><span class="o">))</span>
-</code></pre></div></div>
-</div>
+<script type="math/tex; mode=display">5 \in N\\17 \notin N\\\text{Ramiro}\in P\\\text{Saki}\notin P</script>
 
-<div data-scalafiddle="" data-template="Template" data-minheight="150">
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">numbers</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">7</span><span class="o">,</span><span class="mi">12</span><span class="o">)</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">numbers</span><span class="o">.</span><span class="py">contains</span><span class="o">(</span><span class="mi">17</span><span class="o">))</span>
-</code></pre></div></div>
-</div>
+<p><img src="../assets/img/set-in.svg" alt="Set membership" title="Set membership." /></p>
 
+<h2 id="subset-and-superset">Subset and superset</h2>
 <p>Often, we want to express things like ‘the set of mammals <script type="math/tex">M</script> is part of the set of all animals <script type="math/tex">A</script>’. We then use <em>subset</em> notation: <script type="math/tex">M\subseteq A</script> or <script type="math/tex">M\subset A</script>. The latter means that <script type="math/tex">M</script> is smaller than <script type="math/tex">A</script>.</p>
 
-<div data-scalafiddle="" data-template="Template" data-minheight="150">
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">animals</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"cat"</span><span class="o">,</span> <span class="s">"turtle"</span><span class="o">,</span> <span class="s">"blue whale"</span><span class="o">,</span> <span class="s">"cuttlefish"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">mammals</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"cat"</span><span class="o">,</span> <span class="s">"blue whale"</span><span class="o">)</span>
-
-<span class="nf">println</span><span class="o">(</span><span class="n">mammals</span> <span class="n">isSubsetOf</span> <span class="n">animals</span><span class="o">)</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">mammals</span> <span class="n">isSubsetEqTo</span> <span class="n">animals</span><span class="o">)</span>
-</code></pre></div></div>
-</div>
+<p><img src="../assets/img/set-sub.svg" alt="Subset" title="Subset relationship." /></p>
 
 <p>Vice versa, we can express that ‘the set of all things on earth <script type="math/tex">T</script> contains all animals <script type="math/tex">A</script>’ using <em>superset</em> notation: <script type="math/tex">T\supseteq A</script> or <script type="math/tex">T\supset A</script>. The latter means that <script type="math/tex">T</script> is bigger than <script type="math/tex">A</script>.</p>
 
-<div data-scalafiddle="" data-template="Template" data-minheight="150">
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">manyAnimals</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"cat"</span><span class="o">,</span> <span class="s">"dog"</span><span class="o">,</span> <span class="s">"goldfish"</span><span class="o">,</span> <span class="s">"turtle"</span><span class="o">,</span> <span class="s">"blue whale"</span><span class="o">,</span>
-  <span class="s">"cuttlefish"</span><span class="o">,</span> <span class="s">"shark"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">animals</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"cat"</span><span class="o">,</span> <span class="s">"turtle"</span><span class="o">,</span> <span class="s">"blue whale"</span><span class="o">,</span> <span class="s">"cuttlefish"</span><span class="o">)</span>
+<p><img src="../assets/img/set-sup.svg" alt="Superset" title="Superset relationship." /></p>
 
+<h2 id="intersection-union-and-difference">Intersection, union and difference</h2>
+<p>Let’s look at what more we can do with two sets. For example, take the set of your friends and my friends.</p>
 
-<span class="nf">println</span><span class="o">(</span><span class="n">manyAnimals</span> <span class="n">isSupersetOf</span> <span class="n">animals</span><span class="o">)</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">manyAnimals</span> <span class="n">isSupersetEqTo</span> <span class="n">animals</span><span class="o">)</span>
-</code></pre></div></div>
-</div>
+<script type="math/tex; mode=display">F_{you}=\{\text{John},\text{Roberto},\text{Holly},\text{Doris},\text{Charlene}\}</script>
 
+<script type="math/tex; mode=display">F_{me}=\{\text{Vicky},\text{Charlene},\text{Ramiro},\text{Johnnie},\text{Roberto}\}</script>
+
+<p><img src="../assets/img/set-two.svg" alt="Set example" title="Example sets." /></p>
+
+<p>Who are our common friends? We use <em>set intersection</em>:</p>
+
+<script type="math/tex; mode=display">F_{you}\cap F_{me} = \{\text{Roberto},\text{Charlene}\}</script>
+
+<p><img src="../assets/img/set-disjunction.svg" alt="Set intersection" title="Set intersection." /></p>
+
+<p>Who do we know together? We use <em>set union</em>:</p>
+
+<p><script type="math/tex">F_{you}\cup F_{me} = \{\text{John},\text{Roberto},\text{Holly},\text{Doris},\text{Charlene},</script> <script type="math/tex">\text{Vicky},</script> <script type="math/tex">\text{Ramiro},</script> <script type="math/tex">\text{Johnnie}\}</script></p>
+
+<p><img src="../assets/img/set-union.svg" alt="Set union" title="Set union." /></p>
+
+<p>Who do I know that you do not know? We use <em>set difference</em>:</p>
+
+<script type="math/tex; mode=display">F_{me}\setminus F_{you}=\{\text{Vicky},\text{Ramiro},\text{Johnnie}\}</script>
+
+<p><img src="../assets/img/set-minus.svg" alt="Set difference" title="Set difference." /></p>
+
+<h2 id="set-builder">Set builder</h2>
+<p>A more advanced way to denote sets, is to define a set using <em>set builder</em> notation. This allows us to define (build) a new set given other set(s). A set builder consists of two parts, a variable and a logical predicate:</p>
+
+<script type="math/tex; mode=display">\{\text{variable}~|~\text{predicate}\}</script>
+
+<p>Let’s look at an example and build a set of all mammals from $A$. We explain logical predicates below, for now lets use verbal language:</p>
+
+<script type="math/tex; mode=display">M=\{a~|~a\in A\text{ and }a\text{ is a mammal}\}</script>
+
+<p>You can read this as ‘<script type="math/tex">M</script> contains all <script type="math/tex">a</script>’s <em>with the property that</em> <script type="math/tex">a\in A</script> and <script type="math/tex">a</script> is a mammal’.</p>
+
+<p><img src="../assets/img/set-builder.svg" alt="Set builder" title="Set builder." /></p>
+
+<h2 id="cardinal-product">Cardinal product</h2>
+<p>Set builder notation is useful to filter objects from a single set, but becomes very potent when building from multiple sets. For example:</p>
+
+<script type="math/tex; mode=display">F=\{(p,a)~|~p\in P\text{ AND }a\in A\}</script>
+
+<p><img src="../assets/img/set-cardinal.svg" alt="Cardinal product" title="Cardinal product." /></p>
+
+<p>Read this as ‘<script type="math/tex">F</script> contains all pairs of <script type="math/tex">p</script> and <script type="math/tex">a</script> <em>with the property that</em> <script type="math/tex">p</script> is a person and <script type="math/tex">a</script> is an animal’. Pairs are denoted in brackets. You can think of <script type="math/tex">F</script> containing all possible combinations of person-animal pairs. For example, these are all the options you have when trying to guess what the favorite animals are of your friends.</p>
+
+<p>Many other set builders are possible too, but this specific ‘pair builder’ is called the <em>cardinal product</em> of two sets. It is used often enough that it has its own special symbol: <script type="math/tex">F=P\times A</script>.</p>
+
+<h2 id="special-sets">Special sets</h2>
+<p>Finally, there are some special sets which we often use that have their own symbols:</p>
+
+<ul>
+  <li>Empty set <script type="math/tex">\varnothing=\{\}</script></li>
+  <li>Natural (whole) numbers (with zero) <script type="math/tex">\mathbb{N}_0=\{0,1,2,3,4,\dots\}</script></li>
+  <li>Natural (whole) numbers (without zero) <script type="math/tex">\mathbb{N}^*=\{1,2,3,4,\dots\}</script></li>
+  <li>Integer numbers <script type="math/tex">\mathbb{Z}=\{\dots,-3,-2,-1,0,1,2,3,\dots\}</script></li>
+  <li>Real numbers <script type="math/tex">% <![CDATA[
+\mathbb{R}=\{r~\|~-\infty<r<\infty\} %]]></script></li>
+</ul>
+
+<h1 id="functions">Functions</h1>
+<p>Building on set theory, we can define functions. Functions are relations that map all objects from one set (the <em>domain</em>) to exactly one object from another set (the <em>codomain</em>). We define functions with the following notation, here <script type="math/tex">f</script> is the name of the function:</p>
+
+<script type="math/tex; mode=display">f:D \rightarrow C\text{ with }f(d)=c</script>
+
+<p>Let’s make this more concrete:</p>
+
+<script type="math/tex; mode=display">like: P \rightarrow \mathbb{Z}</script>
+
+<p>You can read this as ‘<script type="math/tex">like</script> is a function that maps persons <script type="math/tex">p\in P</script> to an integer’.</p>
+
+<p><img src="../assets/img/fun-basic.svg" alt="Function" title="Function." /></p>
+
+<p>We sometimes omit the exact specification of the function when it is clear what it would be. For example, here it could be a list of numbers representing how much you (dis)like the person, based on your social interactions with that person.</p>
+
+<h2 id="advanced-functions">Advanced functions</h2>
+<p>We can also give functions more complex domains by using set theory. What would a function that captures how much two persons like each other look like?</p>
+
+<script type="math/tex; mode=display">like_2:P\times P\rightarrow \mathbb{Z}</script>
+
+<p>The cardinal product <script type="math/tex">P\times P</script> denotes all pairs of persons and <script type="math/tex">like_2</script> maps pairs to an integer.</p>
+
+<p><img src="../assets/img/fun-adv.svg" alt="Advanced function" title="Advanced function." /></p>
+
+<h2 id="sum-and-product">Sum and product</h2>
+<p>We can now define <em>summation</em> and <em>product</em>. These functions iterate over members in a set and return a summary value.</p>
+
+<p>Summation <script type="math/tex">\sum</script> takes all <script type="math/tex">x</script>’s from <script type="math/tex">X</script>, applies <script type="math/tex">f(x)</script> to each and adds all values:</p>
+
+<script type="math/tex; mode=display">\sum_{x\in X}f(x)=f(x_1)+f(x_2)+f(x_3)+\dots</script>
+
+<p>Product takes $\prod$ all $x$’s from <script type="math/tex">X</script>, applies <script type="math/tex">f(x)</script> to each and multiplies all values:</p>
+
+<script type="math/tex; mode=display">\prod_{x\in X}f(x)=f(x_1)f(x_2)f(x_3)\dots</script>
+
+<h1 id="logic">Logic</h1>
+<p>Logical predicates can be thought of as a special type of function that returns a Boolean value true (<script type="math/tex">\text{true}</script> or <script type="math/tex">\top</script>) or false (<script type="math/tex">\text{false}</script> or <script type="math/tex">\bot</script>). Predicates can be thought of as asking or claiming whether or not a statement is true or false.</p>
+
+<p>For example, is <script type="math/tex">x</script> bigger than <script type="math/tex">2</script>? Is <script type="math/tex">a</script> a mammal and small? Is Emily your friend? Or, <script type="math/tex">x</script> is bigger than <script type="math/tex">2</script>, <script type="math/tex">a</script> is a mammal and small, and Emily is my friend.</p>
+
+<p>Let’s introduce some formal notation to express these statements:</p>
+
+<ul>
+  <li><em>number comparisons</em> are familiar to most <script type="math/tex">% <![CDATA[
+< %]]></script>, <script type="math/tex">\leq</script>, <script type="math/tex">></script>, <script type="math/tex">\geq</script>, <script type="math/tex">=</script>, and <script type="math/tex">\neq</script></li>
+  <li><em>conjunctions</em> (logical <script type="math/tex">\text{AND}</script>) <script type="math/tex">p\wedge q</script> is <script type="math/tex">\top</script> if and only if both <script type="math/tex">p=\top</script> and <script type="math/tex">q=\top</script></li>
+  <li><em>disjunctions</em> (logical <script type="math/tex">\text{OR}</script>) <script type="math/tex">p\vee q</script> is <script type="math/tex">\top</script> if <script type="math/tex">p=\top</script> or if <script type="math/tex">q=\top</script></li>
+  <li><em>set membership</em> can also be used as a predicate <script type="math/tex">a\in A</script> is <script type="math/tex">\top</script> if <script type="math/tex">a</script> is a member of set <script type="math/tex">A</script></li>
+</ul>
+
+<h2 id="universal-quantifier-for-all">Universal quantifier (for all)</h2>
+<p>Sometimes we want to say something about all objects in a set. We can use quantifier predicates to do this. For example, are all animals in the set mammals? We use the <em>universal quantifier</em>:</p>
+
+<script type="math/tex; mode=display">\forall_{a\in A}\text{mammal}(a)</script>
+
+<p>You can read this as `does it hold for all objects <script type="math/tex">a</script> in <script type="math/tex">A</script> that <script type="math/tex">a</script> is a mammal?’ We implicitly introduced a function <script type="math/tex">\text{mammal}:A\rightarrow\{\top,\bot\}</script> with <script type="math/tex">\text{mammal}(a)=\top</script> if <script type="math/tex">a</script> is a mammal or <script type="math/tex">\bot</script> otherwise.</p>
+
+<h2 id="existential-quantifier-exists">Existential quantifier (exists)</h2>
+<p>Another type of question we can ask is, for example, is there someone I know that I like? We use the <em>existential quantifier</em>:</p>
+
+<script type="math/tex; mode=display">\exists_{p\in F_{me}}\left[\text{like}(p)>0\right]</script>
+
+<p>Which we can read as `does there exist a person <script type="math/tex">p</script> in the set of my friends <script type="math/tex">F_{me}</script> for which I like them <script type="math/tex">\text{like}(p)>0</script>?’</p>
 
 
   
@@ -242,42 +416,5 @@
 
     <!-- Optional footer content -->
 
-  
-<script>
-  window.scalaFiddleTemplates = {
-
-    'Template': {
-      pre: 'import scala.util.Random\nimport scalatags.JsDom.all._\n\n/**\n  * This renderer allows the user to render a Vega plot specification. The specifying\n  * must be passed as a String and will be rendered in a div.\n  */\ncase object VegaRenderer {\n  case object PlotType extends Enumeration {\n    type PlotType = Value\n    val Line, Bar, Point = Value\n  }\n\n  case class Trace(label: String, data: List[Map[String, Any]]) {\n    def toVegaString: String = data.map(convertValues(label, _)).mkString(", ")\n  }\n\n  case class Graph(nodes: List[Any], edges: List[(Any, Any, String)]) {\n    private def toVegaData: (Trace, Trace) = {\n      val nDat: List[Map[String, Any]] = (nodes zip nodes.indices).map(ni => Map("lab" -> ni._1.toString, "id" -> ni._2, "maxId" -> nodes.length))\n      val nodesTrace = Trace("node", nDat)\n      val eDat: List[Map[String, Any]] = edges.map(e => Map("id1" -> nodes.indexOf(e._1), "id2" -> nodes.indexOf(e._2), "lab" -> e._3, "maxId" -> nodes.length))\n      val edgesTrace = Trace("edge", eDat)\n      (nodesTrace, edgesTrace)\n    }\n\n    def toVegaString: String = toVegaData._1.toVegaString + ",\\n" + toVegaData._2.toVegaString\n  }\n\n  def convertValues(label: String, values: Map[String, Any]): String =\n    values.toSeq.map(v => {\n      if(v._2.isInstanceOf[String])\n        s""""${v._1}": "${v._2}""""\n      else\n        s""""${v._1}": ${v._2}"""\n    }).\n    mkString(s"""{"label": "$label",""",",","}")\n\n  import PlotType._\n\n  var plotCounter = 0\n\n  def render(vegaSpec: String): Unit = {\n    Fiddle.print(\n      div(id:=s"plot$plotCounter", s"Rendering plot $plotCounter..."),\n      script(s"""\n        var script = document.createElement(\'script\');\n        script.onload = function () {\n          requirejs.config({\n            baseUrl: \'https://cdn.jsdelivr.net/npm/\',\n            paths: {\n              "vega-embed":  "vega-embed@3?noext",\n              "vega-lib": "vega-lib?noext",\n              "vega-lite": "vega-lite@2?noext",\n              "vega": "vega@3?noext"\n            }\n          });\n\n        require(["vega-embed"], function(vegaEmbed) {\n          const spec = {\n            $vegaSpec\n          };\n          vegaEmbed(\'#plot$plotCounter\', spec, {defaultStyle: true, renderer: "svg"}).catch(console.warn);\n        });\n      };\n\n      script.src = "https://requirejs.org/docs/release/2.3.6/minified/require.js";\n      document.head.appendChild(script);\n      """)\n    )\n    plotCounter = plotCounter + 1\n  }\n\n  def render(graph: Graph): Unit = render(genGraphSpec(graph))\n\n  def render(traces: List[Trace],\n    xValue: String,\n    xLabel: String,\n    yValue: String,\n    yLabel: String,\n    title: String,\n    plotType: PlotType = PlotType.Line): Unit =\n      render(\n        genSpec(\n          traces,\n          xValue,\n          xLabel,\n          yValue,\n          yLabel,\n          title,\n          plotType\n        )\n      )\n\n  def genSpec(traces: List[Trace],\n    xValue: String,\n    xLabel: String,\n    yValue: String,\n    yLabel: String,\n    title: String,\n    plotType: PlotType = PlotType.Line): String = {\n      s"""\n      "$$schema": "https://vega.github.io/schema/vega-lite/v4.json",\n      "height": 340,\n      "autosize": {\n        "type": "fit",\n        "contains": "padding"\n      },\n      "data": { "values": [\n          ${traces.map(_.toVegaString).mkString(",\\n")}\n      ]},\n      """ + {\n        if(plotType==PlotType.Bar && traces.length==1) {\n          s"""\n          "width": 300,\n          "mark": "bar",\n          "encoding": {\n            "x": {"field": "$xValue", "type": "ordinal"},\n            "y": {"field": "$yValue", "type": "quantitative"},\n            "color": {\n              "field": "label",\n              "type": "nominal",\n              "legend": {"orient": "bottom", "title": null}\n            }\n          }\n          """\n        } else if(plotType==PlotType.Bar && traces.length>1) {\n          s"""\n          "width": 10,\n          "mark": "bar",\n          "encoding": {\n            "column": {\n              "field": "$xValue", "type": "nominal", "spacing": 0\n            },\n            "x": {"field": "label", "type": "ordinal", "axis": {"title": ""}},\n            "y": {"field": "$yValue", "type": "quantitative"},\n            "color": {\n              "field": "label",\n              "type": "nominal",\n              "legend": null\n            }\n          }\n          """\n        } else if(plotType==PlotType.Line || plotType==PlotType.Point) {\n          s"""\n          "width": 300,\n          "mark": "${plotType.toString.toLowerCase}",\n          "encoding": {\n            "x": {"field": "$xValue", "type": "ordinal"},\n            "y": {"field": "$yValue", "type": "quantitative"},\n            "color": {\n              "field": "label",\n              "type": "nominal",\n              "legend": {"orient": "bottom", "title": null}\n            }\n          }\n          """\n        }\n      }\n  }.replace(" ","").replace("\\n","")\n\n  def genGraphSpec(graph: Graph): String = {\n    s"""\n      "$$schema": "https://vega.github.io/schema/vega-lite/v4.json",\n      "width": 300,\n      "height": 340,\n      "autosize": {\n        "type": "fit",\n        "contains": "padding"\n      },\n      "data": {\n        "values": [\n              ${graph.toVegaString}\n            ]\n      },\n      "layer": [\n            {\n            "transform": [\n                  {"filter": "datum.label == \'edge\'"},\n                  {"calculate": "sin(datum.id1 / datum.maxId * 2 * PI)+1.5", "as": "x"},\n                  {"calculate": "cos(datum.id1 / datum.maxId * 2 * PI)+1.5", "as": "y"},\n                  {"calculate": "sin(datum.id2 / datum.maxId * 2 * PI)+1.5", "as": "x2"},\n                  {"calculate": "cos(datum.id2 / datum.maxId * 2 * PI)+1.5", "as": "y2"}\n                ],\n            "mark": {\n                "type": "rule",\n                "size": 3\n            },\n            "encoding": {\n                "x": {"field": "x", "type": "quantitative", "axis": null, "scale": {"domain": [0, 3]}},\n                "y": {"field": "y", "type": "quantitative", "axis": null, "scale": {"domain": [0, 3]}},\n                "x2": {"field": "x2", "type": "quantitative"},\n                "y2": {"field": "y2", "type": "quantitative"},\n                "color": {\n                  "field": "lab",\n                  "type": "nominal",\n                  "scale": {"scheme": "set1"},\n                  "legend": {"orient": "bottom", "title": null}\n                }\n            }\n          },\n          {\n            "transform": [\n                {"filter": "datum.label == \'node\'"},\n                {"calculate": "sin(datum.id / datum.maxId * 2 * PI)+1.5", "as": "x"},\n                {"calculate": "1.2*sin(datum.id / datum.maxId * 2 * PI + 0.1)+1.5", "as": "dx"},\n                {"calculate": "cos(datum.id / datum.maxId * 2 * PI)+1.5", "as": "y"},\n                {"calculate": "1.2*cos(datum.id / datum.maxId * 2 * PI + 0.1)+1.5", "as": "dy"}\n            ],\n            "layer": [\n                {\n                    "encoding": {\n                        "x": {"field": "x", "type": "quantitative", "axis": null},\n                        "y": {"field": "y", "type": "quantitative", "axis": null}\n                    },\n                    "mark": {\n                        "type": "circle",\n                        "opacity": 1,\n                        "size": 200\n                    }\n                },\n                {\n                    "mark": {\n                        "type": "text",\n                        "baseline": "middle"\n                    },\n                    "encoding": {\n                        "x": {"field": "dx", "type": "quantitative", "axis": null},\n                        "y": {"field": "dy", "type": "quantitative", "axis": null},\n                        "text": {"field": "lab", "type": "nominal"}\n                    }\n                }\n            ]\n          }\n      ]\n    """\n  }\n}\n\n/**\n  * Implementation of basic set theory as implicits\n  */\n  object Math {\n    implicit class ImplSet[A](set: Set[A]) {\n      // for set membership, use set.contains(element)\n\n      def isSubsetOf(set2: Set[A]): Boolean = set != set2 && set.subsetOf(set2)\n\n      def isSubsetEqTo(set2: Set[A]): Boolean = set.subsetOf(set2)\n\n      def isSupersetOf(set2: Set[A]): Boolean = set2 isSubsetOf set\n\n      def isSupersetEqTo(set2: Set[A]): Boolean = set2 isSubsetEqTo set\n\n      // for intersection use set.intersection(set2)\n\n      // for union use set.union(set2)\n\n      // for difference use set.diff(set2)\n\n      def build(f: A => Boolean): Set[A] = set.filter(f(_))\n\n      def diff(set2: Set[A]): Set[A] = (set diff set2) union (set2 diff set)\n\n      def cardinalProduct[B](set2: Set[B]): Set[(A,B)] =\n        for(x <- set; y <- set2) yield (x,y)\n\n      def cardinalProduct[B](set2: Set[B], condition: (A, B) => Boolean): Set[(A,B)] =\n        for(x <- set; y <- set2 if condition(x,y)) yield (x,y)\n\n      def pairs: Set[(A,A)] = for(x <- set; y <- set) yield (x,y)\n\n      def uniquepairs: Set[(A,A)] = for(x <- set; y <- set if x!=y) yield (x,y)\n\n      def powerset: Set[Set[A]] = set.subsets.toSet\n\n      def argMax(f: A => Double): Option[A] = {\n        val seq = set.toSeq // convert to sequence to preserve ordering in zip function\n        val valSeq = seq map f\n        val maxValue = valSeq.max\n        val maxValSet = seq zip valSeq filter (_._2 == maxValue)\n        if(maxValSet.nonEmpty) Some(maxValSet(new Random().nextInt(maxValSet.length))._1) // if one or more maxima exist return random\n        else None\n      }\n\n      def argMaxOrElse(f: A => Double)(fallback: A): A = {\n        val seq = set.toSeq // convert to sequence to preserve ordering in zip function\n        val valSeq = seq map f\n        val maxValue = valSeq.max\n        val maxValSet = seq zip valSeq filter (_._2 == maxValue)\n        if(maxValSet.nonEmpty) maxValSet(new Random().nextInt(maxValSet.length))._1 // if one or more maxima exist return random\n        else fallback\n      }\n\n      def random: A = set.toList(Random.nextInt(set.size))\n    }\n\n    implicit class Impl2Set[A,B](sets: Tuple2[Set[A],Set[B]]) {\n      // Example (set, set2) build((a: Int, b: Int) => a/2==0 && b%2==0)\n      def build(f: (A, B) => Boolean): Set[(A,B)] =\n        (sets._1 cardinalProduct sets._2) build Function.tupled(f)\n    }\n\n    implicit class ImplSetSet[A](setOfSets: Set[Set[A]]) {\n      def bigUnion: Set[A] =\n        if(setOfSets.nonEmpty) setOfSets.reduce(_ union _) else Set.empty\n\n      def bigIntersection: Set[A] =\n        if(setOfSets.nonEmpty) setOfSets.reduce(_ intersect _) else Set.empty\n    }\n\n    def requirement(b: Boolean, msg: String): Unit =\n      if(!b) {\n        println(s"Requirement not met: $msg")\n        assert(false)\n      }\n  }\n\nimport Math._\nimport VegaRenderer._\n\n',
-      post: ''
-    }
-,
-
-    'Template': {
-      pre: 'import scala.util.Random\nimport scalatags.JsDom.all._\n\n/**\n  * This renderer allows the user to render a Vega plot specification. The specifying\n  * must be passed as a String and will be rendered in a div.\n  */\ncase object VegaRenderer {\n  case object PlotType extends Enumeration {\n    type PlotType = Value\n    val Line, Bar, Point = Value\n  }\n\n  case class Trace(label: String, data: List[Map[String, Any]]) {\n    def toVegaString: String = data.map(convertValues(label, _)).mkString(", ")\n  }\n\n  case class Graph(nodes: List[Any], edges: List[(Any, Any, String)]) {\n    private def toVegaData: (Trace, Trace) = {\n      val nDat: List[Map[String, Any]] = (nodes zip nodes.indices).map(ni => Map("lab" -> ni._1.toString, "id" -> ni._2, "maxId" -> nodes.length))\n      val nodesTrace = Trace("node", nDat)\n      val eDat: List[Map[String, Any]] = edges.map(e => Map("id1" -> nodes.indexOf(e._1), "id2" -> nodes.indexOf(e._2), "lab" -> e._3, "maxId" -> nodes.length))\n      val edgesTrace = Trace("edge", eDat)\n      (nodesTrace, edgesTrace)\n    }\n\n    def toVegaString: String = toVegaData._1.toVegaString + ",\\n" + toVegaData._2.toVegaString\n  }\n\n  def convertValues(label: String, values: Map[String, Any]): String =\n    values.toSeq.map(v => {\n      if(v._2.isInstanceOf[String])\n        s""""${v._1}": "${v._2}""""\n      else\n        s""""${v._1}": ${v._2}"""\n    }).\n    mkString(s"""{"label": "$label",""",",","}")\n\n  import PlotType._\n\n  var plotCounter = 0\n\n  def render(vegaSpec: String): Unit = {\n    Fiddle.print(\n      div(id:=s"plot$plotCounter", s"Rendering plot $plotCounter..."),\n      script(s"""\n        var script = document.createElement(\'script\');\n        script.onload = function () {\n          requirejs.config({\n            baseUrl: \'https://cdn.jsdelivr.net/npm/\',\n            paths: {\n              "vega-embed":  "vega-embed@3?noext",\n              "vega-lib": "vega-lib?noext",\n              "vega-lite": "vega-lite@2?noext",\n              "vega": "vega@3?noext"\n            }\n          });\n\n        require(["vega-embed"], function(vegaEmbed) {\n          const spec = {\n            $vegaSpec\n          };\n          vegaEmbed(\'#plot$plotCounter\', spec, {defaultStyle: true, renderer: "svg"}).catch(console.warn);\n        });\n      };\n\n      script.src = "https://requirejs.org/docs/release/2.3.6/minified/require.js";\n      document.head.appendChild(script);\n      """)\n    )\n    plotCounter = plotCounter + 1\n  }\n\n  def render(graph: Graph): Unit = render(genGraphSpec(graph))\n\n  def render(traces: List[Trace],\n    xValue: String,\n    xLabel: String,\n    yValue: String,\n    yLabel: String,\n    title: String,\n    plotType: PlotType = PlotType.Line): Unit =\n      render(\n        genSpec(\n          traces,\n          xValue,\n          xLabel,\n          yValue,\n          yLabel,\n          title,\n          plotType\n        )\n      )\n\n  def genSpec(traces: List[Trace],\n    xValue: String,\n    xLabel: String,\n    yValue: String,\n    yLabel: String,\n    title: String,\n    plotType: PlotType = PlotType.Line): String = {\n      s"""\n      "$$schema": "https://vega.github.io/schema/vega-lite/v4.json",\n      "height": 340,\n      "autosize": {\n        "type": "fit",\n        "contains": "padding"\n      },\n      "data": { "values": [\n          ${traces.map(_.toVegaString).mkString(",\\n")}\n      ]},\n      """ + {\n        if(plotType==PlotType.Bar && traces.length==1) {\n          s"""\n          "width": 300,\n          "mark": "bar",\n          "encoding": {\n            "x": {"field": "$xValue", "type": "ordinal"},\n            "y": {"field": "$yValue", "type": "quantitative"},\n            "color": {\n              "field": "label",\n              "type": "nominal",\n              "legend": {"orient": "bottom", "title": null}\n            }\n          }\n          """\n        } else if(plotType==PlotType.Bar && traces.length>1) {\n          s"""\n          "width": 10,\n          "mark": "bar",\n          "encoding": {\n            "column": {\n              "field": "$xValue", "type": "nominal", "spacing": 0\n            },\n            "x": {"field": "label", "type": "ordinal", "axis": {"title": ""}},\n            "y": {"field": "$yValue", "type": "quantitative"},\n            "color": {\n              "field": "label",\n              "type": "nominal",\n              "legend": null\n            }\n          }\n          """\n        } else if(plotType==PlotType.Line || plotType==PlotType.Point) {\n          s"""\n          "width": 300,\n          "mark": "${plotType.toString.toLowerCase}",\n          "encoding": {\n            "x": {"field": "$xValue", "type": "ordinal"},\n            "y": {"field": "$yValue", "type": "quantitative"},\n            "color": {\n              "field": "label",\n              "type": "nominal",\n              "legend": {"orient": "bottom", "title": null}\n            }\n          }\n          """\n        }\n      }\n  }.replace(" ","").replace("\\n","")\n\n  def genGraphSpec(graph: Graph): String = {\n    s"""\n      "$$schema": "https://vega.github.io/schema/vega-lite/v4.json",\n      "width": 300,\n      "height": 340,\n      "autosize": {\n        "type": "fit",\n        "contains": "padding"\n      },\n      "data": {\n        "values": [\n              ${graph.toVegaString}\n            ]\n      },\n      "layer": [\n            {\n            "transform": [\n                  {"filter": "datum.label == \'edge\'"},\n                  {"calculate": "sin(datum.id1 / datum.maxId * 2 * PI)+1.5", "as": "x"},\n                  {"calculate": "cos(datum.id1 / datum.maxId * 2 * PI)+1.5", "as": "y"},\n                  {"calculate": "sin(datum.id2 / datum.maxId * 2 * PI)+1.5", "as": "x2"},\n                  {"calculate": "cos(datum.id2 / datum.maxId * 2 * PI)+1.5", "as": "y2"}\n                ],\n            "mark": {\n                "type": "rule",\n                "size": 3\n            },\n            "encoding": {\n                "x": {"field": "x", "type": "quantitative", "axis": null, "scale": {"domain": [0, 3]}},\n                "y": {"field": "y", "type": "quantitative", "axis": null, "scale": {"domain": [0, 3]}},\n                "x2": {"field": "x2", "type": "quantitative"},\n                "y2": {"field": "y2", "type": "quantitative"},\n                "color": {\n                  "field": "lab",\n                  "type": "nominal",\n                  "scale": {"scheme": "set1"},\n                  "legend": {"orient": "bottom", "title": null}\n                }\n            }\n          },\n          {\n            "transform": [\n                {"filter": "datum.label == \'node\'"},\n                {"calculate": "sin(datum.id / datum.maxId * 2 * PI)+1.5", "as": "x"},\n                {"calculate": "1.2*sin(datum.id / datum.maxId * 2 * PI + 0.1)+1.5", "as": "dx"},\n                {"calculate": "cos(datum.id / datum.maxId * 2 * PI)+1.5", "as": "y"},\n                {"calculate": "1.2*cos(datum.id / datum.maxId * 2 * PI + 0.1)+1.5", "as": "dy"}\n            ],\n            "layer": [\n                {\n                    "encoding": {\n                        "x": {"field": "x", "type": "quantitative", "axis": null},\n                        "y": {"field": "y", "type": "quantitative", "axis": null}\n                    },\n                    "mark": {\n                        "type": "circle",\n                        "opacity": 1,\n                        "size": 200\n                    }\n                },\n                {\n                    "mark": {\n                        "type": "text",\n                        "baseline": "middle"\n                    },\n                    "encoding": {\n                        "x": {"field": "dx", "type": "quantitative", "axis": null},\n                        "y": {"field": "dy", "type": "quantitative", "axis": null},\n                        "text": {"field": "lab", "type": "nominal"}\n                    }\n                }\n            ]\n          }\n      ]\n    """\n  }\n}\n\n/**\n  * Implementation of basic set theory as implicits\n  */\n  object Math {\n    implicit class ImplSet[A](set: Set[A]) {\n      // for set membership, use set.contains(element)\n\n      def isSubsetOf(set2: Set[A]): Boolean = set != set2 && set.subsetOf(set2)\n\n      def isSubsetEqTo(set2: Set[A]): Boolean = set.subsetOf(set2)\n\n      def isSupersetOf(set2: Set[A]): Boolean = set2 isSubsetOf set\n\n      def isSupersetEqTo(set2: Set[A]): Boolean = set2 isSubsetEqTo set\n\n      // for intersection use set.intersection(set2)\n\n      // for union use set.union(set2)\n\n      // for difference use set.diff(set2)\n\n      def build(f: A => Boolean): Set[A] = set.filter(f(_))\n\n      def diff(set2: Set[A]): Set[A] = (set diff set2) union (set2 diff set)\n\n      def cardinalProduct[B](set2: Set[B]): Set[(A,B)] =\n        for(x <- set; y <- set2) yield (x,y)\n\n      def cardinalProduct[B](set2: Set[B], condition: (A, B) => Boolean): Set[(A,B)] =\n        for(x <- set; y <- set2 if condition(x,y)) yield (x,y)\n\n      def pairs: Set[(A,A)] = for(x <- set; y <- set) yield (x,y)\n\n      def uniquepairs: Set[(A,A)] = for(x <- set; y <- set if x!=y) yield (x,y)\n\n      def powerset: Set[Set[A]] = set.subsets.toSet\n\n      def argMax(f: A => Double): Option[A] = {\n        val seq = set.toSeq // convert to sequence to preserve ordering in zip function\n        val valSeq = seq map f\n        val maxValue = valSeq.max\n        val maxValSet = seq zip valSeq filter (_._2 == maxValue)\n        if(maxValSet.nonEmpty) Some(maxValSet(new Random().nextInt(maxValSet.length))._1) // if one or more maxima exist return random\n        else None\n      }\n\n      def argMaxOrElse(f: A => Double)(fallback: A): A = {\n        val seq = set.toSeq // convert to sequence to preserve ordering in zip function\n        val valSeq = seq map f\n        val maxValue = valSeq.max\n        val maxValSet = seq zip valSeq filter (_._2 == maxValue)\n        if(maxValSet.nonEmpty) maxValSet(new Random().nextInt(maxValSet.length))._1 // if one or more maxima exist return random\n        else fallback\n      }\n\n      def random: A = set.toList(Random.nextInt(set.size))\n    }\n\n    implicit class Impl2Set[A,B](sets: Tuple2[Set[A],Set[B]]) {\n      // Example (set, set2) build((a: Int, b: Int) => a/2==0 && b%2==0)\n      def build(f: (A, B) => Boolean): Set[(A,B)] =\n        (sets._1 cardinalProduct sets._2) build Function.tupled(f)\n    }\n\n    implicit class ImplSetSet[A](setOfSets: Set[Set[A]]) {\n      def bigUnion: Set[A] =\n        if(setOfSets.nonEmpty) setOfSets.reduce(_ union _) else Set.empty\n\n      def bigIntersection: Set[A] =\n        if(setOfSets.nonEmpty) setOfSets.reduce(_ intersect _) else Set.empty\n    }\n\n    def requirement(b: Boolean, msg: String): Unit =\n      if(!b) {\n        println(s"Requirement not met: $msg")\n        assert(false)\n      }\n  }\n\nimport Math._\nimport VegaRenderer._\n\n',
-      post: ''
-    }
-,
-
-    'Template': {
-      pre: 'import scala.util.Random\nimport scalatags.JsDom.all._\n\n/**\n  * This renderer allows the user to render a Vega plot specification. The specifying\n  * must be passed as a String and will be rendered in a div.\n  */\ncase object VegaRenderer {\n  case object PlotType extends Enumeration {\n    type PlotType = Value\n    val Line, Bar, Point = Value\n  }\n\n  case class Trace(label: String, data: List[Map[String, Any]]) {\n    def toVegaString: String = data.map(convertValues(label, _)).mkString(", ")\n  }\n\n  case class Graph(nodes: List[Any], edges: List[(Any, Any, String)]) {\n    private def toVegaData: (Trace, Trace) = {\n      val nDat: List[Map[String, Any]] = (nodes zip nodes.indices).map(ni => Map("lab" -> ni._1.toString, "id" -> ni._2, "maxId" -> nodes.length))\n      val nodesTrace = Trace("node", nDat)\n      val eDat: List[Map[String, Any]] = edges.map(e => Map("id1" -> nodes.indexOf(e._1), "id2" -> nodes.indexOf(e._2), "lab" -> e._3, "maxId" -> nodes.length))\n      val edgesTrace = Trace("edge", eDat)\n      (nodesTrace, edgesTrace)\n    }\n\n    def toVegaString: String = toVegaData._1.toVegaString + ",\\n" + toVegaData._2.toVegaString\n  }\n\n  def convertValues(label: String, values: Map[String, Any]): String =\n    values.toSeq.map(v => {\n      if(v._2.isInstanceOf[String])\n        s""""${v._1}": "${v._2}""""\n      else\n        s""""${v._1}": ${v._2}"""\n    }).\n    mkString(s"""{"label": "$label",""",",","}")\n\n  import PlotType._\n\n  var plotCounter = 0\n\n  def render(vegaSpec: String): Unit = {\n    Fiddle.print(\n      div(id:=s"plot$plotCounter", s"Rendering plot $plotCounter..."),\n      script(s"""\n        var script = document.createElement(\'script\');\n        script.onload = function () {\n          requirejs.config({\n            baseUrl: \'https://cdn.jsdelivr.net/npm/\',\n            paths: {\n              "vega-embed":  "vega-embed@3?noext",\n              "vega-lib": "vega-lib?noext",\n              "vega-lite": "vega-lite@2?noext",\n              "vega": "vega@3?noext"\n            }\n          });\n\n        require(["vega-embed"], function(vegaEmbed) {\n          const spec = {\n            $vegaSpec\n          };\n          vegaEmbed(\'#plot$plotCounter\', spec, {defaultStyle: true, renderer: "svg"}).catch(console.warn);\n        });\n      };\n\n      script.src = "https://requirejs.org/docs/release/2.3.6/minified/require.js";\n      document.head.appendChild(script);\n      """)\n    )\n    plotCounter = plotCounter + 1\n  }\n\n  def render(graph: Graph): Unit = render(genGraphSpec(graph))\n\n  def render(traces: List[Trace],\n    xValue: String,\n    xLabel: String,\n    yValue: String,\n    yLabel: String,\n    title: String,\n    plotType: PlotType = PlotType.Line): Unit =\n      render(\n        genSpec(\n          traces,\n          xValue,\n          xLabel,\n          yValue,\n          yLabel,\n          title,\n          plotType\n        )\n      )\n\n  def genSpec(traces: List[Trace],\n    xValue: String,\n    xLabel: String,\n    yValue: String,\n    yLabel: String,\n    title: String,\n    plotType: PlotType = PlotType.Line): String = {\n      s"""\n      "$$schema": "https://vega.github.io/schema/vega-lite/v4.json",\n      "height": 340,\n      "autosize": {\n        "type": "fit",\n        "contains": "padding"\n      },\n      "data": { "values": [\n          ${traces.map(_.toVegaString).mkString(",\\n")}\n      ]},\n      """ + {\n        if(plotType==PlotType.Bar && traces.length==1) {\n          s"""\n          "width": 300,\n          "mark": "bar",\n          "encoding": {\n            "x": {"field": "$xValue", "type": "ordinal"},\n            "y": {"field": "$yValue", "type": "quantitative"},\n            "color": {\n              "field": "label",\n              "type": "nominal",\n              "legend": {"orient": "bottom", "title": null}\n            }\n          }\n          """\n        } else if(plotType==PlotType.Bar && traces.length>1) {\n          s"""\n          "width": 10,\n          "mark": "bar",\n          "encoding": {\n            "column": {\n              "field": "$xValue", "type": "nominal", "spacing": 0\n            },\n            "x": {"field": "label", "type": "ordinal", "axis": {"title": ""}},\n            "y": {"field": "$yValue", "type": "quantitative"},\n            "color": {\n              "field": "label",\n              "type": "nominal",\n              "legend": null\n            }\n          }\n          """\n        } else if(plotType==PlotType.Line || plotType==PlotType.Point) {\n          s"""\n          "width": 300,\n          "mark": "${plotType.toString.toLowerCase}",\n          "encoding": {\n            "x": {"field": "$xValue", "type": "ordinal"},\n            "y": {"field": "$yValue", "type": "quantitative"},\n            "color": {\n              "field": "label",\n              "type": "nominal",\n              "legend": {"orient": "bottom", "title": null}\n            }\n          }\n          """\n        }\n      }\n  }.replace(" ","").replace("\\n","")\n\n  def genGraphSpec(graph: Graph): String = {\n    s"""\n      "$$schema": "https://vega.github.io/schema/vega-lite/v4.json",\n      "width": 300,\n      "height": 340,\n      "autosize": {\n        "type": "fit",\n        "contains": "padding"\n      },\n      "data": {\n        "values": [\n              ${graph.toVegaString}\n            ]\n      },\n      "layer": [\n            {\n            "transform": [\n                  {"filter": "datum.label == \'edge\'"},\n                  {"calculate": "sin(datum.id1 / datum.maxId * 2 * PI)+1.5", "as": "x"},\n                  {"calculate": "cos(datum.id1 / datum.maxId * 2 * PI)+1.5", "as": "y"},\n                  {"calculate": "sin(datum.id2 / datum.maxId * 2 * PI)+1.5", "as": "x2"},\n                  {"calculate": "cos(datum.id2 / datum.maxId * 2 * PI)+1.5", "as": "y2"}\n                ],\n            "mark": {\n                "type": "rule",\n                "size": 3\n            },\n            "encoding": {\n                "x": {"field": "x", "type": "quantitative", "axis": null, "scale": {"domain": [0, 3]}},\n                "y": {"field": "y", "type": "quantitative", "axis": null, "scale": {"domain": [0, 3]}},\n                "x2": {"field": "x2", "type": "quantitative"},\n                "y2": {"field": "y2", "type": "quantitative"},\n                "color": {\n                  "field": "lab",\n                  "type": "nominal",\n                  "scale": {"scheme": "set1"},\n                  "legend": {"orient": "bottom", "title": null}\n                }\n            }\n          },\n          {\n            "transform": [\n                {"filter": "datum.label == \'node\'"},\n                {"calculate": "sin(datum.id / datum.maxId * 2 * PI)+1.5", "as": "x"},\n                {"calculate": "1.2*sin(datum.id / datum.maxId * 2 * PI + 0.1)+1.5", "as": "dx"},\n                {"calculate": "cos(datum.id / datum.maxId * 2 * PI)+1.5", "as": "y"},\n                {"calculate": "1.2*cos(datum.id / datum.maxId * 2 * PI + 0.1)+1.5", "as": "dy"}\n            ],\n            "layer": [\n                {\n                    "encoding": {\n                        "x": {"field": "x", "type": "quantitative", "axis": null},\n                        "y": {"field": "y", "type": "quantitative", "axis": null}\n                    },\n                    "mark": {\n                        "type": "circle",\n                        "opacity": 1,\n                        "size": 200\n                    }\n                },\n                {\n                    "mark": {\n                        "type": "text",\n                        "baseline": "middle"\n                    },\n                    "encoding": {\n                        "x": {"field": "dx", "type": "quantitative", "axis": null},\n                        "y": {"field": "dy", "type": "quantitative", "axis": null},\n                        "text": {"field": "lab", "type": "nominal"}\n                    }\n                }\n            ]\n          }\n      ]\n    """\n  }\n}\n\n/**\n  * Implementation of basic set theory as implicits\n  */\n  object Math {\n    implicit class ImplSet[A](set: Set[A]) {\n      // for set membership, use set.contains(element)\n\n      def isSubsetOf(set2: Set[A]): Boolean = set != set2 && set.subsetOf(set2)\n\n      def isSubsetEqTo(set2: Set[A]): Boolean = set.subsetOf(set2)\n\n      def isSupersetOf(set2: Set[A]): Boolean = set2 isSubsetOf set\n\n      def isSupersetEqTo(set2: Set[A]): Boolean = set2 isSubsetEqTo set\n\n      // for intersection use set.intersection(set2)\n\n      // for union use set.union(set2)\n\n      // for difference use set.diff(set2)\n\n      def build(f: A => Boolean): Set[A] = set.filter(f(_))\n\n      def diff(set2: Set[A]): Set[A] = (set diff set2) union (set2 diff set)\n\n      def cardinalProduct[B](set2: Set[B]): Set[(A,B)] =\n        for(x <- set; y <- set2) yield (x,y)\n\n      def cardinalProduct[B](set2: Set[B], condition: (A, B) => Boolean): Set[(A,B)] =\n        for(x <- set; y <- set2 if condition(x,y)) yield (x,y)\n\n      def pairs: Set[(A,A)] = for(x <- set; y <- set) yield (x,y)\n\n      def uniquepairs: Set[(A,A)] = for(x <- set; y <- set if x!=y) yield (x,y)\n\n      def powerset: Set[Set[A]] = set.subsets.toSet\n\n      def argMax(f: A => Double): Option[A] = {\n        val seq = set.toSeq // convert to sequence to preserve ordering in zip function\n        val valSeq = seq map f\n        val maxValue = valSeq.max\n        val maxValSet = seq zip valSeq filter (_._2 == maxValue)\n        if(maxValSet.nonEmpty) Some(maxValSet(new Random().nextInt(maxValSet.length))._1) // if one or more maxima exist return random\n        else None\n      }\n\n      def argMaxOrElse(f: A => Double)(fallback: A): A = {\n        val seq = set.toSeq // convert to sequence to preserve ordering in zip function\n        val valSeq = seq map f\n        val maxValue = valSeq.max\n        val maxValSet = seq zip valSeq filter (_._2 == maxValue)\n        if(maxValSet.nonEmpty) maxValSet(new Random().nextInt(maxValSet.length))._1 // if one or more maxima exist return random\n        else fallback\n      }\n\n      def random: A = set.toList(Random.nextInt(set.size))\n    }\n\n    implicit class Impl2Set[A,B](sets: Tuple2[Set[A],Set[B]]) {\n      // Example (set, set2) build((a: Int, b: Int) => a/2==0 && b%2==0)\n      def build(f: (A, B) => Boolean): Set[(A,B)] =\n        (sets._1 cardinalProduct sets._2) build Function.tupled(f)\n    }\n\n    implicit class ImplSetSet[A](setOfSets: Set[Set[A]]) {\n      def bigUnion: Set[A] =\n        if(setOfSets.nonEmpty) setOfSets.reduce(_ union _) else Set.empty\n\n      def bigIntersection: Set[A] =\n        if(setOfSets.nonEmpty) setOfSets.reduce(_ intersect _) else Set.empty\n    }\n\n    def requirement(b: Boolean, msg: String): Unit =\n      if(!b) {\n        println(s"Requirement not met: $msg")\n        assert(false)\n      }\n  }\n\nimport Math._\nimport VegaRenderer._\n\n',
-      post: ''
-    }
-,
-
-    'Template': {
-      pre: 'import scala.util.Random\nimport scalatags.JsDom.all._\n\n/**\n  * This renderer allows the user to render a Vega plot specification. The specifying\n  * must be passed as a String and will be rendered in a div.\n  */\ncase object VegaRenderer {\n  case object PlotType extends Enumeration {\n    type PlotType = Value\n    val Line, Bar, Point = Value\n  }\n\n  case class Trace(label: String, data: List[Map[String, Any]]) {\n    def toVegaString: String = data.map(convertValues(label, _)).mkString(", ")\n  }\n\n  case class Graph(nodes: List[Any], edges: List[(Any, Any, String)]) {\n    private def toVegaData: (Trace, Trace) = {\n      val nDat: List[Map[String, Any]] = (nodes zip nodes.indices).map(ni => Map("lab" -> ni._1.toString, "id" -> ni._2, "maxId" -> nodes.length))\n      val nodesTrace = Trace("node", nDat)\n      val eDat: List[Map[String, Any]] = edges.map(e => Map("id1" -> nodes.indexOf(e._1), "id2" -> nodes.indexOf(e._2), "lab" -> e._3, "maxId" -> nodes.length))\n      val edgesTrace = Trace("edge", eDat)\n      (nodesTrace, edgesTrace)\n    }\n\n    def toVegaString: String = toVegaData._1.toVegaString + ",\\n" + toVegaData._2.toVegaString\n  }\n\n  def convertValues(label: String, values: Map[String, Any]): String =\n    values.toSeq.map(v => {\n      if(v._2.isInstanceOf[String])\n        s""""${v._1}": "${v._2}""""\n      else\n        s""""${v._1}": ${v._2}"""\n    }).\n    mkString(s"""{"label": "$label",""",",","}")\n\n  import PlotType._\n\n  var plotCounter = 0\n\n  def render(vegaSpec: String): Unit = {\n    Fiddle.print(\n      div(id:=s"plot$plotCounter", s"Rendering plot $plotCounter..."),\n      script(s"""\n        var script = document.createElement(\'script\');\n        script.onload = function () {\n          requirejs.config({\n            baseUrl: \'https://cdn.jsdelivr.net/npm/\',\n            paths: {\n              "vega-embed":  "vega-embed@3?noext",\n              "vega-lib": "vega-lib?noext",\n              "vega-lite": "vega-lite@2?noext",\n              "vega": "vega@3?noext"\n            }\n          });\n\n        require(["vega-embed"], function(vegaEmbed) {\n          const spec = {\n            $vegaSpec\n          };\n          vegaEmbed(\'#plot$plotCounter\', spec, {defaultStyle: true, renderer: "svg"}).catch(console.warn);\n        });\n      };\n\n      script.src = "https://requirejs.org/docs/release/2.3.6/minified/require.js";\n      document.head.appendChild(script);\n      """)\n    )\n    plotCounter = plotCounter + 1\n  }\n\n  def render(graph: Graph): Unit = render(genGraphSpec(graph))\n\n  def render(traces: List[Trace],\n    xValue: String,\n    xLabel: String,\n    yValue: String,\n    yLabel: String,\n    title: String,\n    plotType: PlotType = PlotType.Line): Unit =\n      render(\n        genSpec(\n          traces,\n          xValue,\n          xLabel,\n          yValue,\n          yLabel,\n          title,\n          plotType\n        )\n      )\n\n  def genSpec(traces: List[Trace],\n    xValue: String,\n    xLabel: String,\n    yValue: String,\n    yLabel: String,\n    title: String,\n    plotType: PlotType = PlotType.Line): String = {\n      s"""\n      "$$schema": "https://vega.github.io/schema/vega-lite/v4.json",\n      "height": 340,\n      "autosize": {\n        "type": "fit",\n        "contains": "padding"\n      },\n      "data": { "values": [\n          ${traces.map(_.toVegaString).mkString(",\\n")}\n      ]},\n      """ + {\n        if(plotType==PlotType.Bar && traces.length==1) {\n          s"""\n          "width": 300,\n          "mark": "bar",\n          "encoding": {\n            "x": {"field": "$xValue", "type": "ordinal"},\n            "y": {"field": "$yValue", "type": "quantitative"},\n            "color": {\n              "field": "label",\n              "type": "nominal",\n              "legend": {"orient": "bottom", "title": null}\n            }\n          }\n          """\n        } else if(plotType==PlotType.Bar && traces.length>1) {\n          s"""\n          "width": 10,\n          "mark": "bar",\n          "encoding": {\n            "column": {\n              "field": "$xValue", "type": "nominal", "spacing": 0\n            },\n            "x": {"field": "label", "type": "ordinal", "axis": {"title": ""}},\n            "y": {"field": "$yValue", "type": "quantitative"},\n            "color": {\n              "field": "label",\n              "type": "nominal",\n              "legend": null\n            }\n          }\n          """\n        } else if(plotType==PlotType.Line || plotType==PlotType.Point) {\n          s"""\n          "width": 300,\n          "mark": "${plotType.toString.toLowerCase}",\n          "encoding": {\n            "x": {"field": "$xValue", "type": "ordinal"},\n            "y": {"field": "$yValue", "type": "quantitative"},\n            "color": {\n              "field": "label",\n              "type": "nominal",\n              "legend": {"orient": "bottom", "title": null}\n            }\n          }\n          """\n        }\n      }\n  }.replace(" ","").replace("\\n","")\n\n  def genGraphSpec(graph: Graph): String = {\n    s"""\n      "$$schema": "https://vega.github.io/schema/vega-lite/v4.json",\n      "width": 300,\n      "height": 340,\n      "autosize": {\n        "type": "fit",\n        "contains": "padding"\n      },\n      "data": {\n        "values": [\n              ${graph.toVegaString}\n            ]\n      },\n      "layer": [\n            {\n            "transform": [\n                  {"filter": "datum.label == \'edge\'"},\n                  {"calculate": "sin(datum.id1 / datum.maxId * 2 * PI)+1.5", "as": "x"},\n                  {"calculate": "cos(datum.id1 / datum.maxId * 2 * PI)+1.5", "as": "y"},\n                  {"calculate": "sin(datum.id2 / datum.maxId * 2 * PI)+1.5", "as": "x2"},\n                  {"calculate": "cos(datum.id2 / datum.maxId * 2 * PI)+1.5", "as": "y2"}\n                ],\n            "mark": {\n                "type": "rule",\n                "size": 3\n            },\n            "encoding": {\n                "x": {"field": "x", "type": "quantitative", "axis": null, "scale": {"domain": [0, 3]}},\n                "y": {"field": "y", "type": "quantitative", "axis": null, "scale": {"domain": [0, 3]}},\n                "x2": {"field": "x2", "type": "quantitative"},\n                "y2": {"field": "y2", "type": "quantitative"},\n                "color": {\n                  "field": "lab",\n                  "type": "nominal",\n                  "scale": {"scheme": "set1"},\n                  "legend": {"orient": "bottom", "title": null}\n                }\n            }\n          },\n          {\n            "transform": [\n                {"filter": "datum.label == \'node\'"},\n                {"calculate": "sin(datum.id / datum.maxId * 2 * PI)+1.5", "as": "x"},\n                {"calculate": "1.2*sin(datum.id / datum.maxId * 2 * PI + 0.1)+1.5", "as": "dx"},\n                {"calculate": "cos(datum.id / datum.maxId * 2 * PI)+1.5", "as": "y"},\n                {"calculate": "1.2*cos(datum.id / datum.maxId * 2 * PI + 0.1)+1.5", "as": "dy"}\n            ],\n            "layer": [\n                {\n                    "encoding": {\n                        "x": {"field": "x", "type": "quantitative", "axis": null},\n                        "y": {"field": "y", "type": "quantitative", "axis": null}\n                    },\n                    "mark": {\n                        "type": "circle",\n                        "opacity": 1,\n                        "size": 200\n                    }\n                },\n                {\n                    "mark": {\n                        "type": "text",\n                        "baseline": "middle"\n                    },\n                    "encoding": {\n                        "x": {"field": "dx", "type": "quantitative", "axis": null},\n                        "y": {"field": "dy", "type": "quantitative", "axis": null},\n                        "text": {"field": "lab", "type": "nominal"}\n                    }\n                }\n            ]\n          }\n      ]\n    """\n  }\n}\n\n/**\n  * Implementation of basic set theory as implicits\n  */\n  object Math {\n    implicit class ImplSet[A](set: Set[A]) {\n      // for set membership, use set.contains(element)\n\n      def isSubsetOf(set2: Set[A]): Boolean = set != set2 && set.subsetOf(set2)\n\n      def isSubsetEqTo(set2: Set[A]): Boolean = set.subsetOf(set2)\n\n      def isSupersetOf(set2: Set[A]): Boolean = set2 isSubsetOf set\n\n      def isSupersetEqTo(set2: Set[A]): Boolean = set2 isSubsetEqTo set\n\n      // for intersection use set.intersection(set2)\n\n      // for union use set.union(set2)\n\n      // for difference use set.diff(set2)\n\n      def build(f: A => Boolean): Set[A] = set.filter(f(_))\n\n      def diff(set2: Set[A]): Set[A] = (set diff set2) union (set2 diff set)\n\n      def cardinalProduct[B](set2: Set[B]): Set[(A,B)] =\n        for(x <- set; y <- set2) yield (x,y)\n\n      def cardinalProduct[B](set2: Set[B], condition: (A, B) => Boolean): Set[(A,B)] =\n        for(x <- set; y <- set2 if condition(x,y)) yield (x,y)\n\n      def pairs: Set[(A,A)] = for(x <- set; y <- set) yield (x,y)\n\n      def uniquepairs: Set[(A,A)] = for(x <- set; y <- set if x!=y) yield (x,y)\n\n      def powerset: Set[Set[A]] = set.subsets.toSet\n\n      def argMax(f: A => Double): Option[A] = {\n        val seq = set.toSeq // convert to sequence to preserve ordering in zip function\n        val valSeq = seq map f\n        val maxValue = valSeq.max\n        val maxValSet = seq zip valSeq filter (_._2 == maxValue)\n        if(maxValSet.nonEmpty) Some(maxValSet(new Random().nextInt(maxValSet.length))._1) // if one or more maxima exist return random\n        else None\n      }\n\n      def argMaxOrElse(f: A => Double)(fallback: A): A = {\n        val seq = set.toSeq // convert to sequence to preserve ordering in zip function\n        val valSeq = seq map f\n        val maxValue = valSeq.max\n        val maxValSet = seq zip valSeq filter (_._2 == maxValue)\n        if(maxValSet.nonEmpty) maxValSet(new Random().nextInt(maxValSet.length))._1 // if one or more maxima exist return random\n        else fallback\n      }\n\n      def random: A = set.toList(Random.nextInt(set.size))\n    }\n\n    implicit class Impl2Set[A,B](sets: Tuple2[Set[A],Set[B]]) {\n      // Example (set, set2) build((a: Int, b: Int) => a/2==0 && b%2==0)\n      def build(f: (A, B) => Boolean): Set[(A,B)] =\n        (sets._1 cardinalProduct sets._2) build Function.tupled(f)\n    }\n\n    implicit class ImplSetSet[A](setOfSets: Set[Set[A]]) {\n      def bigUnion: Set[A] =\n        if(setOfSets.nonEmpty) setOfSets.reduce(_ union _) else Set.empty\n\n      def bigIntersection: Set[A] =\n        if(setOfSets.nonEmpty) setOfSets.reduce(_ intersect _) else Set.empty\n    }\n\n    def requirement(b: Boolean, msg: String): Unit =\n      if(!b) {\n        println(s"Requirement not met: $msg")\n        assert(false)\n      }\n  }\n\nimport Math._\nimport VegaRenderer._\n\n',
-      post: ''
-    }
-,
-
-    'Template': {
-      pre: 'import scala.util.Random\nimport scalatags.JsDom.all._\n\n/**\n  * This renderer allows the user to render a Vega plot specification. The specifying\n  * must be passed as a String and will be rendered in a div.\n  */\ncase object VegaRenderer {\n  case object PlotType extends Enumeration {\n    type PlotType = Value\n    val Line, Bar, Point = Value\n  }\n\n  case class Trace(label: String, data: List[Map[String, Any]]) {\n    def toVegaString: String = data.map(convertValues(label, _)).mkString(", ")\n  }\n\n  case class Graph(nodes: List[Any], edges: List[(Any, Any, String)]) {\n    private def toVegaData: (Trace, Trace) = {\n      val nDat: List[Map[String, Any]] = (nodes zip nodes.indices).map(ni => Map("lab" -> ni._1.toString, "id" -> ni._2, "maxId" -> nodes.length))\n      val nodesTrace = Trace("node", nDat)\n      val eDat: List[Map[String, Any]] = edges.map(e => Map("id1" -> nodes.indexOf(e._1), "id2" -> nodes.indexOf(e._2), "lab" -> e._3, "maxId" -> nodes.length))\n      val edgesTrace = Trace("edge", eDat)\n      (nodesTrace, edgesTrace)\n    }\n\n    def toVegaString: String = toVegaData._1.toVegaString + ",\\n" + toVegaData._2.toVegaString\n  }\n\n  def convertValues(label: String, values: Map[String, Any]): String =\n    values.toSeq.map(v => {\n      if(v._2.isInstanceOf[String])\n        s""""${v._1}": "${v._2}""""\n      else\n        s""""${v._1}": ${v._2}"""\n    }).\n    mkString(s"""{"label": "$label",""",",","}")\n\n  import PlotType._\n\n  var plotCounter = 0\n\n  def render(vegaSpec: String): Unit = {\n    Fiddle.print(\n      div(id:=s"plot$plotCounter", s"Rendering plot $plotCounter..."),\n      script(s"""\n        var script = document.createElement(\'script\');\n        script.onload = function () {\n          requirejs.config({\n            baseUrl: \'https://cdn.jsdelivr.net/npm/\',\n            paths: {\n              "vega-embed":  "vega-embed@3?noext",\n              "vega-lib": "vega-lib?noext",\n              "vega-lite": "vega-lite@2?noext",\n              "vega": "vega@3?noext"\n            }\n          });\n\n        require(["vega-embed"], function(vegaEmbed) {\n          const spec = {\n            $vegaSpec\n          };\n          vegaEmbed(\'#plot$plotCounter\', spec, {defaultStyle: true, renderer: "svg"}).catch(console.warn);\n        });\n      };\n\n      script.src = "https://requirejs.org/docs/release/2.3.6/minified/require.js";\n      document.head.appendChild(script);\n      """)\n    )\n    plotCounter = plotCounter + 1\n  }\n\n  def render(graph: Graph): Unit = render(genGraphSpec(graph))\n\n  def render(traces: List[Trace],\n    xValue: String,\n    xLabel: String,\n    yValue: String,\n    yLabel: String,\n    title: String,\n    plotType: PlotType = PlotType.Line): Unit =\n      render(\n        genSpec(\n          traces,\n          xValue,\n          xLabel,\n          yValue,\n          yLabel,\n          title,\n          plotType\n        )\n      )\n\n  def genSpec(traces: List[Trace],\n    xValue: String,\n    xLabel: String,\n    yValue: String,\n    yLabel: String,\n    title: String,\n    plotType: PlotType = PlotType.Line): String = {\n      s"""\n      "$$schema": "https://vega.github.io/schema/vega-lite/v4.json",\n      "height": 340,\n      "autosize": {\n        "type": "fit",\n        "contains": "padding"\n      },\n      "data": { "values": [\n          ${traces.map(_.toVegaString).mkString(",\\n")}\n      ]},\n      """ + {\n        if(plotType==PlotType.Bar && traces.length==1) {\n          s"""\n          "width": 300,\n          "mark": "bar",\n          "encoding": {\n            "x": {"field": "$xValue", "type": "ordinal"},\n            "y": {"field": "$yValue", "type": "quantitative"},\n            "color": {\n              "field": "label",\n              "type": "nominal",\n              "legend": {"orient": "bottom", "title": null}\n            }\n          }\n          """\n        } else if(plotType==PlotType.Bar && traces.length>1) {\n          s"""\n          "width": 10,\n          "mark": "bar",\n          "encoding": {\n            "column": {\n              "field": "$xValue", "type": "nominal", "spacing": 0\n            },\n            "x": {"field": "label", "type": "ordinal", "axis": {"title": ""}},\n            "y": {"field": "$yValue", "type": "quantitative"},\n            "color": {\n              "field": "label",\n              "type": "nominal",\n              "legend": null\n            }\n          }\n          """\n        } else if(plotType==PlotType.Line || plotType==PlotType.Point) {\n          s"""\n          "width": 300,\n          "mark": "${plotType.toString.toLowerCase}",\n          "encoding": {\n            "x": {"field": "$xValue", "type": "ordinal"},\n            "y": {"field": "$yValue", "type": "quantitative"},\n            "color": {\n              "field": "label",\n              "type": "nominal",\n              "legend": {"orient": "bottom", "title": null}\n            }\n          }\n          """\n        }\n      }\n  }.replace(" ","").replace("\\n","")\n\n  def genGraphSpec(graph: Graph): String = {\n    s"""\n      "$$schema": "https://vega.github.io/schema/vega-lite/v4.json",\n      "width": 300,\n      "height": 340,\n      "autosize": {\n        "type": "fit",\n        "contains": "padding"\n      },\n      "data": {\n        "values": [\n              ${graph.toVegaString}\n            ]\n      },\n      "layer": [\n            {\n            "transform": [\n                  {"filter": "datum.label == \'edge\'"},\n                  {"calculate": "sin(datum.id1 / datum.maxId * 2 * PI)+1.5", "as": "x"},\n                  {"calculate": "cos(datum.id1 / datum.maxId * 2 * PI)+1.5", "as": "y"},\n                  {"calculate": "sin(datum.id2 / datum.maxId * 2 * PI)+1.5", "as": "x2"},\n                  {"calculate": "cos(datum.id2 / datum.maxId * 2 * PI)+1.5", "as": "y2"}\n                ],\n            "mark": {\n                "type": "rule",\n                "size": 3\n            },\n            "encoding": {\n                "x": {"field": "x", "type": "quantitative", "axis": null, "scale": {"domain": [0, 3]}},\n                "y": {"field": "y", "type": "quantitative", "axis": null, "scale": {"domain": [0, 3]}},\n                "x2": {"field": "x2", "type": "quantitative"},\n                "y2": {"field": "y2", "type": "quantitative"},\n                "color": {\n                  "field": "lab",\n                  "type": "nominal",\n                  "scale": {"scheme": "set1"},\n                  "legend": {"orient": "bottom", "title": null}\n                }\n            }\n          },\n          {\n            "transform": [\n                {"filter": "datum.label == \'node\'"},\n                {"calculate": "sin(datum.id / datum.maxId * 2 * PI)+1.5", "as": "x"},\n                {"calculate": "1.2*sin(datum.id / datum.maxId * 2 * PI + 0.1)+1.5", "as": "dx"},\n                {"calculate": "cos(datum.id / datum.maxId * 2 * PI)+1.5", "as": "y"},\n                {"calculate": "1.2*cos(datum.id / datum.maxId * 2 * PI + 0.1)+1.5", "as": "dy"}\n            ],\n            "layer": [\n                {\n                    "encoding": {\n                        "x": {"field": "x", "type": "quantitative", "axis": null},\n                        "y": {"field": "y", "type": "quantitative", "axis": null}\n                    },\n                    "mark": {\n                        "type": "circle",\n                        "opacity": 1,\n                        "size": 200\n                    }\n                },\n                {\n                    "mark": {\n                        "type": "text",\n                        "baseline": "middle"\n                    },\n                    "encoding": {\n                        "x": {"field": "dx", "type": "quantitative", "axis": null},\n                        "y": {"field": "dy", "type": "quantitative", "axis": null},\n                        "text": {"field": "lab", "type": "nominal"}\n                    }\n                }\n            ]\n          }\n      ]\n    """\n  }\n}\n\n/**\n  * Implementation of basic set theory as implicits\n  */\n  object Math {\n    implicit class ImplSet[A](set: Set[A]) {\n      // for set membership, use set.contains(element)\n\n      def isSubsetOf(set2: Set[A]): Boolean = set != set2 && set.subsetOf(set2)\n\n      def isSubsetEqTo(set2: Set[A]): Boolean = set.subsetOf(set2)\n\n      def isSupersetOf(set2: Set[A]): Boolean = set2 isSubsetOf set\n\n      def isSupersetEqTo(set2: Set[A]): Boolean = set2 isSubsetEqTo set\n\n      // for intersection use set.intersection(set2)\n\n      // for union use set.union(set2)\n\n      // for difference use set.diff(set2)\n\n      def build(f: A => Boolean): Set[A] = set.filter(f(_))\n\n      def diff(set2: Set[A]): Set[A] = (set diff set2) union (set2 diff set)\n\n      def cardinalProduct[B](set2: Set[B]): Set[(A,B)] =\n        for(x <- set; y <- set2) yield (x,y)\n\n      def cardinalProduct[B](set2: Set[B], condition: (A, B) => Boolean): Set[(A,B)] =\n        for(x <- set; y <- set2 if condition(x,y)) yield (x,y)\n\n      def pairs: Set[(A,A)] = for(x <- set; y <- set) yield (x,y)\n\n      def uniquepairs: Set[(A,A)] = for(x <- set; y <- set if x!=y) yield (x,y)\n\n      def powerset: Set[Set[A]] = set.subsets.toSet\n\n      def argMax(f: A => Double): Option[A] = {\n        val seq = set.toSeq // convert to sequence to preserve ordering in zip function\n        val valSeq = seq map f\n        val maxValue = valSeq.max\n        val maxValSet = seq zip valSeq filter (_._2 == maxValue)\n        if(maxValSet.nonEmpty) Some(maxValSet(new Random().nextInt(maxValSet.length))._1) // if one or more maxima exist return random\n        else None\n      }\n\n      def argMaxOrElse(f: A => Double)(fallback: A): A = {\n        val seq = set.toSeq // convert to sequence to preserve ordering in zip function\n        val valSeq = seq map f\n        val maxValue = valSeq.max\n        val maxValSet = seq zip valSeq filter (_._2 == maxValue)\n        if(maxValSet.nonEmpty) maxValSet(new Random().nextInt(maxValSet.length))._1 // if one or more maxima exist return random\n        else fallback\n      }\n\n      def random: A = set.toList(Random.nextInt(set.size))\n    }\n\n    implicit class Impl2Set[A,B](sets: Tuple2[Set[A],Set[B]]) {\n      // Example (set, set2) build((a: Int, b: Int) => a/2==0 && b%2==0)\n      def build(f: (A, B) => Boolean): Set[(A,B)] =\n        (sets._1 cardinalProduct sets._2) build Function.tupled(f)\n    }\n\n    implicit class ImplSetSet[A](setOfSets: Set[Set[A]]) {\n      def bigUnion: Set[A] =\n        if(setOfSets.nonEmpty) setOfSets.reduce(_ union _) else Set.empty\n\n      def bigIntersection: Set[A] =\n        if(setOfSets.nonEmpty) setOfSets.reduce(_ intersect _) else Set.empty\n    }\n\n    def requirement(b: Boolean, msg: String): Unit =\n      if(!b) {\n        println(s"Requirement not met: $msg")\n        assert(false)\n      }\n  }\n\nimport Math._\nimport VegaRenderer._\n\n',
-      post: ''
-    }
-
-  }
-</script>
-
-<script defer src='https://embed.scalafiddle.io/integration.js'></script>
-</body>
+  </body>
 </html>
