@@ -95,7 +95,7 @@ Finally, there are some special sets which we often use that have their own symb
 * Natural (whole) numbers (with zero) $$\mathbb{N}_0=\{0,1,2,3,4,\dots\}$$
 * Natural (whole) numbers (without zero) $$\mathbb{N}^*=\{1,2,3,4,\dots\}$$
 * Integer numbers $$\mathbb{Z}=\{\dots,-3,-2,-1,0,1,2,3,\dots\}$$
-* Real numbers $$\mathbb{R}=\{r~\|~-\infty<r<\infty\}$$
+* Real numbers <span>$$\mathbb{R}=\{r~|~-\infty<r<\infty\}$$</span>
 
 # Functions
 Building on set theory, we can define functions. Functions are relations that map all objects from one set (the _domain_) to exactly one object from another set (the _codomain_). We define functions with the following notation, here $$f$$ is the name of the function:
