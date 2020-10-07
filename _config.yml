@@ -11,6 +11,12 @@ timezone: Europe/Amsterdam
 excerpt_separator: <!--more-->  # you can specify your own separator, of course.
 exclude: ['Gemfile', 'Gemfile.lock', 'Rakefile', 'UploadToGithub.Rakefile', 'README.md']
 
+plugins:
+  - jekyll/scholar
+
+scholar:
+  style: apa
+  sort_by: author
 
 collections_dir: content
 

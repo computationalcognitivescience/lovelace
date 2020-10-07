@@ -1,6 +1,18 @@
-- link: //www.twitter.com/IrisVanRooij 
-  icon: icon-twitter
+- link: mailto:m.blokpoel@donders.ru.nl
+  icon: icon-mail3
+  label: Mark
+- link: //www.markblokpoel.com
+  icon: icon-html-five
 - link: //www.twitter.com/MarkBlokpoel 
   icon: icon-twitter
 - link: //github.com/markblokpoel 
+  icon: icon-github
+- link: mailto:i.vanrooij@donders.ru.nl
+  icon: icon-mail3
+  label: Iris
+- link: //www.irisvanrooijcogsci.com
+  icon: icon-html-five
+- link: //www.twitter.com/IrisVanRooij 
+  icon: icon-twitter
+- link: //github.com/IrisVanRooij 
   icon: icon-github

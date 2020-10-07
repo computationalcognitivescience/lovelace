@@ -1,10 +1,12 @@
 <footer>
   <hr class="slender">
   <ul class="footer-links">
-    <li><a href="mailto:hate@spam.net"><span class="icon-mail3"></span></a></li>    
     {% for entry in site.data.social %}
       <li>
-        <a href="{{ entry.link }}"><span class="{{ entry.icon }}"></span></a>
+        <a href="{{ entry.link }}">
+		{%- if entry.label -%}{{ entry.label }}{% endif %}
+		<span class="{{ entry.icon }}"></span>
+		</a>
       </li>
     {% endfor %}  
   </ul>

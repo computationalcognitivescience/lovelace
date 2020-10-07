@@ -18,6 +18,38 @@ Chapters (pages) start with a automatically generated heading. Sections should s
 
 {{ "{% newthought 'In his later books'" }} %}
 
+## Citations
+Using ```jekyll-scholar``` plugin we can cite papers. Single citation in APA style {% cite van_rooij_theory_2020 %} is done like so:
+
+```
+{%- raw -%}
+{% cite van_rooij_theory_2020 %}
+{% endraw %}
+```
+
+You can also cite multiple papers {% cite van_rooij_theory_2020 thagard_hot_2006 navarro_between_2019 %} like so:
+
+```
+{%- raw -%}
+{% cite van_rooij_theory_2020 thagard_hot_2006 navarro_between_2019 %}
+{% endraw %}
+```
+
+I don't know how to do textcite equivalent.. Full documentation is [here](https://github.com/inukshuk/jekyll-scholar).
+
+
+To include the bibliography for the papers cited on the current page use: 
+
+```
+{%- raw -%}
+## Bibliography
+{% bibliography --cited %}
+{% endraw %}
+```
+
+## Bibliography
+{% bibliography --cited %}
+
 ## Epigraphs
 
 {% epigraph 'The English language . . . becomes ugly and inaccurate because our thoughts are foolish, but the slovenliness of our language makes it easier for us to have foolish thoughts.' 'George Orwell' ' "Politics and the English Language" ' %}
