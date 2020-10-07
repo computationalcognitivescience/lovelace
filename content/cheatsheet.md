@@ -26,7 +26,7 @@ Chapters (pages) start with a automatically generated heading. Sections should s
 
 
 
-If you’d like to introduce your page or a section of your page with some quotes, use epigraphs. The two examples above show how they are styled. Epigraph elements are modeled after chapter epigraphs in Tufte’s books (particularly *Beautiful Evidence*). The [Tufte-css](https://github.com/edwardtufte/tufte-css) gitub repository has detailed instructions on how to achieve this using HTML elements. As an easier alternative, the *Tufte-jekyll* theme uses custom *Liquid tag* pairs that allow the writer to embed elements such as epigraphs in the middle of the regular Markdown text being edited. 
+If you’d like to introduce your page or a section of your page with some quotes, use epigraphs. The two examples above show how they are styled. Epigraph elements are modeled after chapter epigraphs in Tufte’s books (particularly *Beautiful Evidence*). The [Tufte-css](https://github.com/edwardtufte/tufte-css) gitub repository has detailed instructions on how to achieve this using HTML elements. As an easier alternative, the *Tufte-jekyll* theme uses custom *Liquid tag* pairs that allow the writer to embed elements such as epigraphs in the middle of the regular Markdown text being edited.
 
 In order to use an epigraph in a page or section, type this:
 
@@ -51,7 +51,7 @@ This is but a small subset of a proper overview of the topic of lists in communi
 For these reasons, Tufte CSS encourages caution before reaching for a list element, and by default removes the bullet points from unordered lists.
 
 ## Questions and hints
-Here are some helpful Liquid tags for pedagogical use. 
+Here are some helpful Liquid tags for pedagogical use.
 
 ### Stop and think
 First is a stop-and-think box. The following code:
@@ -60,7 +60,7 @@ First is a stop-and-think box. The following code:
 {%- raw -%}
 {% stopandthink %}
 Okay, let's take a minute and pause.
-{% endstopandthink %} 
+{% endstopandthink %}
 {% endraw %}
 ```
 
@@ -198,7 +198,7 @@ Images and graphics play an integral role in Tufte’s work. To place figures in
 
 ```{{ "{% marginfigure 'mf-id-whatever' 'assets/img/cheatsheet/lerhino.png' 'F.J. Cole, “The History of Albrecht Dürer’s Rhinoceros in Zoological Literature,” *Science, Medicine, and History: Essays on the Evolution of Scientific Thought and Medical Practice* (London, 1953), ed. E. Ashworth Underwood, 337-356. From page 71 of Edward Tufte’s *Visual Explanations*.' "}} %}```.
 
-Note that this tag has *three* parameters. The first is an arbitrary id. This parameter can be named anything as long as it is unique to this post. The second parameter is the path to the image. And the final parameter is whatever caption you want to be displayed with the figure.  All parameters *must* be enclosed in quotes for this simple liquid tag to work! 
+Note that this tag has *three* parameters. The first is an arbitrary id. This parameter can be named anything as long as it is unique to this post. The second parameter is the path to the image. And the final parameter is whatever caption you want to be displayed with the figure.  All parameters *must* be enclosed in quotes for this simple liquid tag to work!
 
 In this example, the *Liquid* marginfigure tag was inserted *before* the paragraph so that it aligns with the beginning of the paragraph. On small screens, the image will collapse into a small symbol: <span class="contrast ">&#8853;</span> at the location it has been inserted in the manuscript. Clicking on it will open the image.
 

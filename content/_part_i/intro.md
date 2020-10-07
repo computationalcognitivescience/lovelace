@@ -15,15 +15,9 @@ To set the right expectations, it is useful to explicitly state what this book i
 
 So what *is* this book about?
 
-In this book you learn concepts and tools that you can use to make *your own* theoretical models in any domain of cognitive science or subfield of psychology of interest to you (barring some philosophical assumptions; which we'll get to soon), and to assess and situate existing theoretical models in the cognitive science and psychology literature. 
+In this book you learn concepts and tools that you can use to make *your own* theoretical models in any domain of cognitive science or subfield of psychology of interest to you (barring some philosophical assumptions; which we'll get to soon), and to assess and situate existing theoretical models in the cognitive science and psychology literature.
 
-To this end, we will cover:
-
-1. conceptual foundations of computational explanation
-2. mathematical concepts and notation
-3. formalizing verbal theories
-4. implementing and simulating theoretical models
-5. comparing models at different levels of explanation
+To this end, we will cover: (1) conceptual foundations of computational explanation; (2) mathematical concepts and notation; (3) formalizing verbal theories; (4) implementing and simulating theoretical models; and (5) comparing models at different levels of explanation.
 
 Using a small number of carefully selected examples we cover points 1-5. The selection serves specific pedagogical aims: to practice the basic conceptual and formal skills with a sufficiently diverse, but not too difficult, set of examples. Once the basics are mastered, one can venture into the literature as suggested in our 'Further Reading' sections. The 'Advanced topics' section additionally provides examples of how the learned tools can be applied more widely.  
 
