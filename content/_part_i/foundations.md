@@ -7,6 +7,12 @@ nav_exclude: true
 
 ## Explaining capacities
 
+{% marginnote 'sn-id-whatever' 'Theoretical modeling may *prima facie* look odd for psychological and cognitive scientists who are used to analyzing empirical data. We won't be modeling data, nor use modeling for statistical analyses. In other words, *theoretical* modeling is different from *data* or *statistical* modeling.'%} The theoretical modeling approach that we adopt here builds on the philosophical view that psychology's primary targets of explanation are behavioural tendencies or dispositions, also knows as \textit{capacities} \parencite{cummins_nature_1985, cummins_how_2000}. As \textcite{van_rooij_theory_2020} put it:
+
+
+
+
+
 ## Levels of explanation
 
 ## Levels of organisation
