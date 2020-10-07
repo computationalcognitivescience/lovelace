@@ -9,7 +9,7 @@ Welcome to this online, open and interactive, textbook on theoretical modeling f
 # License
 This open textbook is released under a [CC-BY 4.0 license](https://creativecommons.org/licenses/by/4.0/) and the Scala software used herein is released under an [UGN GPL v3 license]() or any later version. You are free to reuse, revise, and adapt this textbook, in whole or in part, as long as appropriate credit is given to its authors.
 
-This book is written in [Jekyll](https://jekyllrb.com) using the [Jekyll-Hydeout](https://github.com/fongandrew/hydeout) theme released under an [MIT license](https://github.com/fongandrew/hydeout/blob/master/LICENSE.md). The source code is available on Github [here](https://github.com/computationalcognitivescience/lovelace).
+This book is written in [Jekyll](https://jekyllrb.com) using the [tufte-jekyll](https://github.com/clayh53/tufte-jekyll) theme released under an [MIT license](https://github.com/fongandrew/hydeout/blob/master/LICENSE.md). The source code is available on Github [here](https://github.com/computationalcognitivescience/lovelace).
 
 # How to cite this book
 
