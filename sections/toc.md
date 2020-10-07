@@ -16,13 +16,18 @@ sort: 2
 * License
 * How to cite the book
 * About the authors
+* Reuse of materials
 * Acknowledgements
 
 **Introduction**
-* TBD
+* For whom is this book?
+* What this book is (not) about
+* Approach
+* Scala
 
 **Conceptual foundations**
-* TBD
+* Explaining capacities
+* Levels of explanation
 
 **Math concepts and notation**
 * Sets
@@ -32,7 +37,7 @@ sort: 2
 * Probability theory
 
 **Learning to formalise**
-* Subset Choice
+* Decision making
 * Coherence
 * Categorisation
 * Similarity

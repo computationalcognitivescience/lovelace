@@ -10,7 +10,7 @@ sort: 1
 </div>
 
 # Welcome!
-Welcome to this online, open and interactive, textbook on theoretical modeling for psychology and cognitive science. Check out the Table of Contents and the information below.
+Welcome to this online, open and interactive, textbook on theoretical modeling for cognitive science and psychology. Check out the Table of Contents and the information below.
 
 # License
 This open textbook is released under a [CC-BY 4.0 license](https://creativecommons.org/licenses/by/4.0/) and the Scala software used herein is released under an [UGN GPL v3 license]() or any later version. You are free to reuse, revise, and adapt this textbook, in whole or in part, as long as appropriate credit is given to its authors.
@@ -19,13 +19,19 @@ This book is written in [Jekyll](https://jekyllrb.com) using the [Jekyll-Hydeout
 
 # How to cite this book
 
-Blokpoel, M. & van Rooij, I. (2020). Theoretical modeling for psychology and cognitive science. Retrieved year-month-day from [URL].
+* Blokpoel, M. & van Rooij, I. (2020). Theoretical modeling for cognitive science and psychology. Retrieved year-month-day from [URL].
 
 # In-progress
 At present this book is a living document, some sections have been written while others are still under construction. If the parts you are interested in aren't finished yet, please check back at a later time. Feedback and suggestions are welcome.
 
 # About the authors
 [Mark Blokpoel](http://www.markblokpoel.com) is a computer scientist and computational cognitive scientist. [Iris van Rooij](irisvanrooijcogsci.com) is a psychologist and cognitive scientist. Both authors are based at Donders Institute for Brain, Cognition, and Behaviour, Radboud University. Van Rooij and Blokpoel previously co-authored [Cognition and Intractability](https://cognitionandintractability.com) with Johan Kwisthout and Todd Wareham.
+
+# Reuse of materials
+
+Parts of this book are based on materials that previously appeared in:
+
+* van Rooij, I., & Blokpoel, M. (2020/in press). Formalizing verbal theories: A tutorial by dialogue. To appear in *Social Psychology*. [preprint](https://psyarxiv.com/r2zqy)
 
 # Acknowledgements
 This work has been made possible by a [Distinguished Lorentz Fellowship (DLF)](http://metatheorist.com/Distinguished-Lorentz-Fellowship/) awarded by [NIAS](https://nias.knaw.nl) and the [Lorentz Center](https://www.lorentzcenter.nl) to Van Rooij and a [Language in Interaction](https://www.languageininteraction.nl) grant (nr. 024.001.006) supporting Blokpoel.
