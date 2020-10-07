@@ -1,9 +1,7 @@
 ---
-layout: index
 title: About
 permalink: /
-sidebar_link: true
-sidebar_sort_order: 1
+sort: 1
 ---
 
 <div id="toc-wrapper" markdown="1">

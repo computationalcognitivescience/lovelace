@@ -1,9 +1,7 @@
 ---
-layout: index
 title: Learning to formalize
 permalink: /learningtoformalize/
-sidebar_link: true
-sidebar_sort_order: 6
+sort: 6
 ---
 
 <div id="toc-wrapper" markdown="1">

@@ -1,9 +1,7 @@
 ---
-layout: index
 title: Math concepts and notation
 permalink: /chapter2/
-sidebar_link: true
-sidebar_sort_order: 5
+sort: 5
 ---
 
 <div id="toc-wrapper" markdown="1">
@@ -23,7 +21,11 @@ Sets can contain an infinite number of objects, e.g. all positive odd numbers $$
 ## Set membership
 When we want to write that an object $$x$$ is (or is not) part of a set $$X$$, we use _set membership_ notation:
 
-$$5 \in N\\17 \notin N\\\text{Ramiro}\in P\\\text{Saki}\notin P$$
+$$5 \in N\\17 \notin N$$
+
+$$\text{Ramiro}\in P$$
+
+$$\text{Saki}\notin P$$
 
 ![Set membership](../assets/img/set-in.svg "Set membership.")
 

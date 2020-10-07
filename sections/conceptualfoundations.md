@@ -1,9 +1,7 @@
 ---
-layout: index
 title: Conceptual foundations
 permalink: /foundations/
-sidebar_link: true
-sidebar_sort_order: 4
+sort: 4
 ---
 
 <div id="toc-wrapper" markdown="1">

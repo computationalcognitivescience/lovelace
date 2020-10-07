@@ -1,9 +1,7 @@
 ---
-layout: index
 title: Table of contents
 permalink: /toc
-sidebar_link: true
-sidebar_sort_order: 2
+sort: 2
 ---
 
 <div id="toc-wrapper" markdown="1">

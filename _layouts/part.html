@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<h1>Part {{ page.title}}</h1>
+
+<p>
+<em>Table of contents</em>
+{% for collection in site.collections %}
+{% if collection.label == page.category %}
+	{% for chapter in collection.docs %}
+	  <p><a href="{{ site.baseurl }}{{ chapter.url }}">Chapter {{ chapter.chapter }} - {{ chapter.title }}</a></p>
+	{% endfor %}
+{% endif %}
+{% endfor %}
+</p>
+
+{{ content }}
