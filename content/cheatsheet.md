@@ -220,6 +220,37 @@ Where is this answer being computed?
 {% endquestion %}
 
 
+## Computational problems
+Put the name of the problem inside the tag, then in the body use double semi-colons ```;;``` to separate the input and output.
+
+```
+{%- raw -%}
+{% dproblem Subset Choice (decision) %}
+A set $$S$$, a function $$v: S \times S \rightarrow \mathbb{N}$$, and a value $$k\in\mathbb{N}$$.;;
+Does there exist a subset $$S'\subseteq S$$ such that $$\sum_{s\in S'}v(s)>k$$?
+{% enddproblem %}
+{% endraw %}
+```
+
+{% dproblem Subset Choice (decision) %}
+A set $$S$$, a function $$v: S \times S \rightarrow \mathbb{N}$$, and a value $$k\in\mathbb{N}$$.;;
+Does there exist a subset $$S'\subseteq S$$ such that $$\sum_{s\in S'}v(s)>k$$?
+{% enddproblem %}
+
+```
+{%- raw -%}
+{% dproblem Subset Choice %}
+A set $$S$$, a function $$v: S \times S \rightarrow \mathbb{N}$$, and a value $$k\in\mathbb{N}$$.;;
+A subset $$S'\subseteq S$$ such that $$\sum_{s\in S'}v(s)>k$$.
+{% enddproblem %}
+{% endraw %}
+```
+
+{% dproblem Subset Choice %}
+A set $$S$$, a function $$v: S \times S \rightarrow \mathbb{N}$$, and a value $$k\in\mathbb{N}$$.;;
+A subset $$S'\subseteq S$$ such that $$\sum_{s\in S'}v(s)>k$$.
+{% enddproblem %}
+
 ## Figures
 
 ### Margin Figures
