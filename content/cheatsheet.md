@@ -38,7 +38,7 @@ You can also cite multiple papers {% cite van_rooij_theory_2020 thagard_hot_2006
 I don't know how to do textcite equivalent.. Full documentation is [here](https://github.com/inukshuk/jekyll-scholar).
 
 
-To include the bibliography for the papers cited on the current page use: 
+To include the bibliography for the papers cited on the current page use:
 
 ```
 {%- raw -%}
@@ -239,17 +239,17 @@ Does there exist a subset $$S'\subseteq S$$ such that $$\sum_{s\in S'}v(s)>k$$?
 
 ```
 {%- raw -%}
-{% dproblem Subset Choice %}
+{% fproblem Subset Choice %}
 A set $$S$$, a function $$v: S \times S \rightarrow \mathbb{N}$$, and a value $$k\in\mathbb{N}$$.;;
 A subset $$S'\subseteq S$$ such that $$\sum_{s\in S'}v(s)>k$$.
-{% enddproblem %}
+{% endfproblem %}
 {% endraw %}
 ```
 
-{% dproblem Subset Choice %}
+{% fproblem Subset Choice %}
 A set $$S$$, a function $$v: S \times S \rightarrow \mathbb{N}$$, and a value $$k\in\mathbb{N}$$.;;
 A subset $$S'\subseteq S$$ such that $$\sum_{s\in S'}v(s)>k$$.
-{% enddproblem %}
+{% endfproblem %}
 
 ## Figures
 

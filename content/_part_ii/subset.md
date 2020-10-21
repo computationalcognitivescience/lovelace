@@ -5,7 +5,9 @@ chapter: 4
 nav_exclude: true
 ---
 
-![Choices](../assets/img/choiceoptions.jpg)
+
+
+{% marginfigure 'mf-id-whatever' '/assets/img/choiceoptions.jpg' 'So many possibilities! How do we choose one?' %}.
 
 We start our first adventure in theoretical modeling in the cognitive domain of *decision-making*. Decision making is the capacity for choosing one or more options from a given set of options. This can range from mundane decisions (e.g., choosing ice cream flavours or what movie to watch) to highly specialized decisions (e.g., deciding what medicine to prescribe as a doctor or what experiments to perform as a scientist). There is a long tradition of cognitive and psychological research on this topic, with roots in the behavioural economics developed in the 1950s and onwards (see the Further Reading section for some pointers).
 

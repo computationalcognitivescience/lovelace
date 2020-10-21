@@ -9,7 +9,7 @@ Like sculpting, theoretical modeling requires its own set of dedicated tools. Th
 
 ## Set theory
 {% marginfigure "fig-set-eg" "assets/img/set-eg.svg" "Sets can be visualized as circles." %}
-A set is a collection of distinct objects. For example, a set of people $$P=\{\text{Ramiro},\text{Brenda},\text{Molly}\}$$, animals $$A=\{\text{cat},\text{turtle},\text{blue whale}, \text{cuttlefish}\}$$ or numbers N=\{1,5,7,12\}. Sets are usually denoted by a capital letter and their elements listed between curly brackets. They can also be visualized as circles.
+A set is a collection of distinct objects. For example, a set of people $$P=\{\text{Ramiro},\text{Brenda},\text{Molly}\}$$, animals $$A=\{\text{cat},\text{turtle},\text{blue whale}, \text{cuttlefish}\}$$ or numbers $$ N=\{1,5,7,12\}$$. Sets are usually denoted by a capital letter and their elements listed between curly brackets. They can also be visualized as circles.
 
 Sets can contain an infinite number of objects, e.g. all positive odd numbers $$O=\{1,3,5, 7,\dots\}$$.
 
