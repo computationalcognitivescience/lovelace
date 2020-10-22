@@ -54,4 +54,14 @@ introduction to basic functional programming in Scala.
 
 We end each chapter with a *Further Reading* section to give pointers to the original literature covering or extending some of the key ideas discussed in the chapter.
 
-The idea that theoretical modeling is like sculpting originates from (Blokpoel, 2018). A tutorial based on this idea, featuring also the fictive characters *Verbal* and *Formal*, was published in *Social Psychology* (van Rooij & Blokpoel, 2020). Parts of that tutorial reappear in the chapter on 'Subset Choice' in Part II of this book. For a discussion of problems with NHST we recommend reading Paul Meehl's work (e.g. Meehl, 1997). For a rigorous treatment of how 'replicability (of statistical effects)' does not mean 'good science', or vice versa, check out (Devezer et al., 2020). If you want to learn a bit of Scala before proceeding, see XXX.
+The idea that theoretical modeling is like sculpting originates from (Blokpoel, 2018). A tutorial based on this idea, featuring also the fictive characters *Verbal* and *Formal*, was previously published in *Social Psychology* (van Rooij & Blokpoel, 2020). Parts of that tutorial reappear in the chapter on 'Subset Choice' in Part II of this book. For a discussion of problems with NHST we recommend reading work by Paul Meehl (e.g. Meehl, 1997). Devezer et al. (2020) present a rigorous argument of how 'replicability' and 'good science' are far from the same thing. Lastly, if you want to learn a bit of Scala before proceeding, see XXX.
+
+### References
+
+Blokpoel, M. (2018). [Sculpting computational-level models](https://onlinelibrary.wiley.com/doi/full/10.1111/tops.12282). *Topics in Cognitive Science, 10*(3), 641–648.
+
+Devezer, B., Navarro, D. J., Vandekerckhove, J, & Buzbas, E. O. (2020). The case for formal methodology in scientific reform. doi 10.1101/2020.04.26.048306
+
+Meehl, P. E. (1997). The problem is epistemology, not statistics: Replace significance tests by confidence intervals and quantify accuracy of risky numerical predictions. In L. L. Harlow, S. A. Mulaik, & J. H. Steiger (Eds.), What If There Were No Significance Tests? (pp. 393-425) Mahwah, NJ : Erlbaum.
+
+van Rooij, I., & Blokpoel, M. (2020/in press). Formalizing verbal theories: A tutorial by dialogue. *Social Psychology*. [preprint](https://psyarxiv.com/r2zqy)
