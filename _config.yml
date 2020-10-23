@@ -13,6 +13,7 @@ exclude: ['Gemfile', 'Gemfile.lock', 'Rakefile', 'UploadToGithub.Rakefile', 'REA
 
 plugins:
   - jekyll/scholar
+  - jekyll-youtube
 
 scholar:
   style: apa

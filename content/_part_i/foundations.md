@@ -123,7 +123,9 @@ Let's illustrate these ideas using a capacity called _sorting_ (e.g., one can or
 \vspace{0.5em}
 
 
-{% maincolumn 'assets/img/marr-sorting.pdf' 'XXX' %}
+{% maincolumn 'assets/img/marr-sorting.svg' 'XXX' %}
+
+{% youtube 'https://www.youtube.com/watch?v=ywWBy6J5gz8' %}
 
 
 ## Further Reading
