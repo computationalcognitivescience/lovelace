@@ -45,9 +45,9 @@
   <link rel="stylesheet" type="text/css" href="/lovelace/css/tufte.css">
   <!-- <link rel="stylesheet" type="text/css" href="/lovelace/css/print.css" media="print"> -->
 
-  <link rel="canonical" href="/lovelace/content/cheatsheet">
+  <link rel="canonical" href="http://localhost:4000/lovelace/content/cheatsheet">
 
-  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="/lovelace/feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="http://localhost:4000/lovelace/feed.xml" />
 </head>
 
   <body>
@@ -153,28 +153,28 @@
 
 <h2 id="headings">Headings</h2>
 
-<p>Chapters (pages) start with a automatically generated heading. Sections should start with double hashtags <code class="highlighter-rouge">## Section title</code>.</p>
+<p>Chapters (pages) start with a automatically generated heading. Sections should start with double hashtags <code class="language-plaintext highlighter-rouge">## Section title</code>.</p>
 
 <p><span class="newthought">In his later books</span> <label for="two" class="margin-toggle sidenote-number"></label><input type="checkbox" id="two" class="margin-toggle" /><span class="sidenote">http://www.edwardtufte.com/tufte/books_be </span>, Tufte starts each section with a bit of vertical space, a non-indented paragraph, and sets the first few words of the sentence in small caps. To accomplish this using this style, enclose the sentence fragment you want styled with small caps in a custom Liquid tag called ‘newthought’ like so:</p>
 
 <p>{% newthought ‘In his later books’ %}</p>
 
 <h2 id="citations">Citations</h2>
-<p>Using <code class="highlighter-rouge">jekyll-scholar</code> plugin we can cite papers. Single citation in APA style <a class="citation" href="#van_rooij_theory_2020">(van Rooij &amp; Baggio, 2020)</a> is done like so:</p>
+<p>Using <code class="language-plaintext highlighter-rouge">jekyll-scholar</code> plugin we can cite papers. Single citation in APA style <a class="citation" href="#van_rooij_theory_2020">(van Rooij &amp; Baggio, 2020)</a> is done like so:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% cite van_rooij_theory_2020 %}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% cite van_rooij_theory_2020 %}
 </code></pre></div></div>
 
 <p>You can also cite multiple papers <a class="citation" href="#van_rooij_theory_2020">(van Rooij &amp; Baggio, 2020; Thagard, 2006; Navarro, 2019)</a> like so:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% cite van_rooij_theory_2020 thagard_hot_2006 navarro_between_2019 %}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% cite van_rooij_theory_2020 thagard_hot_2006 navarro_between_2019 %}
 </code></pre></div></div>
 
 <p>I don’t know how to do textcite equivalent.. Full documentation is <a href="https://github.com/inukshuk/jekyll-scholar">here</a>.</p>
 
 <p>To include the bibliography for the papers cited on the current page use:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## Bibliography
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## Bibliography
 {% bibliography --cited %}
 </code></pre></div></div>
 
@@ -193,7 +193,7 @@
 
 <p>In order to use an epigraph in a page or section, type this:</p>
 
-<p><code class="highlighter-rouge">{% epigraph 'text of citation' 'author of citation' 'citation source'  %}</code></p>
+<p><code class="language-plaintext highlighter-rouge">{% epigraph 'text of citation' 'author of citation' 'citation source'  %}</code></p>
 
 <p>to produce this:</p>
 
@@ -221,7 +221,7 @@
 <h3 id="stop-and-think">Stop and think</h3>
 <p>First is a stop-and-think box. The following code:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% stopandthink %}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% stopandthink %}
 Okay, let's take a minute and pause.
 {% endstopandthink %}
 </code></pre></div></div>
@@ -234,7 +234,7 @@ Okay, let's take a minute and pause.
 
 <h3 id="hints">Hints</h3>
 <p>You can add a hint to any part (also inside stop and think of questions) as follows:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% hidden Hint? %}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% hidden Hint? %}
 The answer is obvious.
 {% endhidden %}
 </code></pre></div></div>
@@ -245,7 +245,7 @@ The answer is obvious.
 
 <h3 id="questions">Questions</h3>
 <p>A simple open question can be added using the following liquid tag. It will be automatically numbered using the chapter number specified in the markdown front matter:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% question %}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% question %}
 What is the answer to the ulimate question in the universe?
 {% endquestion %}
 </code></pre></div></div>
@@ -256,7 +256,7 @@ What is the answer to the ulimate question in the universe?
 
 <p>You can nest any other liquid tags inside a question (but try to keep it simple for readibility). For example, hints:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% question %}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% question %}
 What is the answer to the ulimate question in the universe?
 {% hidden Hint? %}
 Have you read the book?
@@ -269,7 +269,7 @@ Have you read the book?
 
 <p>And there are special answer tags in case you want to make a multiple choice question:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% question %}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% question %}
 What is the answer to the ulimate question in the universe?
 
 {% answer Answer A %}
@@ -292,7 +292,7 @@ What is the answer to the ulimate question in the universe?
 
 <p>You can even have subquestions <strong>this code isn’t working yet..</strong>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% question %}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% question %}
 About life, the universe and everything.
 
 {% question %}
@@ -313,25 +313,25 @@ Where is this answer being computed?
 <div class="question" id="question-6"><p><em>Question 666.6:</em> Where is this answer being computed?</p></div></p></div>
 
 <h2 id="computational-problems">Computational problems</h2>
-<p>Put the name of the problem inside the tag, then in the body use double semi-colons <code class="highlighter-rouge">;;</code> to separate the input and output.</p>
+<p>Put the name of the problem inside the tag, then in the body use double semi-colons <code class="language-plaintext highlighter-rouge">;;</code> to separate the input and output.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% dproblem Subset Choice (decision) %}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% dproblem Subset Choice (decision) %}
 A set $$S$$, a function $$v: S \times S \rightarrow \mathbb{N}$$, and a value $$k\in\mathbb{N}$$.;;
 Does there exist a subset $$S'\subseteq S$$ such that $$\sum_{s\in S'}v(s)&gt;k$$?
 {% enddproblem %}
 </code></pre></div></div>
 
-<p><span class="problemtitle">Subset Choice (decision)</span><br /><span class="probleminout">Input:</span> A set <script type="math/tex">S</script>, a function <script type="math/tex">v: S \times S \rightarrow \mathbb{N}</script>, and a value <script type="math/tex">k\in\mathbb{N}</script>.<br /><span class="probleminout">Question:</span> 
-Does there exist a subset <script type="math/tex">S'\subseteq S</script> such that <script type="math/tex">\sum_{s\in S'}v(s)>k</script>?</p>
+<p><span class="problemtitle">Subset Choice (decision)</span><br /><span class="probleminout">Input:</span> A set \(S\), a function \(v: S \times S \rightarrow \mathbb{N}\), and a value \(k\in\mathbb{N}\).<br /><span class="probleminout">Question:</span> 
+Does there exist a subset \(S'\subseteq S\) such that \(\sum_{s\in S'}v(s)&gt;k\)?</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% fproblem Subset Choice %}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% fproblem Subset Choice %}
 A set $$S$$, a function $$v: S \times S \rightarrow \mathbb{N}$$, and a value $$k\in\mathbb{N}$$.;;
 A subset $$S'\subseteq S$$ such that $$\sum_{s\in S'}v(s)&gt;k$$.
 {% endfproblem %}
 </code></pre></div></div>
 
-<p><span class="problemtitle">Subset Choice</span><br /><span class="probleminout">Input:</span> A set <script type="math/tex">S</script>, a function <script type="math/tex">v: S \times S \rightarrow \mathbb{N}</script>, and a value <script type="math/tex">k\in\mathbb{N}</script>.<br /><span class="probleminout">Output:</span> 
-A subset <script type="math/tex">S'\subseteq S</script> such that <script type="math/tex">\sum_{s\in S'}v(s)>k</script>.</p>
+<p><span class="problemtitle">Subset Choice</span><br /><span class="probleminout">Input:</span> A set \(S\), a function \(v: S \times S \rightarrow \mathbb{N}\), and a value \(k\in\mathbb{N}\).<br /><span class="probleminout">Output:</span> 
+A subset \(S'\subseteq S\) such that \(\sum_{s\in S'}v(s)&gt;k\).</p>
 
 <h2 id="figures">Figures</h2>
 
@@ -339,9 +339,9 @@ A subset <script type="math/tex">S'\subseteq S</script> such that <script type="
 
 <p><label for="mf-id-1" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/cheatsheet/rhino.png" /><br />F.J. Cole, “The History of Albrecht Dürer’s Rhinoceros in Zoological Literature,” <em>Science, Medicine, and History: Essays on the Evolution of Scientific Thought and Medical Practice</em> (London, 1953), ed. E. Ashworth Underwood, 337-356. From page 71 of Edward Tufte’s <em>Visual Explanations</em>.</span></p>
 
-<p>Images and graphics play an integral role in Tufte’s work. To place figures in the margin, use the custom margin figure liquid tag included in the <code class="highlighter-rouge">_plugins</code> directory like so:</p>
+<p>Images and graphics play an integral role in Tufte’s work. To place figures in the margin, use the custom margin figure liquid tag included in the <code class="language-plaintext highlighter-rouge">_plugins</code> directory like so:</p>
 
-<p><code class="highlighter-rouge">{% marginfigure 'mf-id-whatever' 'assets/img/cheatsheet/lerhino.png' 'F.J. Cole, “The History of Albrecht Dürer’s Rhinoceros in Zoological Literature,” *Science, Medicine, and History: Essays on the Evolution of Scientific Thought and Medical Practice* (London, 1953), ed. E. Ashworth Underwood, 337-356. From page 71 of Edward Tufte’s *Visual Explanations*.'  %}</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">{% marginfigure 'mf-id-whatever' 'assets/img/cheatsheet/lerhino.png' 'F.J. Cole, “The History of Albrecht Dürer’s Rhinoceros in Zoological Literature,” *Science, Medicine, and History: Essays on the Evolution of Scientific Thought and Medical Practice* (London, 1953), ed. E. Ashworth Underwood, 337-356. From page 71 of Edward Tufte’s *Visual Explanations*.'  %}</code>.</p>
 
 <p>Note that this tag has <em>three</em> parameters. The first is an arbitrary id. This parameter can be named anything as long as it is unique to this post. The second parameter is the path to the image. And the final parameter is whatever caption you want to be displayed with the figure.  All parameters <em>must</em> be enclosed in quotes for this simple liquid tag to work!</p>
 
@@ -351,7 +351,7 @@ A subset <script type="math/tex">S'\subseteq S</script> such that <script type="
 
 <p>If you need a full-width image or figure, another custom liquid tag is available to use. Oddly enough, it is named ‘fullwidth’, and this markup:</p>
 
-<p><code class="highlighter-rouge">{% fullwidth 'assets/img/cheatsheet/napoleons-march.png' 'Napoleon's March *(Edward Tufte’s English translation)*'  %}</code></p>
+<p><code class="language-plaintext highlighter-rouge">{% fullwidth 'assets/img/cheatsheet/napoleons-march.png' 'Napoleon's March *(Edward Tufte’s English translation)*'  %}</code></p>
 
 <p>Yields this:</p>
 
@@ -361,7 +361,7 @@ A subset <script type="math/tex">S'\subseteq S</script> such that <script type="
 
 <p>Besides margin and full width figures, you can of course also include figures constrained to the main column. Yes, you guessed it, a custom liquid tag rides to the rescue once again:</p>
 
-<p><code class="highlighter-rouge">{% maincolumn 'assets/img/cheatsheet/export-imports.png' 'From Edward Tufte, *Visual Display of Quantitative Information*, page 92'  %}</code></p>
+<p><code class="language-plaintext highlighter-rouge">{% maincolumn 'assets/img/cheatsheet/export-imports.png' 'From Edward Tufte, *Visual Display of Quantitative Information*, page 92'  %}</code></p>
 
 <p>yields this:</p>
 
@@ -377,13 +377,13 @@ A subset <script type="math/tex">S'\subseteq S</script> such that <script type="
 
 <p>Sidenotes<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">This is a sidenote and <em>displays a superscript</em> </span> display a superscript. The <em>sidenote</em> Liquid tag contains two components. The first is an identifier allowing the sidenote to be targeted by the twitchy index fingers of mobile device users so that all the yummy sidenote goodness is revealed when the superscript is tapped. The second components is the actual content of the sidenote. Both of these components should be enclosed in single quotes. Note that we are using the CSS ‘counter’ trick to automagically keep track of the number sequence on each page or post. On small screens, the sidenotes disappear and when the superscript is clicked, a side note will open below the content, which can then be closed with a similar click. Here is the markup for the sidenote at the beginning of this paragraph:</p>
 
-<p><code class="highlighter-rouge">{% sidenote 'sn-id-whatever' 'This is a sidenote and *displays a superscript*'%}</code></p>
+<p><code class="language-plaintext highlighter-rouge">{% sidenote 'sn-id-whatever' 'This is a sidenote and *displays a superscript*'%}</code></p>
 
 <h3 id="margin-notes">Margin notes</h3>
 
 <p>Margin notes<label for="mn-id-whatever" class="margin-toggle"> ⊕</label><input type="checkbox" id="mn-id-whatever" class="margin-toggle" /><span class="marginnote">This is a margin note <em>without</em> a superscript </span> are similar to sidenotes, but do not display a superscript. The <em>marginnnote</em> Liquid tags has the same two components as the <em>sidenote</em> tag. Anything can be placed in a margin note. Well, anything that is an inline element. Block level elements can make the Kramdown parser do strange things. On small screens, the margin notes disappear and this symbol: <span class="contrast ">⊕</span> pops up. When clicked, it will open the margin note below the content, which can then be closed with a similar click. The Markdown content has a similar sort of markup as a sidenote, but without a number involved:</p>
 
-<p><code class="highlighter-rouge">{% marginnote 'mn-id-whatever' 'This is a margin note *without* a superscript' %}</code></p>
+<p><code class="language-plaintext highlighter-rouge">{% marginnote 'mn-id-whatever' 'This is a margin note *without* a superscript' %}</code></p>
 
 <h2 id="equations">Equations</h2>
 
@@ -391,23 +391,23 @@ A subset <script type="math/tex">S'\subseteq S</script> such that <script type="
 
 <p>For instance, the following inline sequence:</p>
 
-<p><em>When <script type="math/tex">a \ne 0</script>, there are two solutions to <script type="math/tex">ax^2 + bx + c = 0</script></em></p>
+<p><em>When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\)</em></p>
 
-<p>is written by enclosing a Mathjax expression within <em>a matching pair of double dollar signs: <code class="highlighter-rouge">$$</code></em>:</p>
+<p>is written by enclosing a Mathjax expression within <em>a matching pair of double dollar signs: <code class="language-plaintext highlighter-rouge">$$</code></em>:</p>
 
-<p><code class="highlighter-rouge">When $$ a \ne 0 $$, there are two solutions to $$ ax^2 + bx + c = 0 $$</code></p>
+<p><code class="language-plaintext highlighter-rouge">When $$ a \ne 0 $$, there are two solutions to $$ ax^2 + bx + c = 0 $$</code></p>
 
 <p>Similarly, this block-level Mathjax expression:</p>
 
-<script type="math/tex; mode=display">x = {-b \pm \sqrt{b^2-4ac} \over 2a}</script>
+\[x = {-b \pm \sqrt{b^2-4ac} \over 2a}\]
 
-<p>is written by enclosing the expression within a pair of <code class="highlighter-rouge">$$</code> with an empty line above and below:</p>
+<p>is written by enclosing the expression within a pair of <code class="language-plaintext highlighter-rouge">$$</code> with an empty line above and below:</p>
 
-<p><code class="highlighter-rouge">$$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$</code></p>
+<p><code class="language-plaintext highlighter-rouge">$$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$</code></p>
 
 <p>You can get pretty fancy, for instance, the wave equation’s nabla is no big thing:</p>
 
-<script type="math/tex; mode=display">\frac{\partial^2 y}{\partial t^2}= c^2\nabla^2u</script>
+\[\frac{\partial^2 y}{\partial t^2}= c^2\nabla^2u\]
 
 <p>All of the standard <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> equation markup is available to use inside these block tags.</p>
 
@@ -419,9 +419,9 @@ A subset <script type="math/tex">S'\subseteq S</script> such that <script type="
 
 <p>Tables are, frankly,  a pain in the ass to create. That said, they often are one of the best methods for presenting data. Tabular data are normally presented with right-aligned numbers, left-aligned text, and minimal grid lines.</p>
 
-<p>Note that when writing Jekyll Markdown content, there will often be a need to get some dirt under your fingernails and stoop to writing a little honest-to-god html. Yes, all that hideous <code class="highlighter-rouge">&lt;table&gt;..&lt;thead&gt;..&lt;th&gt;</code> nonsense. <em>And</em> you must wrap the unholy mess in a <code class="highlighter-rouge">&lt;div class="table-wrapper"&gt;</code> tag to ensure that the table stays centered in the main content column.</p>
+<p>Note that when writing Jekyll Markdown content, there will often be a need to get some dirt under your fingernails and stoop to writing a little honest-to-god html. Yes, all that hideous <code class="language-plaintext highlighter-rouge">&lt;table&gt;..&lt;thead&gt;..&lt;th&gt;</code> nonsense. <em>And</em> you must wrap the unholy mess in a <code class="language-plaintext highlighter-rouge">&lt;div class="table-wrapper"&gt;</code> tag to ensure that the table stays centered in the main content column.</p>
 
-<p>Tables are designed with an <code class="highlighter-rouge">overflow:scroll</code> property to create slider bars when the viewport is narrow. This is so that you do not collapse all your beautiful data into a jumble of letters and numbers when you view it on your smartphone.</p>
+<p>Tables are designed with an <code class="language-plaintext highlighter-rouge">overflow:scroll</code> property to create slider bars when the viewport is narrow. This is so that you do not collapse all your beautiful data into a jumble of letters and numbers when you view it on your smartphone.</p>
 
 <p><label for="table-1-id" class="margin-toggle"> ⊕</label><input type="checkbox" id="table-1-id" class="margin-toggle" /><span class="marginnote"><em>Table 1</em>: A table with default style formatting </span></p>
 <div class="table-wrapper">
@@ -484,7 +484,7 @@ A subset <script type="math/tex">S'\subseteq S</script> such that <script type="
 
 <p>This is not the One True Table. Such a style does not exist. One must craft each data table with custom care to the narrative one is telling with that specific data. So take this not as “the table style to use”, but rather as “a table style to start from”. From here, use principles to guide you: avoid chartjunk, optimize the data-ink ratio (“within reason”, as Tufte says), and “mobilize every graphical element, perhaps several times over, to show the data.<label for="table-id" class="margin-toggle sidenote-number"></label><input type="checkbox" id="table-id" class="margin-toggle" /><span class="sidenote">Page 139, <em>The Visual Display of Quantitative Information</em>, Edward Tufte 2001. </span> Furthermore, one must know when to reach for more complex data presentation tools, like a custom graphic or a JavaScript charting library.</p>
 
-<p>As an example of alternative table styles, academic publications written in <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> often rely on the <code class="highlighter-rouge">booktabs</code> package to produce clean, clear tables. Similar results can be achieved in Tufte CSS with the <code class="highlighter-rouge">booktabs</code> class, as demonstrated in this table:</p>
+<p>As an example of alternative table styles, academic publications written in <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> often rely on the <code class="language-plaintext highlighter-rouge">booktabs</code> package to produce clean, clear tables. Similar results can be achieved in Tufte CSS with the <code class="language-plaintext highlighter-rouge">booktabs</code> class, as demonstrated in this table:</p>
 
 <p><label for="table-2-id" class="margin-toggle"> ⊕</label><input type="checkbox" id="table-2-id" class="margin-toggle" /><span class="marginnote"><em>Table 2</em>: A table with booktabs style formatting </span></p>
 <div class="table-wrapper">
@@ -505,7 +505,7 @@ A subset <script type="math/tex">S'\subseteq S</script> such that <script type="
 
 <p>The table above was written in HTML as follows:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div class="table-wrapper"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div class="table-wrapper"&gt;
 &lt;table class="booktabs"&gt;
           &lt;thead&gt;
             &lt;tr&gt;&lt;th colspan="2" class="cmid"&gt;Items&lt;/th&gt;&lt;th class="nocmid"&gt;&lt;/th&gt;&lt;/tr&gt;
@@ -598,7 +598,7 @@ A subset <script type="math/tex">S'\subseteq S</script> such that <script type="
 
 <p>Using the following Markdown formatting:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|                 |mpg  | cyl  |  disp  |   hp   |  drat  | wt  |
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|                 |mpg  | cyl  |  disp  |   hp   |  drat  | wt  |
 |:----------------|----:|-----:|-------:|-------:|-------:|----:|
 |Mazda RX4        |21   |6     |160     |110     |3.90    |2.62 |
 |Mazda RX4 Wag    |21   |6     |160     |110     |3.90    |2.88 |
@@ -608,7 +608,7 @@ etc...
 
 <p>The following is a more simple table, showing the Markdown-style table markup. Remember to label the table with a <em>marginnote</em> Liquid tag, and you <em>must</em> separate the label from the table with a single blank line. This markup:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% marginnote 'Table-ID4' 'Table 4: a simple table showing left, center, and right alignment of table headings and data'  %}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% marginnote 'Table-ID4' 'Table 4: a simple table showing left, center, and right alignment of table headings and data'  %}
 
 |**Left** |**Center**|**Right**|
 |:--------|:--------:|--------:|
@@ -650,9 +650,9 @@ etc...
 
 <h2 id="code">Code</h2>
 
-<p>Code samples use a monospace font using the ‘code’ class. The Kramdown parser has the ‘GFM’ option enabled, which stands for ‘Github Flavored Markdown’, and this means that both inline code such as <code class="highlighter-rouge">#include &lt;stdio.h&gt;</code> and blocks of code can be delimited by surrounding them with 3 backticks:</p>
+<p>Code samples use a monospace font using the ‘code’ class. The Kramdown parser has the ‘GFM’ option enabled, which stands for ‘Github Flavored Markdown’, and this means that both inline code such as <code class="language-plaintext highlighter-rouge">#include &lt;stdio.h&gt;</code> and blocks of code can be delimited by surrounding them with 3 backticks:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(map tufte-style all-the-things)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(map tufte-style all-the-things)
 </code></pre></div></div>
 <p>is created by the following markup:</p>
 <pre><code>```(map tufte-style all-the-things)```</code></pre>

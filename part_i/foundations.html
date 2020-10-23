@@ -45,9 +45,9 @@
   <link rel="stylesheet" type="text/css" href="/lovelace/css/tufte.css">
   <!-- <link rel="stylesheet" type="text/css" href="/lovelace/css/print.css" media="print"> -->
 
-  <link rel="canonical" href="/lovelace/part_i/foundations">
+  <link rel="canonical" href="http://localhost:4000/lovelace/part_i/foundations">
 
-  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="/lovelace/feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="http://localhost:4000/lovelace/feed.xml" />
 </head>
 
   <body>
@@ -125,13 +125,10 @@
 
 <p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/globe.png" /><br /></span> There is not one answer to this question. There are many possible reasons and valid purposes for modeling. For instance, some models have the purpose to <em>describe</em> (or <em>represent</em>). Descriptive models typically capture some aspects of the thing described and ignore others. Often they maintain relational information about things in the world, while not necessarily respecting the scale of the thing described. A familiar example is the globe that you may have on your desk. This model is substantially smaller than the thing it models (i.e., earth), yet it describes quite accurately the relative shapes, borders and locations of countries, oceans and seas on the surface of the earth. Many details remain omitted of course.</p>
 
-<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/solar-system.jpg" /><br /></span>  Sometimes descriptive models ignore more than just the scale of things. The picture on the right depicting the relation between the planets and the sun in our solar system illustrates this idea. This picture ignores relative distances between planets and the sun and only captures their ordering. Models need not be pictorial. For instance, we can also describe the ordering of the planets using functions, such as <script type="math/tex">d(x,y)</script> to denote the distance between <script type="math/tex">x</script> and <script type="math/tex">y</script>; and using mathematical symbols, such as <script type="math/tex">% <![CDATA[
-< %]]></script> for ‘smaller than’:</p>
+<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/solar-system.jpg" /><br /></span>  Sometimes descriptive models ignore more than just the scale of things. The picture on the right depicting the relation between the planets and the sun in our solar system illustrates this idea. This picture ignores relative distances between planets and the sun and only captures their ordering. Models need not be pictorial. For instance, we can also describe the ordering of the planets using functions, such as \(d(x,y)\) to denote the distance between \(x\) and \(y\); and using mathematical symbols, such as \(&lt;\) for ‘smaller than’:</p>
 
-<p><script type="math/tex">% <![CDATA[
-d(Mercury, Sun) < d(Venus, Sun) < d(Earth, Sun) < d(Mars, Sun) %]]></script>
-<script type="math/tex">% <![CDATA[
-<d(Jupiter, Sun) < d(Saturn, Sun) < d(Uranus, Sun) < d(Neptune, Sun) %]]></script></p>
+<p>\(d(Mercury, Sun) &lt; d(Venus, Sun) &lt; d(Earth, Sun) &lt; d(Mars, Sun)\)
+\(&lt;d(Jupiter, Sun) &lt; d(Saturn, Sun) &lt; d(Uranus, Sun) &lt; d(Neptune, Sun)\)</p>
 
 <p>In this description even more information is lost. There is no longer any information about the relative sizes of the planets, nor about colours.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">Note that in the picture above the relative sizes of the sun and planets were in fact distorted (e.g., <a href="https://en.wikipedia.org/wiki/Solar_System#/media/File:Planets2013.svg">the Sun is many orders of magnitude bigger than Earth</a>) and the colours of the planets are caricatures at best. Every model, <em>qua</em> description or representation, will omit information and distort on some dimensions. This is unavoidable, but we can be aware of it. </span> Yet, the relevant information about <em>ordering</em> is perfectly retained. The type of models we will be developing in this book are more of the mathematical type than the pictorial type.</p>
 
@@ -232,10 +229,12 @@ The theoretical modeling approach that we adopt here builds on the philosophical
 <div class="nav-wrapper">
 	<div class="prev-chapter">
 		
+		<p><a href="/lovelace/part_i/intro">Previous: Introduction</a></p>
+		
 	</div>
 	<div class="next-chapter">
 		
-		<p><a href="/lovelace/part_i/intro">Next: Introduction</a></p>
+		<p><a href="/lovelace/part_i/math">Next: Math concepts and notation</a></p>
 		
 	</div>
 </div>
