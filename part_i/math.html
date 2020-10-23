@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Math concepts and notation</title>
+  <meta name="description" content="Like sculpting, theoretical modeling requires its own set of dedicated tools. The theoretical modeler’s tools are mathematical concepts, formal expressions, ...">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+  <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+ <!--   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  
+
+  <link rel="stylesheet" type="text/css" href="/lovelace/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/lovelace/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="/lovelace/part_i/math">
+
+  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="/lovelace/feed.xml" />
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<div class="nav-wrapper">
+	<div class="nav-left">
+	<a href="/lovelace/"><img class="badge" src="/lovelace/assets/img/badge_1.png" alt="CH"></a>
+	</div>
+	<div class="nav-right">
+	
+		
+		    
+		      <a href="/lovelace/404.html"></a>
+		    
+	    
+  	
+		
+  	
+		
+		    
+		      <a href="/lovelace/home">Home</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part1">I - Intro</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part2">II - Formalizing</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part3">III - Levels</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part4">IV - Advanced</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/css/print.css"></a>
+		    
+	    
+  	
+		
+  	
+		
+  	
+	</div>
+	</div>
+	</nav>
+</header>
+    <article class="group">
+      
+<h1>Chapter 3 - Math concepts and notation</h1>
+
+
+<p>Like sculpting, theoretical modeling requires its own set of dedicated tools. The theoretical modeler’s tools are mathematical concepts, formal expressions, and notational conventions. One can already get quite far with the basics in <em>set theory</em>, <em>functions</em> and <em>logic</em>. Below we present a brief primer. Readers who have taken introductory classes on these topics can skip this section without loss of continuity.</p>
+
+<h2 id="set-theory">Set theory</h2>
+<p><label for="fig-set-eg" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-eg" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-eg.svg" /><br />Sets can be visualized as circles.</span>
+A set is a collection of distinct objects. For example, a set of people <script type="math/tex">P=\{\text{Ramiro},\text{Brenda},\text{Molly}\}</script>, animals <script type="math/tex">A=\{\text{cat},\text{turtle},\text{blue whale}, \text{cuttlefish}\}</script> or numbers <script type="math/tex">N=\{1,5,7,12\}</script>. Sets are usually denoted by a capital letter and their elements listed between curly brackets. They can also be visualized as circles.</p>
+
+<p>Sets can contain an infinite number of objects, e.g. all positive odd numbers <script type="math/tex">O=\{1,3,5, 7,\dots\}</script>.</p>
+
+<h3 id="set-membership">Set membership</h3>
+<p>When we want to write that an object <script type="math/tex">x</script> is (or is not) part of a set <script type="math/tex">X</script>, we use <em>set membership</em> notation:</p>
+
+<p><label for="fig-set-in" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-in" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-in.svg" /><br />Set membership.</span></p>
+
+<script type="math/tex; mode=display">5 \in N\\17 \notin N\\\text{Ramiro}\in P\\\text{Saki}\notin P</script>
+
+<h3 id="subset-and-superset">Subset and superset</h3>
+<p><label for="fig-subset" class="margin-toggle">⊕</label><input type="checkbox" id="fig-subset" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-sub.svg" /><br />Subset relationship.</span>
+Often, we want to express things like ‘the set of mammals <script type="math/tex">M</script> is part of the set of all animals <script type="math/tex">A</script>’. We then use <em>subset</em> notation: <script type="math/tex">M\subseteq A</script> or <script type="math/tex">M\subset A</script>. The latter means that <script type="math/tex">M</script> is smaller than <script type="math/tex">A</script>.</p>
+
+<p><label for="fig-superset" class="margin-toggle">⊕</label><input type="checkbox" id="fig-superset" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-sup.svg" /><br />Superset relationship.</span>
+Vice versa, we can express that ‘the set of all things on earth <script type="math/tex">T</script> contains all animals <script type="math/tex">A</script>’ using <em>superset</em> notation: <script type="math/tex">T\supseteq A</script> or <script type="math/tex">T\supset A</script>. The latter means that <script type="math/tex">T</script> is bigger than <script type="math/tex">A</script>.</p>
+
+<h3 id="intersection-union-and-difference">Intersection, union and difference</h3>
+<p>Let’s look at what more we can do with two sets.
+<label for="fig-set-two" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-two" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-two.svg" /><br />Example sets.</span>
+For example, take the set of your friends and my friends.</p>
+
+<script type="math/tex; mode=display">F_{you}=\{\text{John},\text{Roberto},\text{Holly},\text{Doris},\text{Charlene}\}</script>
+
+<script type="math/tex; mode=display">F_{me}=\{\text{Vicky},\text{Charlene},\text{Ramiro},\text{Johnnie},\text{Roberto}\}</script>
+
+<p><label for="fig-set-intersection" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-intersection" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-intersection.png" /><br />Set intersection.</span>
+Who are our common friends? We use <em>set intersection</em>:</p>
+
+<script type="math/tex; mode=display">F_{you}\cap F_{me} = \{\text{Roberto},\text{Charlene}\}</script>
+
+<p>Who do we know together? We use <em>set union</em>:</p>
+
+<p><script type="math/tex">F_{you}\cup F_{me} = \{\text{John},\text{Roberto},\text{Holly},\text{Doris},\text{Charlene},</script> <script type="math/tex">\text{Vicky},</script> <script type="math/tex">\text{Ramiro},</script> <script type="math/tex">\text{Johnnie}\}</script></p>
+
+<p><label for="fig-set-union" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-union" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-union.svg" /><br />Set union.</span></p>
+
+<p>Who do I know that you do not know? We use <em>set difference</em>:</p>
+
+<script type="math/tex; mode=display">F_{me}\setminus F_{you}=\{\text{Vicky},\text{Ramiro},\text{Johnnie}\}</script>
+
+<p><label for="fig-set-difference" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-difference" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-minus.svg" /><br />Set difference.</span></p>
+
+<h3 id="set-builder">Set builder</h3>
+<p>A more advanced way to denote sets, is to define a set using <em>set builder</em> notation. This allows us to define (build) a new set given other set(s). A set builder consists of two parts, a variable and a logical predicate:</p>
+
+<script type="math/tex; mode=display">\{\text{variable}~|~\text{predicate}\}</script>
+
+<p>Let’s look at an example and build a set of all mammals from $A$. We explain logical predicates below, for now lets use verbal language:</p>
+
+<script type="math/tex; mode=display">M=\{a~|~a\in A\text{ and }a\text{ is a mammal}\}</script>
+
+<p>You can read this as ‘<script type="math/tex">M</script> contains all <script type="math/tex">a</script>’s <em>with the property that</em> <script type="math/tex">a\in A</script> and <script type="math/tex">a</script> is a mammal’.</p>
+
+<p><label for="fig-set-builder" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-builder" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-builder.svg" /><br />Set builder.</span></p>
+
+<h3 id="cardinal-product">Cardinal product</h3>
+<p>Set builder notation is useful to filter objects from a single set, but becomes very potent when building from multiple sets. For example:</p>
+
+<script type="math/tex; mode=display">F=\{(p,a)~|~p\in P\text{ AND }a\in A\}</script>
+
+<p><label for="fig-cardinal-product" class="margin-toggle">⊕</label><input type="checkbox" id="fig-cardinal-product" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-cardinal.svg" /><br />Cardinal product.</span></p>
+
+<p>Read this as ‘<script type="math/tex">F</script> contains all pairs of <script type="math/tex">p</script> and <script type="math/tex">a</script> <em>with the property that</em> <script type="math/tex">p</script> is a person and <script type="math/tex">a</script> is an animal’. Pairs are denoted in brackets. You can think of <script type="math/tex">F</script> containing all possible combinations of person-animal pairs. For example, these are all the options you have when trying to guess what the favorite animals are of your friends.</p>
+
+<p>Many other set builders are possible too, but this specific ‘pair builder’ is called the <em>cardinal product</em> of two sets. It is used often enough that it has its own special symbol: <script type="math/tex">F=P\times A</script>.</p>
+
+<h3 id="special-sets">Special sets</h3>
+<p>Finally, there are some special sets which we often use that have their own symbols:</p>
+
+<ul>
+  <li>Empty set <script type="math/tex">\varnothing=\{\}</script></li>
+  <li>Natural (whole) numbers (with zero) <script type="math/tex">\mathbb{N}_0=\{0,1,2,3,4,\dots\}</script></li>
+  <li>Natural (whole) numbers (without zero) <script type="math/tex">\mathbb{N}^*=\{1,2,3,4,\dots\}</script></li>
+  <li>Integer numbers <script type="math/tex">\mathbb{Z}=\{\dots,-3,-2,-1,0,1,2,3,\dots\}</script></li>
+  <li>Real numbers <span><script type="math/tex">% <![CDATA[
+\mathbb{R}=\{r~|~-\infty<r<\infty\} %]]></script></span></li>
+</ul>
+
+<h2 id="functions">Functions</h2>
+<p>Building on set theory, we can define functions. Functions are relations that map all objects from one set (the <em>domain</em>) to exactly one object from another set (the <em>codomain</em>). We define functions with the following notation, here <script type="math/tex">f</script> is the name of the function:</p>
+
+<script type="math/tex; mode=display">f:D \rightarrow C\text{ with }f(d)=c</script>
+
+<p>Let’s make this more concrete:</p>
+
+<script type="math/tex; mode=display">like: P \rightarrow \mathbb{Z}</script>
+
+<p>You can read this as ‘<script type="math/tex">like</script> is a function that maps persons <script type="math/tex">p\in P</script> to an integer’.</p>
+
+<p><label for="fig-function" class="margin-toggle">⊕</label><input type="checkbox" id="fig-function" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/fun-basic.svg" /><br />Function.</span></p>
+
+<p>We sometimes omit the exact specification of the function when it is clear what it would be. For example, here it could be a list of numbers representing how much you (dis)like the person, based on your social interactions with that person.</p>
+
+<h3 id="advanced-functions">Advanced functions</h3>
+<p>We can also give functions more complex domains by using set theory. What would a function that captures how much two persons like each other look like?</p>
+
+<script type="math/tex; mode=display">like_2:P\times P\rightarrow \mathbb{Z}</script>
+
+<p>The cardinal product <script type="math/tex">P\times P</script> denotes all pairs of persons and <script type="math/tex">like_2</script> maps pairs to an integer.</p>
+
+<p><label for="fig-advanced-function" class="margin-toggle">⊕</label><input type="checkbox" id="fig-advanced-function" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/fun-adv.svg" /><br />Advanced function.</span></p>
+
+<h3 id="sum-and-product">Sum and product</h3>
+<p>We can now define <em>summation</em> and <em>product</em>. These functions iterate over members in a set and return a summary value.</p>
+
+<p>Summation <script type="math/tex">\sum</script> takes all <script type="math/tex">x</script>’s from <script type="math/tex">X</script>, applies <script type="math/tex">f(x)</script> to each and adds all values:</p>
+
+<script type="math/tex; mode=display">\sum_{x\in X}f(x)=f(x_1)+f(x_2)+f(x_3)+\dots</script>
+
+<p>Product takes $\prod$ all $x$’s from <script type="math/tex">X</script>, applies <script type="math/tex">f(x)</script> to each and multiplies all values:</p>
+
+<script type="math/tex; mode=display">\prod_{x\in X}f(x)=f(x_1)f(x_2)f(x_3)\dots</script>
+
+<h2 id="logic">Logic</h2>
+<p>Logical predicates can be thought of as a special type of function that returns a Boolean value true (<script type="math/tex">\text{true}</script> or <script type="math/tex">\top</script>) or false (<script type="math/tex">\text{false}</script> or <script type="math/tex">\bot</script>). Predicates can be thought of as asking or claiming whether or not a statement is true or false.</p>
+
+<p>For example, is <script type="math/tex">x</script> bigger than <script type="math/tex">2</script>? Is <script type="math/tex">a</script> a mammal and small? Is Emily your friend? Or, <script type="math/tex">x</script> is bigger than <script type="math/tex">2</script>, <script type="math/tex">a</script> is a mammal and small, and Emily is my friend.</p>
+
+<p>Let’s introduce some formal notation to express these statements:</p>
+
+<ul>
+  <li><em>number comparisons</em> are familiar to most <script type="math/tex">% <![CDATA[
+< %]]></script>, <script type="math/tex">\leq</script>, <script type="math/tex">></script>, <script type="math/tex">\geq</script>, <script type="math/tex">=</script>, and <script type="math/tex">\neq</script></li>
+  <li><em>conjunctions</em> (logical <script type="math/tex">\text{AND}</script>) <script type="math/tex">p\wedge q</script> is <script type="math/tex">\top</script> if and only if both <script type="math/tex">p=\top</script> and <script type="math/tex">q=\top</script></li>
+  <li><em>disjunctions</em> (logical <script type="math/tex">\text{OR}</script>) <script type="math/tex">p\vee q</script> is <script type="math/tex">\top</script> if <script type="math/tex">p=\top</script> or if <script type="math/tex">q=\top</script></li>
+  <li><em>set membership</em> can also be used as a predicate <script type="math/tex">a\in A</script> is <script type="math/tex">\top</script> if <script type="math/tex">a</script> is a member of set <script type="math/tex">A</script></li>
+</ul>
+
+<h3 id="universal-quantifier-for-all">Universal quantifier (for all)</h3>
+<p>Sometimes we want to say something about all objects in a set. We can use quantifier predicates to do this. For example, are all animals in the set mammals? We use the <em>universal quantifier</em>:</p>
+
+<script type="math/tex; mode=display">\forall_{a\in A}\text{mammal}(a)</script>
+
+<p>You can read this as `does it hold for all objects <script type="math/tex">a</script> in <script type="math/tex">A</script> that <script type="math/tex">a</script> is a mammal?’ We implicitly introduced a function <script type="math/tex">\text{mammal}:A\rightarrow\{\top,\bot\}</script> with <script type="math/tex">\text{mammal}(a)=\top</script> if <script type="math/tex">a</script> is a mammal or <script type="math/tex">\bot</script> otherwise.</p>
+
+<h2 id="existential-quantifier-exists">Existential quantifier (exists)</h2>
+<p>Another type of question we can ask is, for example, is there someone I know that I like? We use the <em>existential quantifier</em>:</p>
+
+<script type="math/tex; mode=display">\exists_{p\in F_{me}}\left[\text{like}(p)>0\right]</script>
+
+<p>Which we can read as `does there exist a person <script type="math/tex">p</script> in the set of my friends <script type="math/tex">F_{me}</script> for which I like them <script type="math/tex">\text{like}(p)>0</script>?’</p>
+
+
+<div class="nav-wrapper">
+	<div class="prev-chapter">
+		
+		<p><a href="/lovelace/part_i/intro">Previous: Introduction</a></p>
+		
+	</div>
+	<div class="next-chapter">
+		
+	</div>
+</div>
+
+    </article>
+    <span class="print-footer">Math concepts and notation - October 23, 2020 - Mark Blokpoel and Iris van Rooij</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    
+      <li>
+        <a href="mailto:m.blokpoel@donders.ru.nl">Mark
+		<span class="icon-mail3"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//www.markblokpoel.com">
+		<span class="icon-html-five"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//www.twitter.com/MarkBlokpoel">
+		<span class="icon-twitter"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//github.com/markblokpoel">
+		<span class="icon-github"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="mailto:i.vanrooij@donders.ru.nl">Iris
+		<span class="icon-mail3"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//www.irisvanrooijcogsci.com">
+		<span class="icon-html-five"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//www.twitter.com/IrisVanRooij">
+		<span class="icon-twitter"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//github.com/IrisVanRooij">
+		<span class="icon-github"></span>
+		</a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2020 &nbsp;&nbsp;MARK BLOKPOEL AND IRIS VAN ROOIJ</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

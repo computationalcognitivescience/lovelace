@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Conceptual foundations</title>
+  <meta name="description" content="The first question that arises frequently—sometimes innocently and sometimes not—is simply, "Why model?" Imagining a rhetorical (non-innocent) inquisitor, my...">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+  <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+ <!--   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  
+
+  <link rel="stylesheet" type="text/css" href="/lovelace/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/lovelace/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="/lovelace/part_i/foundations">
+
+  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="/lovelace/feed.xml" />
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<div class="nav-wrapper">
+	<div class="nav-left">
+	<a href="/lovelace/"><img class="badge" src="/lovelace/assets/img/badge_1.png" alt="CH"></a>
+	</div>
+	<div class="nav-right">
+	
+		
+		    
+		      <a href="/lovelace/404.html"></a>
+		    
+	    
+  	
+		
+  	
+		
+		    
+		      <a href="/lovelace/home">Home</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part1">I - Intro</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part2">II - Formalizing</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part3">III - Levels</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part4">IV - Advanced</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/css/print.css"></a>
+		    
+	    
+  	
+		
+  	
+		
+  	
+	</div>
+	</div>
+	</nav>
+</header>
+    <article class="group">
+      
+<h1>Chapter 2 - Conceptual foundations</h1>
+
+
+<div class="epigraph"><blockquote><p>The first question that arises frequently—sometimes innocently and sometimes not—is simply, "Why model?" Imagining a rhetorical (non-innocent) inquisitor, my favorite retort is, "You are a modeler."  (...) when you close your eyes and imagine an epidemic spreading, or any other social dynamic, you are running some model or other. It is just an implicit model that you haven&#39;t written down.</p><footer>Joshua M. Epstein, <cite>2008</cite></footer></blockquote></div>
+
+<p>We need to cover some conceptual and philosophical grounds before we can start modeling. We’ll start by considering what models are for.</p>
+
+<h2 id="why-do-scientists-model">Why do scientists model?</h2>
+
+<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/globe.png" /><br /></span> There is not one answer to this question. There are many possible reasons and valid purposes for modeling. For instance, some models have the purpose to <em>describe</em> (or <em>represent</em>). Descriptive models typically capture some aspects of the thing described and ignore others. Often they maintain relational information about things in the world, while not necessarily respecting the scale of the thing described. A familiar example is the globe that you may have on your desk. This model is substantially smaller than the thing it models (i.e., earth), yet it describes quite accurately the relative shapes, borders and locations of countries, oceans and seas on the surface of the earth. Many details remain omitted of course.</p>
+
+<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/solar-system.jpg" /><br /></span>  Sometimes descriptive models ignore more than just the scale of things. The picture on the right depicting the relation between the planets and the sun in our solar system illustrates this idea. This picture ignores relative distances between planets and the sun and only captures their ordering. Models need not be pictorial. For instance, we can also describe the ordering of the planets using functions, such as <script type="math/tex">d(x,y)</script> to denote the distance between <script type="math/tex">x</script> and <script type="math/tex">y</script>; and using mathematical symbols, such as <script type="math/tex">% <![CDATA[
+< %]]></script> for ‘smaller than’:</p>
+
+<p><script type="math/tex">% <![CDATA[
+d(Mercury, Sun) < d(Venus, Sun) < d(Earth, Sun) < d(Mars, Sun) %]]></script>
+<script type="math/tex">% <![CDATA[
+<d(Jupiter, Sun) < d(Saturn, Sun) < d(Uranus, Sun) < d(Neptune, Sun) %]]></script></p>
+
+<p>In this description even more information is lost. There is no longer any information about the relative sizes of the planets, nor about colours.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">Note that in the picture above the relative sizes of the sun and planets were in fact distorted (e.g., <a href="https://en.wikipedia.org/wiki/Solar_System#/media/File:Planets2013.svg">the Sun is many orders of magnitude bigger than Earth</a>) and the colours of the planets are caricatures at best. Every model, <em>qua</em> description or representation, will omit information and distort on some dimensions. This is unavoidable, but we can be aware of it. </span> Yet, the relevant information about <em>ordering</em> is perfectly retained. The type of models we will be developing in this book are more of the mathematical type than the pictorial type.</p>
+
+<p class="stopandthink"><em>Stop and think: </em>
+Do you think cognitive scientists and psychologists also make use of descriptive models?
+<div class="answer" id="hint-1-heading-hint-1"><p><a onclick="document.getElementById('hint-1').style.display = document.getElementById('hint-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="hint-1" style="display: none;"><p>Aren't all models minimally descriptive of something?</p></div></div>
+</p>
+
+<div class="question" id="question-1"><p><em>Question 2.1:</em> What mathematical descriptive model could describe a person's ability to add numbers?
+<div class="answer" id="question-1-heading-1"><p><a onclick="document.getElementById('question-1-answer-1').style.display = document.getElementById('question-1-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-1-answer-1" style="display: none;"><p>For any two numbers <span>&#8203;<script type="math/tex">x</script></span> and <span>&#8203;<script type="math/tex">y</script></span>, the ability could be described by a function <span>&#8203;<script type="math/tex">f</script></span>, defined as <span>&#8203;<script type="math/tex">f(x,y) = x + y</script></span>.</p></div></div></p></div>
+
+<div class="question" id="question-2"><p><em>Question 2.2:</em> What mathematical descriptive model could describe a person's ability to multiply numbers?
+<div class="answer" id="question-2-heading-1"><p><a onclick="document.getElementById('question-2-answer-1').style.display = document.getElementById('question-2-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-2-answer-1" style="display: none;"><p>You don't need a hint.</p></div></div></p></div>
+
+<p>As models minimally describe something<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">This need not be a <em>real</em> or <em>concrete</em> thing, but can also be a <em>hypothetical</em> thing. For instance, a globe could describe the geography of an alien planet in a sci-fi novel, and a mathematical model could describe a hypothesized cognitive ability. </span>, they can be used for other purposes, too. For instance, the globe can be used to <em>predict</em> that if one starts sailing from the coast of The Netherlands and heads straight West, one will eventually bump into the coast of the United Kingdom. This prediction holds no matter where you start on the Dutch coast (provided you stay on course). To make a more precise prediction of where you most likely will end up, you would need more information about where you started on the Dutch coast (e.g., above or below the longitude coordinate of Zandvoort aan Zee).</p>
+
+<p>Can we also use models to predict people’s behaviour? Sure. You do this all the time yourself. For instance, when you predict how someone will behave in a given situation, based on their past behaviour in <em>similar</em> situations, you are using a model of that person<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">And a model of 'similarity'; a topic we will pick up in Chapter 7. </span>. It is just not a model that you have written down (cf. quote at start of this chapter). Similarly, when you predict how someone will behave in a given situation, based on how <em>other</em> people behave in similar situations, you are also using a model. This second type of model is more generic and not specific to the person. A third possibility is when you predict how someone will behave in a given situation, based on how <em>similar</em> people have behaved in similar situations. Then you are using a model that is neither person specific, nor fully generic, but specific to a group of people who are similar (according to some dimension you assume is relevant<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">cf. stereotypes. </span>).</p>
+
+<p class="stopandthink"><em>Stop and think: </em>
+Take a moment to think of concrete situations where you tried to predict a person's behaviour. What type of model did you use, and why?
+<div class="answer" id="hint-2-heading-hint-2"><p><a onclick="document.getElementById('hint-2').style.display = document.getElementById('hint-2').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="hint-2" style="display: none;"><p>Think of multiple situations and different people. Is the model that you use the same or different accross situations and people? What makes the models vary?</p></div></div>
+</p>
+
+<div class="question" id="question-3"><p><em>Question 2.3:</em> What could be an example of model used by scientists to predict a person's behaviour.
+<div class="answer" id="question-3-heading-1"><p><a onclick="document.getElementById('question-3-answer-1').style.display = document.getElementById('question-3-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-3-answer-1" style="display: none;"><p>Think, for instance, of [simple linear regression](https://www.youtube.com/watch?v=SYY_BPciXPw). The best fitting line in a simple linear regression of data obtained from a sample of people, can be used to predict (unknown) values for a person  the <span>&#8203;<script type="math/tex">y</script></span>-axis (e.g. how often they go to the movies), from their known values on the <span>&#8203;<script type="math/tex">x</script></span>-axis (e.g. their monthly income).</p></div></div></p></div>
+
+<p>Explain the other used of modeling: explanation, understanding, controlling, prescribing or emulating. Explain the other used of modeling: explanation, understanding, controlling, prescribing or emulating. Explain the other used of modeling: explanation, understanding, controlling, prescribing or emulating. Explain the other used of modeling: explanation, understanding, controlling, prescribing or emulating.Explain the other used of modeling: explanation, understanding, controlling, prescribing or emulating. Explain the other used of modeling: explanation, understanding, controlling, prescribing or emulating. Explain the other used of modeling: explanation, understanding, controlling, prescribing or emulating. Explain the other used of modeling: explanation, understanding, controlling, prescribing or emulating.</p>
+
+<div class="question" id="question-4"><p><em>Question 2.4:</em> In this section we covered 7 possible reasons for modeling. Can you think of more?
+<div class="answer" id="question-4-heading-1"><p><a onclick="document.getElementById('question-4-answer-1').style.display = document.getElementById('question-4-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-4-answer-1" style="display: none;"><p>Read Epstein (2008). [Why Model?](http://jasss.soc.surrey.ac.uk/11/4/12.html). He identifies 16 possible reasons.</p></div></div></p></div>
+
+<h2 id="prediction-vs-explanation">Prediction vs. Explanation</h2>
+<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace//assets/img/rainbow.jpg" /><br /></span>.
+<label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace//assets/img/norway.jpg" /><br /></span>.
+<label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace//assets/img/wave.jpg" /><br />Rainbows, northern lights (aurora borealis), and the tides are well-known phenomena we can all observe. Unexplained these phenomena are puzzling. Explanations postulate mechanisms (interacting component processes) and conditions that together produce these phenomena.</span>.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.
+Explain how prediction and explanation are doubly dissociated.</p>
+
+<h2 id="explaining-capacities">Explaining Capacities</h2>
+
+<p><label for="sn-id-whatever" class="margin-toggle"> ⊕</label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="marginnote">Theoretical modeling is different from data or statistical modeling. This may <em>prima facie</em> look odd for scientists used to analyzing empirical data. We will be modeling target phenomena, not data.  </span>
+The theoretical modeling approach that we adopt here builds on the philosophical view that psychology’s primary targets of explanation are behavioural tendencies or dispositions, also knows as <em>capacities</em> <a class="citation" href="#cummins_nature_1985">(Cummins, 1985; Cummins, 2000)</a>. As <a class="citation" href="#van_rooij_theory_2020">(van Rooij &amp; Baggio, 2020)</a> put it:</p>
+
+<div class="epigraph"><blockquote><p>A capacity is a dispositional property of a system at one of its levels of organization: e.g., single neurons have capacities (firing, exciting, inhibiting) and so do minds and brains (vision, learning, reasoning) and groups of people (coordination, competition, polarization).
+    A capacity is a more or less reliable ability (or disposition or tendency) to transform some initial state (‘input’) into a resulting state (‘output’).</p><footer>van Rooij &amp; Baggio, <cite>Theory before the test, 2020</cite></footer></blockquote></div>
+
+<p>Take, for instance, the social-cognitive capacity for <em>goal inference</em>  <a class="citation" href="#baker_goal_2007">(Baker et al., 2007; Blokpoel et al., 2013)</a>: Given observations of a person’s behaviours one can make inferences about the (presumed) goals of a person. In this case the <em>input</em> is the observed behaviour (e.g., ‘Jake buys flowers’) and background knowledge (e.g., ‘Yesterday, Jake broke Cass’s car’), and the <em>output</em> is an inferred goal (e.g., ‘Jake wants to apologize to Cass’). Alternatively, consider the capacity for <em>causal attribution</em>  <a class="citation" href="#de_houwer_levels_2015">(De Houwer &amp; Moors, 2015; Ross, 1977)</a>: given observations of a person’s behaviours one can make attributions of whether the underlying causes lie in person traits and/or situational factors. In this case the <em>input</em> is again the observed behaviour (e.g., ‘Jake buys flowers’) and some background knowledge but the <em>output</em> is a causal attribution in terms of person traits (e.g., ‘Jake bought flowers because he is an attentive person’) or in terms of situational factors (e.g., as in the <em>goal inference</em> example above, or otherwise).</p>
+
+<p>According to the influential tri-level framework proposed by David (1982) capacities can be analyzed at three different levels: the computational level, the algorithmic level, and the implementational level. At the computational level, we ask the question, ‘what is the function (or problem) being computed by the capacity?’ At the algorithmic level, we ask: ‘how is the function computed (by what algorithm)?’ And finally, at the implementational level, we ask: ‘how is the algorithm physically realized?’ An important feature of this framework is that lower levels of explanation are underdetermined, though constrained, by the higher levels of explanation: A function can, in principle, be computed by different algorithms; and any given algorithm can, in principle, be physicially realized in different ways (Fig.~\ref{fig:marr-sorting}).</p>
+
+<p>Let’s illustrate these ideas using a capacity called <em>sorting</em> (e.g., one can order people from youngest to oldest, order choice options from least to most preferred, etc.). We will adopt the convention that a computational-level model can be represented as follows:</p>
+
+<p>\vspace{0.5em}
+\fproblem{Name of modelled capacity}
+{Specification of the input.}
+{Specification of the output as a function of the input.}
+\vspace{0.5em}</p>
+
+<figure><img src="/lovelace/assets/img/marr-sorting.pdf" /><figcaption class="maincolumn-figure">XXX</figcaption></figure>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<p>Cummins, R. (1985). <em>The Nature of Psychological Explanation</em>. MIT Press.</p>
+
+<p>Cummins, R. (2000). <a href="https://pdfs.semanticscholar.org/f5b1/b05e8313aee94ccd98e80eab3ec56dbd2c97.pdf">How does it work?” versus” what are the laws?”: Two conceptions of psychological explanation</a>. In <em>Explanation and cognition</em> (pp. 117–144). Frank C. Keil, Robert Andrew Wilson (Eds). MIT Press</p>
+
+<p>Guest, O., &amp; Martin, A. E. (2020). How computational modeling can force theory building in psychological science. <em>Perspectives on Psychological Science</em> <a href="https://doi.org/10.31234/osf.io/rybh9">preprint</a></p>
+
+<p><a href="http://ling.umd.edu/~ellenlau/courses/ling646/Marr_1982.pdf">Excerpt (pp. 69-73)</a> from: Marr, D. (1982). <em>Vision: A computational investigation into the human representation and processing of visual information.</em> New York.</p>
+
+<p>van Rooij, I., &amp; Baggio, G. (2020). Theory before the test: How to build high-verisimilitude explanatory theories in psychological science. <em>Perspectives on Psychological Science</em> <a href="https://psyarxiv.com/7qbpr/">preprint</a></p>
+
+
+<div class="nav-wrapper">
+	<div class="prev-chapter">
+		
+	</div>
+	<div class="next-chapter">
+		
+		<p><a href="/lovelace/part_i/intro">Next: Introduction</a></p>
+		
+	</div>
+</div>
+
+    </article>
+    <span class="print-footer">Conceptual foundations - October 23, 2020 - Mark Blokpoel and Iris van Rooij</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    
+      <li>
+        <a href="mailto:m.blokpoel@donders.ru.nl">Mark
+		<span class="icon-mail3"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//www.markblokpoel.com">
+		<span class="icon-html-five"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//www.twitter.com/MarkBlokpoel">
+		<span class="icon-twitter"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//github.com/markblokpoel">
+		<span class="icon-github"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="mailto:i.vanrooij@donders.ru.nl">Iris
+		<span class="icon-mail3"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//www.irisvanrooijcogsci.com">
+		<span class="icon-html-five"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//www.twitter.com/IrisVanRooij">
+		<span class="icon-twitter"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//github.com/IrisVanRooij">
+		<span class="icon-github"></span>
+		</a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2020 &nbsp;&nbsp;MARK BLOKPOEL AND IRIS VAN ROOIJ</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>
