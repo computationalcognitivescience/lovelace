@@ -1,0 +1,21 @@
+<!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<div class="nav-wrapper">
+	<div class="nav-left">
+	<a href="{{site.baseurl}}/"><img class="badge" src="{{site.baseurl}}/assets/img/badge_1.png" alt="CH"></a>
+	</div>
+	<div class="nav-right">
+	{% for node in site.pages %}
+		{% unless node.nav_exclude %}
+		    {% if page.url == node.url %}
+		      <a class="active" href="{{node.url | prepend: site.baseurl}}" class="active">{{node.title}}</a>
+		    {% else %}
+		      <a href="{{node.url | prepend: site.baseurl}}">{{node.title}}</a>
+		    {% endif %}
+	    {% endunless %}
+  	{% endfor %}
+	</div>
+	</div>
+	</nav>
+</header>

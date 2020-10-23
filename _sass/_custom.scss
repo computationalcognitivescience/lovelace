@@ -1,0 +1,131 @@
+html{
+  text-align: justify;
+}
+
+.splash-wrapper{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background-image: url("../assets/img/splash.png");
+  background-size: cover;//auto 100%;
+  background-repeat:no-repeat;
+  background-position: right;
+  height: 100vh;
+  width: 100vw;
+}
+
+.splash-title{
+  margin: 0;
+  position: absolute;
+  top: 2.5rem;
+  text-align: left;
+  left: 0;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+    text-shadow: .25rem .25rem .5rem #000000;
+}
+
+.splash-title h1{
+  font-size: 4rem;
+  color: #fffff8;
+}
+
+.splash-title h2{
+  font-size: 2.75rem;
+  font-style: normal;
+  color: #fffff8;
+}
+
+.splash-title h3{
+  font-size: 2.5rem;
+  color: #fffff8;
+  margin-top: 5rem;
+}
+
+.nav-wrapper{
+  display: flex;
+}
+
+.nav-left{
+  flex: 0 0 10%;
+}
+
+.nav-right{
+  flex: 1;
+}
+
+.badge{
+	width: 100%;
+	height: auto;
+}
+
+.scastie.embedded{
+	width: 87.5% !important;
+    margin-left: 0px !important;
+    margin-right: auto !important;
+	padding-right: 2rem !important;
+
+}
+
+.embedded-menu{
+	width: 150px !important;
+}
+
+.run-button span{
+	display: none !important;
+}
+
+.run-button:after{
+	content: 'run' !important;
+}
+
+.output-console li{
+	font-size: 1rem;
+	margin-top: 0;
+	line-height: 1.2rem;
+}
+
+
+.next-chapter{
+  flex: 1;
+}
+
+.prev-chapter{
+  flex: 0 0 50%;
+}
+
+.question em{
+  font-weight: normal;
+  font-style: italic;
+}
+.question > .answer{
+  margin-left: 0;
+}
+.question > .answer .question{
+  position: relative;
+  margin-left: 2rem;
+}
+
+.answer p{
+  margin-top: 0;
+}
+.answer em{
+  font-weight: normal;
+  font-style: italic;
+}
+
+.stopandthink em{
+  font-weight: normal;
+  font-style: italic;
+}
+
+span.problemtitle{
+	font-variant: small-caps;
+    font-size: 1.2em;
+    letter-spacing: 0.05rem;
+}
+
+span.probleminout{
+  font-weight: normal;
+  font-style: italic;
+}
