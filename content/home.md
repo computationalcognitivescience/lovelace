@@ -4,7 +4,7 @@ layout: page
 permalink: /home
 ---
 
-Welcome to this online, open and interactive, textbook on theoretical modeling for cognitive science and psychology.
+Welcome to this open and interactive textbook on theoretical modeling for cognitive science and psychology.
 
 ## Table of contents
 
@@ -22,7 +22,7 @@ Welcome to this online, open and interactive, textbook on theoretical modeling f
 {%- endfor -%}
 
 ## Cover art
-The cover art is by Danielle Navarro (used with permission & released under [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)).
+The [cover art](https://computationalcognitivescience.github.io/lovelace/) is by Danielle Navarro (used with permission & released under [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)).
 
 Danielle Navarro's award-winning open textbook [Learning Statistics with R](https://learningstatisticswithr.com) and open teaching materials [R for Psychological Science](http://psyr.djnavarro.net) inspired us to write this open and online textbook. Choosing her art for the book's cover represents our gratitude for this inspiration as much as our love for her [artwork](https://art.djnavarro.net).
 
@@ -30,7 +30,7 @@ Danielle Navarro's award-winning open textbook [Learning Statistics with R](http
 This open textbook is released under a [CC-BY 4.0 license](https://creativecommons.org/licenses/by/4.0/) and the Scala software used herein is released under an [UGN GPL v3 license]() or any later version. This book is written in [Jekyll](https://jekyllrb.com) using the [tufte-jekyll](https://github.com/clayh53/tufte-jekyll) theme released under an [MIT license](https://github.com/fongandrew/hydeout/blob/master/LICENSE.md). The source code is available on Github [here](https://github.com/computationalcognitivescience/lovelace).
 
 ## How to cite this book
-Blokpoel, M. & van Rooij, I. (2020). Theoretical modeling for cognitive science and psychology. Version 0.1. Retrieved year-month-day from [URL].
+Blokpoel, M. & van Rooij, I. (2020). Theoretical modeling for cognitive science and psychology. Retrieved year-month-day from [URL].
 
 ## In-progress
 At present this book is a living document, some sections have been written while others are still under construction. If the parts you are interested in aren't finished yet, please check back at a later time. Feedback and suggestions are welcome.
