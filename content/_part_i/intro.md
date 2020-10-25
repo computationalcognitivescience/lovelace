@@ -41,7 +41,7 @@ These characters represent complementary cognitive states of mind required for s
 
 These days it is probably not controversial to say that NHST{% sidenote 'mn-id-whatever' 'NHST stands for *null hypothesis significance testing*.' %} {% marginnote 'mn-id-whatever' 'In the beginning, psychological scientists had a hammer and everything looked like a nail. Problems arose because they didn&#39;t know how to handle the hammer well. All effort was spent on improving the use of the hammer so that they finally could hit nails. After a while no one remembered the original and most important problem: Not everything is a nail.' %} has been psychology's hammer that made cognition and behaviour look like a nail. Fervent use of this hammer, which took center stage in the 'replication crisis', has most certainly contributed to a relative [neglect of solid theory building in psychological science](https://featuredcontent.psychonomic.org/psychological-science-needs-theory-development-before-preregistration/). Why? Well, a hammer (especially in the form of NHST) is not a suitable tool for sculpting theoretical models.
 
-To sculpt theories one needs other types of tools. The theoretician's tools are first and foremost tools for  better *thinking* and more explicitly and precisely *communicating* the resulting theoretical thoughts. These tools include functional analysis ('Can we decompose a system into its component processes and their interactions?'), conceptual analysis ('What do we mean by the words we use when expressing ideas and intuitions?'), formalization ('Can we make our informal intuitions formally precise?'), mathematical proofs ('Can we deduce properties and predictions from formalized ideas'), and computer simulation ('Can we understand by building a computational system that can mimic what we want to explain?').
+To sculpt theories one needs other types of tools. The theoretician's tools are first and foremost tools for  better *thinking* and more explicitly and precisely *communicating* the resulting theoretical thoughts. These tools include functional analysis ('Can we decompose a system into its component processes and their interactions?'), conceptual analysis ('What do we mean by the words we use when expressing ideas and intuitions?'), formalization ('Can we make our informal intuitions formally precise?'), mathematical proofs ('Can we deduce properties and predictions from formalized ideas'), and computer simulation ('Can we improve our understanding by building a computational system that can mimic what we want to explain?').
 {% marginfigure 'mf-id-whatever' 'assets/img/sculpting_tools.jpeg' 'Sculpting requires a set of dedicated tools.' %}
 
 As with any tools, it takes practice to use these tools effectively and skillfully. This book gives the necessary practice. It starts at the basics and progressively trains you in independent theoretical modeling.   
@@ -53,6 +53,8 @@ This choice is deliberate. Functional programming makes interpreting the
 semantics of the code transparent, making it easy to understand the relationship
 between formalized theory and simulation. We provide an accessible
 introduction to basic functional programming in Scala.
+
+{% marginfigure '' 'assets/img/scala_logo.png' 'By [Lightbend, Inc.](https://www.lightbend.com/assets/images/brand/scala/scala-logos/svg/scala-full-color.svg), [CC BY 4.0](https://commons.wikimedia.org/w/index.php?curid=94026409).' %}
 
 ## Further Reading
 

@@ -54,81 +54,93 @@ Think of multiple situations and different people. Is the model that you use the
 {% endstopandthink %}
 
 {% question %}
-What could be an example of model used by scientists to predict a person's behaviour.
+What could be an example of a model used by scientists to predict a person's behaviour.
 {% hidden Hint? %}
-Think, for instance, of [simple linear regression](https://www.youtube.com/watch?v=SYY_BPciXPw). The best fitting line in a simple linear regression of data obtained from a sample of people, can be used to predict (unknown) values for a person  the {% m %}y{% em %}-axis (e.g. how often they go to the movies), from their known values on the {% m %}x{% em %}-axis (e.g. their monthly income).
+Think, for instance, of <a href="https://www.youtube.com/watch?v=SYY_BPciXPw">simple linear regression</a>. The best fitting line in a simple linear regression of data obtained from a sample of people, can be used to predict (unknown) values for a person  the {% m %}y{% em %}-axis (e.g. how often they go to the movies), from their known values on the {% m %}x{% em %}-axis (e.g. their monthly income).
 {% endhidden %}
 {% endquestion %}
 
-Explain the other used of modeling: explanation, understanding, controlling, prescribing or emulating. Explain the other used of modeling: explanation, understanding, controlling, prescribing or emulating. Explain the other used of modeling: explanation, understanding, controlling, prescribing or emulating. Explain the other used of modeling: explanation, understanding, controlling, prescribing or emulating.Explain the other used of modeling: explanation, understanding, controlling, prescribing or emulating. Explain the other used of modeling: explanation, understanding, controlling, prescribing or emulating. Explain the other used of modeling: explanation, understanding, controlling, prescribing or emulating. Explain the other used of modeling: explanation, understanding, controlling, prescribing or emulating.
+A third important use of models is to _explain_ (or _understand_). {% marginfigure 'mf-id-whatever' 'assets/img/tide_model.png' 'Schematic explaining the lunar tides. From [Wikimedia. CC BY-SA 3.0.](https://en.wikipedia.org/wiki/Tide#/media/File:Tide_overview.svg)' %} Models that explain can be seen as answering 'why' and 'how' questions. For instance, the schematic on the right can be used to explain _why_ there are tides and _how_ they come about: i.e., the gravitational pull of the moon generates a tidal force that causes Earth and its water to bulge out on the side closest to and farthest away from the moon. The solar tide works similarly, but is not shown in the schematic. For a more complete explanation [watch this](https://youtu.be/FtFn6Y1QDyk).
+
+An important thing to notice is that models that _predict_ need not _explain_, and vice versa. For instance, using tide tables you can very precisely predict the tides at any time of the day at different locations. Yet, tide tables do not explain the tides{% sidenote 'sn-id-whatever' 'cf. Cummins (2000)'%}. Similarly, we could construct a big look-up table to predict what types of products people tend to buy at different times during the year. Even if the table would make good predictions it would not explain why people buy more ice cream in Summer and more Christmas trees in December.{% sidenote 'sn-id-whatever' 'Depending on where you are on Earth this may or may not be around the same time.'%} Conversely, while the schematic model of the tidal force created by the moon generates understanding of the 'why' and 'how' of tides, it is too abstract to make very precise, local predictions about the tides. Similarly, a scientific explanation of the 'why' and 'how' of the human ability to make decisions{% sidenote 'sn-id-whatever' 'A topic we will pick up further in Chapter 4.'%} is likely too abstract and generic to predict particular concrete choices that people make.
+
+Besides describing, predicting and explaining, models can also be used for, say, _controlling_, _prescribing_, and _emulating_.
+
+For instance, if one has a model of 'consumer biases' then this model could be used to figure out how to 'nudge' people into buying certain products; or, if one has a model of what causes depression then one could use the model to design a treatment that removes the cause. Both these examples would be instances of using a model to exert _control_ over something, for better or worse. If one uses a normative model of reasoning (as in logic or probability theory) or deciding (as in economic choice theory) then the model could be used to _prescibe_ how one should reason or should decide if one were to be rational. This type of prescriptive model need not be descriptive of actual human behaviour; though there exist psychologists and cognitive scientists who believe that prescriptive models can be descriptive in that sense, too.{% sidenote 'sn-id-whatever' 'Chater & Oaksford (2000). [The rational analysis of mind and behavior](https://link.springer.com/article/10.1023/A:1005272027245) _Synthese, 122_, pp. 93–131.' %} Lastly, we could make a model of human cognition and instantiate it in an artificial agent (e.g., a physical robot or virtual agent). Then the model would serve to _emulate_ (or _simulate_{% sidenote 'sn-id-whatever' 'Whether or not intelligence can really be emulated, and not just merely simulated, is a longstanding debate in AI (see [strong versus weak AI](https://plato.stanford.edu/entries/artificial-intelligence/#PhilArtiInte)).' %}) the thing modeled. The idea that models can be made to emulate human cognition has of course led to the foundation of the field artificial intelligence (AI). Similarly, the idea that models can be made to emulate natural evolution has founded the field of artificial life.  
+
+{% stopandthink %}
+So far we have offered several possible reasons for modeling. Can you think of more?
+{% hidden Hint? %}
+Read Epstein (2008). <a href="http://jasss.soc.surrey.ac.uk/11/4/12.html">Why Model?</a> He identifies 16 possible reasons. Can you come up with reasons 17 and 18?
+{% endhidden %}
+{% endstopandthink %}
+
+
+## Explaining capacities
+
+All possible purposes for modeling are valid. One use is not better than another. All depends on one's scientific aims. In the remainer of this book we will focus on modeling with the scientific aim of _explaining_ or otherwise advancing our _understanding_ of (cognitive) psychological phenomena (though other uses of modeling may show their faces along the way insofar as they support this aim). This can also include models that try to explain but fail to do so. As you will see, we can learn as much from model 'failures' as from model 'successes', or from modeling 'hypotheticals' and 'counterfactuals'. But before we dive into modeling, let's think deeply about _what_ it is that we want our models to explain.
+
+{% marginnote 'mn-id-whatever' '“(…) a substantial proportion of research effort in experimental psychology isn’t expended directly in the explanation business; it is expended in the business of discovering and confirming effects” – Cummins (2000).' %}  For psychologists and cognitive scientists whose day-to-day research involves doing experiments in the lab and analysing data, a first obvious contender for 'target explananda'{% sidenote 'sn-id-whatever' 'Terminology: _explanandum_ (plural _explananda_) means the thing to be explained, and _explanans_ means the thing doing the explaining, i.e. the explanation.' %} {% marginnote 'sn-id-whatever' 'Theoretical modeling is different from (statistical) data modeling. This may *prima facie* look odd for cognitive and psychological scientists used to analyzing empirical data. We will be modeling target phenomena, not data.' %} may be one or more of the 'effects' established via such research practices. Take for instance, well-known effects like the Stroop effect, the McGurk effect, the primacy and recency effects, visual illusions etc. Aren't these the things we should be explaining? Not really. Or rather, not primarily. While effects have a role to play in the scientific enterprise they are at best _secondary_ explananda for psychologal and cognitive science. Ideally, we do not construct theories just to explain effects. The Stroop effect, the McGurk effect, the primacy and recency effects, visual illusions etc. rather serve to arbitrate between competing explanations of the _capacities_ for cognitive control, speech perception, memory, and vision, respectively. It is these kinds of capacities that form the _primary_ explananda.
 
 {% question %}
-In this section we covered 7 possible reasons for modeling. Can you think of more?
+How can effects arbitrate between competing explanations of capacities?
 {% hidden Hint? %}
-Read Epstein (2008). [Why Model?](http://jasss.soc.surrey.ac.uk/11/4/12.html). He identifies 16 possible reasons. 
+Consider, for instance, the capacity for <em>multiplication</em>. This capacity could be exercised using the <em>partial products algorithm</em> or using <em>successive addition</em>. Both methods realize the same capacity, but the second shows a “linearity effect” (i.e., it takes roughly twice as long to compute {% m %}x \times y{% em %} as it does to compute {% m %}2x \times y{% em %}, for any numbers {% m %}x{% em %} and {% m %}y{% em %}, while the <em>partial products algorithm</em> does not exhibit this linearity effect (see Cummins, 2000, for further discussion).
 {% endhidden %}
 {% endquestion %}
 
+{% epigraph 'A capacity is a dispositional property of a system at one of its levels of organization: e.g., single neurons have capacities (firing, exciting, inhibiting) and so do minds and brains (vision, learning, reasoning) and groups of people (coordination, competition, polarization). A capacity is a more or less reliable ability (or disposition or tendency) to transform some initial state (or &#39;input&#39;) into a resulting state (&#39;output&#39;).' 'van Rooij & Baggio' '2020' %}
+
+{% marginfigure 'mf-id-whatever' '/assets/img/wave.jpg' '' %}
+{% marginfigure 'mf-id-whatever' '/assets/img/rainbow.jpg' '' %}
+{% marginfigure 'mf-id-whatever' '/assets/img/decisionmaking.png' '' %}
+{% marginfigure 'mf-id-whatever' '/assets/img/communication.png' 'Tides and rainbows are two of the many natural phenomena we can all observe and don&#39;t require intricate methods to be discovered. Unexplained these phenomena are puzzling. The same holds for many cognitive capacities, like decision making and communication, and many others.' %}
+
+Primary explananda are the key phenomena that collectively define a field of study. For instance, cognitive psychology’s primary explananda are the various cognitive capacities that humans and other animals seem endowed with. These include capacities for learning, language, perception, categorization, decision making, planning, problem solving, reasoning, communication, to name a few. While effects (secondary explananda) are often only discovered through intricate methods and experiments, capacities (primary explananda) usually need not be discovered in the same way. We often know roughly the kinds of capacities we'd like to explain before we bring them into the lab. How else could we know there was something to study in the first place?
+
+Just like we knew about tides (or rainbows, nordic lights, thunder and lighting, etc.) from naturalistic observation before seeking explanations for these puzzling phenomena, so too we already know that humans can learn languages, interpret complex visual scenes, navigate dynamic and uncertain environments, and have conversations with conspecifics. These capacities are so remarkable and difficult to explain computationally or mechanistically that we do not know yet how to emulate them in artificial systems at human levels of sophistication. Like the tides, rainbows, etc., these cognitive capacities are puzzling and demand explanation.
+
+How do we explain capacities?
+
+According to the influential tri-level framework proposed by David (1982) capacities can be analyzed at three different levels: the computational level, the algorithmic level, and the implementational level. At the _computational_ level, we ask the question, '_what_ is the nature of the problem solved by the capacity?' An answer to this question comes in the form of a hypothesized input-output mapping, a.k.a. computational problem. At the _algorithmic_ level, we ask: '_how_ is the input-output mapping that characterizes the capacity computed?' An answer to this question comes in the form of a hypothesized algorithm, a step-by-step procedure computing the hypothesized mapping. And finally, at the _implementational_ level, we ask: 'how is the algorithm _physically realized_?' An answer to this question comes in the form of specification of how the algorithm posed at the algorithmic level is hypothesized to be implemented in the 'stuff' realizing the capacity.
+
+An important feature of Marr's framework is that lower levels of explanation are underdetermined, though constrained, by the higher levels of explanation: A function can, in principle, be computed by different algorithms; and any given algorithm can, in principle, be physically realized in different ways. Let's illustrate these ideas using a capacity called _sorting_ (e.g., one can order people from youngest to oldest, order choice options from least to most preferred, etc.). We will adopt the convention{% sidenote 'sn-id-whatever' 'This convention comes from computer science. We believe that adoption of this convention in psychology and cognitive science will bring more clarity about the scope and commitments of computational-level theories. In the current literature, these aspects often remain implicit or ill-defined, causing crosstalk and making explanatory failures invisible (more on this in Part II of this book).'%} that a computational-level model can be represented as follows:
+
+{% fproblem Name of modelled capacity %}
+Specification of the input.;;
+Specification of the output as a function of the input.
+{% endfproblem %}
+
+For the capacity _sorting_, this looks as follows:
+
+{% fproblem Sorting %}
+A list of unordered numbers $$L$$.;;
+An ordered list $$L'$$ that consists of the elements in $$L$$.
+{% endfproblem %}
+
+In other words, here we stipulate that $$L'$$ = <span style="font-variant:small-caps;">Sorting</span>$$(L)$$. For instance, if $$L$$ is 625739 then $$L'$$ is 235679.
+
+The <span style="font-variant:small-caps;">Sorting</span> function can be computed by different algorithms. For instance, one strategy can be to consider each item, from left to right, to find the smallest element in the list $$L$$, and put it in position 1 of list $$L'$$. Then repeat this for the remainder of the numbers in $$L$$, and put the next smallest number in position 2 in list $$L'$$; and so on, until one has filled up list $$L'$$ using the elements in $$L$$. A different strategy, however, could be to order the numbers in $$L$$ by 'swapping' adjancent numbers: i.e., consider the numbers in position 1 and 2 in $$L$$, and if the second number smaller than the first then swap the two numbers. Repeat for the numbers in position 2 and 3, positions 3 and 4, and so on. Then repeat the whole procedure starting again at position 1, and repeat until no more swaps can be made.
+
+{% maincolumn 'assets/img/marr-sorting.png' 'Any given function can be computed by different algorithms, and any given algorithm can be physically realized in different ways. This principle is illustrated for the sorting example.' %}
+
+Both algorithms, called _selection sort_ and _bubble sort_ respectively (Knuth, 1968), compute the <span style="font-variant:small-caps;">Sorting</span> function. Besides these two algorithms there exists a host of different sorting algorithms, all of which compute exactly the same function, though their timing profiles may differ.{% sidenote 'sn-id-whatever' 'For a visual and auditory illustration of 15 distinct sorting algorithms [watch this](https://youtu.be/kPRA0W1kECg). '%}
+Like the <span style="font-variant:small-caps;">Sorting</span> function can be computed by different algorithms, each algorithm can be realized in different physical ways. For instance, a sorting algorithm can be physically realized by a computer or a brain, or even as a distributed group activity (e.g., by people walking though a maze (van Rooij & Baggio, 2020), or by a group of Hungarian dancers.{% sidenote 'sn-id-whatever' 'Here an example [video](https://www.youtube.com/watch?v=uzyDE_5h-vs) for sorting through a maze, and an example [video](https://www.youtube.com/watch?v=lyZQPjUT5B4) for sorting by Hungarian dancers. '%}
 
 
-## Prediction vs. Explanation
-{% marginfigure 'mf-id-whatever' '/assets/img/rainbow.jpg' '' %}.
-{% marginfigure 'mf-id-whatever' '/assets/img/norway.jpg' '' %}.
-{% marginfigure 'mf-id-whatever' '/assets/img/wave.jpg' 'Rainbows, northern lights (aurora borealis), and the tides are well-known phenomena we can all observe. Unexplained these phenomena are puzzling. Explanations postulate mechanisms (interacting component processes) and conditions that together produce these phenomena.' %}.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
-Explain how prediction and explanation are doubly dissociated.
+An important lesson is that the _levels of explanation_ of Marr do not correspond to _levels of organisation_.{% sidenote 'sn-id-whatever' 'See also McClamrock (1991). '%} That is, at each level of organisation we can ask the three questions: what is the computational problem? how is the problem computed? how is the algorithm implemented?
 
-## Explaining Capacities
+_To do:_ Explain the difference between levels or organisation and utility of top-down approach. Explain the difference between levels or organisation and utility of top-down approach. Explain the difference between levels or organisation and utility of top-down approach. Explain the difference between levels or organisation and utility of top-down approach. Explain the difference between levels or organisation and utility of top-down approach. Explain the difference between levels or organisation and utility of top-down approach. Explain the difference between levels or organisation and utility of top-down approach. Explain the difference between levels or organisation and utility of top-down approach. Explain the difference between levels or organisation and utility of top-down approach. Explain the difference between levels or organisation and utility of top-down approach. Explain the difference between levels or organisation and utility of top-down approach.
 
-{% marginnote 'sn-id-whatever' 'Theoretical modeling is different from data or statistical modeling. This may *prima facie* look odd for scientists used to analyzing empirical data. We will be modeling target phenomena, not data. ' %}
-The theoretical modeling approach that we adopt here builds on the philosophical view that psychology's primary targets of explanation are behavioural tendencies or dispositions, also knows as *capacities* {% cite cummins_nature_1985 cummins_how_2000 %}. As {% cite van_rooij_theory_2020 %} put it:
-
-{% epigraph 'A capacity is a dispositional property of a system at one of its levels of organization: e.g., single neurons have capacities (firing, exciting, inhibiting) and so do minds and brains (vision, learning, reasoning) and groups of people (coordination, competition, polarization).
-    A capacity is a more or less reliable ability (or disposition or tendency) to transform some initial state (‘input’) into a resulting state (‘output’).' 'van Rooij & Baggio' 'Theory before the test, 2020' %}
-
-Take, for instance, the social-cognitive capacity for *goal inference*  {% cite baker_goal_2007 blokpoel_computational-level_2013 %}: Given observations of a person's behaviours one can make inferences about the (presumed) goals of a person. In this case the *input* is the observed behaviour (e.g., 'Jake buys flowers') and background knowledge (e.g., 'Yesterday, Jake broke Cass's car'), and the *output* is an inferred goal (e.g., 'Jake wants to apologize to Cass'). Alternatively, consider the capacity for *causal attribution*  {% cite  de_houwer_levels_2015 ross_intuitive_1977 %}: given observations of a person's behaviours one can make attributions of whether the underlying causes lie in person traits and/or situational factors. In this case the *input* is again the observed behaviour (e.g., 'Jake buys flowers') and some background knowledge but the *output* is a causal attribution in terms of person traits (e.g., 'Jake bought flowers because he is an attentive person') or in terms of situational factors (e.g., as in the *goal inference* example above, or otherwise).
-
-According to the influential tri-level framework proposed by David (1982) capacities can be analyzed at three different levels: the computational level, the algorithmic level, and the implementational level. At the computational level, we ask the question, 'what is the function (or problem) being computed by the capacity?' At the algorithmic level, we ask: 'how is the function computed (by what algorithm)?' And finally, at the implementational level, we ask: 'how is the algorithm physically realized?' An important feature of this framework is that lower levels of explanation are underdetermined, though constrained, by the higher levels of explanation: A function can, in principle, be computed by different algorithms; and any given algorithm can, in principle, be physicially realized in different ways (Fig.~\ref{fig:marr-sorting}).
-
-Let's illustrate these ideas using a capacity called _sorting_ (e.g., one can order people from youngest to oldest, order choice options from least to most preferred, etc.). We will adopt the convention that a computational-level model can be represented as follows:
-
-\vspace{0.5em}
-\fproblem{Name of modelled capacity}
-{Specification of the input.}
-{Specification of the output as a function of the input.}
-\vspace{0.5em}
-
-
-{% maincolumn 'assets/img/marr-sorting.svg' 'XXX' %}
-
-{% youtube 'https://www.youtube.com/watch?v=ywWBy6J5gz8' %}
-
+Following (Marr, 1982), in this book we adopt a top-down strategy. We focus on the computational level, but we will have things to say on algorithmic and implementational level considerations, especially in ways that they constrain computational-level theorizing (van Rooij, 2008, van Rooij et al., 2019) and vice versa (Blokpoel, 2018). The computational level of analysis is specifically useful for as an interface between those aspects of psychology and cognitive science that focus on behavior and those aspects that focus on physical implementation (e.g., neuroscience or genetics) as it casts cognitive and other psychological capacities in an abstract common language of computation.  
 
 ## Further Reading
+
+_To do:_ Finalize this section. Some sketch of ideas: The need for modeling in psychological science is currently a hotly debated issue, leading to a boost in new papers on the topic, spanning the full breadth of psychology, including cognitive, evolutionary and clinical psychological science (XXX).
+
+Much has been written on Marr's 3 levels. Both critiques, re-evaluations and reformulations. To learn about the diversity of views on the topic we recommend reading the special issue in Topics in Cognitive Science, with more than X paper representing prons, cons and re-evaluations. For explicit treatments of the priority of the computational-level see XXX.    
+
+### References
 
 Cummins, R. (1985). *The Nature of Psychological Explanation*. MIT Press.
 
@@ -136,6 +148,6 @@ Cummins, R. (2000). [How does it work?" versus" what are the laws?": Two concept
 
 Guest, O., & Martin, A. E. (2020). How computational modeling can force theory building in psychological science. *Perspectives on Psychological Science* [preprint](https://doi.org/10.31234/osf.io/rybh9)
 
-[Excerpt (pp. 69-73)](http://ling.umd.edu/~ellenlau/courses/ling646/Marr_1982.pdf) from: Marr, D. (1982). *Vision: A computational investigation into the human representation and processing of visual information.* New York.
+Pages 69-73 from: Marr, D. (1982). *Vision: A computational investigation into the human representation and processing of visual information.* New York.
 
 van Rooij, I., & Baggio, G. (2020). Theory before the test: How to build high-verisimilitude explanatory theories in psychological science. *Perspectives on Psychological Science* [preprint](https://psyarxiv.com/7qbpr/)
