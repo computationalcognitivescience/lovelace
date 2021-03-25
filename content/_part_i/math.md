@@ -40,7 +40,7 @@ $$F_{you}=\{\text{John},\text{Roberto},\text{Holly},\text{Doris},\text{Charlene}
 $$F_{me}=\{\text{Vicky},\text{Charlene},\text{Ramiro},\text{Johnnie},\text{Roberto}\}$$
 
 
-{% marginfigure fig-set-intersection "assets/img/set-intersection.png" "Set intersection." %}
+{% marginfigure fig-set-intersection "assets/img/set-intersection.svg" "Set intersection." %}
 Who are our common friends? We use _set intersection_:
 
 $$F_{you}\cap F_{me} = \{\text{Roberto},\text{Charlene}\}$$

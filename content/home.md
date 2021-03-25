@@ -14,7 +14,10 @@ Welcome to this open and interactive textbook on theoretical modeling for cognit
 <p><a href="{{ site.baseurl }}{{ page.url }}">Part {{ page.title }}</a></p>
 <ul>
 {%- for chapter in collection.docs -%}
+{% assign path = chapter.relative_path | split: "/" %}
+{% if path.size == 2 %}
 <li><a href="{{ site.baseurl }}{{ chapter.url }}">Chapter {{ chapter.chapter }} - {{ chapter.title }}</a></li>
+{% endif %}
 {%- endfor -%}
 </ul>
 {% endif %}

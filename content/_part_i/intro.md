@@ -48,7 +48,10 @@ As with any tools, it takes practice to use these tools effectively and skillful
 
 ## Scala
 
+
 The computer simulations in this book are written using functional programming in Scala.
+
+
 This choice is deliberate. Functional programming makes interpreting the
 semantics of the code transparent, making it easy to understand the relationship
 between formalized theory and simulation. We provide an accessible

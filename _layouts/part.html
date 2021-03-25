@@ -8,7 +8,10 @@ layout: default
 {% for collection in site.collections %}
 {% if collection.label == page.category %}
 	{% for chapter in collection.docs %}
+	  {% assign path = chapter.relative_path | split: "/" %}
+	  {% if path.size == 2 %}
 	  <p><a href="{{ site.baseurl }}{{ chapter.url }}">Chapter {{ chapter.chapter }} - {{ chapter.title }}</a></p>
+	  {% endif %}
 	{% endfor %}
 {% endif %}
 {% endfor %}

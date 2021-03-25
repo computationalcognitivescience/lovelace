@@ -1,4 +1,15 @@
 module Jekyll::Tags
+	class ProblemTag < Liquid::Tag
+		def initialize(tag_name, text, tokens)
+		  super
+		  @text = text
+		end
+
+		def render(context)
+		  "<span>#{@text}</span>"
+		end
+	end
+	
 	class DProblemTag < Liquid::Block
 
 		def initialize(tag_name, block_options, liquid_options)
@@ -40,6 +51,6 @@ module Jekyll::Tags
 	end
 end
 
-
+Liquid::Template.register_tag('problem', Jekyll::Tags::ProblemTag)
 Liquid::Template.register_tag('dproblem', Jekyll::Tags::DProblemTag)
 Liquid::Template.register_tag('fproblem', Jekyll::Tags::FProblemTag)
