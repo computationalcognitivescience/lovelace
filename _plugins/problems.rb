@@ -6,7 +6,7 @@ module Jekyll::Tags
 		end
 
 		def render(context)
-		  "<span>#{@text}</span>"
+		  "<span style='font-variant: small-caps;'>#{@text}</span>"
 		end
 	end
 	
