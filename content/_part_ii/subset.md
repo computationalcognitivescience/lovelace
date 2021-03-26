@@ -5,13 +5,32 @@ chapter: 4
 nav_exclude: true
 ---
 
-{% marginfigure 'mf-id-whatever' '/assets/img/choiceoptions.jpg' 'So many possibilities! How do we choose one?' %}.
+{% marginfigure 'mf-id-whatever' '/assets/img/choiceoptions.jpg' 'So many possibilities! How do we choose one?' %} We start our first adventure in theoretical modeling in the cognitive domain of *decision-making*. Decision making is the capacity for choosing one or more options from a given set of options. This can range from mundane decisions (e.g., choosing ice cream flavours or what movie to watch) to highly specialized decisions (e.g., deciding what medicine to prescribe as a doctor or what experiments to perform as a scientist). There is a long tradition of cognitive and psychological research on this topic, with roots in behavioural economics in the 1950s and onwards (see the Further Reading section for some pointers).
 
-We start our first adventure in theoretical modeling in the cognitive domain of *decision-making*. Decision making is the capacity for choosing one or more options from a given set of options. This can range from mundane decisions (e.g., choosing ice cream flavours or what movie to watch) to highly specialized decisions (e.g., deciding what medicine to prescribe as a doctor or what experiments to perform as a scientist). There is a long tradition of cognitive and psychological research on this topic, with roots in the behavioural economics developed in the 1950s and onwards (see the Further Reading section for some pointers).
+A classic distinction in the literature on decision-making is between deciding under *certainty*, *risk*, or *uncertainty*. When probabilities of different outcomes for choice options are known we say the decision is made under *risk*.
 
-As explained in the Introduction, our goal here will not to be retrace tradition or to review existing theoretical models. Instead, we'll be throwing you into the deep waters: We will present you with (more or less fictive) verbal theories in this domain, and you will formalise them. You may think you are unable to and that you first need to learn how others made models. But trust us. You can! The goal is specifically not to mimic (what you think) existing models of decision making (look like), but rather to develop your own. Remember, the purpose is not to be 'right' but rather to practice using the theoretician's tools.
 
-For instance, when one arrives at a crossroad, one can choose to turn left or right or drive on straight. Which direction you choose may depend on where you are going, but also on the time of day (as you anticipate traffic jams) and how much in a rush you are (perhaps you want to drive the scenic route by the ocean).
+{% question %}
+What could be an example of decision-making under risk?
+{% hidden Hint? %}
+ An example is deciding between lotteries. Imagine two lotteries. In lottery A you win 100 euros with probability 0.25 and lose 10 euro with probability 0.75, and in lottery B you win 500 euros with probability 0.20 and lose 20 euro with probability 0.80. Which lottery would you choose to participate in?
+{% endhidden %}
+{% endquestion %}
+
+When exact probability information is unavailable, e.g., because the choice problem is more ill-defined, we say the decision is made under *uncertainty*.
+
+{% question %}
+What could be an example of decision-making under uncertainty?
+{% hidden Hint? %}
+An example is choosing what career to pursue: e.g., Would you rather be an artist, doctor, politician, accountant, or technician?
+{% endhidden %}
+{% endquestion %}
+
+{% marginnote 'mn-id-whatever' '“This is the essence of intuitive heuristics: when faced with a difficult question, we often answer an easier one instead, usually without noticing the substitution.” – Daniel Kahneman (2017).' %} To make our lives easier, in this chapter we focus on decision making under *certainty*. That is, we consider choice situations where options are well-defined and the value of options is certain. As we will see, this is usually merely a convenient fiction. It makes learning to model easier, and allows us to delay the use of probability theory to the Advanced sections.
+
+We will not retrace tradition or review existing theoretical models of decision making. {% marginnote 'mn-id-whatever' '“Human rational behavior (...) is shaped by a scissors whose two blades are the structure of task environments and the computational capabilities of the actor.” – Herbert Simon (1990).' %} Instead, we'll be throwing you into the deep waters: We will present you with (more or less fictive) verbal theories in this domain and will invite you to try and formalize them. You may think you are unable to and that you first need to learn how others made models. But trust us. You can do it! The goal is specifically not to mimic (what you think) existing models of decision making (are like), but rather to develop your own. The purpose is to practice using the theoretician's tools. Think of this and the next chapters as your sandbox for sculpting some sandcastles for fun, and to train your sculpting skills.
+
+The example decision making capacity that we will use for our practices is called *subset choice*. This is the ability to select a *subset* of options from a larger set.
 
 Subset Choice
 * Selecting toppings on a pizza
@@ -19,6 +38,12 @@ Subset Choice
 * Prescribing combinations of medicine
 * Doing groceries
 * Selecting member for a committee or team
+
+
+{% stopandthink %}
+Okay, let's take a minute and pause.
+{% endstopandthink %}
+
 
 
 **Exercise**
