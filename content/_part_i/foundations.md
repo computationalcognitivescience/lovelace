@@ -146,8 +146,8 @@ Cummins, R. (1985). *The Nature of Psychological Explanation*. MIT Press.
 
 Cummins, R. (2000). [How does it work?" versus" what are the laws?": Two conceptions of psychological explanation](https://pdfs.semanticscholar.org/f5b1/b05e8313aee94ccd98e80eab3ec56dbd2c97.pdf). In *Explanation and cognition* (pp. 117–144). Frank C. Keil, Robert Andrew Wilson (Eds). MIT Press
 
-Guest, O., & Martin, A. E. (2020). How computational modeling can force theory building in psychological science. *Perspectives on Psychological Science* [preprint](https://doi.org/10.31234/osf.io/rybh9)
+Guest, O., & Martin, A. E. (2021). [How computational modeling can force theory building in psychological science](https://journals.sagepub.com/doi/full/10.1177/1745691620970585). *Perspectives on Psychological Science*.
 
 Pages 69-73 from: Marr, D. (1982). *Vision: A computational investigation into the human representation and processing of visual information.* New York.
 
-van Rooij, I., & Baggio, G. (2020). Theory before the test: How to build high-verisimilitude explanatory theories in psychological science. *Perspectives on Psychological Science* [preprint](https://psyarxiv.com/7qbpr/)
+van Rooij, I., & Baggio, G. (2021). [Theory before the test: How to build high-verisimilitude explanatory theories in psychological science](https://journals.sagepub.com/doi/full/10.1177/1745691620970604). *Perspectives on Psychological Science*.

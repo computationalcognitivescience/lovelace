@@ -30,23 +30,23 @@ Danielle Navarro's award-winning open textbook [Learning Statistics with R](http
 This open textbook is released under a [CC-BY 4.0 license](https://creativecommons.org/licenses/by/4.0/) and the Scala software used herein is released under an [UGN GPL v3 license]() or any later version. This book is written in [Jekyll](https://jekyllrb.com) using the [tufte-jekyll](https://github.com/clayh53/tufte-jekyll) theme released under an [MIT license](https://github.com/fongandrew/hydeout/blob/master/LICENSE.md). The source code is available on Github [here](https://github.com/computationalcognitivescience/lovelace).
 
 ## How to cite this book
-Blokpoel, M. & van Rooij, I. (2020). Theoretical modeling for cognitive science and psychology. Retrieved year-month-day from [URL].
+Blokpoel, M. & van Rooij, I. (2021). Theoretical modeling for cognitive science and psychology. Retrieved year-month-day from [URL].
 
 ## In-progress
 At present this book is a living document, some sections have been written while others are still under construction. If the parts you are interested in aren't finished yet, please check back at a later time. Feedback and suggestions are welcome.
 
 ## About the authors
-[Mark Blokpoel](http://www.markblokpoel.com) is a computer scientist and computational cognitive scientist. [Iris van Rooij](irisvanrooijcogsci.com) is a psychologist and cognitive scientist. Both authors are based at Donders Institute for Brain, Cognition, and Behaviour, Radboud University. Van Rooij is currently writing parts of this book while at the Netherlands Institute for Advanced Study in the Humanities and Social Sciences ([NIAS](https://nias.knaw.nl)). Van Rooij and Blokpoel previously co-authored [Cognition and Intractability](https://cognitionandintractability.com) with Johan Kwisthout and Todd Wareham.
+[Mark Blokpoel](http://www.markblokpoel.com) is a computer scientist and computational cognitive scientist. [Iris van Rooij](irisvanrooijcogsci.com) is a psychologist and cognitive scientist. Both authors are based at Donders Institute for Brain, Cognition, and Behaviour, Radboud University. Parts of this book were written while Van Rooij was at the Netherlands Institute for Advanced Study in the Humanities and Social Sciences ([NIAS](https://nias.knaw.nl)). Van Rooij and Blokpoel previously co-authored [Cognition and Intractability](https://cognitionandintractability.com) with Johan Kwisthout and Todd Wareham.
 
 ## Reuse of materials
 
 Parts of this book are based on materials that previously appeared in:
 
-van Rooij, I., & Baggio, G. (2020/in press). Theory before the test: How to build high-verisimilitude explanatory theories in psychological science. *Perspectives on Psychological Science*. [preprint](https://psyarxiv.com/7qbpr/)
+van Rooij, I., & Baggio, G. (2021). [Theory before the test](https://journals.sagepub.com/doi/full/10.1177/1745691620970604): How to build high-verisimilitude explanatory theories in psychological science. *Perspectives on Psychological Science*.
 
-van Rooij, I., & Blokpoel, M. (2020/in press). Formalizing verbal theories: A tutorial by dialogue. *Social Psychology*. [preprint](https://psyarxiv.com/r2zqy)
+van Rooij, I., & Blokpoel, M. (2020). [Formalizing verbal theories: A tutorial by dialogue](https://doi.org/10.1027/1864-9335/a000428). *Social Psychology, 51*(5), 285-298
 
-Specifically, parts of these papers were reused in the 'Conceptual Foundations' and the 'Math Concepts and Notation' sections.
+Specifically, parts of these papers were reused in the 'Conceptual Foundations', the 'Math Concepts and Notation', and 'Subset Choice' chapters.
 
 
 ## Acknowledgements

@@ -22,43 +22,100 @@ When exact probability information is unavailable, e.g., because the choice prob
 {% question %}
 What could be an example of decision-making under uncertainty?
 {% hidden Hint? %}
-An example is choosing what career to pursue: e.g., Would you rather be an artist, doctor, politician, accountant, or technician?
+An example is choosing what career to pursue. For instance, would you rather be an artist, doctor, politician, accountant, scientist or technician?
 {% endhidden %}
 {% endquestion %}
 
-{% marginnote 'mn-id-whatever' '“This is the essence of intuitive heuristics: when faced with a difficult question, we often answer an easier one instead, usually without noticing the substitution.” – Daniel Kahneman (2017).' %} To make our lives easier, in this chapter we focus on decision making under *certainty*. That is, we consider choice situations where options are well-defined and the value of options is certain. As we will see, this is usually merely a convenient fiction. It makes learning to model easier, and allows us to delay the use of probability theory to the Advanced sections.
+{% marginnote 'mn-id-whatever' '“This is the essence of intuitive heuristics: when faced with a difficult question, we often answer an easier one instead, usually without noticing the substitution.” – Daniel Kahneman (2017).' %} To make our lives easier, in this chapter we focus on decision making under *certainty*. That is, we consider choice situations where options are well-defined and the value of options is certain. As we will see, this is usually merely a convenient fiction. But it makes learning to model easier, and allows us to postpone the use of probability theory to the Advanced sections.
 
-We will not retrace tradition or review existing theoretical models of decision making. {% marginnote 'mn-id-whatever' '“Human rational behavior (...) is shaped by a scissors whose two blades are the structure of task environments and the computational capabilities of the actor.” – Herbert Simon (1990).' %} Instead, we'll be throwing you into the deep waters: We will present you with (more or less fictive) verbal theories in this domain and will invite you to try and formalize them. You may think you are unable to and that you first need to learn how others made models. But trust us. You can do it! The goal is specifically not to mimic (what you think) existing models of decision making (are like), but rather to develop your own. The purpose is to practice using the theoretician's tools. Think of this and the next chapters as your sandbox for sculpting some sandcastles for fun, and to train your sculpting skills.
+We will not review existing theoretical models of decision making. Instead, we'll be throwing you into the deep waters: We will present you with a capacity to explain and will invite you to articulate a verbal theory and try to formalize these ideas. You may think you are unable to and that you first need to learn how others made models. But trust us. You can do it! The goal is specifically not to mimic existing models of decision making, but rather to develop your own. The purpose is to practice using the theoretician's tools. Think of this and the next chapters as your sandbox for sculpting some sandcastles for fun, and to train your sculpting skills.
 
-The example decision making capacity that we will use for our practices is called *subset choice*. This is the ability to select a *subset* of options from a larger set.
+{% marginfigure 'mf-id-whatever' '/assets/img/vitrine.png' 'So many flavours! How do we choose a subset?' %} The example decision making capacity that we will use for our practices is called *subset choice*. This is the capacity for chosing a *subset* of options from a larger set. Take for example choosing Italian ice cream. The set of options is the full set of flavours displayed in the vitrine. Depending on your budget and appetite you may choose one, two, three, or---if you are *really* hungry---more scoops. For instance, you may choose strawberry, lemon, and mango. Or, alternatively, you may choose chocolate and hazelnut.
 
-Subset Choice
-* Selecting toppings on a pizza
-* Inviting people to a party
-* Prescribing combinations of medicine
-* Doing groceries
-* Selecting member for a committee or team
+{% question %}
+Can you think of more everyday situations where the choice options are subsets of available options?
+{% hidden Hint? %}
+
+When we select toppings on a pizza.
+
+{% question %}
+Can you think of another one?
+{% hidden Hint? %}
+
+When we invite people to a party
+
+{% question %}
+Can you think of another one?
+{% hidden Hint? %}
+
+When a doctor prescribes combinations of medicine.
+
+{% question %}
+Can you think of another one?
+{% hidden Hint? %}
+When you shop for groceries.
+
+{% question %}
+Can you think of another one?
+{% hidden Hint? %}
+When a manager selects members for a committee or team.
+
+{% question %}
+Can you think of another one?
+{% hidden Hint? %}
+When you select ingredients for cooking a meal.
+
+{% question %}
+Can you think of another one?
+{% endquestion %}
+
+{% endhidden %}
+{% endquestion %}
+
+{% endhidden %}
+{% endquestion %}
+
+{% endhidden %}
+{% endquestion %}
+
+{% endhidden %}
+{% endquestion %}
+
+{% endhidden %}
+{% endquestion %}
+
+{% endhidden %}
+{% endquestion %}
+
+
+If you went down the rabbit hole of that question, you will have discovered that there are many everyday situations that correspond to choosing subsets. Let's pick one or more of those situations and make a computational-level explanation of the capacity for choosing subsets of that type.
+
+{% question %}
+Make a computational level theory of subset choice that incorporates the assumption that people choose options with maximum or satisfactory subjective value (a.k.a. utility).
+{% endquestion %}
+
+{% hidden Hint? %}
+Think about how you want to approach this exercise. You can, for instance, look back at Chapter 2 to refresh your knowledge of what is a computational level theory of a capacity and how you can write it down. You can also use the mathematics from Chapter 3 where useful. Our advice is to first define an informal specification of the capacity's input domain and output domain, and intuitively articulate the mapping, and only then try to formalize your own intuitions.
+{% endhidden %}
 
 
 {% stopandthink %}
-Okay, let's take a minute and pause.
+It is important that you perform the exercise in Question 4.4 before continuing in this chapter. You will likely get stuck somewhere. This is part of the learning experience. One can only learn to model by trying, just like one only can learn to ride a bicycle by trying, sometimes losing balance, but slowly refining the skill in the process. Write down for yourself where you get stuck and why.
 {% endstopandthink %}
 
+After you have tried to answer Question 4.4 to the best of your abilities, you can continue with the next section.
 
+# A tutorial by dialogue
+{% marginfigure 'mf-id-whatever' '/assets/img/party.jpg' 'How to decide whom to invite to your party?' %}
 
-**Exercise**
-Can you think of more everyday situations where the choice options are sets as opposed to single elements?
-
-
-# Theoretical Modeling Illustrations
-\noindent In this section we illustrate theoretical modeling by dialogues between the two fictive characters, *Verbal* and *Formal*. We use two toy social psychological phenomena: (1) a host inviting people to a party, and (2) party guests  self-organizing into smaller subgroups. These example scenarios can be seen as special cases of the more general capacities for *social decision-making* and *social group formation*. We present multiple dialogues. *Verbal*'s intuitions and *Formal*'s questions vary from dialogue to dialogue, and hence the developed theoretical models differ as well.  
+In this section we illustrate theoretical modeling by dialogues between the two fictive characters, *Verbal* and *Formal*. We use as subset choice situation how a host invites people to a party. We present multiple dialogues. *Verbal*'s intuitions and *Formal*'s questions vary from dialogue to dialogue, and hence the developed theoretical models differ as well. These dialogues also appeared previously in a tutorial in the journal [*Social Psychology*](https://econtent.hogrefe.com/doi/pdf/10.1027/1864-9335/a000428).
 
 ## Dialogue 1: Formalizing inviting guests
 {% indent 0 %}
 **Verbal:** I'd like to explain how a host decides whom to invite to a party.  
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** Why would the host not invite everybody?
 {% endindent %}
 
@@ -66,7 +123,7 @@ Can you think of more everyday situations where the choice options are sets as o
 **Verbal:** They may like some people but dislike others.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  Then the host invites everybody they like?
 {% endindent %}
 
@@ -74,7 +131,7 @@ Can you think of more everyday situations where the choice options are sets as o
 **Verbal:** Not all people get along. If people get into an argument that can spoil a party.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**   I see. So a host may choose to invite people they like *and* that all get along.
 {% endindent %}
 
@@ -82,12 +139,11 @@ Can you think of more everyday situations where the choice options are sets as o
 **Verbal:** Yes, that sounds right. I think that's what a host will tend to do.  Can we formalize this idea?
 {% endindent %}
 
-
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  Let's see. We can start by defining the initial state (input) of the decision process as consisting of the set of people that the host chooses from. Let us denote this set as $$P = \{p_1, p_2, ..., p_n\}$$. Further, let's define two subsets, $$L \subseteq P$$ and $$D \subseteq P$$, denoting the subsets of people our host likes and dislikes respectively.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  I assume you had in mind that a person cannot be both liked *and* disliked by the host, and that any given person is either liked or disliked by the host.
 {% endindent %}
 
@@ -95,11 +151,11 @@ Can you think of more everyday situations where the choice options are sets as o
 **Verbal:** Let's indeed assume that for now.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  Then $$L$$ and $$D$$ form a *partition* of $$P$$. To be precise,  $$L \cap D = \emptyset$$ (a person cannot be both liked and disliked) and $$L \cup D = P$$ (any person is either liked or disliked).
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  To formalize that different pairs of people in $$P$$ can also like or dislike each other, let us define a 'liking' function $$like : P \times P \rightarrow \{true, false\}$$ that specifies for each pair of persons $$(p_i, p_j) \in P$$ whether or not $$p_i$$ and $$p_j$$ like each other.
 {% endindent %}
 
@@ -107,15 +163,15 @@ Can you think of more everyday situations where the choice options are sets as o
 **Verbal:** That function $$like$$ is merely a notational device to assign 'true' or 'false' for pairs of persons in $$P$$ to indicate whether or not they like each other?
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  Correct.  
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  To formalize the hypothesized output we can define the set of (to be) invited  guests $$G$$ to be a subset of the liked people in $$P$$ (i.e., $$G \subseteq L$$) with the additional constraint that all pairs of people in $$G$$ like each other (i.e, $$like(p_i,p_j) = true$$ for each $$p_i,p_j \in G$$, or equivalently, $$\forall_{p_i,p_j \in G}like(p_i,p_j) = true$$).
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  Combined, these formalization choices yield a computational-level model:
 {% endindent %}
 
@@ -124,7 +180,7 @@ A set of people $$P$$, some of whom the host likes ($$L \subseteq P$$) and some 
 A set of liked guests $$G \subseteq L$$ that all like each other (i.e.,  $$like(p_i,p_j) = true$$ for each $$p_i,p_j \in G$$).
 {% endfproblem %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  Now we know what the formal symbols mean, we can compress this description:
 {% endindent %}
 
@@ -137,7 +193,7 @@ A subset $$G \subseteq L$$ such that $$\forall_{p_i,p_j \in G}like(p_i,p_j) = tr
 **Verbal:** That looks great!
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** But does it correctly express what you had in mind?
 {% endindent %}
 
@@ -145,10 +201,10 @@ A subset $$G \subseteq L$$ such that $$\forall_{p_i,p_j \in G}like(p_i,p_j) = tr
 **Verbal:** I think so yes.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** We should rigorously check if it really captures what you have in mind. Let's explore this with an example. Say a host knows six people they all like, i.e., $$P=L=\{A,B,C,D,E,F\}$$. We can depict their like and dislike relations in a figure. The color of the lines indicate for each pair of persons $$p_i, p_j \in P$$ the value of $$like(p_i, p_j)$$:
 
-fig/selecting-example1.pdf
+{% maincolumn 'assets/img/selecting-example1.png' '' %}
 
 Who would you predict the host would invite?
 {% endindent %}
@@ -157,7 +213,7 @@ Who would you predict the host would invite?
 **Verbal:** Of course in that situation the host would invite $$\{C, D, E, F \}$$.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  Or they would invite $$\{A,B \}$$.
 {% endindent %}
 
@@ -165,7 +221,7 @@ Who would you predict the host would invite?
 **Verbal:** I would not think so.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  But according to version 1 of the model, subset $$\{A,B \}$$ is as likely to be the selected invitees as $$\{C, D, E, F \}$$, or at least there is no reason why the host would select the one and not the other.
 {% endindent %}
 
@@ -173,7 +229,7 @@ Who would you predict the host would invite?
 **Verbal:** But a party with only two guests is not much of a party!
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  So there are more constraints on the subset of guests that you have in mind but did not tell me yet. The host wants to have at least 3 guests?
 {% endindent %}
 
@@ -181,7 +237,7 @@ Who would you predict the host would invite?
 **Verbal:** As many as possible, the more the merrier.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** Ok. Here an adjusted version of the model:
 {% endindent %}
 
@@ -194,7 +250,7 @@ A subset $$G \subseteq L$$ such that $$\forall_{p_i,p_j \in G} like(p_i,p_j) = t
 **Verbal:** Yes, that is what I mean!
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** This model predicts that a host never invites people who they dislike, nor any pair of people who dislike each other. Is this really realistic?
 {% endindent %}
 
@@ -208,7 +264,7 @@ A subset $$G \subseteq L$$ such that $$\forall_{p_i,p_j \in G} like(p_i,p_j) = t
 **Verbal:** You are right. In some situations, hosts invite people they do not like. I am not sure why.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** Whatever the reason, the theory must then be adjusted. Let us remove the assumption that $$G \subseteq L$$. Then the adjusted theory is as follows:
 {% endindent %}
 
@@ -217,7 +273,7 @@ A set $$P$$, subsets $$L \subseteq P$$ and $$D \subseteq P$$ with $$L \cap D = \
 A subset $$G \subseteq P$$ such that $$\forall_{p_i,p_j \in G}  like(p_i,p_j) = true$$ and $$|G|$$ is maximized.
 {% endfproblem %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** But this does not seem right, because in this case the theory predicts that the host may end up with a party where everyone likes each other, but the host likes no-one.
 {% endindent %}
 
@@ -225,19 +281,19 @@ A subset $$G \subseteq P$$ such that $$\forall_{p_i,p_j \in G}  like(p_i,p_j) = 
 **Verbal:** It seems that hosts invite at most a few people they do not like, and also sometimes some people who do not like each other, as long as sufficiently many people like each other.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** I am not sure how to formalize that. Can you be more precise?
 {% endindent %}
 
 {% indent 0 %}
 **Verbal:** For instance, if the situation is like this, with $$L = \{ B, C, D, E, G\}$$ and $$D = \{ A, F\}$$:
 
-fig/selecting-example2.pdf
+{% maincolumn 'assets/img/selecting-example2.png' '' %}
 
 then hosts tend to invite $$\{ C, D, E, F, G \}$$.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** What do you think is the reason?
 {% endindent %}
 
@@ -245,7 +301,7 @@ then hosts tend to invite $$\{ C, D, E, F, G \}$$.
 **Verbal:** Possibly hosts tend to *minimize* the number of disliked guests while at the same time *maximizing* the *total* number of guests and *maximizing* the number of guests that like each other?
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** That makes sense intuitively. But formally it is underdefined. We now have three quantities that all need to be optimized (minimized or maximized), but there can be trade-offs such that it's impossible to always optimize them all at the same time.
 {% endindent %}
 
@@ -253,7 +309,7 @@ then hosts tend to invite $$\{ C, D, E, F, G \}$$.
 **Verbal:** What do you propose?
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** Perhaps we can come up with different model versions that all more or less capture this intuition, but in different well-defined ways, and then compare them empirically?
 {% endindent %}
 
@@ -261,7 +317,7 @@ then hosts tend to invite $$\{ C, D, E, F, G \}$$.
 **Verbal:** Great idea! Let's do that.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** OK. Here are three qualitatively different ways to formalize the idea:
 {% endindent %}
 
@@ -280,8 +336,8 @@ A set $$P$$, subsets $$L \subseteq P$$ and $$D \subseteq P$$ with $$L \cap D = \
 $$G \subseteq P$$ such that $$|Y| \leq k$$ and  $$|G\cap L|+|G|$$ is maximized (where $$Y = \{p_i,p_j \in G\}~|~like(p_i,p_j) = false \wedge i\neq j \}$$).
 {% endfproblem %}
 
-{% indent 1 %}
-**Formal:** There may be other possibilities.\footnote{We leave this as an exercise for the reader to explore further.} I have created simulation code for these versions, available online here https://computationalcognitivescience.github.io/socialpsychtutorial/, so you can explore their empirical implications via computer simulation.
+{% indent 4 %}
+**Formal:** There may be other possibilities.{% sidenote 'sn-id-whatever' 'We leave this as an exercise for the reader to explore further.'%} I have created simulation code for these versions, available online [here](), so you can explore their empirical implications via computer simulation.
 {% endindent %}
 
 
@@ -295,7 +351,7 @@ In this Dialogue 2, *Formal* again formalizes *Verbal*'s intuitions about how a 
  I'd like to explain how a host decides whom to invite to a party.  
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** Why would the host not invite everybody?
 {% endindent %}
 
@@ -303,7 +359,7 @@ In this Dialogue 2, *Formal* again formalizes *Verbal*'s intuitions about how a 
 **Verbal:** They may like some people but dislike others.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** Is liking and disliking all or none, or does it come in degrees?
 {% endindent %}
 
@@ -311,7 +367,7 @@ In this Dialogue 2, *Formal* again formalizes *Verbal*'s intuitions about how a 
 **Verbal:** I guess it comes in degrees.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** Then the host invites everyone they like enough?
 {% endindent %}
 
@@ -319,7 +375,7 @@ In this Dialogue 2, *Formal* again formalizes *Verbal*'s intuitions about how a 
 **Verbal:** Well, it is also important that the guests like each other enough.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** OK. So both the host and everyone at the party must like everyone at the party enough?
 {% endindent %}
 
@@ -327,11 +383,11 @@ In this Dialogue 2, *Formal* again formalizes *Verbal*'s intuitions about how a 
 **Verbal:** Yes, that sounds right. Can we formalize that idea?
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  Let's see. We can start by defining the initial state (input) of the decision process as consisting of the set of people that the host chooses from, $$P$$, and define a function $$like_1: P \rightarrow \mathbb{Z}$$ that assigns a number for each person $$p \in P$$ indicating how much the host (dis)likes that person. Negative numbers indicate degrees of disliking and positive numbers indicate degrees of liking.  
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  Can a host also sometimes not like nor dislike a person?  I mean, can they be neutral about a person?
 {% endindent %}
 
@@ -339,15 +395,15 @@ In this Dialogue 2, *Formal* again formalizes *Verbal*'s intuitions about how a 
 **Verbal:** It may be rare, but it seems possible.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  Ok, then we keep the value '0' as an option for the *like*$$_1$$ function.   
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  To formalize that different pairs of people in $$P$$ can also like or dislike each other to various degrees, let us define a function $$like_2 : P \times P \rightarrow \mathbb{Z}$$ that specifies for each pair of persons $$(p_i, p_j) \in P$$ how much they like each other, again including '0' as an option.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  To formalize the hypothesized output we define a threshold number $$k$$ for 'liking enough'. Shall I set $$k \geq 0$$ or $$k > 0$$?
 {% endindent %}
 
@@ -355,7 +411,7 @@ In this Dialogue 2, *Formal* again formalizes *Verbal*'s intuitions about how a 
 **Verbal:** I suppose, one minimally likes a person if they invite them to ones party? But guests may not be too bothered if there are people around who they feel neutral about.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  If that is the case, then let's define a separate threshold for the host $$k_h > 0$$ and a threshold for the guests $$k_g \geq 0$$.
 {% endindent %}
 
@@ -363,7 +419,7 @@ In this Dialogue 2, *Formal* again formalizes *Verbal*'s intuitions about how a 
 **Verbal:** Sounds good.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  Combined, these formalization choices yield a computational-level model:
 {% endindent %}
 
@@ -382,7 +438,7 @@ In this Dialogue 3, *Formal* again formalizes *Verbal*'s intuitions about how a 
 **Verbal:** I'd like to explain how a host decides whom to invite to a party.  
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** Why would the host not invite everybody?
 {% endindent %}
 
@@ -390,7 +446,7 @@ In this Dialogue 3, *Formal* again formalizes *Verbal*'s intuitions about how a 
 **Verbal:** They may have limited space and budget available.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** Then they invite the number of people that fit the space and the budget?
 {% endindent %}
 
@@ -398,7 +454,7 @@ In this Dialogue 3, *Formal* again formalizes *Verbal*'s intuitions about how a 
 **Verbal:** Well, yes. But I think there may be more to it. A host wants a party to be fun. So they probably invite a mix of people that make for a maximally fun party.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**
 What type of mix makes for maximal fun?
 {% endindent %}
@@ -407,7 +463,7 @@ What type of mix makes for maximal fun?
 **Verbal:** Probably lots of fun people, with great synergies. That boosts the atmosphere. And as few people as possible who do not interact well with others. You know? The right *mix*.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**
 Not sure if I get it yet. But perhaps we can start by trying to model those interactions you hint at.
 {% endindent %}
@@ -416,7 +472,7 @@ Not sure if I get it yet. But perhaps we can start by trying to model those inte
 **Verbal:** Great!
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** Let's see. Let's define a function $$fun: P \rightarrow \mathbb{Z}$$ that assigns a number for each person $$p \in P$$ indicating how much *fun* they are individually, and a second function $$synergy: P \times P \rightarrow \mathbb{Z}$$ that assigns a number for each pair of persons $$p_i, p_j \in P$$ indicating how much their interaction adds to, or subtracts from the overall *synergy*.
 {% endindent %}
 
@@ -424,7 +480,7 @@ Not sure if I get it yet. But perhaps we can start by trying to model those inte
 **Verbal:** So $$synergy(p_i, p_j) = 0$$ means no synergy between $$p_i$$ and $$p_j$$?
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** Indeed. And if $$synergy(p_i, p_j) > 0$$ or $$synergy(p_i, p_j) < 0$$ then their combined presence adds additional fun or decreases overall fun, respectively. Does this make sense?
 {% endindent %}
 
@@ -432,7 +488,7 @@ Not sure if I get it yet. But perhaps we can start by trying to model those inte
 **Verbal:** Not sure where you are going with this.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:** Well, given these assumptions, we could formalize the overall party fun as follows:
 
 {% endindent %}
@@ -445,7 +501,7 @@ $$
 **Verbal:** Makes sense. But this only allows for synergies between pairs of people, while sometimes synergies are really a function of small subgroups of people who interact well with each other.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  No problem, we can generalize the formalization to include that idea:
 {% endindent %}
 
@@ -453,7 +509,7 @@ $$
 fun(G) = \sum_{p \in G}fun(p) + \sum_{G' \subseteq G} synergy(G')
 $$
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  Better in line with your thoughts?
 {% endindent %}
 
@@ -461,7 +517,7 @@ $$
 **Verbal:** Yes!
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  Good. Let us use $$2^P = P \times P \times ... \times P$$ to denote the *powerset* of $$P$$, i.e., all possible subsets of $$P$$. Then we can finalize the model as follows:
 {% endindent %}
 
@@ -475,7 +531,7 @@ A subset $$G \subseteq P$$ such that $$fun(G) = \sum_{p \in G}fun(p) + \sum_{G' 
 The host has limited space and budget.
 {% endindent %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  Right! I forgot about those. Can I assume that there is a fixed cost per person, or are some people more expensive to host than others?
 {% endindent %}
 
@@ -484,7 +540,7 @@ The host has limited space and budget.
 {% endindent %}
 
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  Then here is my proposal:
 {% endindent %}
 
@@ -493,7 +549,7 @@ A set $$P$$ and two functions $$fun: P \rightarrow \mathbb{Z}$$, $$synergy: 2^P 
 A subset $$G \subseteq P$$ such that $$|G| \leq S$$ and  $$c|G|  \leq B$$ and $$fun(G) = \sum_{p \in G}fun(p) + \sum_{G' \subseteq G} synergy(G')$$ is maximized.
 {% endfproblem %}
 
-{% indent 1 %}
+{% indent 4 %}
 **Formal:**  If you would like to extend this model to include variable costs, then that is possible. For instance, like this:
 {% endindent %}
 
@@ -504,101 +560,59 @@ A subset $$G \subseteq P$$ such that $$|G| \leq S$$ and  $$\sum_{p \in G} c(p) \
 
 We end Dialogue 3 here. Again, we invite you to compare how this dialogue ended with how Dialogues 1 and 2 ended (e.g., ask yourself, 'Could the constraints of cost also be adopted in the earlier versions 1-7?' 'What other constraints may I want to build in?' 'How do the contraints affect which selections a host makes under different circumstances?').
 
-## Dialogue 4: Formalizing group formation
+# Lessons and reflections
 
-Dialogues 1-3 illustrated three distinct ways in which *Verbal* and *Formal* could settle on formalizations of the social decision-making capacity of a host deciding whom to invite to their party. This social decision-making capacity is a cognitive capacity of an individual, i.e., the host (their brain/mind) is doing the deciding. Not all social psychological capacities need to be like this. Some capacities emerge from the *interaction between* individuals, as we will see in the next and last dialogue.
+We reflect on some of the lessons learned from the examples and dialogues.
 
-{% indent 0 %}
-**Verbal:**  Can we explain how people naturally divide into smaller subgroups at a party?
-{% endindent %}
+We illustrated with various fictive dialogous how theoretical models can end up different based on the intuitions expressed in verbal theories and formalization choices made. You may have wanted to take different turns in the conversations than we explored here. We encourage such exploration. There is no reason why the models created by *Verbal* and *Formal* are to be the preferred ones. The different conversations served to illustrate several didactical points we want to highlight:
 
-{% indent 1 %}
-**Formal:** Sure. You think there is systematicity to it?
-{% endindent %}
+### formalization is a dialogical process
+It is often through the *interaction* between verbally expressable intuitions and the questions raised in the process of formalization that one comes to more and more well-defined formal characterizations of a (hypothesized) capacity.
 
-{% indent 0 %}
-**Verbal:** Clearly. People tend to want to be with people who are like them.
-{% endindent %}
+### formalization is a revealing process
+It makes invisible holes and inconsistencies and hidden assumptions in a verbal theory visible. These hidden problems can be discovered and resolved by explicitly making different model variants.
 
-{% indent 1 %}
-**Formal:** You mean, to be with people they like?
-{% endindent %}
+### formalizations are transparent specifications
+Formalizations define mathematically precise and well-defined functions that can serve as specifications for computer simulations. Yet, they can be communicated and understood without reliance on any code, as they specify the theory independently of implementational details.{% sidenote 'sn-id-whatever' 'See also Guest & Martin (2021) for the related notion of *open theory* and Cooper & Guest (2014) for the important distiction between specifications and implementations.'%}
 
-{% indent 0 %}
-**Verbal:**  Well, the question is what makes people like each other. Previous research suggests people like being with people who are similar to them; have a lot in common, such as hobbies, preferences, political beliefs, etc.
-{% endindent %}
+### formalizations make transparent predictions
+Unlike predictions 'derived' from verbal theories, formalizations allow predictions to be derived in a transparent and reproducible way. Predictions can be derived analytically (e.g., proof by example) or using simulations one can discover more intricate, and potentially counterintuitive, predictions.{% sidenote 'sn-id-whatever' 'See the [code and simulations]() created by *Formal*'%}
 
-{% indent 1 %}
-**Formal:** So similarity between people may drive how they form groups?
-{% endindent %}
+Other than these important lessons, the dialogues also illustrated how formalizing verbal theories is a *non-deterministic* and *open-ended* process: Each dialogue ended with one or more different candidate theoretical models, which are at best working hypotheses.
 
-{% indent 0 %}
-**Verbal:**  Indeed. Can we model this?
-{% endindent %}
+# Try Again
+Having read the chapter up to here, we recommend trying Exercise 4.4 again. Observe how you can get unstuck with the new knowledge and insights gained. Try to make at least two, and preferably more, variants of the computational level model.
 
-{% indent 1 %}
-**Formal:** It is easy to define a similary measure $$sim : P \times P \rightarrow \mathbb{R}$$ for every pair of persons in $$P$$. But how does it factor into the grouping process? Any intuitions?
-{% endindent %}
+# Further reading
 
-{% indent 0 %}
-**Verbal:** I think guests at a party tend to self-organize into subgroups with high ingroup similarity.
-{% endindent %}
+{% marginnote 'mn-id-whatever' '“Human rational behavior (...) is shaped by a scissors whose two blades are the structure of task environments and the computational capabilities of the actor.” – Herbert Simon (1990).' %}
 
-{% indent 1 %}
-**Formal:** By 'high' do you mean 'maximum average ingroup similarity', or  'satisfactory high levels of ingroup similarity'?
-{% endindent %}
+A key historical figure in the cognitive science of decision making is [Herbert Simon](https://www.nobelprize.org/prizes/economic-sciences/1978/simon/biographical/). He won the Nobel Prize in economics for his line of work started in the 1950s on *bounded rationality*: the idea that human rationality is to be understood as bounded by the computational limits of our minds. In the 1970s, Daniel Kahneman and Amos Tversky developed a program of *biases and heuristics* that demonstrated how limits of mind lead to systematic fallacies and judgment errors. From 1990s onwards, Gerd Gigerenzer and colleagues returned to the key ideas from Simon and developed a notion of *ecological rationality* that puts the ideas of 'biases and heuristics' in a more positive light, focusing less on human error and more on human smarts.
 
-{% indent 0 %}
-**Verbal:** Good question. Either could be the case. I honestly don't know.
-{% endindent %}
+For examples of formal modeling of subset choice in the literature, see Fishburn & LaValle (1996), Bossaerts, & Murawski (2017), and van Rooij, Stege, & Kadlec (2005). During your formalization exercises you may have noticed that subset choice models can face so-called combinatorial explosion, because the number of subsets grows exponentially as a function of the number of elements one can choose from. We will return to this issue in later chapters. For more information on this specific issue we also recommend the textbook [Cognition and Intractability](https://cognitionandintractability.com) by van Rooij, Blokpoel, Kwisthout & Wareham (2019).    
 
-{% indent 1 %}
-**Formal:** How about we formalize both ideas, and then test empirically which one accounts best for natural grouping behaviour?
-{% endindent %}
+### References
 
-{% indent 0 %}
-**Verbal:** Sounds good!
-{% endindent %}
+Simon, H. A. (1957). *Administrative Behavior*. New York, NY: Free Press.
 
-{% indent 1 %}
-**Formal:** Here you go.
-{% endindent %}
+Simon, H. A. (1990). [Invariants of human behavior](https://www.annualreviews.org/doi/abs/10.1146/annurev.ps.41.020190.000245). *Annual review of psychology, 41*(1), 1-20.
 
-{% fproblem Party subgrouping (version 1) %}
-A set of guests $$G$$ and a function $$sim: G \times G \rightarrow \mathbb{R}$$.;;
-A partition of $$G$$ into non-overlapping subsets $$G_1, G_2, ..., G_k$$ that maximizes average ingroup similarity:
-$$$\frac{1}{k}\sum_{i=1,2,\dots k}sim(G_i) $$$
+Tversky, A., & Kahneman, D. (1974). Judgment under uncertainty: Heuristics and biases. *Science, 185*(4157), 1124-1131.
 
-Where ingroup similarity for subset $$G_i$$ is defined as mean pair-wise similarity:
-$$$sim(G_i)=\frac{1}{|G_i|}\sum_{g_i, g_j \in G_i} sim(g_i, g_j)$$$
-{% endfproblem %}
+Kahneman, D., Slovic, S. P., Slovic, P., & Tversky, A. (Eds.). (1982). [Judgment under uncertainty: Heuristics and biases](). Cambridge university press.
 
-{% fproblem Party subgrouping (version 2) %}
-A set of guests $$G$$, a function $$sim: G \times G \rightarrow \mathbb{R}$$, and threshold of satisfactory similarity $$s \in \mathbb{R}$$.;;
-A partition of $$G$$ into non-overlapping subsets $$G_1, G_2, ..., G_k$$ where each partition has satisfactory ingroup similarity:
-$$$\forall_{i=1,2,\dots k}\left[sim(G_i) \geq s\right]$$$
+Gigerenzer, G. (1996). [On narrow norms and vague heuristics: A reply to Kahneman and Tversky](https://doi.org/10.1037/0033-295X.103.3.592). *Psychological Review, 103*(3), 592–596.
 
-Where ingroup similarity for subset $$G_i$$ is defined as mean pair-wise similarity:
-$$$sim(G_i)=\frac{1}{|G_i|}\sum_{g_i, g_j \in G_i} sim(g_i, g_j)$$$
-{% endfproblem %}
+Todd, P. M., & Gigerenzer, G. (2000). Précis of "Simple heuristics that make us smart". *Behavioral and Brain Sciences, 23*(5), 727-741.
 
-{% indent 0 %}
-**Verbal:** OK, I see how the two models formalize the intuitive idea of 'maximum ingroup similarity' and  'satisfactory ingroup similarity', thanks.
-{% endindent %}
+Guest, O., & Martin, A. E. (2021). [How computational modeling can force theory building in psychological science](https://journals.sagepub.com/doi/full/10.1177/1745691620970585). *Perspectives on Psychological Science*.
 
-{% indent 1 %}
-**Formal:** Be aware, there may be other possibilities! These two ways of formalizing were just two ways I came up with.
-{% endindent %}
+Cooper, R. P., & Guest, O. (2014). [Implementations are not specifications](https://www.sciencedirect.com/science/article/pii/S1389041713000314?casa_token=0Gn3_OBpKGkAAAAA:xtIOLXCj8XIUhzL7Tn7uJzhGgepPzRgOaW4UT5WMqW8nvjSIBE4_klHDPoh44AYadf_DHWDwYbM): Specification, replication and experimentation in computational cognitive modeling. *Cognitive Systems Research, 27*, 42-49.
 
-{% indent 0 %}
-**Verbal:** Understood. But for now I think they are good working hypotheses.
-{% endindent %}
+Fishburn, P. C., & LaValle, I. H. (1996). [Binary interactions and subset choice](https://www.sciencedirect.com/science/article/abs/pii/0377221795000739). *European journal of operational research, 92*(1), 182-192.
 
-{% indent 0 %}
-**Verbal:**  One last question. The models look very similar. How can I test which of them best explains patterns of group formation that I observe in my studies?
-{% endindent %}
+Bossaerts, P., & Murawski, C. (2017). [Computational complexity and human decision-making](https://www.sciencedirect.com/science/article/pii/S1364661317301936). *Trends in Cognitive Sciences, 21*(12), 917-929.
 
-{% indent 1 %}
-**Formal:**
-You can run simulations for these models for different parameter settings and compare the output to the subgroup formations you've observed in your empirical studies. I have created code for the simulations here https://computationalcognitivescience.github.io/socialpsychtutorial/. Check it out!
-{% endindent %}
+van Rooij, I., Stege, U., & Kadlec, H. (2005). [Sources of complexity in subset choice](https://www.sciencedirect.com/science/article/abs/pii/S0022249605000052). *Journal of Mathematical Psychology, 49*(2), 160-187.
+
+van Rooij, I., Blokpoel, M., Kwisthout, J. & Wareham, T. (2019). [Cognition and Intractability](https://cognitionandintractability.com). Cambridge University Press.  
