@@ -11,7 +11,7 @@ nav_exclude: true
 
 ## For whom is this book?
 
-Are you a student or researcher in cognitive science or psychology? Would you like to be able to make your own, formally precise, theoretical models? You have no or little prior training in theory or modeling? This book is a place to start!
+Are you a student or researcher in cognitive science{% sidenote 'mn-id-whatever' 'Here, *cognitive science* refers to the multidisciplinary study of mind and behaviour, incl. psychology, philosophy, computer science, artificial intelligence, neuroscience, linguistics, anthropology, and education.' %} or psychology?{% sidenote 'mn-id-whatever' 'Here, *psychology* refers to any subfield of psychological study of mind and behaviour, incl. cognitive, developmental, social, evolutionary, clinical, and cultural psychology.' %} Would you like to be able to make your own, formally precise, theoretical models? You have no or little prior training in theory or modeling? This book is a place to start!
 
 Or, perhaps, you do have experience with theory and modeling but want to expand your skill and tool sets; or alternatively, you are just curious to have a taste of theoretical modeling to see what it is like? Whatever your interests, you are welcome here!
 
@@ -21,9 +21,9 @@ To set the right expectations, it is useful to explicitly state what this book i
 
 So what *is* this book about?
 
-In this book you learn concepts and tools that you can use to make *your own* theoretical models in any domain of cognitive science or subfield of psychology of interest to you (barring some philosophical assumptions; which we'll get to soon), and to assess and situate existing theoretical models in the cognitive science and psychology literature.
+In this book you learn concepts and tools that you can use to make *your own* theoretical models in *any* domain of cognitive science or subfield of psychology of interest to you (barring some philosophical assumptions; which we'll get to soon), and to assess and situate existing theoretical models in the cognitive science and psychology literature.
 
-To this end, we will cover the conceptual foundations of computational explanation; mathematical concepts and notation; formalizing verbal theories; implementing and simulating theoretical models; and comparing models at different levels of explanation. We cover these points in Parts I - III using a small number of carefully selected examples. The main goal is to provide a playground and sandbox for practicing the basic conceptual and formal skills with a sufficiently diverse, but not too difficult, set of examples. The examples are constructed in ways that serve specific pedagogical aims. Once the basics are mastered, one can venture into the literature as suggested in our 'Further Reading' sections. Part IV ('Advanced topics') additionally provides examples of how the learned tools can be applied more widely and in less traditional ways.  
+To this end, we will cover the conceptual foundations of computational explanation; mathematical concepts and notation; formalizing verbal theories; implementing and simulating theoretical models; and comparing models at different levels of explanation. We cover these points in Parts I - III using a small number of carefully selected examples. The main goal is to provide a playground and sandbox for practicing the basic conceptual and formal skills with a sufficiently diverse, but not too difficult, set of examples. The examples are constructed in ways that serve specific pedagogical aims. Once the basics are mastered, one can venture into the literature as suggested in our 'Further Reading' sections. Part IV ('Advanced topics') additionally provides examples of how the learned tools can be applied more widely and in non-traditional ways.  
 
 ## Approach
 
@@ -73,4 +73,4 @@ Devezer, B., Navarro, D. J., Vandekerckhove, J, & Buzbas, E. O. (2020). The case
 
 Meehl, P. E. (1997). [The problem is epistemology, not statistics](http://meehl.umn.edu/sites/meehl.dl.umn.edu/files/169problemisepistemology.pdf). In Harlow, Mulaik, & Steiger (Eds.), What If There Were No Significance Tests? (pp. 393-425)
 
-van Rooij, I., & Blokpoel, M. (2020/in press). Formalizing verbal theories: A tutorial by dialogue. *Social Psychology*. [preprint](https://psyarxiv.com/r2zqy)
+van Rooij, I., & Blokpoel, M. (2020). [Formalizing verbal theories: A tutorial by dialogue](https://doi.org/10.1027/1864-9335/a000428). *Social Psychology, 51*(5), 285-298
