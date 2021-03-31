@@ -28,9 +28,9 @@ An example is choosing what career to pursue. For instance, would you rather be 
 
 {% marginnote 'mn-id-whatever' '“This is the essence of intuitive heuristics: when faced with a difficult question, we often answer an easier one instead, usually without noticing the substitution.” – Daniel Kahneman (2017).' %} To make our lives easier, in this chapter we focus on decision making under *certainty*. That is, we consider choice situations where options are well-defined and the value of options is certain. As we will see, this is usually merely a convenient fiction. But it makes learning to model easier, and allows us to postpone the use of probability theory to the Advanced sections.
 
-We will not review existing theoretical models of decision making. Instead, we'll be throwing you into the deep waters: We will present you with a capacity to explain and will invite you to articulate a verbal theory and try to formalize these ideas. You may think you are unable to and that you first need to learn how others made models. But trust us. You can do it! The goal is specifically not to mimic existing models of decision making, but rather to develop your own. The purpose is to practice using the theoretician's tools. Think of this and the next chapters as your sandbox for sculpting some sandcastles for fun, and to train your sculpting skills.
+We will not review existing theoretical models of decision making. Instead, we'll be throwing you into the deep waters: We will present you with a capacity to explain and invite you to articulate a verbal theory and try to formalize these ideas. You may think you are unable to and that you first need to learn how others made models. But trust us. You can do it! The goal is specifically not to mimic existing models of decision making, but rather to develop your own. The purpose is to practice using the theoretician's tools. Think of this and the next chapters as your sandbox for sculpting some sandcastles for fun, and to train your sculpting skills.
 
-{% marginfigure 'mf-id-whatever' '/assets/img/vitrine.png' 'So many flavours! How do we choose a subset?' %} The example decision making capacity that we will use for our practices is called *subset choice*. This is the capacity for chosing a *subset* of options from a larger set. Take for example choosing Italian ice cream. The set of options is the full set of flavours displayed in the vitrine. Depending on your budget and appetite you may choose one, two, three, or---if you are *really* hungry---more scoops. For instance, you may choose strawberry, lemon, and mango. Or, alternatively, you may choose chocolate and hazelnut.
+{% marginfigure 'mf-id-whatever' '/assets/img/vitrine.png' 'So many flavours! How do we choose a subset?' %} The example decision making capacity that we will use for our practices is called *subset choice*. This is the capacity for chosing a *subset* of options from a larger set. Take for example choosing Italian ice cream. The set of options is the full set of flavours displayed in the vitrine. Depending on your budget and appetite you may choose one, two, three, or---if you are *really* craving---more scoops. For instance, you may choose strawberry, lemon, and mango. Or, alternatively, you may choose chocolate and hazelnut.
 
 {% question %}
 Can you think of more everyday situations where the choice options are subsets of available options?
@@ -100,17 +100,17 @@ Think about how you want to approach this exercise. You can, for instance, look 
 
 
 {% stopandthink %}
-It is important that you perform the exercise in Question 4.4 before continuing in this chapter. You will likely get stuck somewhere. This is part of the learning experience. One can only learn to model by trying, just like one only can learn to ride a bicycle by trying, sometimes losing balance, but slowly refining the skill in the process. Write down for yourself where you get stuck and why.
+It is important that you perform the exercise in Question 4.4 before continuing in this chapter. You will likely get stuck somewhere. This is part of the learning experience. One can only learn to model by trying, just like one can only learn to ride a bicycle by trying, failing, and trying again. Write down for yourself where you get stuck and why.
 {% endstopandthink %}
 
 After you have tried to answer Question 4.4 to the best of your abilities, you can continue with the next section.
 
 # A tutorial by dialogue
 {% marginfigure 'mf-id-whatever' '/assets/img/party.jpg' 'How to decide whom to invite to your party?' %}
-
-In this section we illustrate theoretical modeling by dialogues between the two fictive characters, *Verbal* and *Formal*. We use as subset choice situation how a host invites people to a party. We present multiple dialogues. *Verbal*'s intuitions and *Formal*'s questions vary from dialogue to dialogue, and hence the developed theoretical models differ as well. These dialogues also appeared previously in a tutorial in the journal [*Social Psychology*](https://econtent.hogrefe.com/doi/pdf/10.1027/1864-9335/a000428).
+In this section we illustrate theoretical modeling by dialogues between the two fictive characters, *Verbal* and *Formal*.{% sidenote 'mf-id-whatever' 'These dialogues are adapted from [van Rooij & Blokpoel (2020)](https://econtent.hogrefe.com/doi/10.1027/1864-9335/a000428).' %} We use as subset choice situation how a host invites people to a party. We present multiple dialogues. *Verbal*'s intuitions and *Formal*'s questions vary from dialogue to dialogue, and hence the developed theoretical models differ as well.
 
 ## Dialogue 1: Formalizing inviting guests
+
 {% indent 0 %}
 **Verbal:** I'd like to explain how a host decides whom to invite to a party.  
 {% endindent %}
@@ -323,7 +323,7 @@ then hosts tend to invite $$\{ C, D, E, F, G \}$$.
 
 {% fproblem Selecting invitees (version 4) %}
 A set $$P$$, subsets $$L \subseteq P$$ and $$D \subseteq P$$ with $$L \cap D = \emptyset$$ and $$L \cup D = P$$, a function $$like: P \times P \rightarrow \{true, false\}$$, and a threshold value $$k$$.;;
-$$G \subseteq P$$ such that $$|G\cap D| \leq k$$ and $$|X| + |G|$$ is maximized (where $$X = \{p_i,p_j \in G~|~like(p_i,p_j) = true \wedge i\neq j \}$$).
+$$G \subseteq P$$ such that $$|G\cap D| \leq k$$ and $$|X| + |G|$$ is maximized (where $$X = \{p_i,p_j \in G~|~like(p_i,p_j) = true \wedge i\neq j\}$$).
 {% endfproblem %}
 
 {% fproblem Selecting invitees (version 5) %}
@@ -341,7 +341,7 @@ $$G \subseteq P$$ such that $$|Y| \leq k$$ and  $$|G\cap L|+|G|$$ is maximized (
 {% endindent %}
 
 
-We end Dialogue 1 here. At this juncture you can either go online and check out the code that *Formal* made for *Verbal* and run some simulations of your own; or, alternatively, you can continue with reading Dialogue 2.
+We end Dialogue 1 here. At this juncture you can either go [here]() and check out the code that *Formal* made for *Verbal* and run some simulations of your own; or, alternatively, you can continue with reading Dialogue 2.
 
 ## Dialogue 2: Formalizing inviting guests, again
 
@@ -576,7 +576,7 @@ It makes invisible holes and inconsistencies and hidden assumptions in a verbal 
 Formalizations define mathematically precise and well-defined functions that can serve as specifications for computer simulations. Yet, they can be communicated and understood without reliance on any code, as they specify the theory independently of implementational details.{% sidenote 'sn-id-whatever' 'See also Guest & Martin (2021) for the related notion of *open theory* and Cooper & Guest (2014) for the important distiction between specifications and implementations.'%}
 
 ### formalizations make transparent predictions
-Unlike predictions 'derived' from verbal theories, formalizations allow predictions to be derived in a transparent and reproducible way. Predictions can be derived analytically (e.g., proof by example) or using simulations one can discover more intricate, and potentially counterintuitive, predictions.{% sidenote 'sn-id-whatever' 'See the [code and simulations]() created by *Formal*'%}
+Unlike predictions 'derived' from verbal theories, formalizations allow predictions to be derived in a transparent and reproducible way. Predictions can be derived analytically (e.g., proof by example) or using simulations one can discover more intricate, and potentially counterintuitive, predictions.{% sidenote 'sn-id-whatever' 'See the [code and simulations]() created by *Formal*.'%}
 
 Other than these important lessons, the dialogues also illustrated how formalizing verbal theories is a *non-deterministic* and *open-ended* process: Each dialogue ended with one or more different candidate theoretical models, which are at best working hypotheses.
 
@@ -589,7 +589,7 @@ Having read the chapter up to here, we recommend trying Exercise 4.4 again. Obse
 
 A key historical figure in the cognitive science of decision making is [Herbert Simon](https://www.nobelprize.org/prizes/economic-sciences/1978/simon/biographical/). He won the Nobel Prize in economics for his line of work started in the 1950s on *bounded rationality*: the idea that human rationality is to be understood as bounded by the computational limits of our minds. In the 1970s, Daniel Kahneman and Amos Tversky developed a program of *biases and heuristics* that demonstrated how limits of mind lead to systematic fallacies and judgment errors. From 1990s onwards, Gerd Gigerenzer and colleagues returned to the key ideas from Simon and developed a notion of *ecological rationality* that puts the ideas of 'biases and heuristics' in a more positive light, focusing less on human error and more on human smarts.
 
-For examples of formal modeling of subset choice in the literature, see Fishburn & LaValle (1996), Bossaerts, & Murawski (2017), and van Rooij, Stege, & Kadlec (2005). During your formalization exercises you may have noticed that subset choice models can face so-called combinatorial explosion, because the number of subsets grows exponentially as a function of the number of elements one can choose from. We will return to this issue in later chapters. For more information on this specific issue we also recommend the textbook [Cognition and Intractability](https://cognitionandintractability.com) by van Rooij, Blokpoel, Kwisthout & Wareham (2019).    
+For examples of formal modeling of subset choice in the literature, see Fishburn & LaValle (1996), van Rooij, Stege, & Kadlec (2005), and Bossaerts, & Murawski (2017). During your formalization exercises you may have noticed that subset choice models can face so-called combinatorial explosion, because the number of subsets grows exponentially as a function of the number of elements one can choose from. We will return to this issue in later chapters. For more information on this issue we also recommend the textbook [Cognition and Intractability](https://cognitionandintractability.com), in particular [Chapter 1](https://www.cambridge.org/core/books/cognition-and-intractability/introduction/2FBB76A42417F33C409A2EAD17C15046) which is open access.    
 
 ### References
 
