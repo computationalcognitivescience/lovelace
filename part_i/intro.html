@@ -56,7 +56,7 @@
     <nav class="group">
 	<div class="nav-wrapper">
 	<div class="nav-left">
-	<a href="/lovelace/"><img class="badge" src="/lovelace/assets/img/badge_1.png" alt="CH"></a>
+	<a href="/lovelace/"><img class="badge" src="/lovelace/assets/img/cover.png" alt="CH"></a>
 	</div>
 	<div class="nav-right">
 	
@@ -88,13 +88,19 @@
   	
 		
 		    
-		      <a href="/lovelace/content/part3">III - Levels</a>
+		      <a href="/lovelace/content/part3">III - Simulating</a>
 		    
 	    
   	
 		
 		    
-		      <a href="/lovelace/content/part4">IV - Advanced</a>
+		      <a href="/lovelace/content/part4">IV - Reflecting</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part5">V - Advanced</a>
 		    
 	    
   	
@@ -112,6 +118,7 @@
 	</div>
 	</nav>
 </header>
+
     <article class="group">
       
 <h1>Chapter 1 - Introduction</h1>
@@ -122,7 +129,7 @@
 
 <h2 id="for-whom-is-this-book">For whom is this book?</h2>
 
-<p>Are you a student or researcher in cognitive science or psychology? Would you like to be able to make your own, formally precise, theoretical models? You have no or little prior training in theory or modeling? This book is a place to start!</p>
+<p>Are you a student or researcher in cognitive science<label for="mn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="mn-id-whatever" class="margin-toggle" /><span class="sidenote">Here, <em>cognitive science</em> refers to the multidisciplinary study of mind and behaviour, incl. psychology, philosophy, computer science, artificial intelligence, neuroscience, linguistics, anthropology, and education. </span> or psychology?<label for="mn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="mn-id-whatever" class="margin-toggle" /><span class="sidenote">Here, <em>psychology</em> refers to any subfield of psychological study of mind and behaviour, incl. cognitive, developmental, social, evolutionary, clinical, and cultural psychology. </span> Would you like to be able to make your own, formally precise, theoretical models? You have no or little prior training in theory or modeling? This book is a place to start!</p>
 
 <p>Or, perhaps, you do have experience with theory and modeling but want to expand your skill and tool sets; or alternatively, you are just curious to have a taste of theoretical modeling to see what it is like? Whatever your interests, you are welcome here!</p>
 
@@ -132,9 +139,9 @@
 
 <p>So what <em>is</em> this book about?</p>
 
-<p>In this book you learn concepts and tools that you can use to make <em>your own</em> theoretical models in any domain of cognitive science or subfield of psychology of interest to you (barring some philosophical assumptions; which we’ll get to soon), and to assess and situate existing theoretical models in the cognitive science and psychology literature.</p>
+<p>In this book you learn concepts and tools that you can use to make <em>your own</em> theoretical models in <em>any</em> domain of cognitive science or subfield of psychology of interest to you (barring some philosophical assumptions; which we’ll get to soon), and to assess and situate existing theoretical models in the cognitive science and psychology literature.</p>
 
-<p>To this end, we will cover the conceptual foundations of computational explanation; mathematical concepts and notation; formalizing verbal theories; implementing and simulating theoretical models; and comparing models at different levels of explanation. We cover these points in Parts I - III using a small number of carefully selected examples. The main goal is to provide a playground and sandbox for practicing the basic conceptual and formal skills with a sufficiently diverse, but not too difficult, set of examples. The examples are constructed in ways that serve specific pedagogical aims. Once the basics are mastered, one can venture into the literature as suggested in our ‘Further Reading’ sections. Part IV (‘Advanced topics’) additionally provides examples of how the learned tools can be applied more widely and in less traditional ways.</p>
+<p>To this end, we will cover the conceptual foundations of computational explanation; mathematical concepts and notation; formalizing verbal theories; implementing and simulating theoretical models; and comparing models at different levels of explanation. We cover these points in Parts I - III using a small number of carefully selected examples. The main goal is to provide a playground and sandbox for practicing the basic conceptual and formal skills with a sufficiently diverse, but not too difficult, set of examples. The examples are constructed in ways that serve specific pedagogical aims. Once the basics are mastered, one can venture into the literature as suggested in our ‘Further Reading’ sections. Part IV (‘Advanced topics’) additionally provides examples of how the learned tools can be applied more widely and in non-traditional ways.</p>
 
 <h2 id="approach">Approach</h2>
 
@@ -159,8 +166,9 @@
 
 <h2 id="scala">Scala</h2>
 
-<p>The computer simulations in this book are written using functional programming in Scala.
-This choice is deliberate. Functional programming makes interpreting the
+<p>The computer simulations in this book are written using functional programming in Scala.</p>
+
+<p>This choice is deliberate. Functional programming makes interpreting the
 semantics of the code transparent, making it easy to understand the relationship
 between formalized theory and simulation. We provide an accessible
 introduction to basic functional programming in Scala.</p>
@@ -181,7 +189,7 @@ introduction to basic functional programming in Scala.</p>
 
 <p>Meehl, P. E. (1997). <a href="http://meehl.umn.edu/sites/meehl.dl.umn.edu/files/169problemisepistemology.pdf">The problem is epistemology, not statistics</a>. In Harlow, Mulaik, &amp; Steiger (Eds.), What If There Were No Significance Tests? (pp. 393-425)</p>
 
-<p>van Rooij, I., &amp; Blokpoel, M. (2020/in press). Formalizing verbal theories: A tutorial by dialogue. <em>Social Psychology</em>. <a href="https://psyarxiv.com/r2zqy">preprint</a></p>
+<p>van Rooij, I., &amp; Blokpoel, M. (2020). <a href="https://doi.org/10.1027/1864-9335/a000428">Formalizing verbal theories: A tutorial by dialogue</a>. <em>Social Psychology, 51</em>(5), 285-298</p>
 
 
 <div class="nav-wrapper">
@@ -196,7 +204,7 @@ introduction to basic functional programming in Scala.</p>
 </div>
 
     </article>
-    <span class="print-footer">Introduction - October 25, 2020 - Mark Blokpoel and Iris van Rooij</span>
+    <span class="print-footer">Introduction - April 7, 2021 - Mark Blokpoel and Iris van Rooij</span>
     <footer>
   <hr class="slender">
   <ul class="footer-links">
@@ -251,7 +259,7 @@ introduction to basic functional programming in Scala.</p>
       
   </ul>
 <div class="credits">
-<span>&copy; 2020 &nbsp;&nbsp;MARK BLOKPOEL AND IRIS VAN ROOIJ</span></br> <br>
+<span>&copy; 2021 &nbsp;&nbsp;MARK BLOKPOEL AND IRIS VAN ROOIJ</span></br> <br>
 <span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
 </div>  
 </footer>

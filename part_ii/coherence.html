@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Coherence</title>
-  <meta name="description" content="">
+  <meta name="description" content="⊕“But what is coherence? Given a large number of elements (propositions, concepts, or whatever) that are coherent or incoherent with each other in various wa...">
 
   <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
   
@@ -56,7 +56,7 @@
     <nav class="group">
 	<div class="nav-wrapper">
 	<div class="nav-left">
-	<a href="/lovelace/"><img class="badge" src="/lovelace/assets/img/badge_1.png" alt="CH"></a>
+	<a href="/lovelace/"><img class="badge" src="/lovelace/assets/img/cover.png" alt="CH"></a>
 	</div>
 	<div class="nav-right">
 	
@@ -88,13 +88,19 @@
   	
 		
 		    
-		      <a href="/lovelace/content/part3">III - Levels</a>
+		      <a href="/lovelace/content/part3">III - Simulating</a>
 		    
 	    
   	
 		
 		    
-		      <a href="/lovelace/content/part4">IV - Advanced</a>
+		      <a href="/lovelace/content/part4">IV - Reflecting</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part5">V - Advanced</a>
 		    
 	    
   	
@@ -112,12 +118,109 @@
 	</div>
 	</nav>
 </header>
+
     <article class="group">
       
 <h1>Chapter 5 - Coherence</h1>
 
 
+<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace//assets/img/coherence_network.jpg" /><br />“But what is coherence? Given a large number of elements (propositions, concepts, or whatever) that are coherent or incoherent with each other in various ways, how can we accept some of these elements and reject others in a way that maximizes coherence? How can coherence be computed?” – Thagard &amp; Verbeurgt (1998)</span> In the previous chapter you practiced making a formal computational-level model of <em>subset choice</em>. In this chapter we study a computational-level model of <em>coherence</em> developed by cognitive scientists and published in the journal <a href="https://www.sciencedirect.com/science/article/pii/S0364021399800330"><em>Cognitive Science</em></a>. The pedagogical goal is to see how these scientists motivated their modeling decisions, what properties their formalization has, what limitations it has, and how it may be revised or expanded.</p>
 
+<p>We have selected this particular model for our purposes because it combines simplicity with wide applicability. It also allows us to illustrate how mathematical proofs can be used to derive model properties.</p>
+
+<h1 id="coherence-as-constraint-satisfaction">Coherence as constraint satisfaction</h1>
+
+<p>In 1998, computational philosopher Paul Thagard and computer scientist Karsten Verbeurgt proposed a model of a wide range of phenomena that can all be seen as falling under a single banner: ‘maximizing coherence’.</p>
+
+<div class="epigraph"><blockquote><p>When we make sense of a text, a picture, a person, or an event, we need to construct an interpretation that fits with the available information better than alternative interpretations. The best interpretation is one that provides the most coherent account of what we want to understand, considering both pieces of information that fit with each other and pieces of information that do not fit with each other. For example, when we meet unusual people, we may consider different combinations of concepts and hypotheses that fit together to make sense of their behavior.</p><footer>Thagard &amp; Verbeurgt, <cite>1998</cite></footer></blockquote></div>
+
+<p>Thagard and Verbeurgt wanted to explain this capacity for sense making computationally. Intuitively, they saw the computational-level problem as follows:</p>
+
+<p><span class="problemtitle">Coherence (informal)</span><br /><span class="probleminout">Input:</span> Networks of interconnected elements<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote"><em>Elements</em> can be any type of mental representations (concepts, propositions, hypotheses, images, goals, actions, plans, etc.). </span>, where connections in the network represent coherence and incoherence relations between pairs of elements.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote"><em>Coherence</em> relations include explanation, implication, positive association. <em>Incoherence</em> relations include inconsistency, incompatibility, and negative association. </span><br /><span class="probleminout">Output:</span> 
+Accept and reject elements in a way that is maximally coherent.</p>
+
+<p>Inspired by the notion of <em>constraint satisfaction</em> studied in computer science, the scientists formalized coherence and incoherence relations as positive and negative constraints, respectively. These constraints have well-defined satisfaction conditions: A <em>positive</em> constraint \((a,b) \in C^+\) is <em>satisfied</em> if and only if the elements \(a\) and \(b\) are both rejected or both accepted. A <em>negative</em> constraint \((a,b) \in C^-\) is <em>satisfied</em> if and only if the element \(a\) is accepted and \(b\) is rejected, or conversely, element \(b\) is accepted and \(a\) is rejected.</p>
+
+<p>Using these definitions, the problem of maximizing coherence can be made a bit more formal, as follows:</p>
+
+<p><span class="problemtitle">Coherence (pre-formal)</span><br /><span class="probleminout">Input:</span> A network of elements, with pairs of elements connected by positive or negative constraints.<br /><span class="probleminout">Output:</span> 
+A partition of the set of elements into sets \(A\) (accepted) and \(R\) (rejected) elements such that the number of satisfied constraints is maximized.</p>
+
+<p>Using mathematical notation from the section on <em>graph theory</em> in Chapter 3, we can make this more precise and explicit:<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">We deviate a bit from the notation used by the original authors and make the link to graph theory transparent. </span></p>
+
+<p><span class="problemtitle">Coherence (formal, version 1)</span><br /><span class="probleminout">Input:</span> A graph \(G = (V, E)\) with vertex set \(V\) and edge set \(E \subseteq V \times V\) that partitions into positive constraints \(C^+\) and negative constraints \(C^-\) (i.e., \(C^+ \cup C^- = E\) and \(C^+ \cap C^- = \emptyset\)).
+<br /><span class="probleminout">Output:</span> 
+A partition of the vertices \(V\) into sets \(A\) and \(R\) such that \(Coh(A,R)=\) \(|\{(u,v)~|~(u,v) \in C^+,\) \(u,v \in A\) \(\text{ OR }\) \(u,v \in R \}|\) \(+\) \(|\{(u,v)~|~(u,v) \in C^{-},\) \(u \in A, v \in R\) \(\text{ OR }\) \(v \in A, u \in R \}|\) is maximum.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">\(Coh(A,R)\) is said to be <em>maximum</em> if there exists no alternative partition \(X,Y\) with \(Coh(X,Y) &gt;\) \(Coh(A,R)\). </span></p>
+
+<p>The following figure illustrates the idea.</p>
+
+<figure><img src="/lovelace/assets/img/coherence_capital_example.png" /><figcaption class="maincolumn-figure">An instance of the <span style="font-variant:small-caps;">Coherence</span>  problem, with vertex set \(V = \{a, b, c, d, e, f, g, h, i \}.\)<em>Solid lines</em> indicate positive constraints \(C^+\), and <em>dotted lines</em> indicate negative constraints \(C^-\). Note how it is not possible to satisfy all constraints by a partition of \(V\) into \(A\) and \(R\). But it is still possible to satisfy a <em>maximum</em> of constraints.</figcaption></figure>
+
+<div class="question" id="question-1"><p><em>Question 5.1:</em> What is a maximum coherence partition for the input of <span style="font-variant:small-caps;">Coherence</span>  depicted above?
+<div class="answer" id="question-1-heading-1"><p><a onclick="document.getElementById('question-1-answer-1').style.display = document.getElementById('question-1-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-1-answer-1" style="display: none;"><p>Consider the partition $$A = \{ a, d, f, i \}, R = \{ b, c, e, g, h\}$$ How many constraints are satisfied by that partition? Can you find a partition that satisfies more constraints?</p></div></div></p></div>
+
+<p>Lastly, we introduce <em>weights</em> on the constraints in the model. This captures Thagard and Verbeurgt’s intuition that some pairs of elements can cohere and incohere more strongly than others:</p>
+
+<p><span class="problemtitle">Coherence (formal, version 2)</span><br /><span class="probleminout">Input:</span> A graph \(G = (V, E)\), where \(E = C^+ \cup C^-\) (\(C^+ \cap C^- = \emptyset\)), and a weight \(w(u,v) \in \mathbb{N}\) for each edge \((u,v) \in E\).
+<br /><span class="probleminout">Output:</span> 
+A partition of the vertices \(V\) into sets \(A\) and \(R\) such that \(Coh(A,R)= \sum_{(u,v) \in C^+, u,v \in A \text{ OR } u,v \in R} w(u,v) + \sum_{(u,v) \in C^{-}, u \in A, v \in R \text{ OR } v \in A, u \in R } w(u,v)\) is maximum.</p>
+
+<figure><img src="/lovelace/assets/img/coherence_capital_weighted.png" /><figcaption class="maincolumn-figure">An input for version 2 of <span style="font-variant:small-caps;">Coherence</span>. The thickness of the lines represents the weights.</figcaption></figure>
+
+<h1 id="equivalence">Equivalence</h1>
+
+<p>With version 2 of <span style="font-variant:small-caps;">Coherence</span> we presented <em>one</em> possible formal way of expressing Thagard and Verbeurgt’s ideas. We could have picked a different mathematical way of expressing the same ideas. For instance, instead of speaking of an accepted set and rejected set, we could define a function \(T\) that assigns to every vertex a truth value, i.e., \(T: V \rightarrow \{\top, \bot \}\).<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">Recall from Chapter 3 that \(\top\) can be read as <em>true</em> and \(\bot\) can be read as <em>false</em>. </span>  We could then express the model as follows:</p>
+
+<p><span class="problemtitle">Coherence (formal, version 3)</span><br /><span class="probleminout">Input:</span> A graph \(G = (V, E)\), with a weight \(w(u,v) \in \mathbb{N}\) for each edge \((u,v) \in E = C^+ \cup C^- \subseteq V \times V\) (where \(C^+ \cap C^- = \emptyset\)).<br /><span class="probleminout">Output:</span> 
+A truth assignment \(T: V \rightarrow \{\top, \bot \}\) such that \(Coh(T)= \sum_{T(u) = T(v)} w(u,v) + \sum_{T(u) \neq T(v)} w(u,v)\) is maximum.</p>
+
+<div class="question" id="question-2"><p><em>Question 5.2:</em> Are versions 2 and 3 of <span style="font-variant:small-caps;">Coherence</span> the same or different computational-level models?
+<div class="answer" id="question-2-heading-1"><p><a onclick="document.getElementById('question-2-answer-1').style.display = document.getElementById('question-2-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-2-answer-1" style="display: none;"><p>While the models look different on the surface the input-output mappings are equivalent. Try to prove the equivalence. That is, assume that $$A = \top$$ and $$R = \bot$$ and convince yourself (or someone else) that there is no input for which the two models produce different outputs.</p></div></div></p></div>
+
+<p>Answering <em>Question 5.1</em> may have been easy enough. Once you recognize that a partition into sets \(A\) and \(R\) can be conceptualized as a truth assignment with \(A = \top\) and \(R = \bot\), and you notice that then \(T(v)=T(u)\) means the same as \(u,v \in A \text{ OR } u,v \in R\), and so on, the equivalence between the two versions becomes apparent.</p>
+
+<p>Now, consider the following computational-level model inspired by the connectionist modeling tradition, and answer <em>Question 5.2</em>:</p>
+
+<p><span class="problemtitle">Harmony Maximization</span><br /><span class="probleminout">Input:</span> A Hopfiel network \(G = (V, E)\), with a weight \(w(u,v) \in \mathbb{Z}\) for each edge \((u,v) \in E = V \times V\) (i.e., the network is fully connected).<br /><span class="probleminout">Output:</span> 
+An activation pattern \(a: V \rightarrow \{-1,1 \}\) such that \(H(a) = \sum_{u,v \in V} a(u)a(v)w(u,v)\) is maximum.</p>
+
+<div class="question" id="question-3"><p><em>Question 5.3:</em> Is <span style="font-variant:small-caps;">Harmony Maximization</span> the same or a different computational-level model as versions 2 and 3 of <span style="font-variant:small-caps;">Coherence</span>?
+<div class="answer" id="question-3-heading-1"><p><a onclick="document.getElementById('question-3-answer-1').style.display = document.getElementById('question-3-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-3-answer-1" style="display: none;"><p>While the models look quite different on the surface the input-output mappings are, again, equivalent. Try to prove the equivalence. That is, assume that $$\top = 1$$ and $$\bot = -1$$ and convince yourself (or someone else) that there is no input for which the two models produce different outputs. Tip: calculate $$\sum_{u,v \in V} a(u)a(v)w(u,v)$$ for a few possible inputs and activations patterns. And compare this to $$\sum_{T(u) = T(v)} w(u,v) + \sum_{T(u) \neq T(v)} w(u,v)$$ for corresponding input and truth assigments. What do you notice?</p></div></div></p></div>
+
+<h3 id="lessons">Lessons</h3>
+
+<p>The exercises illustrate a few lessons. Models that look very different may not be different at all. Before considering models as explanatory competitors, it is good practice to first verify that they are not equivalent. The answer to <em>Question 5.2</em> shows that even models from very different modeling traditions (e.g., symbolic versus connectionist)<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">See e.g. <a href="https://www.sciencedirect.com/science/article/abs/pii/0010027788900315?dgcid=api_sd_search-api-endpoint">Fodor &amp; Pylyshyn (1988)</a>. </span> can be equivalent at the computational level of explanation.</p>
+
+<h1 id="properties">Properties</h1>
+
+<p>Let’s see if we can prove some properties of <span style="font-variant:small-caps;">Coherence</span>.</p>
+
+<h2 id="symmetry-property">Symmetry property</h2>
+
+<p><span style="font-variant:small-caps;">Coherence</span> has the property that \(Coh(A,R) = Coh(R,A)\) (or, equivalently, \(Coh(T) = Coh(\neg T)\)). We call this the <em>symmetry property</em>.</p>
+
+<div class="question" id="question-4"><p><em>Question 5.4:</em> Prove that the symmetry property holds for <span style="font-variant:small-caps;">Coherence</span>.
+<div class="answer" id="question-4-heading-1"><p><a onclick="document.getElementById('question-4-answer-1').style.display = document.getElementById('question-4-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-4-answer-1" style="display: none;"><p>Carefully look at the definitions of versions 1, 2 and 3 of <span style="font-variant:small-caps;">Coherence</span>.</p></div></div></p></div>
+
+<p>The symmetry property seems cognitively implausible when explaining how people decide what to believe as true or false (a capacity known as <em>belief fixation</em>). To see why, consider that the model predicts the following: If you would mentally <em>flip</em> all your beliefs—such that what you currently believe to be true<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">e.g., the belief that Amsterdam is the capital of The Netherlands. </span> you will from then on believe to be false and what you currently believe to be false<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">e.g., the belief that the Moon is made of cheese. </span> you will from then on believe to be true—your new mental state will still be equally (maximally) coherent. This seems wrong!</p>
+
+<p>If the symmetry property would really hold for our mental states then we would never have stable beliefs. We’d go through life flip-flopping our thoughts without anything forcing us to stabilise our beliefs. There would also be no relationship between our beliefs and the world (e.g., believing that the Moon is made of cheese would make perfect sense to all of us).</p>
+
+<p>Judging from experience, it is unlikely that our minds operate this way. More likely, the model needs adjusting.</p>
+
+<h2 id="data-priority-principle">Data priority principle</h2>
+
+<h2 id="np-hard">NP-hard</h2>
+
+<h2 id="scope">Scope</h2>
+
+<h1 id="computing-coherence">Computing coherence</h1>
+
+<p>Thagard and Verbeurgt also pursued possible algorithmic-level explanation of how humans may compute coherence. We summarize here three of the five algorithms that they considered.</p>
+
+<h1 id="further-reading">Further reading</h1>
+
+<h3 id="references">References</h3>
 
 
 <div class="nav-wrapper">
@@ -134,7 +237,7 @@
 </div>
 
     </article>
-    <span class="print-footer">Coherence - October 25, 2020 - Mark Blokpoel and Iris van Rooij</span>
+    <span class="print-footer">Coherence - April 7, 2021 - Mark Blokpoel and Iris van Rooij</span>
     <footer>
   <hr class="slender">
   <ul class="footer-links">
@@ -189,7 +292,7 @@
       
   </ul>
 <div class="credits">
-<span>&copy; 2020 &nbsp;&nbsp;MARK BLOKPOEL AND IRIS VAN ROOIJ</span></br> <br>
+<span>&copy; 2021 &nbsp;&nbsp;MARK BLOKPOEL AND IRIS VAN ROOIJ</span></br> <br>
 <span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
 </div>  
 </footer>

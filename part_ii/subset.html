@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Subset choice</title>
-  <meta name="description" content="⊕So many possibilities! How do we choose one?.We start our first adventure in theoretical modeling in the cognitive domain of decision-making. Decision makin...">
+  <meta name="description" content="⊕So many possibilities! How do we choose one? We start our first adventure in theoretical modeling in the cognitive domain of decision-making. Decision makin...">
 
   <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
   
@@ -56,7 +56,7 @@
     <nav class="group">
 	<div class="nav-wrapper">
 	<div class="nav-left">
-	<a href="/lovelace/"><img class="badge" src="/lovelace/assets/img/badge_1.png" alt="CH"></a>
+	<a href="/lovelace/"><img class="badge" src="/lovelace/assets/img/cover.png" alt="CH"></a>
 	</div>
 	<div class="nav-right">
 	
@@ -88,13 +88,19 @@
   	
 		
 		    
-		      <a href="/lovelace/content/part3">III - Levels</a>
+		      <a href="/lovelace/content/part3">III - Simulating</a>
 		    
 	    
   	
 		
 		    
-		      <a href="/lovelace/content/part4">IV - Advanced</a>
+		      <a href="/lovelace/content/part4">IV - Reflecting</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part5">V - Advanced</a>
 		    
 	    
   	
@@ -112,30 +118,545 @@
 	</div>
 	</nav>
 </header>
+
     <article class="group">
       
 <h1>Chapter 4 - Subset choice</h1>
 
 
-<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace//assets/img/choiceoptions.jpg" /><br />So many possibilities! How do we choose one?</span>.</p>
+<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace//assets/img/choiceoptions.jpg" /><br />So many possibilities! How do we choose one?</span> We start our first adventure in theoretical modeling in the cognitive domain of <em>decision-making</em>. Decision making is the capacity for choosing one or more options from a given set of options. This can range from mundane decisions (e.g., choosing ice cream flavours or what movie to watch) to highly specialized decisions (e.g., deciding what medicine to prescribe as a doctor or what experiments to perform as a scientist). There is a long tradition of cognitive and psychological research on this topic, with roots in behavioural economics in the 1950s and onwards (see the Further Reading section for some pointers).</p>
 
-<p>We start our first adventure in theoretical modeling in the cognitive domain of <em>decision-making</em>. Decision making is the capacity for choosing one or more options from a given set of options. This can range from mundane decisions (e.g., choosing ice cream flavours or what movie to watch) to highly specialized decisions (e.g., deciding what medicine to prescribe as a doctor or what experiments to perform as a scientist). There is a long tradition of cognitive and psychological research on this topic, with roots in the behavioural economics developed in the 1950s and onwards (see the Further Reading section for some pointers).</p>
+<p>A classic distinction in the literature on decision-making is between deciding under <em>certainty</em>, <em>risk</em>, or <em>uncertainty</em>. When probabilities of different outcomes for choice options are known we say the decision is made under <em>risk</em>.</p>
 
-<p>As explained in the Introduction, our goal here will not to be retrace tradition or to review existing theoretical models. Instead, we’ll be throwing you into the deep waters: We will present you with (more or less fictive) verbal theories in this domain, and you will formalise them. You may think you are unable to and that you first need to learn how others made models. But trust us. You can! The goal is specifically not to mimic (what you think) existing models of decision making (look like), but rather to develop your own. Remember, the purpose is not to be ‘right’ but rather to practice using the theoretician’s tools.</p>
+<div class="question" id="question-1"><p><em>Question 4.1:</em> What could be an example of decision-making under risk?
+<div class="answer" id="question-1-heading-1"><p><a onclick="document.getElementById('question-1-answer-1').style.display = document.getElementById('question-1-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-1-answer-1" style="display: none;"><p>An example is deciding between lotteries. Imagine two lotteries. In lottery A you win 100 euros with probability 0.25 and lose 10 euro with probability 0.75, and in lottery B you win 500 euros with probability 0.20 and lose 20 euro with probability 0.80. Which lottery would you choose to participate in?</p></div></div></p></div>
 
-<p>For instance, when one arrives at a crossroad, one can choose to turn left or right or drive on straight. Which direction you choose may depend on where you are going, but also on the time of day (as you anticipate traffic jams) and how much in a rush you are (perhaps you want to drive the scenic route by the ocean).</p>
+<p>When exact probability information is unavailable, e.g., because the choice problem is more ill-defined, we say the decision is made under <em>uncertainty</em>.</p>
 
-<p>Subset Choice</p>
-<ul>
-  <li>Selecting toppings on a pizza</li>
-  <li>Inviting people to a party</li>
-  <li>Prescribing combinations of medicine</li>
-  <li>Doing groceries</li>
-  <li>Selecting member for a committee or team</li>
-</ul>
+<div class="question" id="question-2"><p><em>Question 4.2:</em> What could be an example of decision-making under uncertainty?
+<div class="answer" id="question-2-heading-1"><p><a onclick="document.getElementById('question-2-answer-1').style.display = document.getElementById('question-2-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-2-answer-1" style="display: none;"><p>An example is choosing what career to pursue. For instance, would you rather be an artist, doctor, politician, accountant, scientist or technician?</p></div></div></p></div>
 
-<p><strong>Exercise</strong>
-Can you think of more everyday situations where the choice options are sets as opposed to single elements?</p>
+<p><label for="mn-id-whatever" class="margin-toggle"> ⊕</label><input type="checkbox" id="mn-id-whatever" class="margin-toggle" /><span class="marginnote">“This is the essence of intuitive heuristics: when faced with a difficult question, we often answer an easier one instead, usually without noticing the substitution.” – Daniel Kahneman (2017). </span> To make our lives easier, in this chapter we focus on decision making under <em>certainty</em>. That is, we consider choice situations where options are well-defined and the value of options is certain. As we will see, this is usually merely a convenient fiction. But it makes learning to model easier, and allows us to postpone the use of probability theory to the Advanced sections.</p>
+
+<p>We will not review existing theoretical models of decision making. Instead, we’ll be throwing you into the deep waters: We will present you with a capacity to explain and invite you to articulate a verbal theory and try to formalize these ideas. You may think you are unable to and that you first need to learn how others made models. But trust us. You can do it! The goal is specifically not to mimic existing models of decision making, but rather to develop your own. The purpose is to practice using the theoretician’s tools. Think of this and the next chapters as your sandbox for sculpting some sandcastles for fun, and to train your sculpting skills.</p>
+
+<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace//assets/img/vitrine.png" /><br />So many flavours! How do we choose a subset?</span> The example decision making capacity that we will use for our practices is called <em>subset choice</em>. This is the capacity for chosing a <em>subset</em> of options from a larger set. Take for example choosing Italian ice cream. The set of options is the full set of flavours displayed in the vitrine. Depending on your budget and appetite you may choose one, two, three, or—if you are <em>really</em> craving—more scoops. For instance, you may choose strawberry, lemon, and mango. Or, alternatively, you may choose chocolate and hazelnut.</p>
+
+<div class="question" id="question-3"><p><em>Question 4.3:</em> Can you think of more everyday situations where the choice options are subsets of available options?
+<div class="answer" id="question-3-heading-1"><p><a onclick="document.getElementById('question-3-answer-1').style.display = document.getElementById('question-3-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-3-answer-1" style="display: none;"><p>When we select toppings on a pizza.
+
+<div class="question" id="question-4"><p><em>Question 4.4:</em> Can you think of another one?
+<div class="answer" id="question-4-heading-1"><p><a onclick="document.getElementById('question-4-answer-1').style.display = document.getElementById('question-4-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-4-answer-1" style="display: none;"><p>When we invite people to a party
+
+<div class="question" id="question-5"><p><em>Question 4.5:</em> Can you think of another one?
+<div class="answer" id="question-5-heading-1"><p><a onclick="document.getElementById('question-5-answer-1').style.display = document.getElementById('question-5-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-5-answer-1" style="display: none;"><p>When a doctor prescribes combinations of medicine.
+
+<div class="question" id="question-6"><p><em>Question 4.6:</em> Can you think of another one?
+<div class="answer" id="question-6-heading-1"><p><a onclick="document.getElementById('question-6-answer-1').style.display = document.getElementById('question-6-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-6-answer-1" style="display: none;"><p>When you shop for groceries.
+
+<div class="question" id="question-7"><p><em>Question 4.7:</em> Can you think of another one?
+<div class="answer" id="question-7-heading-1"><p><a onclick="document.getElementById('question-7-answer-1').style.display = document.getElementById('question-7-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-7-answer-1" style="display: none;"><p>When a manager selects members for a committee or team.
+
+<div class="question" id="question-8"><p><em>Question 4.8:</em> Can you think of another one?
+<div class="answer" id="question-8-heading-1"><p><a onclick="document.getElementById('question-8-answer-1').style.display = document.getElementById('question-8-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-8-answer-1" style="display: none;"><p>When you select ingredients for cooking a meal.
+
+<div class="question" id="question-9"><p><em>Question 4.9:</em> Can you think of another one?</p></div></p></div></div></p></div></p></div></div></p></div></p></div></div></p></div></p></div></div></p></div></p></div></div></p></div></p></div></div></p></div>
+
+<p>If you went down the rabbit hole of that question, you will have discovered that there are many everyday situations that correspond to choosing subsets. Let’s pick one or more of those situations and make a computational-level explanation of the capacity for choosing subsets of that type.</p>
+
+<div class="question" id="question-4"><p><em>Question 4.4:</em> Make a computational level theory of subset choice that incorporates the assumption that people choose options with maximum or satisfactory subjective value (a.k.a. utility).</p></div>
+
+<div class="answer" id="hint-1-heading-hint-1"><p><a onclick="document.getElementById('hint-1').style.display = document.getElementById('hint-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="hint-1" style="display: none;"><p>Think about how you want to approach this exercise. You can, for instance, look back at Chapter 2 to refresh your knowledge of what is a computational level theory of a capacity and how you can write it down. You can also use the mathematics from Chapter 3 where useful. Our advice is to first define an informal specification of the capacity's input domain and output domain, and intuitively articulate the mapping, and only then try to formalize your own intuitions.</p></div></div>
+
+<p class="stopandthink"><em>Stop and think: </em>
+It is important that you perform the exercise in Question 4.4 before continuing in this chapter. You will likely get stuck somewhere. This is part of the learning experience. One can only learn to model by trying, just like one can only learn to ride a bicycle by trying, failing, and trying again. Write down for yourself where you get stuck and why.
+</p>
+
+<p>After you have tried to answer Question 4.4 to the best of your abilities, you can continue with the next section.</p>
+
+<h1 id="a-tutorial-by-dialogue">A tutorial by dialogue</h1>
+<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace//assets/img/party.jpg" /><br />How to decide whom to invite to your party?</span>
+In this section we illustrate theoretical modeling by dialogues between the two fictive characters, <em>Verbal</em> and <em>Formal</em>.<label for="mf-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="sidenote">These dialogues are adapted from <a href="https://econtent.hogrefe.com/doi/10.1027/1864-9335/a000428">van Rooij &amp; Blokpoel (2020)</a>. </span> We use as subset choice situation how a host invites people to a party. We present multiple dialogues. <em>Verbal</em>’s intuitions and <em>Formal</em>’s questions vary from dialogue to dialogue, and hence the developed theoretical models differ as well.</p>
+
+<h2 id="dialogue-1-formalizing-inviting-guests">Dialogue 1: Formalizing inviting guests</h2>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> I’d like to explain how a host decides whom to invite to a party.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> Why would the host not invite everybody?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> They may like some people but dislike others.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  Then the host invites everybody they like?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Not all people get along. If people get into an argument that can spoil a party.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>   I see. So a host may choose to invite people they like <em>and</em> that all get along.</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Yes, that sounds right. I think that’s what a host will tend to do.  Can we formalize this idea?</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  Let’s see. We can start by defining the initial state (input) of the decision process as consisting of the set of people that the host chooses from. Let us denote this set as \(P = \{p_1, p_2, ..., p_n\}\). Further, let’s define two subsets, \(L \subseteq P\) and \(D \subseteq P\), denoting the subsets of people our host likes and dislikes respectively.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  I assume you had in mind that a person cannot be both liked <em>and</em> disliked by the host, and that any given person is either liked or disliked by the host.</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Let’s indeed assume that for now.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  Then \(L\) and \(D\) form a <em>partition</em> of \(P\). To be precise,  \(L \cap D = \emptyset\) (a person cannot be both liked and disliked) and \(L \cup D = P\) (any person is either liked or disliked).</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  To formalize that different pairs of people in \(P\) can also like or dislike each other, let us define a ‘liking’ function \(like : P \times P \rightarrow \{true, false\}\) that specifies for each pair of persons \((p_i, p_j) \in P\) whether or not \(p_i\) and \(p_j\) like each other.</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> That function \(like\) is merely a notational device to assign ‘true’ or ‘false’ for pairs of persons in \(P\) to indicate whether or not they like each other?</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  Correct.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  To formalize the hypothesized output we can define the set of (to be) invited  guests \(G\) to be a subset of the liked people in \(P\) (i.e., \(G \subseteq L\)) with the additional constraint that all pairs of people in \(G\) like each other (i.e, \(like(p_i,p_j) = true\) for each \(p_i,p_j \in G\), or equivalently, \(\forall_{p_i,p_j \in G}like(p_i,p_j) = true\)).</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  Combined, these formalization choices yield a computational-level model:</p>
+</div>
+
+<p><span class="problemtitle">Selecting invitees (version 1)</span><br /><span class="probleminout">Input:</span> A set of people \(P\), some of whom the host likes (\(L \subseteq P\)) and some of whom the host dislikes (\(D \subseteq P\)), with \(L \cap D = \emptyset\) and \(L \cup D = P\), and a function \(like: P \times P \rightarrow \{true, false\}\) specifying for each pair of persons \((p_i, p_j) \in P\) whether or not they like each other.<br /><span class="probleminout">Output:</span> 
+A set of liked guests \(G \subseteq L\) that all like each other (i.e.,  \(like(p_i,p_j) = true\) for each \(p_i,p_j \in G\)).</p>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  Now we know what the formal symbols mean, we can compress this description:</p>
+</div>
+
+<p><span class="problemtitle">Selecting invitees (version 1, compressed)</span><br /><span class="probleminout">Input:</span> A set \(P\), subsets \(L \subseteq P\) and \(D \subseteq P\) with \(L \cap D = \emptyset\) and \(L \cup D = P\), and a function \(like: P \times P \rightarrow \{true, false\}\).<br /><span class="probleminout">Output:</span> 
+A subset \(G \subseteq L\) such that \(\forall_{p_i,p_j \in G}like(p_i,p_j) = true\).</p>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> That looks great!</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> But does it correctly express what you had in mind?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> I think so yes.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> We should rigorously check if it really captures what you have in mind. Let’s explore this with an example. Say a host knows six people they all like, i.e., \(P=L=\{A,B,C,D,E,F\}\). We can depict their like and dislike relations in a figure. The color of the lines indicate for each pair of persons \(p_i, p_j \in P\) the value of \(like(p_i, p_j)\):</p>
+
+  <figure><img src="/lovelace/assets/img/selecting-example1.png" /><figcaption class="maincolumn-figure"></figcaption></figure>
+
+  <p>Who would you predict the host would invite?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Of course in that situation the host would invite \(\{C, D, E, F \}\).</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  Or they would invite \(\{A,B \}\).</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> I would not think so.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  But according to version 1 of the model, subset \(\{A,B \}\) is as likely to be the selected invitees as \(\{C, D, E, F \}\), or at least there is no reason why the host would select the one and not the other.</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> But a party with only two guests is not much of a party!</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  So there are more constraints on the subset of guests that you have in mind but did not tell me yet. The host wants to have at least 3 guests?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> As many as possible, the more the merrier.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> Ok. Here an adjusted version of the model:</p>
+</div>
+
+<p><span class="problemtitle">Selecting invitees (version 2)</span><br /><span class="probleminout">Input:</span> A set \(P\), subsets \(L \subseteq P\) and \(D \subseteq P\) with \(L \cap D = \emptyset\) and \(L \cup D = P\), and a function \(like: P \times P \rightarrow \{true, false\}\).<br /><span class="probleminout">Output:</span> 
+A subset \(G \subseteq L\) such that \(\forall_{p_i,p_j \in G} like(p_i,p_j) = true\) and the size of \(G\) is maximized (i.e., there exists no \(G'\) such that \(\forall_{p_i,p_j \in G'} like(p_i,p_j) = true\) and \(|G'| &gt; |G|\)).</p>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Yes, that is what I mean!</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> This model predicts that a host never invites people who they dislike, nor any pair of people who dislike each other. Is this really realistic?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> I hadn’t thought about that. It’s something I could empirically test. I will be right back.</p>
+</div>
+
+<p><em>A few months pass, and…</em></p>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> You are right. In some situations, hosts invite people they do not like. I am not sure why.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> Whatever the reason, the theory must then be adjusted. Let us remove the assumption that \(G \subseteq L\). Then the adjusted theory is as follows:</p>
+</div>
+
+<p><span class="problemtitle">Selecting invitees (version 3)</span><br /><span class="probleminout">Input:</span> A set \(P\), subsets \(L \subseteq P\) and \(D \subseteq P\) with \(L \cap D = \emptyset\) and \(L \cup D = P\), and a function \(like: P \times P \rightarrow \{true, false\}\).<br /><span class="probleminout">Output:</span> 
+A subset \(G \subseteq P\) such that \(\forall_{p_i,p_j \in G}  like(p_i,p_j) = true\) and \(|G|\) is maximized.</p>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> But this does not seem right, because in this case the theory predicts that the host may end up with a party where everyone likes each other, but the host likes no-one.</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> It seems that hosts invite at most a few people they do not like, and also sometimes some people who do not like each other, as long as sufficiently many people like each other.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> I am not sure how to formalize that. Can you be more precise?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> For instance, if the situation is like this, with \(L = \{ B, C, D, E, G\}\) and \(D = \{ A, F\}\):</p>
+
+  <figure><img src="/lovelace/assets/img/selecting-example2.png" /><figcaption class="maincolumn-figure"></figcaption></figure>
+
+  <p>then hosts tend to invite \(\{ C, D, E, F, G \}\).</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> What do you think is the reason?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Possibly hosts tend to <em>minimize</em> the number of disliked guests while at the same time <em>maximizing</em> the <em>total</em> number of guests and <em>maximizing</em> the number of guests that like each other?</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> That makes sense intuitively. But formally it is underdefined. We now have three quantities that all need to be optimized (minimized or maximized), but there can be trade-offs such that it’s impossible to always optimize them all at the same time.</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> What do you propose?</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> Perhaps we can come up with different model versions that all more or less capture this intuition, but in different well-defined ways, and then compare them empirically?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Great idea! Let’s do that.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> OK. Here are three qualitatively different ways to formalize the idea:</p>
+</div>
+
+<p><span class="problemtitle">Selecting invitees (version 4)</span><br /><span class="probleminout">Input:</span> A set \(P\), subsets \(L \subseteq P\) and \(D \subseteq P\) with \(L \cap D = \emptyset\) and \(L \cup D = P\), a function \(like: P \times P \rightarrow \{true, false\}\), and a threshold value \(k\).<br /><span class="probleminout">Output:</span> 
+\(G \subseteq P\) such that \(|G\cap D| \leq k\) and \(|X| + |G|\) is maximized (where \(X = \{p_i,p_j \in G~|~like(p_i,p_j) = true \wedge i\neq j\}\)).</p>
+
+<p><span class="problemtitle">Selecting invitees (version 5)</span><br /><span class="probleminout">Input:</span> A set \(P\), subsets \(L \subseteq P\) and \(D \subseteq P\) with \(L \cap D = \emptyset\) and \(L \cup D = P\), and a function \(like: P \times P \rightarrow \{true, false\}\).<br /><span class="probleminout">Output:</span> 
+\(G \subseteq P\) such that \(|G\cap L| + |X| + |G|\) is maximized (where \(X = \{p_i,p_j \in G\}~|~like(p_i,p_j) = true \wedge i\neq j\}\)).</p>
+
+<p><span class="problemtitle">Selecting invitees (version 6)</span><br /><span class="probleminout">Input:</span> A set \(P\), subsets \(L \subseteq P\) and \(D \subseteq P\) with \(L \cap D = \emptyset\) and \(L \cup D = P\), a function \(like: P \times P \rightarrow \{true, false\}\), and a threshold value \(k\).<br /><span class="probleminout">Output:</span> 
+\(G \subseteq P\) such that \(|Y| \leq k\) and  \(|G\cap L|+|G|\) is maximized (where \(Y = \{p_i,p_j \in G\}~|~like(p_i,p_j) = false \wedge i\neq j \}\)).</p>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> There may be other possibilities.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">We leave this as an exercise for the reader to explore further. </span> I have created simulation code for these versions, available online <a href="">here</a>, so you can explore their empirical implications via computer simulation.</p>
+</div>
+
+<p>We end Dialogue 1 here. At this juncture you can either go <a href="">here</a> and check out the code that <em>Formal</em> made for <em>Verbal</em> and run some simulations of your own; or, alternatively, you can continue with reading Dialogue 2.</p>
+
+<h2 id="dialogue-2-formalizing-inviting-guests-again">Dialogue 2: Formalizing inviting guests, again</h2>
+
+<p>In this Dialogue 2, <em>Formal</em> again formalizes <em>Verbal</em>’s intuitions about how a hosts selects invitees for a party, but after initially starting off the same way as in Dialogue 1, <em>Formal</em>’s questions quickly lead the dialogue in a different direction. You can think of this dialogue as taking place in a different possible parallel universe from the one in which Dialogue 1 took place.</p>
+
+<div class="indent-0 ">
+  <p>I’d like to explain how a host decides whom to invite to a party.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> Why would the host not invite everybody?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> They may like some people but dislike others.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> Is liking and disliking all or none, or does it come in degrees?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> I guess it comes in degrees.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> Then the host invites everyone they like enough?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Well, it is also important that the guests like each other enough.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> OK. So both the host and everyone at the party must like everyone at the party enough?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Yes, that sounds right. Can we formalize that idea?</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  Let’s see. We can start by defining the initial state (input) of the decision process as consisting of the set of people that the host chooses from, \(P\), and define a function \(like_1: P \rightarrow \mathbb{Z}\) that assigns a number for each person \(p \in P\) indicating how much the host (dis)likes that person. Negative numbers indicate degrees of disliking and positive numbers indicate degrees of liking.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  Can a host also sometimes not like nor dislike a person?  I mean, can they be neutral about a person?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> It may be rare, but it seems possible.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  Ok, then we keep the value ‘0’ as an option for the <em>like</em>\(_1\) function.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  To formalize that different pairs of people in \(P\) can also like or dislike each other to various degrees, let us define a function \(like_2 : P \times P \rightarrow \mathbb{Z}\) that specifies for each pair of persons \((p_i, p_j) \in P\) how much they like each other, again including ‘0’ as an option.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  To formalize the hypothesized output we define a threshold number \(k\) for ‘liking enough’. Shall I set \(k \geq 0\) or \(k &gt; 0\)?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> I suppose, one minimally likes a person if they invite them to ones party? But guests may not be too bothered if there are people around who they feel neutral about.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  If that is the case, then let’s define a separate threshold for the host \(k_h &gt; 0\) and a threshold for the guests \(k_g \geq 0\).</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Sounds good.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  Combined, these formalization choices yield a computational-level model:</p>
+</div>
+
+<p><span class="problemtitle">Selecting invitees (version 7)</span><br /><span class="probleminout">Input:</span> A set \(P\), two functions \(like_1: P \rightarrow \mathbb{Z}\) and \(like_2 : P \times P \rightarrow \mathbb{Z}\), and two threshold values \(k_h &gt; 0\) and \(k_g \geq 0\).<br /><span class="probleminout">Output:</span> 
+A subset \(G \subseteq P\) such that \(\forall_{p \in G}~like_1(p) \geq k_h\) and \(\forall_{p_i,p_j \in G}~like_2(p_i, p_j) \geq k_g\).</p>
+
+<p>We end Dialogue 2 here. At this juncture you could choose to compare how this dialogue ended with where Dialogue 1 ended (e.g., ask yourself ‘Which of the models best matches my own intuitions? How would I change or adapt the models?’); or, alternatively, you can continue reading the next dialogue.</p>
+
+<h2 id="dialogue-3-formalizing-inviting-guests-one-last-time">Dialogue 3: Formalizing inviting guests, one last time</h2>
+
+<p>In this Dialogue 3, <em>Formal</em> again formalizes <em>Verbal</em>’s intuitions about how a hosts selects invitees for a party, but after initially starting off the same way as in Dialogues 1 and 2, <em>Verbal</em>’s different intuitions quickly lead the dialogue in a different direction. Again, you can think of this dialogue as taking place in a different possible parallel universe from the one in which Dialogues 1 and 2 took place.</p>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> I’d like to explain how a host decides whom to invite to a party.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> Why would the host not invite everybody?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> They may have limited space and budget available.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> Then they invite the number of people that fit the space and the budget?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Well, yes. But I think there may be more to it. A host wants a party to be fun. So they probably invite a mix of people that make for a maximally fun party.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>
+What type of mix makes for maximal fun?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Probably lots of fun people, with great synergies. That boosts the atmosphere. And as few people as possible who do not interact well with others. You know? The right <em>mix</em>.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>
+Not sure if I get it yet. But perhaps we can start by trying to model those interactions you hint at.</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Great!</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> Let’s see. Let’s define a function \(fun: P \rightarrow \mathbb{Z}\) that assigns a number for each person \(p \in P\) indicating how much <em>fun</em> they are individually, and a second function \(synergy: P \times P \rightarrow \mathbb{Z}\) that assigns a number for each pair of persons \(p_i, p_j \in P\) indicating how much their interaction adds to, or subtracts from the overall <em>synergy</em>.</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> So \(synergy(p_i, p_j) = 0\) means no synergy between \(p_i\) and \(p_j\)?</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> Indeed. And if \(synergy(p_i, p_j) &gt; 0\) or \(synergy(p_i, p_j) &lt; 0\) then their combined presence adds additional fun or decreases overall fun, respectively. Does this make sense?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Not sure where you are going with this.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong> Well, given these assumptions, we could formalize the overall party fun as follows:</p>
+
+</div>
+
+\[fun(G) = \sum_{p \in G}fun(p) + \sum_{p_i,p_j \in G} synergy(p_i, p_j)\]
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Makes sense. But this only allows for synergies between pairs of people, while sometimes synergies are really a function of small subgroups of people who interact well with each other.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  No problem, we can generalize the formalization to include that idea:</p>
+</div>
+
+\[fun(G) = \sum_{p \in G}fun(p) + \sum_{G' \subseteq G} synergy(G')\]
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  Better in line with your thoughts?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Yes!</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  Good. Let us use \(2^P = P \times P \times ... \times P\) to denote the <em>powerset</em> of \(P\), i.e., all possible subsets of \(P\). Then we can finalize the model as follows:</p>
+</div>
+
+<p><span class="problemtitle">Selecting invitees (version 8)</span><br /><span class="probleminout">Input:</span> A set \(P\), two functions \(fun: P \rightarrow \mathbb{Z}\) and \(synergy: 2^P \rightarrow \mathbb{Z}\).<br /><span class="probleminout">Output:</span> 
+A subset \(G \subseteq P\) such that \(fun(G) = \sum_{p \in G}fun(p) + \sum_{G' \subseteq G} synergy(G')\) is maximized.</p>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Wait! You forgot about the most important constraints.
+The host has limited space and budget.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  Right! I forgot about those. Can I assume that there is a fixed cost per person, or are some people more expensive to host than others?</p>
+</div>
+
+<div class="indent-0 ">
+  <p><strong>Verbal:</strong> Let’s assume for simplicity sake that cost is the same for everyone.</p>
+</div>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  Then here is my proposal:</p>
+</div>
+
+<p><span class="problemtitle">Selecting invitees (version 9)</span><br /><span class="probleminout">Input:</span> A set \(P\) and two functions \(fun: P \rightarrow \mathbb{Z}\), \(synergy: 2^P \rightarrow \mathbb{Z}\). Further, three constants: the cost per person \(c \in \mathbb{R}\), a space constraint \(S \in \mathbb{N}\) and a budget constraint \(B \in \mathbb{R}\).<br /><span class="probleminout">Output:</span> 
+A subset \(G \subseteq P\) such that \(|G| \leq S\) and  \(c|G|  \leq B\) and \(fun(G) = \sum_{p \in G}fun(p) + \sum_{G' \subseteq G} synergy(G')\) is maximized.</p>
+
+<div class="indent-4 ">
+  <p><strong>Formal:</strong>  If you would like to extend this model to include variable costs, then that is possible. For instance, like this:</p>
+</div>
+
+<p><span class="problemtitle">Selecting invitees (version 10)</span><br /><span class="probleminout">Input:</span> A set \(P\), three functions \(fun: P \rightarrow \mathbb{Z}\), \(synergy: 2^P \rightarrow \mathbb{Z}\), and \(c: P \rightarrow \mathbb{R}\). Further, a space constraint \(S \in \mathbb{N}\) and a budget constraint \(B \in \mathbb{R}\).<br /><span class="probleminout">Output:</span> 
+A subset \(G \subseteq P\) such that \(|G| \leq S\) and  \(\sum_{p \in G} c(p) \leq B\) and \(fun(G) = \sum_{p \in G}fun(p) + \sum_{G' \subseteq G} synergy(G')\) is maximized.</p>
+
+<p>We end Dialogue 3 here. Again, we invite you to compare how this dialogue ended with how Dialogues 1 and 2 ended (e.g., ask yourself, ‘Could the constraints of cost also be adopted in the earlier versions 1-7?’ ‘What other constraints may I want to build in?’ ‘How do the contraints affect which selections a host makes under different circumstances?’).</p>
+
+<h1 id="lessons-and-reflections">Lessons and reflections</h1>
+
+<p>We reflect on some of the lessons learned from the examples and dialogues.</p>
+
+<p>We illustrated with various fictive dialogous how theoretical models can end up different based on the intuitions expressed in verbal theories and formalization choices made. You may have wanted to take different turns in the conversations than we explored here. We encourage such exploration. There is no reason why the models created by <em>Verbal</em> and <em>Formal</em> are to be the preferred ones. The different conversations served to illustrate several didactical points we want to highlight:</p>
+
+<h3 id="formalization-is-a-dialogical-process">formalization is a dialogical process</h3>
+<p>It is often through the <em>interaction</em> between verbally expressable intuitions and the questions raised in the process of formalization that one comes to more and more well-defined formal characterizations of a (hypothesized) capacity.</p>
+
+<h3 id="formalization-is-a-revealing-process">formalization is a revealing process</h3>
+<p>It makes invisible holes and inconsistencies and hidden assumptions in a verbal theory visible. These hidden problems can be discovered and resolved by explicitly making different model variants.</p>
+
+<h3 id="formalizations-are-transparent-specifications">formalizations are transparent specifications</h3>
+<p>Formalizations define mathematically precise and well-defined functions that can serve as specifications for computer simulations. Yet, they can be communicated and understood without reliance on any code, as they specify the theory independently of implementational details.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">See also Guest &amp; Martin (2021) for the related notion of <em>open theory</em> and Cooper &amp; Guest (2014) for the important distiction between specifications and implementations. </span></p>
+
+<h3 id="formalizations-make-transparent-predictions">formalizations make transparent predictions</h3>
+<p>Unlike predictions ‘derived’ from verbal theories, formalizations allow predictions to be derived in a transparent and reproducible way. Predictions can be derived analytically (e.g., proof by example) or using simulations one can discover more intricate, and potentially counterintuitive, predictions.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">See the <a href="">code and simulations</a> created by <em>Formal</em>. </span></p>
+
+<p>Other than these important lessons, the dialogues also illustrated how formalizing verbal theories is a <em>non-deterministic</em> and <em>open-ended</em> process: Each dialogue ended with one or more different candidate theoretical models, which are at best working hypotheses.</p>
+
+<h1 id="try-again">Try Again</h1>
+<p>Having read the chapter up to here, we recommend trying Exercise 4.4 again. Observe how you can get unstuck with the new knowledge and insights gained. Try to make at least two, and preferably more, variants of the computational level model.</p>
+
+<h1 id="further-reading">Further reading</h1>
+
+<p><label for="mn-id-whatever" class="margin-toggle"> ⊕</label><input type="checkbox" id="mn-id-whatever" class="margin-toggle" /><span class="marginnote">“Human rational behavior (…) is shaped by a scissors whose two blades are the structure of task environments and the computational capabilities of the actor.” – Herbert Simon (1990). </span></p>
+
+<p>A key historical figure in the cognitive science of decision making is <a href="https://www.nobelprize.org/prizes/economic-sciences/1978/simon/biographical/">Herbert Simon</a>. He won the Nobel Prize in economics for his line of work started in the 1950s on <em>bounded rationality</em>: the idea that human rationality is to be understood as bounded by the computational limits of our minds. In the 1970s, Daniel Kahneman and Amos Tversky developed a program of <em>biases and heuristics</em> that demonstrated how limits of mind lead to systematic fallacies and judgment errors. From 1990s onwards, Gerd Gigerenzer and colleagues returned to the key ideas from Simon and developed a notion of <em>ecological rationality</em> that puts the ideas of ‘biases and heuristics’ in a more positive light, focusing less on human error and more on human smarts.</p>
+
+<p>For examples of formal modeling of subset choice in the literature, see Fishburn &amp; LaValle (1996), van Rooij, Stege, &amp; Kadlec (2005), and Bossaerts, &amp; Murawski (2017). During your formalization exercises you may have noticed that subset choice models can face so-called combinatorial explosion, because the number of subsets grows exponentially as a function of the number of elements one can choose from. We will return to this issue in later chapters. For more information on this issue we also recommend the textbook <a href="https://cognitionandintractability.com">Cognition and Intractability</a>, in particular <a href="https://www.cambridge.org/core/books/cognition-and-intractability/introduction/2FBB76A42417F33C409A2EAD17C15046">Chapter 1</a> which is open access.</p>
+
+<h3 id="references">References</h3>
+
+<p>Simon, H. A. (1957). <em>Administrative Behavior</em>. New York, NY: Free Press.</p>
+
+<p>Simon, H. A. (1990). <a href="https://www.annualreviews.org/doi/abs/10.1146/annurev.ps.41.020190.000245">Invariants of human behavior</a>. <em>Annual review of psychology, 41</em>(1), 1-20.</p>
+
+<p>Tversky, A., &amp; Kahneman, D. (1974). Judgment under uncertainty: Heuristics and biases. <em>Science, 185</em>(4157), 1124-1131.</p>
+
+<p>Kahneman, D., Slovic, S. P., Slovic, P., &amp; Tversky, A. (Eds.). (1982). <a href="">Judgment under uncertainty: Heuristics and biases</a>. Cambridge university press.</p>
+
+<p>Gigerenzer, G. (1996). <a href="https://doi.org/10.1037/0033-295X.103.3.592">On narrow norms and vague heuristics: A reply to Kahneman and Tversky</a>. <em>Psychological Review, 103</em>(3), 592–596.</p>
+
+<p>Todd, P. M., &amp; Gigerenzer, G. (2000). Précis of “Simple heuristics that make us smart”. <em>Behavioral and Brain Sciences, 23</em>(5), 727-741.</p>
+
+<p>Guest, O., &amp; Martin, A. E. (2021). <a href="https://journals.sagepub.com/doi/full/10.1177/1745691620970585">How computational modeling can force theory building in psychological science</a>. <em>Perspectives on Psychological Science</em>.</p>
+
+<p>Cooper, R. P., &amp; Guest, O. (2014). <a href="https://www.sciencedirect.com/science/article/pii/S1389041713000314?casa_token=0Gn3_OBpKGkAAAAA:xtIOLXCj8XIUhzL7Tn7uJzhGgepPzRgOaW4UT5WMqW8nvjSIBE4_klHDPoh44AYadf_DHWDwYbM">Implementations are not specifications</a>: Specification, replication and experimentation in computational cognitive modeling. <em>Cognitive Systems Research, 27</em>, 42-49.</p>
+
+<p>Fishburn, P. C., &amp; LaValle, I. H. (1996). <a href="https://www.sciencedirect.com/science/article/abs/pii/0377221795000739">Binary interactions and subset choice</a>. <em>European journal of operational research, 92</em>(1), 182-192.</p>
+
+<p>Bossaerts, P., &amp; Murawski, C. (2017). <a href="https://www.sciencedirect.com/science/article/pii/S1364661317301936">Computational complexity and human decision-making</a>. <em>Trends in Cognitive Sciences, 21</em>(12), 917-929.</p>
+
+<p>van Rooij, I., Stege, U., &amp; Kadlec, H. (2005). <a href="https://www.sciencedirect.com/science/article/abs/pii/S0022249605000052">Sources of complexity in subset choice</a>. <em>Journal of Mathematical Psychology, 49</em>(2), 160-187.</p>
+
+<p>van Rooij, I., Blokpoel, M., Kwisthout, J. &amp; Wareham, T. (2019). <a href="https://cognitionandintractability.com">Cognition and Intractability</a>. Cambridge University Press.</p>
 
 
 <div class="nav-wrapper">
@@ -150,7 +671,7 @@ Can you think of more everyday situations where the choice options are sets as o
 </div>
 
     </article>
-    <span class="print-footer">Subset choice - October 25, 2020 - Mark Blokpoel and Iris van Rooij</span>
+    <span class="print-footer">Subset choice - April 7, 2021 - Mark Blokpoel and Iris van Rooij</span>
     <footer>
   <hr class="slender">
   <ul class="footer-links">
@@ -205,7 +726,7 @@ Can you think of more everyday situations where the choice options are sets as o
       
   </ul>
 <div class="credits">
-<span>&copy; 2020 &nbsp;&nbsp;MARK BLOKPOEL AND IRIS VAN ROOIJ</span></br> <br>
+<span>&copy; 2021 &nbsp;&nbsp;MARK BLOKPOEL AND IRIS VAN ROOIJ</span></br> <br>
 <span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
 </div>  
 </footer>

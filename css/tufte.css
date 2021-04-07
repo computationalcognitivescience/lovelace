@@ -64,6 +64,14 @@ span.problemtitle { font-variant: small-caps; font-size: 1.2em; letter-spacing: 
 
 span.probleminout { font-weight: normal; font-style: italic; }
 
+div.indent-1 { margin-left: 1rem; }
+
+div.indent-2 { margin-left: 2rem; }
+
+div.indent-3 { margin-left: 3rem; }
+
+div.indent-4 { margin-left: 4rem; }
+
 /* This file contains all the constants for colors and font styles */
 /** Syntax highlighting styles */
 .highlight { margin-bottom: 15px; }

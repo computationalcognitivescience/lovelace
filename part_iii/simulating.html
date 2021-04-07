@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Simulating in Scala</title>
+  <meta name="description" content="In Part II we have practised formalizing verbal theories and we experienced that any verbal theory can be formalized in multiple ways. Sometimes the conseque...">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+  <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+ <!--   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  
+
+  <link rel="stylesheet" type="text/css" href="/lovelace/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/lovelace/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="http://localhost:4000/lovelace/part_iii/simulating">
+
+  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="http://localhost:4000/lovelace/feed.xml" />
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<div class="nav-wrapper">
+	<div class="nav-left">
+	<a href="/lovelace/"><img class="badge" src="/lovelace/assets/img/cover.png" alt="CH"></a>
+	</div>
+	<div class="nav-right">
+	
+		
+		    
+		      <a href="/lovelace/404.html"></a>
+		    
+	    
+  	
+		
+  	
+		
+		    
+		      <a href="/lovelace/home">Home</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part1">I - Intro</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part2">II - Formalizing</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part3">III - Simulating</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part4">IV - Reflecting</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part5">V - Advanced</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/css/print.css"></a>
+		    
+	    
+  	
+		
+  	
+		
+  	
+	</div>
+	</div>
+	</nav>
+</header>
+
+    <article class="group">
+      
+<h1>Chapter 8 - Simulating in Scala</h1>
+
+
+<p>In <a href="/lovelace/content/part2">Part II</a> we have practised formalizing verbal theories and we experienced that any verbal theory can be formalized in multiple ways. Sometimes the consequences of formalization choices are self-evident.<label for="mn-id-easy" class="margin-toggle sidenote-number"></label><input type="checkbox" id="mn-id-easy" class="margin-toggle" /><span class="sidenote">It is easy to understand that allowing for negative value in <span style="font-variant: small-caps;">Additive Subset Choice </span> will never include negative value items in the subset. </span> More often, however, deeper analysis is needed to uncover such consequences.<label for="mn-id-hard" class="margin-toggle sidenote-number"></label><input type="checkbox" id="mn-id-hard" class="margin-toggle" /><span class="sidenote">It is hard to understand the different consequences of binary or tertiary interactions in <span style="font-variant: small-caps;">Subset Choice </span>. </span> Answering questions such as “Does it matter if I formalize this concept one way or another?”, “Are these two formalizations truly different, or are they equivalent?”, and “How would I be able tell different formalizations apart in terms of the behaviour that they predict?” provides important insight in the what theories can (or cannot) explain.</p>
+
+<p>We have seen that sometimes such questions can be answered analytically, using conceptual analysis, rigorous argumentation, or mathematical proofs. These analytical tools are an important part of the theoretical modeler’s toolbox. However, they are limited to what our resource-bounded minds can reason about precisely and explicitly. Computer simulations supplement the modeler’s mind. They are in a sense automated thought experiments. By running our models on computers other than our minds <a class="citation" href="#guest_how_2020">(Guest &amp; Martin, 2020)</a><label for="mf-id-guest" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-guest" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/simulation-guest.jpg" /><br />Post by <a href="https://twitter.com/VandekerckhoveJ/status/1256135079086092288">Joachim van der Kerckhoven on Twitter.</a></span>, we can go beyond the limits of mental simulation and explore model behaviour under a wide range of conditions and at larger input scales. This way we can investigate properties of a theoretical model that are difficult to derive through mathematical analysis because they emerge from the complex interaction of the theory’s components. In Part III, we focus on this use of computer simulations.</p>
+
+<h3 id="references">References</h3>
+
+<ol class="bibliography"><li><span id="guest_how_2020">Guest, O., &amp; Martin, A. E. (2020). <i>How computational modeling can force theory building in psychological science</i>. https://doi.org/10.31234/osf.io/rybh9</span></li></ol>
+
+
+<div class="nav-wrapper">
+	<div class="prev-chapter">
+		
+	</div>
+	<div class="next-chapter">
+		
+		<p><a href="/lovelace/part_iii/sections/why_scala">Next: Why Scala?</a></p>
+		
+	</div>
+</div>
+
+    </article>
+    <span class="print-footer">Simulating in Scala - April 7, 2021 - Mark Blokpoel and Iris van Rooij</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    
+      <li>
+        <a href="mailto:m.blokpoel@donders.ru.nl">Mark
+		<span class="icon-mail3"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//www.markblokpoel.com">
+		<span class="icon-html-five"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//www.twitter.com/MarkBlokpoel">
+		<span class="icon-twitter"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//github.com/markblokpoel">
+		<span class="icon-github"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="mailto:i.vanrooij@donders.ru.nl">Iris
+		<span class="icon-mail3"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//www.irisvanrooijcogsci.com">
+		<span class="icon-html-five"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//www.twitter.com/IrisVanRooij">
+		<span class="icon-twitter"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//github.com/IrisVanRooij">
+		<span class="icon-github"></span>
+		</a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2021 &nbsp;&nbsp;MARK BLOKPOEL AND IRIS VAN ROOIJ</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>
