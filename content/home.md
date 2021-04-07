@@ -11,12 +11,12 @@ Welcome to this open and interactive textbook on theoretical modeling for cognit
 {%- for collection in site.collections -%}
 {%- for page in site.pages  -%}
 {% if page.category==collection.label %}
-<p><a href="{{ site.baseurl }}{{ page.url }}">Part {{ page.title }}</a></p>
+<p style="text-transform: uppercase; margin-top: 2.5rem;"><a href="{{ site.baseurl }}{{ page.url }}">Part {{ page.title }}</a></p>
 <ul>
 {%- for chapter in collection.docs -%}
 {% assign path = chapter.relative_path | split: "/" %}
 {% if path.size == 2 %}
-<li><a href="{{ site.baseurl }}{{ chapter.url }}">Chapter {{ chapter.chapter }} - {{ chapter.title }}</a></li>
+<li style="text-align: left;"><a href="{{ site.baseurl }}{{ chapter.url }}">Chapter {{ chapter.chapter }} - {{ chapter.title }}</a></li>
 {% endif %}
 {%- endfor -%}
 </ul>

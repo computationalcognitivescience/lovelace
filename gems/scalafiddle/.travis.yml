@@ -1,0 +1,11 @@
+language: ruby
+rvm:
+- 2.4.1
+- 2.3.0
+- 2.2
+- 2.1
+script: script/cibuild
+after_success:
+  - bundle exec codeclimate-test-reporter
+sudo: false
+cache: bundler
