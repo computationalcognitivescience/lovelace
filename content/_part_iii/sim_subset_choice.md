@@ -5,59 +5,197 @@ chapter: 9
 nav_exclude: true
 ---
 
-{% marginnote 'sn-id-binder' '[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/markblokpoel/scala-mybinder-template/HEAD?filepath=notebooks%2Fselecting-invitees.ipynb)' %}
-Some text.
+We pick up the conversation between Verbal and Formal from [Chapter 4 - Subset Choice](/lovelace/part_ii/subset#dialogue-1-formalizing-inviting-guests). Formal is very excited to share the computer simulations they implemented of the theoretical models Formal and Verbal created. Formal has some suggestions on how to use the simulations, which they explain to Verbal.
 
-{% scalafiddle template="SetTheory" %}
+{% indent 4 %}
+**Formal:** Welcome dr. Verbal! As promised, I have implemented three of our computational-level models in computer simulations.
+{% endindent %}
+
+{% indent 0 %}
+**Verbal:** That's great. You said we can use the simulations to explore the models' empirical implications. How does that work?
+{% endindent %}
+
+{% indent 4 %}
+**Formal:** The three formal models each make different tradeofs in optimizing selecting guests...
+{% endindent %}
+
+{% indent 0 %}
+**Verbal:** Yes, I remember. Shall I run some experiments to see which one is best?
+{% endindent %}
+
+{% indent 4 %}
+**Formal:** ...wait! Before you leave me alone again for a few months, let's do a bit more theory before the test. Do we even know if the models are different in important and meaningful ways? Even if they are different, are they so under sensible conditions?
+{% endindent %}
+
+{% indent 0 %}
+**Verbal:** But the formalisations are different, so the models must behave differently right?
+{% endindent %}
+
+{% indent 4 %}
+**Formal:**
+While the formalizations are different, it might be possible that they behave the same or very similarly. Sometimes we can derive equivalence formally, but this is not always possible.{% sidenote 'sn-id-equivalence' 'You can read about mathematically proving equivalence of two models in [Chapter 5 - Coherence](/lovelace/part_ii/coherence#Equivalence).' %} In those cases, we can use computer simulations to explore the qualitative differences between (possibly) competing theories.
+{% endindent %}
+
+
+
+{% indent 4 %}
+**Formal:** 
+{% endindent %}
+
+## Selecting Invitees V4
+
+
+
+{% fproblem Selecting invitees (version 4) %}
+A set $$P$$, subsets $$L \subseteq P$$ and $$D \subseteq P$$ with $$L \cap D = \emptyset$$ and $$L \cup D = P$$, a function $$like: P \times P \rightarrow \{true, false\}$$, and a threshold value $$k$$.;;
+$$G \subseteq P$$ such that $$|G\cap D| \leq k$$ and $$|X| + |G|$$ is maximized (where $$X = \{p_i,p_j \in G~|~like(p_i,p_j) = true \wedge i\neq j\}$$).
+{% endfproblem %}
+
+{% scalafiddle template="SetTheory", minheight="1000", layout="v45" %}
 ```scala
-type Item = String
+def si4(P: Set[Person],
+        L: Set[Person],
+        D: Set[Person],
+        like: (Person, Person) => Boolean,
+        k: Int): Set[Person] = {
+  requirement(L subsetOf P, "L must be a subset of P")
+  requirement(D subsetOf P, "D must be a subset of P")
+  requirement((L intersect D).isEmpty, "intersection between L and D must be emtpy")
+  requirement((L union D) == P, "union of L and D must equal P")
 
-def subsetChoice(
-  stuff: Set[Item],
-  f: (Item => Double),
-  f2: ((Item, Item) => Double)): Set[Set[Item]] = {
-
-  def value(subset: Set[Item]): Double = 
-    sum(subset, f) + sum(subset.uniquePairs, f2)
-
-  argMax(powerset(stuff), value)
+  P.subsets.toSet // G \subseteq P
+   .filter(G => (G intersect D).size <= k) // such that |G \cap D| <= k
+   .argMax(G => G.size + G.uniquepairs.build(Function.tupled(like)).size)
+   .get
 }
 
-val objects = Set("coffee", "sugar", "salt", "cookie", "milk")
-def value(item: Item): Double = item match {
-  case "coffee" => 4.0
-  case "sugar" => 2.0
-  case "salt" => 1.0
-  case "cookie" => 8.0
-  case "milk" => 3.0
-  case _ => 0.0
-}
-def value2(item1: Item, item2: Item): Double = (item2, item1) match {
-  case ("coffee", "sugar") => -3.0
-  case ("sugar", "coffee") => -3.0
-  case ("coffee", "salt") => -6.0
-  case ("salt", "coffee") => -6.0
-  case ("coffee", "cookie") => 6.0
-  case ("cookie", "coffee") => 6.0
-  case ("coffee", "milk") => 3.0
-  case ("milk", "coffee") => 3.0
-  case ("sugar", "salt") => -2.0
-  case ("salt", "sugar") => -2.0
-  case ("sugar", "cookie") => 5.0
-  case ("cookie", "sugar") => 5.0
-  case ("sugar", "milk") => 2.0
-  case ("milk", "sugar") => 2.0
-  case ("salt", "cookie") => 4.0
-  case ("cookie", "salt") => 4.0
-  case ("salt", "milk") => -7.0
-  case ("milk", "salt") => -7.0
-  case ("cookie", "milk") => 5
-  case ("milk", "cookie") => 5
-  case _ => 0
-}
+val (p1, p2, p3, p4) = (Person("p1"), Person("p2"), Person("p3"), Person("p4"))
 
-println(subsetChoice(objects, value, value2))
+val P = Set(p1, p2, p3, p4)
+val L = Set(p1, p2, p3)
+val D = Set(p4)
+val relations = Set(
+  p1 like p2,
+  p1 like p3,
+  p2 like p3,
+  p3 like p4
+)
+def like = relations.deriveFun
+val k = 3
+
+val out = si4(P, L, D, like, k)
+
+println(h2("Input:"))
+VegaRenderer.render(relations.deriveGraph(P))
+println(s"k=$k")
+
+println(h2("Output:"))
+println(out)
+
 ```
 {% endscalafiddle %}
 
-{% fullwidth 'assets/img/cheatsheet/napoleons-march.png' 'Napoleons March *(Edward Tufte’s English translation)*' %}
+## Selecting Invitees V5
+
+{% fproblem Selecting invitees (version 5) %}
+A set $$P$$, subsets $$L \subseteq P$$ and $$D \subseteq P$$ with $$L \cap D = \emptyset$$ and $$L \cup D = P$$, and a function $$like: P \times P \rightarrow \{true, false\}$$.;;
+$$G \subseteq P$$ such that $$|G\cap L| + |X| + |G|$$ is maximized (where $$X = \{p_i,p_j \in G\}~|~like(p_i,p_j) = true \wedge i\neq j\}$$).
+{% endfproblem %}
+
+
+{% scalafiddle template="SetTheory", minheight="1000", layout="v45" %}
+```scala
+def si5(P: Set[Person],
+        L: Set[Person],
+        D: Set[Person],
+        like: (Person, Person) => Boolean): Set[Person] = {
+  requirement(L subsetOf P, "l must be a subset of p")
+  requirement(D subsetOf P, "d must be a subset of p")
+  requirement((L intersect D).isEmpty, "intersection between l and d must be emtpy")
+  requirement((L union D) == P, "union of l and d must equal p")
+
+
+  P.subsets.toSet // G \subseteq P
+   .argMax(G => {
+     (G intersect L).size // |G \cap L|
+     + G.size // |G|
+     + G.uniquepairs.build(pair => like(pair._1, pair._2)).size // |X|
+   })
+   .get
+}
+
+val (p1, p2, p3, p4) = (Person("p1"), Person("p2"), Person("p3"), Person("p4"))
+
+val P = Set(p1, p2, p3, p4)
+val L = Set(p1, p2, p3)
+val D = Set(p4)
+val relations = Set(
+  p1 like p2,
+  p1 like p3,
+  p2 like p3,
+  p3 like p4
+)
+def like = relations.deriveFun
+val k = 3
+
+val out = si5(P, L, D, like)
+
+println(h2("Input:"))
+VegaRenderer.render(relations.deriveGraph(P))
+println(s"k=$k")
+
+println(h2("Output:"))
+println(out)
+```
+{% endscalafiddle %}
+
+## Selecting Invitees V6
+
+{% fproblem Selecting invitees (version 6) %}
+A set $$P$$, subsets $$L \subseteq P$$ and $$D \subseteq P$$ with $$L \cap D = \emptyset$$ and $$L \cup D = P$$, a function $$like: P \times P \rightarrow \{true, false\}$$, and a threshold value $$k$$.;;
+$$G \subseteq P$$ such that $$|Y| \leq k$$ and  $$|G\cap L|+|G|$$ is maximized (where $$Y = \{p_i,p_j \in G\}~|~like(p_i,p_j) = false \wedge i\neq j \}$$).
+{% endfproblem %}
+
+{% scalafiddle template="SetTheory", minheight="1000", layout="v45" %}
+```scala
+def si6(P: Set[Person],
+        L: Set[Person],
+        D: Set[Person],
+        like: (Person, Person) => Boolean,
+        k: Int): Set[Person] = {
+    requirement(L subsetOf P, "l must be a subset of p")
+    requirement(D subsetOf P, "d must be a subset of p")
+    requirement((L intersect D).isEmpty, "intersection between l and d must be emtpy")
+    requirement((L union D) == P, "union of l and d must equal p")
+
+
+  P.subsets.toSet // G \subseteq P
+   .filter(G => G.uniquepairs.build(pair => !like(pair._1, pair._2)).size <= k)
+   .argMax(G => (G intersect L).size + G.size)
+   .get
+}
+
+val (p1, p2, p3, p4) = (Person("p1"), Person("p2"), Person("p3"), Person("p4"))
+
+val P = Set(p1, p2, p3, p4)
+val L = Set(p1, p2, p3)
+val D = Set(p4)
+val relations = Set(
+  p1 like p2,
+  p1 like p3,
+  p2 like p3,
+  p3 like p4
+)
+def like = relations.deriveFun
+val k = 3
+
+val out = si6(P, L, D, like, k)
+
+println(h2("Input:"))
+VegaRenderer.render(relations.deriveGraph(P))
+println(s"k=$k")
+
+println(h2("Output:"))
+println(out)
+```
+{% endscalafiddle %}
