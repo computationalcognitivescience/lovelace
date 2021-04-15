@@ -145,6 +145,6 @@ div.indent-4{
 	margin-left: 4rem;
 }
 
-div[data-scalafiddle] {
-	max-width: 90%;
+div[data-scalafiddle], div[data-scalafiddle] pre, div[data-scalafiddle] code {
+	width: 90%;
 }

@@ -28,15 +28,19 @@ We pick up the conversation between Verbal and Formal from [Chapter 4 - Subset C
 {% endindent %}
 
 {% indent 0 %}
-**Verbal:** But the formalisations are different, so the models must behave differently right?
+**Verbal:** But the formalisations are different, so the models must behave differently, right?
 {% endindent %}
 
 {% indent 4 %}
 **Formal:**
-While the formalizations are different, it might be possible that they behave the same or very similarly. Sometimes we can derive equivalence formally, but this is not always possible.{% sidenote 'sn-id-equivalence' 'You can read about mathematically proving equivalence of two models in [Chapter 5 - Coherence](/lovelace/part_ii/coherence#Equivalence).' %} In those cases, we can use computer simulations to explore the qualitative differences between (possibly) competing theories.
+While the formalizations are different, it might be actually be possible that they behave the same or very similarly. Sometimes we can formally derive equivalence, but this is not always possible.{% sidenote 'sn-id-equivalence' 'You can read about mathematically proving model equivalence in [Chapter 5 - Coherence](/lovelace/part_ii/coherence#Equivalence).' %} In those cases, we can use computer simulations to explore the qualitative differences between theories.
+
+
 {% endindent %}
 
-
+{% indent 0 %}
+**Verbal:** 
+{% endindent %}
 
 {% indent 4 %}
 **Formal:** 
@@ -45,52 +49,66 @@ While the formalizations are different, it might be possible that they behave th
 ## Selecting Invitees V4
 
 
-
 {% fproblem Selecting invitees (version 4) %}
 A set $$P$$, subsets $$L \subseteq P$$ and $$D \subseteq P$$ with $$L \cap D = \emptyset$$ and $$L \cup D = P$$, a function $$like: P \times P \rightarrow \{true, false\}$$, and a threshold value $$k$$.;;
 $$G \subseteq P$$ such that $$|G\cap D| \leq k$$ and $$|X| + |G|$$ is maximized (where $$X = \{p_i,p_j \in G~|~like(p_i,p_j) = true \wedge i\neq j\}$$).
 {% endfproblem %}
 
+To make the code more readable, we use variable names that are more descriptive. The table below gives an overview of the mapping between formal model and Scala code labels.
+
+
+| Math | Scala | Description |
+| --- | --- | --- |
+| $$P$$ | ```persons``` | Set of persons from which to<br/> select invitees. |
+| $$L$$ | ```personsLiked``` | Subset of persons that is liked. |
+| $$D$$ | ```personsDisliked``` | Subset of persons that is <br/>disliked. |
+| $$like$$ | ```like``` | Function that captures if two<br/> persons like each other or not. |
+| $$k$$ | ```k``` | Value that states how many of<br/> the invited persons at most<br/> can be disliked. |
+| $$G$$ | n.a. | Set of invited persons. |
+| $$X$$ | n.a. | Set of all pairs of persons that<br/> like each other. |
+
+
 {% scalafiddle template="SetTheory", minheight="1000", layout="v45" %}
 ```scala
-def si4(P: Set[Person],
-        L: Set[Person],
-        D: Set[Person],
-        like: (Person, Person) => Boolean,
-        k: Int): Set[Person] = {
-  requirement(L subsetOf P, "L must be a subset of P")
-  requirement(D subsetOf P, "D must be a subset of P")
-  requirement((L intersect D).isEmpty, "intersection between L and D must be emtpy")
-  requirement((L union D) == P, "union of L and D must equal P")
-
-  P.subsets.toSet // G \subseteq P
-   .filter(G => (G intersect D).size <= k) // such that |G \cap D| <= k
-   .argMax(G => G.size + G.uniquepairs.build(Function.tupled(like)).size)
-   .get
+def si4(persons: Set[String],
+        personsLiked: Set[String],
+        personsDisliked: Set[String],
+        like: (String, String) => Boolean,
+        k: Int): Set[String] = {
+  
+	// Specify requirements. Selecting Invitees V4 is undefined if requirements are not met.
+    requirement(personsLiked subsetOf persons, "L must be a subset of P")
+    requirement(personsDisliked subsetOf persons, "D must be a subset of P")
+    requirement((personsLiked intersect personsDisliked).isEmpty, "intersection between L and D must be emtpy")
+    requirement((personsLiked union personsDisliked) == persons, "union of L and D must equal P")
+    
+    // Specify what makes a valid (sub)set of invitees:
+    def atMostKDislikes(invitees: Set[String]): Boolean = {
+        // |G /\ D| <= k
+        (invitees /\ personsDisliked).size <= k
+    }
+    
+    // Specify the optimality condition:
+    def xg(invitees: Set[String]): Int = {
+        // |X|
+        val x = invitees.uniquePairs // From all pairs of invitees,
+                .build(like.tupled)  // select all pairs that like each other,
+                .size                // and count them.
+        // |G|
+        val g = invitees.size        // Count the number of total invitees.
+        
+        x + g
+    }
+    
+    val invitees = powerset(persons)  // From all possible subsets of persons,
+        .build(atMostKDislikes)       // select subsets that contain at most k disliked persons,
+        .argMax(xg)                   // then select the subsets that maximize the optimality condition.
+    
+    // If more than one solution exists, return one at random. Always 1 solution must exist,
+    // because the empty set is a valid solution. Hence, we can assume random does not
+    // return None and 'get' the value.
+    invitees.random.get 
 }
-
-val (p1, p2, p3, p4) = (Person("p1"), Person("p2"), Person("p3"), Person("p4"))
-
-val P = Set(p1, p2, p3, p4)
-val L = Set(p1, p2, p3)
-val D = Set(p4)
-val relations = Set(
-  p1 like p2,
-  p1 like p3,
-  p2 like p3,
-  p3 like p4
-)
-def like = relations.deriveFun
-val k = 3
-
-val out = si4(P, L, D, like, k)
-
-println(h2("Input:"))
-VegaRenderer.render(relations.deriveGraph(P))
-println(s"k=$k")
-
-println(h2("Output:"))
-println(out)
 
 ```
 {% endscalafiddle %}

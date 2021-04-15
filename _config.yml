@@ -21,7 +21,7 @@ scholar:
   sort_by: author
 
 scalafiddle:
-  theme: dark
+  theme: light
 
 collections_dir: content
 
