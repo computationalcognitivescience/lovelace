@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Subset choice
-chapter: 9
+chapter: 10
 nav_exclude: true
 ---
 
@@ -46,6 +46,35 @@ While the formalizations are different, it might be actually be possible that th
 **Formal:** 
 {% endindent %}
 
+## Helper functions
+As is common with programming, Formal has written a few helper functions to make running the simulations easier.
+
+A particular person is identified by their name, and can be defined as follows:
+
+{% scalafiddle template="mathlib" %}
+```scala
+Person("Jamie")
+```
+{% endscalafiddle %}
+
+We can also request a random person name:
+
+{% scalafiddle template="mathlib" %}
+```scala
+Person.random
+```
+{% endscalafiddle %}
+
+But more useful, we can request a group of ```n``` random individuals:
+
+{% scalafiddle template="mathlib" %}
+```scala
+Person.randomGroup(5)
+```
+{% endscalafiddle %}
+
+These functions will help you create sets of persons
+
 ## Selecting Invitees V4
 
 
@@ -64,51 +93,49 @@ To make the code more readable, we use variable names that are more descriptive.
 | $$D$$ | ```personsDisliked``` | Subset of persons that is <br/>disliked. |
 | $$like$$ | ```like``` | Function that captures if two<br/> persons like each other or not. |
 | $$k$$ | ```k``` | Value that states how many of<br/> the invited persons at most<br/> can be disliked. |
-| $$G$$ | n.a. | Set of invited persons. |
-| $$X$$ | n.a. | Set of all pairs of persons that<br/> like each other. |
+| $$G$$ | ```invitees``` | Set of invited persons. |
+| $$X$$ | ```X``` | Set of all pairs of persons that<br/> like each other. |
 
 
-{% scalafiddle template="SetTheory", minheight="1000", layout="v45" %}
+{% scalafiddle template="mathlib" %}
 ```scala
-def si4(persons: Set[String],
-        personsLiked: Set[String],
-        personsDisliked: Set[String],
-        like: (String, String) => Boolean,
-        k: Int): Set[String] = {
-  
-	// Specify requirements. Selecting Invitees V4 is undefined if requirements are not met.
-    requirement(personsLiked subsetOf persons, "L must be a subset of P")
-    requirement(personsDisliked subsetOf persons, "D must be a subset of P")
-    requirement((personsLiked intersect personsDisliked).isEmpty, "intersection between L and D must be emtpy")
-    requirement((personsLiked union personsDisliked) == persons, "union of L and D must equal P")
-    
-    // Specify what makes a valid (sub)set of invitees:
-    def atMostKDislikes(invitees: Set[String]): Boolean = {
-        // |G /\ D| <= k
+def si4(persons: Set[Person],
+        personsLiked: Set[Person],
+        personsDisliked: Set[Person],
+        like: (Person, Person) => Boolean,
+        k: Int): Set[Person] = {
+
+    // Specify that invitees is valid if |G /\ D| <= k.
+    def atMostKDislikes(invitees: Set[Person]): Boolean = 
         (invitees /\ personsDisliked).size <= k
-    }
     
-    // Specify the optimality condition:
-    def xg(invitees: Set[String]): Int = {
-        // |X|
+    // Specify the optimality condition.
+    def xg(invitees: Set[Person]): Int = {
         val x = invitees.uniquePairs // From all pairs of invitees,
                 .build(like.tupled)  // select all pairs that like each other,
                 .size                // and count them.
-        // |G|
         val g = invitees.size        // Count the number of total invitees.
-        
         x + g
     }
     
     val invitees = powerset(persons)  // From all possible subsets of persons,
         .build(atMostKDislikes)       // select subsets that contain at most k disliked persons,
-        .argMax(xg)                   // then select the subsets that maximize the optimality condition.
+        .argMax(xg)                   // and select the subsets that maximize the optimality condition.
     
     // If more than one solution exists, return one at random. Always 1 solution must exist,
     // because the empty set is a valid solution. Hence, we can assume random does not
     // return None and 'get' the value.
     invitees.random.get 
 }
+
+val group = Person.randomGroup(10)    // Generate random group
+val personsLiked = group.take(5)      // The first 5 are liked
+val personsDisliked = group.drop(5)   // The rest is disliked
+
+def like(pi: Person, pj: Person): Boolean = {
+???
+}
+
 
 ```
 {% endscalafiddle %}
@@ -121,7 +148,7 @@ $$G \subseteq P$$ such that $$|G\cap L| + |X| + |G|$$ is maximized (where $$X = 
 {% endfproblem %}
 
 
-{% scalafiddle template="SetTheory", minheight="1000", layout="v45" %}
+{% scalafiddle template="Mathlib", minheight="1000", layout="v45" %}
 ```scala
 def si5(P: Set[Person],
         L: Set[Person],
@@ -174,7 +201,7 @@ A set $$P$$, subsets $$L \subseteq P$$ and $$D \subseteq P$$ with $$L \cap D = \
 $$G \subseteq P$$ such that $$|Y| \leq k$$ and  $$|G\cap L|+|G|$$ is maximized (where $$Y = \{p_i,p_j \in G\}~|~like(p_i,p_j) = false \wedge i\neq j \}$$).
 {% endfproblem %}
 
-{% scalafiddle template="SetTheory", minheight="1000", layout="v45" %}
+{% scalafiddle template="mathlib", minheight="1000", layout="v45" %}
 ```scala
 def si6(P: Set[Person],
         L: Set[Person],

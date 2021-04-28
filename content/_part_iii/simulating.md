@@ -65,8 +65,6 @@ This mechanism is called *strict typing* and is used to prevent code from being 
 ### Open source and open science
 Scala is open source. It is available free of charge and supported by an active community of developers from academia and industry. The principles outlined in this chapter will lead to transparent, accessible and reproducible simulation code. These principles are not limited to Scala and we encourage users of other programming languages to apply them too, even though some additional work might be required.
 
-## Scala and mathlib
-
 
 ### References
 
