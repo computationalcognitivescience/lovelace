@@ -1,4 +1,4 @@
 val result = {
 ////
 }
-println(result)
+if(!result.isInstanceOf[Unit]) println(result)

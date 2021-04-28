@@ -46,10 +46,16 @@ While the formalizations are different, it might be actually be possible that th
 **Formal:** 
 {% endindent %}
 
-## Helper functions
-As is common with programming, Formal has written a few helper functions to make running the simulations easier.
+## Support code
+Running simulations requires input instances to compute output for, as specified by the theoretical model. While we could type in input by hand, that is a lot of work. The beauty of using computer simulations is that it can do the hard work for us, but we will need some help in *automatically* generating input. To that end, Formal has written a supporting code that contains helper functionality.{% sidenote 'sn-id-helper' 'Helper functionality is often written specifically for a domain. For example, [simulating Coherence](/lovelace/part_iii/sim_coherence) uses different support code.' %}
 
-A particular person is identified by their name, and can be defined as follows:
+For now, it is not important that you know how to write support code. However, in order to explore and adapt the code that Formal has provided, being able to *use* support code is recommended. Let's explore some examples. Remember that you can run (and adapt) the code in your browser using the <button style="background: rgba(255,255,255,0.6) !important;color: rgba(0, 0, 0, 0.6) !important;border-radius: 5px;border: 1px solid #ddd;font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;font-size: 14px;
+padding: 3px 8px;transition: all 350ms ease;"><img src="https://embed.scalafiddle.io/runicon.png" style="padding: 0;margin: 0 0 4px 0;vertical-align: middle;width: 16px;height: 16px;display: inline;">Run</button> button.
+
+The formal models for selecting invitees (subset choice) take as input sets of persons and a function that for pairs of persons returns if they like eachother or not. The support code helps us generate these parts of the input.
+
+### Persons
+A particular person is identified by their name, and can be defined by using ```Person(name: String)```. This function takes a string as input and returns a Person object with the given name:
 
 {% scalafiddle template="mathlib" %}
 ```scala
@@ -57,7 +63,7 @@ Person("Jamie")
 ```
 {% endscalafiddle %}
 
-We can also request a random person name:
+We can also request a random person name. Names are randomly selected from a predefined list with 100 names:
 
 {% scalafiddle template="mathlib" %}
 ```scala
@@ -65,7 +71,7 @@ Person.random
 ```
 {% endscalafiddle %}
 
-But more useful, we can request a group of ```n``` random individuals:
+We can request a group of ```n``` random individuals:
 
 {% scalafiddle template="mathlib" %}
 ```scala
@@ -73,7 +79,123 @@ Person.randomGroup(5)
 ```
 {% endscalafiddle %}
 
-These functions will help you create sets of persons
+These functions will help us create sets of persons. We can then use ```mathlib``` to work with these sets as expected. For example, we can create a set of random persons who are liked $$L$$, a set of persons who are disliked $$D$$, and the set of all persons $$P=L\cup D$$:  
+
+{% scalafiddle template="mathlib" %}
+```scala
+val personsLiked = Person.randomGroup(2)
+val personsDisliked = Person.randomGroup(3)
+val allPersons = personsLiked \/ personsDisliked
+
+println(personsLiked)
+println(personsDisliked)
+println(allPersons)
+```
+{% endscalafiddle %}
+
+### Like-function
+The final support code Formal provided is used to create like relationships between persons. In the formal model this function is defined as $$like: P\times P \rightarrow \{true,false\}$$. Note that the math does not exclude non-symmetrical liking, meaning that person $$a$$ may like $$b$$, but not the other way around: $$like(a,b)\neq like(b,a)$$. Furthermore, it does not exclude reflection (i.e., self-liking), $$like(a,a)$$ is valid.
+
+One could specify a like relationship manually. Simply create persons, store them in values so we can refer to them and then use ```likes``` or ```dislikes``` to create like relationships.
+
+{% scalafiddle template="mathlib" %}
+```scala
+val lela = Person("Lela")
+val carlos = Person("Carlos")
+val ervin = Person("Ervin")
+
+println(lela likes carlos)
+println(carlos dislikes ervin)
+println(carlos dislikes lela)
+```
+{% endscalafiddle %}
+
+Specifying a *complete* like function for a set of persons, however, will be quite a chore: for each pair you need to explicate if $$a$$ likes $$b$$ and vice versa. For $$10$$ persons, that is a list of $$10 \cdot 10=100$$ likes. The support functions help us reduce this chore. 
+
+When given a partial specification of the like function, we can complete it by assuming that any non-specified relationship is a dislike. Use the support function ```.deriveLikeFunction(partialLikes: Set[Likes])``` on a set of persons to create a like function for which the domain consists of all pairs of persons (including $$(a,b)$$, $$(b,a)$$ and $$a,a$$). It will complete ```partialLikes``` by assuming non-specified relationships are dislikes. 
+
+{% scalafiddle template="mathlib" %}
+```scala
+val lela = Person("Lela")
+val carlos = Person("Carlos")
+val ervin = Person("Ervin")
+
+val persons = Set(lela, carlos, ervin)
+val partialLikings = Set(lela likes carlos, carlos likes ervin,carlos dislikes lela)
+
+def like = persons.deriveLikeFunction(partialLikings)
+
+List(
+  like(lela, carlos),
+  like(lela, ervin),
+  like(carlos, lela),
+  like(carlos, ervin),
+  like(ervin, carlos),
+  like(ervin, lela),
+  like(lela, lela),
+  like(carlos, carlos),
+  like(ervin, ervin)
+)
+```
+{% endscalafiddle %}
+
+While this approach is useful to manually explore small examples, it still is a lot of manual work. Wouldn't it be nice if we can generate a complete like function randomly? Use the support function ```.randomLikeFunction(probability: Double)``` on a set of persons to create a random like function. For each pair (including $$(a,b)$$, $$(b,a)$$ and $$a,a$$), it generates ```true``` with probability equal to the ratio or false otherwise.
+
+{% scalafiddle template="mathlib" %}
+```scala
+val lela = Person("Lela")
+val carlos = Person("Carlos")
+val ervin = Person("Ervin")
+
+val persons = Set(lela, carlos, ervin)
+
+def like = persons.randomLikeFunction(0.7)
+
+List(
+  like(lela, carlos),
+  like(lela, ervin),
+  like(carlos, lela),
+  like(carlos, ervin),
+  like(ervin, carlos),
+  like(ervin, lela),
+  like(lela, lela),
+  like(carlos, carlos),
+  like(ervin, ervin)
+)
+```
+{% endscalafiddle %}
+
+{% question %}
+What happens to the like function behaviour when you change the probability?
+{% hidden Hint? %}
+Try changing the probability value (the input of the function ```randomLikeFunction```) and see what changes in the output.
+{% endhidden %}
+{% endquestion %}
+
+{% question %}
+With these support functions, we can randomly create instances for the formal models of selecting invitees. Why is this helpful?
+{% hidden Hint? %}
+It save a lot of manual work.
+
+{% question %}
+Can you think of another use?
+{% hidden Hint? %}
+You can compare model behaviour for the same input.
+
+{% question %}
+Can you think of another use?
+{% hidden Hint? %}
+You can generate different inputs at random and see if (and how) model behaviour changes as a function of the input.
+
+{% question %}
+Can you think of another use?
+{% endquestion %}
+{% endhidden %}
+{% endquestion %}
+{% endhidden %}
+{% endquestion %}
+{% endhidden %}
+{% endquestion %}
 
 ## Selecting Invitees V4
 
