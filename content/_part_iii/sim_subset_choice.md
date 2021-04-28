@@ -34,17 +34,18 @@ We pick up the conversation between Verbal and Formal from [Chapter 4 - Subset C
 {% indent 4 %}
 **Formal:**
 While the formalizations are different, it might be actually be possible that they behave the same or very similarly. Sometimes we can formally derive equivalence, but this is not always possible.{% sidenote 'sn-id-equivalence' 'You can read about mathematically proving model equivalence in [Chapter 5 - Coherence](/lovelace/part_ii/coherence#Equivalence).' %} In those cases, we can use computer simulations to explore the qualitative differences between theories.
-
-
 {% endindent %}
 
 {% indent 0 %}
-**Verbal:** 
+**Verbal:** Ah, I would like to know if there are qualitative differences between the theories. I guess we can possibly rule out theories or find ways to update them, just like when we were formalizing my verbal theories.
 {% endindent %}
 
 {% indent 4 %}
-**Formal:** 
+**Formal:** Indeed, that is the idea.
 {% endindent %}
+
+If you jumped here directly from [Chapter 4 - Subset choice](/lovelace/part_ii/subset)
+you may find it helpful to first read the instructions on how to read (and write) Scala code using the ```mathlib``` library. This is discussed in [Chapter 9 - Scala and mathlib](/lovelace/part_ii/mathlib). Additionally, the simulation code on this page uses support code which we explain first.
 
 ## Support code
 Running simulations requires input instances to compute output for, as specified by the theoretical model. While we could type in input by hand, that is a lot of work. The beauty of using computer simulations is that it can do the hard work for us, but we will need some help in *automatically* generating input. To that end, Formal has written a supporting code that contains helper functionality.{% sidenote 'sn-id-helper' 'Helper functionality is often written specifically for a domain. For example, [simulating Coherence](/lovelace/part_iii/sim_coherence) uses different support code.' %}
@@ -197,7 +198,27 @@ Can you think of another use?
 {% endhidden %}
 {% endquestion %}
 
-## Selecting Invitees V4
+## Simulating <span style="font-variant: small-caps; font-style: normal;">Selecting Invitees</span>
+
+In this section we simulate {% problem Selecting invitees (version 4, 5 and 6) %}. Each of the models is copied here, for your convenience. To make the code more readable, we use names in the code that are more descriptive than the single letters used in math. Each formal model is followed by a table that gives an overview of the mapping between formal model and Scala code labels.
+
+
+{% marginnote 'Table-ID1' 'Table 1: the mapping from math notation to Scala code.'  %}
+<div class="table-wrapper" markdown="block" style="margin-top:3rem;">
+
+| Math | Scala | Description |
+| :--- | :--- | :--- |
+| $$P$$ | ```persons``` | Set of persons from which to select invitees. |
+| $$L$$ | ```personsLiked``` | Subset of persons that is liked. |
+| $$D$$ | ```personsDisliked``` | Subset of persons that is disliked. |
+| $$like$$ | ```like``` | Function that captures if two persons like each other or not. |
+| $$k$$ | ```k``` | Value that states how many of the invited persons at most can be disliked. |
+| $$G$$ | ```invitees``` | Set of invited persons. |
+| $$X$$ | ```x``` | Set of all unique pairs of persons that like each other. |
+| $$Y$$ | ```y``` | Set of all unique pairs of persons that dislike each other. |
+
+</div>
+
 
 
 {% fproblem Selecting invitees (version 4) %}
@@ -205,18 +226,7 @@ A set $$P$$, subsets $$L \subseteq P$$ and $$D \subseteq P$$ with $$L \cap D = \
 $$G \subseteq P$$ such that $$|G\cap D| \leq k$$ and $$|X| + |G|$$ is maximized (where $$X = \{p_i,p_j \in G~|~like(p_i,p_j) = true \wedge i\neq j\}$$).
 {% endfproblem %}
 
-To make the code more readable, we use variable names that are more descriptive. The table below gives an overview of the mapping between formal model and Scala code labels.
 
-
-| Math | Scala | Description |
-| --- | --- | --- |
-| $$P$$ | ```persons``` | Set of persons from which to<br/> select invitees. |
-| $$L$$ | ```personsLiked``` | Subset of persons that is liked. |
-| $$D$$ | ```personsDisliked``` | Subset of persons that is <br/>disliked. |
-| $$like$$ | ```like``` | Function that captures if two<br/> persons like each other or not. |
-| $$k$$ | ```k``` | Value that states how many of<br/> the invited persons at most<br/> can be disliked. |
-| $$G$$ | ```invitees``` | Set of invited persons. |
-| $$X$$ | ```X``` | Set of all pairs of persons that<br/> like each other. |
 
 
 {% scalafiddle template="mathlib" %}
@@ -226,6 +236,12 @@ def si4(persons: Set[Person],
         personsDisliked: Set[Person],
         like: (Person, Person) => Boolean,
         k: Int): Set[Person] = {
+
+    // Input must satisfy these constraints, or program halts.
+    require(personsLiked <= persons, "personsLiked must be a subset of persons")
+    require(personsDisliked <= persons, "personsDisliked must be a subset of persons")
+    require(personsLiked /\ personsDisliked == Set.empty, "intersection between personsLiked and personsDisliked must be emtpy")
+    require(personsLiked \/ personsDisliked == persons, "union of personsLiked and personsLiked must equal persons")
 
     // Specify that invitees is valid if |G /\ D| <= k.
     def atMostKDislikes(invitees: Set[Person]): Boolean = 
@@ -254,15 +270,13 @@ val group = Person.randomGroup(10)    // Generate random group
 val personsLiked = group.take(5)      // The first 5 are liked
 val personsDisliked = group.drop(5)   // The rest is disliked
 
-def like(pi: Person, pj: Person): Boolean = {
-???
-}
+def like = group.randomLikeFunction(.7) // Autogenerate random like relations
 
-
+si4(group, personsLiked, personsDisliked, like, k = 2)
 ```
 {% endscalafiddle %}
 
-## Selecting Invitees V5
+
 
 {% fproblem Selecting invitees (version 5) %}
 A set $$P$$, subsets $$L \subseteq P$$ and $$D \subseteq P$$ with $$L \cap D = \emptyset$$ and $$L \cup D = P$$, and a function $$like: P \times P \rightarrow \{true, false\}$$.;;
@@ -286,33 +300,18 @@ def si5(P: Set[Person],
    .argMax(G => {
      (G intersect L).size // |G \cap L|
      + G.size // |G|
-     + G.uniquepairs.build(pair => like(pair._1, pair._2)).size // |X|
+     + G.uniquePairs.build(pair => like(pair._1, pair._2)).size // |X|
    })
    .get
 }
 
-val (p1, p2, p3, p4) = (Person("p1"), Person("p2"), Person("p3"), Person("p4"))
+val group = Person.randomGroup(10)    // Generate random group
+val personsLiked = group.take(5)      // The first 5 are liked
+val personsDisliked = group.drop(5)   // The rest is disliked
 
-val P = Set(p1, p2, p3, p4)
-val L = Set(p1, p2, p3)
-val D = Set(p4)
-val relations = Set(
-  p1 like p2,
-  p1 like p3,
-  p2 like p3,
-  p3 like p4
-)
-def like = relations.deriveFun
-val k = 3
+def like = group.randomLikeFunction(.7) // Autogenerate random like relations
 
-val out = si5(P, L, D, like)
-
-println(h2("Input:"))
-VegaRenderer.render(relations.deriveGraph(P))
-println(s"k=$k")
-
-println(h2("Output:"))
-println(out)
+si5(group, personsLiked, personsDisliked, like)
 ```
 {% endscalafiddle %}
 
@@ -342,27 +341,12 @@ def si6(P: Set[Person],
    .get
 }
 
-val (p1, p2, p3, p4) = (Person("p1"), Person("p2"), Person("p3"), Person("p4"))
+val group = Person.randomGroup(10)    // Generate random group
+val personsLiked = group.take(5)      // The first 5 are liked
+val personsDisliked = group.drop(5)   // The rest is disliked
 
-val P = Set(p1, p2, p3, p4)
-val L = Set(p1, p2, p3)
-val D = Set(p4)
-val relations = Set(
-  p1 like p2,
-  p1 like p3,
-  p2 like p3,
-  p3 like p4
-)
-def like = relations.deriveFun
-val k = 3
+def like = group.randomLikeFunction(.7) // Autogenerate random like relations
 
-val out = si6(P, L, D, like, k)
-
-println(h2("Input:"))
-VegaRenderer.render(relations.deriveGraph(P))
-println(s"k=$k")
-
-println(h2("Output:"))
-println(out)
+si6(group, personsLiked, personsDisliked, like, k = 2)
 ```
 {% endscalafiddle %}
