@@ -115,7 +115,7 @@ Specifying a *complete* like function for a set of persons, however, will be qui
 
 When given a partial specification of the like function, we can complete it by assuming that any non-specified relationship is a dislike. Use the support function ```.deriveLikeFunction(partialLikes: Set[Likes])``` on a set of persons to create a like function for which the domain consists of all pairs of persons (including $$(a,b)$$, $$(b,a)$$ and $$a,a$$). It will complete ```partialLikes``` by assuming non-specified relationships are dislikes. 
 
-{% scalafiddle template="mathlib" %}
+{% scalafiddle template="mathlib" layout="v50" %}
 ```scala
 val lela = Person("Lela")
 val carlos = Person("Carlos")
@@ -125,7 +125,13 @@ val persons = Set(lela, carlos, ervin)
 val partialLikings = Set(lela likes carlos, carlos likes ervin,carlos dislikes lela)
 
 def like = persons.deriveLikeFunction(partialLikings)
-
+```
+The ```Viz.render()``` function can draw graphs specified in the [DOT language](https://graphviz.org/doc/info/lang.html). The ```.toDotString(like)``` helper function transforms persons and a like function to graph figures.
+```scala
+Viz.render(persons.toDotString(like))
+```
+And we can view the truth values associated with all pairs of persons.
+```scala
 List(
   like(lela, carlos),
   like(lela, ervin),
@@ -142,7 +148,7 @@ List(
 
 While this approach is useful to manually explore small examples, it still is a lot of manual work. Wouldn't it be nice if we can generate a complete like function randomly? Use the support function ```.randomLikeFunction(probability: Double)``` on a set of persons to create a random like function. For each pair (including $$(a,b)$$, $$(b,a)$$ and $$a,a$$), it generates ```true``` with probability equal to the ratio or false otherwise.
 
-{% scalafiddle template="mathlib" %}
+{% scalafiddle template="mathlib" layout="v50" minheight="700"%}
 ```scala
 val lela = Person("Lela")
 val carlos = Person("Carlos")
@@ -151,6 +157,8 @@ val ervin = Person("Ervin")
 val persons = Set(lela, carlos, ervin)
 
 def like = persons.randomLikeFunction(0.7)
+
+Viz.render(persons.toDotString(like))
 
 List(
   like(lela, carlos),
@@ -167,11 +175,26 @@ List(
 {% endscalafiddle %}
 
 {% question %}
-What happens to the like function behaviour when you change the probability?
+What happens to the like function when you change the probability?
 {% hidden Hint? %}
 Try changing the probability value (the input of the function ```randomLikeFunction```) and see what changes in the output.
 {% endhidden %}
 {% endquestion %}
+
+A final example to illustrate how to generate a random input instance.
+
+{% scalafiddle template="mathlib" layout="v20" minheight="700"%}
+```scala
+val personsLiked = Person.randomGroup(2)
+val personsDisliked = Person.randomGroup(3)
+val persons = personsLiked \/ personsDisliked
+
+def like = persons.randomLikeFunction(0.7)
+
+Viz.render(persons.toDotString(like))
+```
+{% endscalafiddle %}
+
 
 {% question %}
 With these support functions, we can randomly create instances for the formal models of selecting invitees. Why is this helpful?

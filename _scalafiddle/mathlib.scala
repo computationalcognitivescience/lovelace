@@ -154,6 +154,42 @@ object SetTheory {
 }
 
 import SetTheory._ 
+import scalatags.JsDom.all._
+
+case object Viz {
+
+  var vizCounter = 0
+
+  def render(dot: String): Unit = {
+    Fiddle.print(
+	  div(id:=s"plot$vizCounter"),
+	  script(s"""
+  	    var script = document.createElement('script');
+	    script.onload = function () {
+		  requirejs.config({
+		    baseUrl: 'http://webgraphviz.com/',
+		    paths: {
+			  "viz": "viz"
+		    }
+		  });
+
+	    require(["viz"], function(viz) {
+  		  const figure = '${dot.filter(_ >= ' ')}';
+  		  var svg = Viz(figure, "svg");
+  		  document.getElementById('plot$vizCounter').innerHTML = svg;
+	    });
+	  };
+
+	  script.src = "https://requirejs.org/docs/release/2.3.6/minified/require.js";
+	  document.head.appendChild(script);
+	  """)
+    )
+    vizCounter = vizCounter + 1
+  }
+}
+
+
+ 
 import scala.util.Random
 
 case class Person(name: String) {
@@ -214,6 +250,16 @@ case object Person {
 			
 			like 
 		}
+		
+		def toDotString(like: (Person, Person) => Boolean): String = {
+			"digraph people {\n" +
+			"node [shape = circle];\n" +
+			(persons x persons).map(pair => {
+			  if(like(pair._1, pair._2)) s"${pair._1} -> ${pair._2} [style=dashed];"
+			  else s"${pair._1} -> ${pair._2} [style=solid];"
+			}).mkString("\n")+
+			"}"
+		}
 	}
 }
 
@@ -249,6 +295,38 @@ case object SelectingInvitees {
 }
 
 import Person._ 
+import scalatags.JsDom.all._
+
+case object Plotly {
+
+  var plotCounter = 0
+
+  def render(plotJson: String): Unit = {
+    Fiddle.print(
+	  div(id:=s"plot$plotCounter"),
+	  script(s"""
+  	    var script = document.createElement('script');
+	    script.onload = function () {
+		  requirejs.config({
+		    baseUrl: 'https://cdn.jsdelivr.net/npm/',
+		    paths: {
+			  "plotly": "plotly.js@1.58.4/dist/plotly.min.js?noext"
+		    }
+		  });
+
+	    require(["plotly"], function(plotly) {
+		  const figure = JSON.parse('${plotJson.filter(_ >= ' ')}');
+		  plotly.newPlot('plot$plotCounter', figure.data, figure.layout).catch(console.warn);
+	    });
+	  };
+
+	  script.src = "https://requirejs.org/docs/release/2.3.6/minified/require.js";
+	  document.head.appendChild(script);
+	  """)
+    )
+    plotCounter = plotCounter + 1
+  }
+} 
 val result = {
 ////
 }
