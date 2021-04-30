@@ -72,6 +72,8 @@ div.indent-3 { margin-left: 3rem; }
 
 div.indent-4 { margin-left: 4rem; }
 
+div[data-scalafiddle], div[data-scalafiddle] pre, div[data-scalafiddle] code { width: 90%; }
+
 /* This file contains all the constants for colors and font styles */
 /** Syntax highlighting styles */
 .highlight { margin-bottom: 15px; }
@@ -256,7 +258,7 @@ blockquote footer { font-size: 1.1rem; line-height: 1.78181818; margin-top: 1.78
 /* blockquote footer { width: 45%; text-align: right; } */
 .sans { font-family: "Gill Sans", "Gill Sans MT", "Gotham Narrow", "Lato", Calibri, sans-serif; letter-spacing: .03em; }
 
-pre, pre code, p code, p pre code { font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 1.2rem; line-height: 1.71428571; margin-top: 1.71428571rem; }
+pre, pre code, p code, p pre code { font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 1rem; line-height: 1.71428571; margin-top: 1.71428571rem; }
 
 h1 code, h2 code, h3 code { font-size: 0.80em; }
 

@@ -13,6 +13,7 @@
     <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
   
   
+
   <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
   
     <script type="text/x-mathjax-config">
@@ -42,6 +43,7 @@
  <!--   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
   
 
+
   <link rel="stylesheet" type="text/css" href="/lovelace/css/tufte.css">
   <!-- <link rel="stylesheet" type="text/css" href="/lovelace/css/print.css" media="print"> -->
 
@@ -61,10 +63,6 @@
 	<div class="nav-right">
 	
 		
-		    
-		      <a href="/lovelace/404.html"></a>
-		    
-	    
   	
 		
   	
@@ -128,6 +126,55 @@
 
 <p>We have seen that sometimes such questions can be answered analytically, using conceptual analysis, rigorous argumentation, or mathematical proofs. These analytical tools are an important part of the theoretical modeler’s toolbox. However, they are limited to what our resource-bounded minds can reason about precisely and explicitly. Computer simulations supplement the modeler’s mind. They are in a sense automated thought experiments. By running our models on computers other than our minds <a class="citation" href="#guest_how_2020">(Guest &amp; Martin, 2020)</a><label for="mf-id-guest" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-guest" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/simulation-guest.jpg" /><br />Post by <a href="https://twitter.com/VandekerckhoveJ/status/1256135079086092288">Joachim van der Kerckhoven on Twitter.</a></span>, we can go beyond the limits of mental simulation and explore model behaviour under a wide range of conditions and at larger input scales. This way we can investigate properties of a theoretical model that are difficult to derive through mathematical analysis because they emerge from the complex interaction of the theory’s components. In Part III, we focus on this use of computer simulations.</p>
 
+<h2 id="why-scala">Why Scala?</h2>
+<p>Whether you are a veteran coder or just starting out, there is a good chance this is the first time you encounter the programming language Scala. Don’t be dissuaded by the unknown; we chose Scala to help you read and write understandable code. Should you wish to use a different programming language, that is perfectly fine too. All coding exercises in this book can be done in any programming language. The coding principles you will learn here will be valuable regardless.</p>
+
+<p>If you’re curious why we chose Scala, please read on. Otherwise, continue <a href="/lovelace/part_iii/simulating#scala-and-mathlib">down below</a>. <label for="" class="margin-toggle">⊕</label><input type="checkbox" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/scala_logo.png" /><br />By <a href="https://www.lightbend.com/assets/images/brand/scala/scala-logos/svg/scala-full-color.svg">Lightbend, Inc.</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=94026409">CC BY 4.0</a>.</span></p>
+
+<h3 id="trustworthy-and-transparent-code">Trustworthy and transparent code</h3>
+<p>Scala is a <em>functional</em> programming language. Functional programming languages are very closely tied to mathematical concepts, precisely like the concepts we have been using in this book. This is an important design feature to make <em>correctness</em> of code more evident to the coder and user. You can trust your code to do the thing is it designed to do, even when the complexity of your code increases. This is where Scala gets its name: <strong>SCA</strong>lable <strong>LA</strong>nguage. It is also the reason why companies like LinkedIn, Airbnb, Netflix and Twitter chose to build their digital infrastructure in Scala.<label for="mn-id-scale" class="margin-toggle sidenote-number"></label><input type="checkbox" id="mn-id-scale" class="margin-toggle" /><span class="sidenote">You might not write code on the same scale as Twitter anytime soon, but the same principles that afford their software to scale are principles that will make your simulation code transparant, verifyable, readible and accessible. </span></p>
+
+<p>Functional programming languages also promote computational level thinking because the relationship between specification (theory) and code (implementation) is thight. This guards against the common confusing between computational level and algorithmic level explanations (see Chapter X). We will be using the <code class="language-plaintext highlighter-rouge">mathlib</code> library, which provides Scala syntax and functionality very similary to the mathematical concepts used in computational level modeling. For example, consider this part of <span style="font-variant: small-caps;">Selecting Invitees (Variant 4) </span> which uses <a href="/lovelace/part_i/math#set-builder">set builder notation</a>:</p>
+
+\[X=\left\{p_i,p_j\in G\middle|like(p_i,p_j)=true\wedge i\neq j\right\}\]
+
+<p>Let’s assume that \(G\), the set of invitees, is stored in <code class="language-plaintext highlighter-rouge">invitees</code> and we have a function <code class="language-plaintext highlighter-rouge">like(x,y)</code>. In Scala <code class="language-plaintext highlighter-rouge">mathlib</code> the equation can be implemented as:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="n">invitees</span>  <span class="c1">// From all invitees,</span>
+    <span class="o">.</span><span class="py">uniquePairs</span>  <span class="c1">// give me all unique pairs,</span>
+                  <span class="c1">// and keep only pairs that like eachother.</span>
+    <span class="o">.</span><span class="py">build</span><span class="o">(</span><span class="n">pair</span> <span class="k">=&gt;</span> <span class="nf">like</span><span class="o">(</span><span class="nv">pair</span><span class="o">.</span><span class="py">_1</span><span class="o">,</span> <span class="nv">pair</span><span class="o">.</span><span class="py">_2</span><span class="o">))</span> 
+</code></pre></div></div>
+
+<p>A common implementation, e.g. in Python, would be<label for="sn-id-python" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-python" class="margin-toggle" /><span class="sidenote">We do not intended to argue that Python is a bad language. One could certainly use a functional programing paradigm in Python, something we would recommend you to try out! However, most code we encounter is written in a less transparent manner as illustrated here. </span>:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>               <span class="c1"># Create an empty set,
+</span><span class="k">for</span> <span class="n">pi</span> <span class="ow">in</span> <span class="n">invitees</span><span class="p">:</span>     <span class="c1"># then loop over all pi,
+</span>  <span class="k">for</span> <span class="n">pj</span> <span class="ow">in</span> <span class="n">invitees</span><span class="p">:</span>   <span class="c1"># and loop over all pj,
+</span>                        <span class="c1"># if the pair is unique
+</span>                        <span class="c1"># and likes eachother,
+</span>    <span class="k">if</span> <span class="n">pi</span> <span class="o">!=</span> <span class="n">pj</span> <span class="ow">and</span> <span class="n">like</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="n">pj</span><span class="p">):</span>
+      <span class="n">x</span><span class="p">.</span><span class="n">add</span><span class="p">((</span><span class="n">pi</span><span class="p">,</span> <span class="n">pj</span><span class="p">))</span>   <span class="c1"># add the pair to x.
+</span></code></pre></div></div>
+
+<p>Not only is the Scala example easier to check if it precisely implements the computational-level model, it also does not tempt the modeller to apply algortihmic level thinking at the computational level.</p>
+
+<h3 id="protection">Protection</h3>
+<p>Another helpful feature of Scala is its type system, which provides protection from running code on input it was not designed for. In many programming languages, Scala included, variables have a <em>type</em>. In the case of Scala, once a variable’s type has been defined it cannot change. For example, we can say that the variable <code class="language-plaintext highlighter-rouge">pets</code> is a set consisting of animals:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val pets: Set[Animal]          
+</code></pre></div></div>
+<p>If we were to assign a list to <code class="language-plaintext highlighter-rouge">pets</code> in Scala:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val pets: Set[Animal] = List[Animal](cat, dog, goldfish)
+</code></pre></div></div>
+<p>The code will not compile and you will receive an error message that explains you are not allowed to assign a list to <code class="language-plaintext highlighter-rouge">pets</code>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>error: type mismatch;
+ found   : List[Animal]
+ required: Set[Animal]
+</code></pre></div></div>
+<p>This mechanism is called <em>strict typing</em> and is used to prevent code from being run on inputs whose behaviour is not defined.<label for="mn-id-type" class="margin-toggle sidenote-number"></label><input type="checkbox" id="mn-id-type" class="margin-toggle" /><span class="sidenote">Languages like Python and R are dynamically typed. You can set any variable to any type. Sometimes you will get an error message when running your code, but if you are unlucky you may not discover you have used incorrect inputs after trying to understand why your simulation is behaving so strangely. </span></p>
+
+<h3 id="open-source-and-open-science">Open source and open science</h3>
+<p>Scala is open source. It is available free of charge and supported by an active community of developers from academia and industry. The principles outlined in this chapter will lead to transparent, accessible and reproducible simulation code. These principles are not limited to Scala and we encourage users of other programming languages to apply them too, even though some additional work might be required.</p>
+
 <h3 id="references">References</h3>
 
 <ol class="bibliography"><li><span id="guest_how_2020">Guest, O., &amp; Martin, A. E. (2020). <i>How computational modeling can force theory building in psychological science</i>. https://doi.org/10.31234/osf.io/rybh9</span></li></ol>
@@ -139,13 +186,13 @@
 	</div>
 	<div class="next-chapter">
 		
-		<p><a href="/lovelace/part_iii/sections/why_scala">Next: Why Scala?</a></p>
+		<p><a href="/lovelace/part_iii/mathlib">Next: Scala and mathlib</a></p>
 		
 	</div>
 </div>
 
     </article>
-    <span class="print-footer">Simulating in Scala - April 7, 2021 - Mark Blokpoel and Iris van Rooij</span>
+    <span class="print-footer">Simulating in Scala - April 30, 2021 - Mark Blokpoel and Iris van Rooij</span>
     <footer>
   <hr class="slender">
   <ul class="footer-links">
