@@ -8,7 +8,7 @@ nav_exclude: true
 We pick up the conversation between Verbal and Formal from [Chapter 4 - Subset Choice](/lovelace/part_ii/subset#dialogue-1-formalizing-inviting-guests). Formal is very excited to share the computer simulations they implemented of the theoretical models Formal and Verbal created. Formal has some suggestions on how to use the simulations, which they explain to Verbal.
 
 {% indent 4 %}
-**Formal:** Welcome dr. Verbal! As promised, I have implemented three of our computational-level models in computer simulations.
+**Formal:** Welcome dr. Verbal! As promised, I have implemented computer simulations for three of our computational-level models.
 {% endindent %}
 
 {% indent 0 %}
@@ -45,15 +45,15 @@ While the formalizations are different, it might be actually be possible that th
 {% endindent %}
 
 If you jumped here directly from [Chapter 4 - Subset choice](/lovelace/part_ii/subset)
-you may find it helpful to first read the instructions on how to read (and write) Scala code using the ```mathlib``` library. This is discussed in [Chapter 9 - Scala and mathlib](/lovelace/part_ii/mathlib). Additionally, the simulation code on this page uses support code which we explain first.
+you may find it helpful to first read [Chapter 9 - Scala and mathlib](/lovelace/part_ii/mathlib) to learn how to read (and write) Scala code using the ```mathlib``` library. In addition to the default ```mathlib``` library, the simulation code on this page includes supporting code which we explain first.
 
-## Support code
-Running simulations requires input instances to compute output for, as specified by the theoretical model. While we could type in input by hand, that is a lot of work. The beauty of using computer simulations is that it can do the hard work for us, but we will need some help in *automatically* generating input. To that end, Formal has written a supporting code that contains helper functionality.{% sidenote 'sn-id-helper' 'Helper functionality is often written specifically for a domain. For example, [simulating Coherence](/lovelace/part_iii/sim_coherence) uses different support code.' %}
+## Supporting code
+Running simulations requires input instances as specified by the theoretical model. While we could code input by hand, that is a lot of work. The beauty of using computer simulations is that it can do the hard work for us by *automatically* generating input. To that end, Formal has written a supporting code. {% sidenote 'sn-id-helper' 'Supporting code is often written specifically for a domain. For example, [simulating Coherence](/lovelace/part_iii/sim_coherence) uses different support code.' %}
 
 For now, it is not important that you know how to write support code. However, in order to explore and adapt the code that Formal has provided, being able to *use* support code is recommended. Let's explore some examples. Remember that you can run (and adapt) the code in your browser using the <button style="background: rgba(255,255,255,0.6) !important;color: rgba(0, 0, 0, 0.6) !important;border-radius: 5px;border: 1px solid #ddd;font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;font-size: 14px;
 padding: 3px 8px;transition: all 350ms ease;"><img src="https://embed.scalafiddle.io/runicon.png" style="padding: 0;margin: 0 0 4px 0;vertical-align: middle;width: 16px;height: 16px;display: inline;">Run</button> button.
 
-The formal models for selecting invitees (subset choice) take as input sets of persons and a function that for pairs of persons returns if they like eachother or not. The support code helps us generate these parts of the input.
+The theoretical models for selecting invitees (subset choice) take as input sets of persons and a function that for pairs of persons returns if they like eachother or not. The support code helps us generate these parts of the input.
 
 ### Persons
 A particular person is identified by their name, and can be defined by using ```Person(name: String)```. This function takes a string as input and returns a Person object with the given name:
@@ -64,7 +64,18 @@ Person("Jamie")
 ```
 {% endscalafiddle %}
 
-We can also request a random person name. Names are randomly selected from a predefined list with 100 names:
+Persons with the same name are considered to refer to the same individual, since the computer cannot distinguish between them.
+
+{% scalafiddle template="mathlib" %}
+```scala
+val person1 = Person("Jamie")
+val person2 = Person("Jamie")
+
+person1 == person2
+```
+{% endscalafiddle %}
+
+We can also create random persons. Their names are randomly selected from a predefined list with 100 names. Running the code below multiple times will create different persons.
 
 {% scalafiddle template="mathlib" %}
 ```scala
@@ -72,7 +83,7 @@ Person.random
 ```
 {% endscalafiddle %}
 
-We can request a group of ```n``` random individuals:
+We can also generate groups of ```n``` random individuals.
 
 {% scalafiddle template="mathlib" %}
 ```scala
@@ -84,18 +95,18 @@ These functions will help us create sets of persons. We can then use ```mathlib`
 
 {% scalafiddle template="mathlib" %}
 ```scala
-val personsLiked = Person.randomGroup(2)
-val personsDisliked = Person.randomGroup(3)
-val allPersons = personsLiked \/ personsDisliked
+val persons = Person.randomGroup(5)
+val personsLiked = persons.take(2)
+val personsDisliked = persons /\ personsLiked
 
 println(personsLiked)
 println(personsDisliked)
-println(allPersons)
+println(persons)
 ```
 {% endscalafiddle %}
 
 ### Like-function
-The final support code Formal provided is used to create like relationships between persons. In the formal model this function is defined as $$like: P\times P \rightarrow \{true,false\}$$. Note that the math does not exclude non-symmetrical liking, meaning that person $$a$$ may like $$b$$, but not the other way around: $$like(a,b)\neq like(b,a)$$. Furthermore, it does not exclude reflection (i.e., self-liking), $$like(a,a)$$ is valid.
+The final support code Formal provided is used to create like relationships between persons. In the formal model this function is defined as $$like: P\times P \rightarrow \{true,false\}$$. After discussing with a colleague (see [Exercise X in Chapter 4](/lovelace/part_ii/subset#try-again)), Formal recognized that the like function was intended to exclude reflection (i.e., self-liking) and is symmetrical $$like(a,b)=like(b,a)$$ (i.e., it formalises like or dislike *eachother*).{% sidenote 'sn-id-helper' 'The formalisations in this chapter are updated with these properties.' %}
 
 One could specify a like relationship manually. Simply create persons, store them in values so we can refer to them and then use ```likes``` or ```dislikes``` to create like relationships.
 
@@ -111,7 +122,7 @@ println(carlos dislikes lela)
 ```
 {% endscalafiddle %}
 
-Specifying a *complete* like function for a set of persons, however, will be quite a chore: for each pair you need to explicate if $$a$$ likes $$b$$ and vice versa. For $$10$$ persons, that is a list of $$10 \cdot 10=100$$ likes. The support functions help us reduce this chore. 
+Specifying a *complete* like function for a set of persons, however, will be quite a chore: for each pair you need to explicate if $$a$$ likes $$b$$ and vice versa. For $$10$$ persons, that is a list of $$10 \cdot 10=100$$ likes. Support functions help us reduce this chore. 
 
 When given a partial specification of the like function, we can complete it by assuming that any non-specified relationship is a dislike. Use the support function ```.deriveLikeFunction(partialLikes: Set[Likes])``` on a set of persons to create a like function for which the domain consists of all pairs of persons (including $$(a,b)$$, $$(b,a)$$ and $$a,a$$). It will complete ```partialLikes``` by assuming non-specified relationships are dislikes. 
 
@@ -135,13 +146,7 @@ And we can view the truth values associated with all pairs of persons.
 List(
   like(lela, carlos),
   like(lela, ervin),
-  like(carlos, lela),
-  like(carlos, ervin),
-  like(ervin, carlos),
-  like(ervin, lela),
-  like(lela, lela),
-  like(carlos, carlos),
-  like(ervin, ervin)
+  like(carlos, ervin)
 )
 ```
 {% endscalafiddle %}
@@ -163,35 +168,29 @@ Viz.render(persons.toDotString(like))
 List(
   like(lela, carlos),
   like(lela, ervin),
-  like(carlos, lela),
-  like(carlos, ervin),
-  like(ervin, carlos),
-  like(ervin, lela),
-  like(lela, lela),
-  like(carlos, carlos),
-  like(ervin, ervin)
+  like(carlos, ervin)
 )
 ```
 {% endscalafiddle %}
 
 {% question %}
-What happens to the like function when you change the probability?
+What happens to the output of the like function when you change the probability?
 {% hidden Hint? %}
 Try changing the probability value (the input of the function ```randomLikeFunction```) and see what changes in the output.
 {% endhidden %}
 {% endquestion %}
 
-A final example to illustrate how to generate a random input instance.
+A final example to illustrate how to generate a random input instance. An alternative visualization is used to indicate which persons are liked by the host or not. Note that generating a visualization graph with many persons will not display properly or potentially crash your browser due to the many relationships.
 
 {% scalafiddle template="mathlib" layout="v20" minheight="700"%}
 ```scala
-val personsLiked = Person.randomGroup(2)
-val personsDisliked = Person.randomGroup(3)
-val persons = personsLiked \/ personsDisliked
+val persons = Person.randomGroup(5)
+val personsLiked = persons.take(2)
+val personsDisliked = persons \ personsLiked
 
 def like = persons.randomLikeFunction(0.7)
 
-Viz.render(persons.toDotString(like))
+Viz.render(persons.toDotString(personsLiked, personsDisliked, like))
 ```
 {% endscalafiddle %}
 
@@ -223,7 +222,7 @@ Can you think of another use?
 
 ## Simulating <span style="font-variant: small-caps; font-style: normal;">Selecting Invitees</span>
 
-In this section we simulate {% problem Selecting invitees (version 4, 5 and 6) %}. Each of the models is copied here, for your convenience. To make the code more readable, we use names in the code that are more descriptive than the single letters used in math. Each formal model is followed by a table that gives an overview of the mapping between formal model and Scala code labels.
+In this section we simulate {% problem Selecting invitees (version 4, 5 and 6) %}. Each of the models is copied here, for your convenience. To make the code more readable, we use names in the code that are more descriptive than the single letters used in math (see Table 1).
 
 
 {% marginnote 'Table-ID1' 'Table 1: the mapping from math notation to Scala code.'  %}
@@ -242,15 +241,12 @@ In this section we simulate {% problem Selecting invitees (version 4, 5 and 6) %
 
 </div>
 
-
+From here on, you are free to explore the simulations at your own. Try to get a feeling for how the three formalizations behave. You can even change the simulation code if you want. After simulating the three models individually, we provide a sandbox for you to compare their behaviour directly.
 
 {% fproblem Selecting invitees (version 4) %}
 A set $$P$$, subsets $$L \subseteq P$$ and $$D \subseteq P$$ with $$L \cap D = \emptyset$$ and $$L \cup D = P$$, a function $$like: P \times P \rightarrow \{true, false\}$$, and a threshold value $$k$$.;;
 $$G \subseteq P$$ such that $$|G\cap D| \leq k$$ and $$|X| + |G|$$ is maximized (where $$X = \{p_i,p_j \in G~|~like(p_i,p_j) = true \wedge i\neq j\}$$).
 {% endfproblem %}
-
-
-
 
 {% scalafiddle template="mathlib" %}
 ```scala
@@ -295,10 +291,11 @@ val personsDisliked = group.drop(5)   // The rest is disliked
 
 def like = group.randomLikeFunction(.7) // Autogenerate random like relations
 
+Viz.render(group.toDotString(personsLiked, personsDisliked, like))
+
 si4(group, personsLiked, personsDisliked, like, k = 2)
 ```
 {% endscalafiddle %}
-
 
 
 {% fproblem Selecting invitees (version 5) %}
@@ -309,23 +306,35 @@ $$G \subseteq P$$ such that $$|G\cap L| + |X| + |G|$$ is maximized (where $$X = 
 
 {% scalafiddle template="Mathlib", minheight="1000", layout="v45" %}
 ```scala
-def si5(P: Set[Person],
-        L: Set[Person],
-        D: Set[Person],
+def si5(persons: Set[Person],
+        personsLiked: Set[Person],
+        personsDisliked: Set[Person],
         like: (Person, Person) => Boolean): Set[Person] = {
-  requirement(L subsetOf P, "l must be a subset of p")
-  requirement(D subsetOf P, "d must be a subset of p")
-  requirement((L intersect D).isEmpty, "intersection between l and d must be emtpy")
-  requirement((L union D) == P, "union of l and d must equal p")
+		
+    // Input must satisfy these constraints, or program halts.
+    require(personsLiked <= persons, "personsLiked must be a subset of persons")
+    require(personsDisliked <= persons, "personsDisliked must be a subset of persons")
+    require(personsLiked /\ personsDisliked == Set.empty, "intersection between personsLiked and personsDisliked must be emtpy")
+    require(personsLiked \/ personsDisliked == persons, "union of personsLiked and personsLiked")
+	
+    // Specify the optimality condition.
+    def gl_x_g(invitees: Set[Person]): Int = {
+        val gl = (invitees /\ personsLiked)
+    	         .size                // Count the invitees the host likes.
+        val x  = invitees.uniquePairs // From all pairs of invitees,
+                 .build(like.tupled)  // select all pairs that like each other,
+                 .size                // and count them.
+        val g  = invitees.size        // Count the number of total invitees.
+        gl + x + g
+    }
 
-
-  P.subsets.toSet // G \subseteq P
-   .argMax(G => {
-     (G intersect L).size // |G \cap L|
-     + G.size // |G|
-     + G.uniquePairs.build(pair => like(pair._1, pair._2)).size // |X|
-   })
-   .get
+    val invitees = powerset(persons)  // From all possible subsets of persons,
+        .argMax(gl_x_g)               // select those that maximize |G/\L| + |X| + |G|
+    
+    // If more than one solution exists, return one at random. Always 1 solution must exist,
+    // because the empty set is a valid solution. Hence, we can assume random does not
+    // return None and 'get' the value.
+    invitees.random.get 
 }
 
 val group = Person.randomGroup(10)    // Generate random group
@@ -334,11 +343,11 @@ val personsDisliked = group.drop(5)   // The rest is disliked
 
 def like = group.randomLikeFunction(.7) // Autogenerate random like relations
 
+Viz.render(group.toDotString(personsLiked, personsDisliked, like))
+
 si5(group, personsLiked, personsDisliked, like)
 ```
 {% endscalafiddle %}
-
-## Selecting Invitees V6
 
 {% fproblem Selecting invitees (version 6) %}
 A set $$P$$, subsets $$L \subseteq P$$ and $$D \subseteq P$$ with $$L \cap D = \emptyset$$ and $$L \cup D = P$$, a function $$like: P \times P \rightarrow \{true, false\}$$, and a threshold value $$k$$.;;
@@ -347,21 +356,37 @@ $$G \subseteq P$$ such that $$|Y| \leq k$$ and  $$|G\cap L|+|G|$$ is maximized (
 
 {% scalafiddle template="mathlib", minheight="1000", layout="v45" %}
 ```scala
-def si6(P: Set[Person],
-        L: Set[Person],
-        D: Set[Person],
+def si6(persons: Set[Person],
+        personsLiked: Set[Person],
+        personsDisliked: Set[Person],
         like: (Person, Person) => Boolean,
         k: Int): Set[Person] = {
-    requirement(L subsetOf P, "l must be a subset of p")
-    requirement(D subsetOf P, "d must be a subset of p")
-    requirement((L intersect D).isEmpty, "intersection between l and d must be emtpy")
-    requirement((L union D) == P, "union of l and d must equal p")
+    
+    // Input must satisfy these constraints, or program halts.
+    require(personsLiked <= persons, "personsLiked must be a subset of persons")
+    require(personsDisliked <= persons, "personsDisliked must be a subset of persons")
+    require(personsLiked /\ personsDisliked == Set.empty, "intersection between personsLiked and personsDisliked must be emtpy")
+    require(personsLiked \/ personsDisliked == persons, "union of personsLiked and personsLiked")
 
+	// Specify that invitees is valid if |Y| <= k.
+    def atMostKPairDislikes(invitees: Set[Person]): Boolean = 
+      { invitees.uniquePairs | like.tupled }.size <= k
+		
+    // Specify the optimality condition.
+    def gl_g(invitees: Set[Person]): Int = {
+        val gl = (invitees /\ personsLiked)
+    	         .size                // Count the invitees the host likes.
+        val g  = invitees.size        // Count the number of total invitees.
+        gl + g
+    }
 
-  P.subsets.toSet // G \subseteq P
-   .filter(G => G.uniquepairs.build(pair => !like(pair._1, pair._2)).size <= k)
-   .argMax(G => (G intersect L).size + G.size)
-   .get
+    val invitees = { powerset(persons) | atMostKPairDislikes _ }
+                   .argMax(gl_g)
+    
+    // If more than one solution exists, return one at random. Always 1 solution must exist,
+    // because the empty set is a valid solution. Hence, we can assume random does not
+    // return None and 'get' the value.
+    invitees.random.get 
 }
 
 val group = Person.randomGroup(10)    // Generate random group
@@ -370,6 +395,30 @@ val personsDisliked = group.drop(5)   // The rest is disliked
 
 def like = group.randomLikeFunction(.7) // Autogenerate random like relations
 
+Viz.render(group.toDotString(personsLiked, personsDisliked, like))
+
 si6(group, personsLiked, personsDisliked, like, k = 2)
+```
+{% endscalafiddle %}
+
+### Comparing model behaviour
+
+Work in progress.
+
+{% scalafiddle template="mathlib", minheight="1000", layout="v30" %}
+```scala
+val group = Person.randomGroup(10)    // Generate random group
+val personsLiked = group.take(5)      // The first 5 are liked
+val personsDisliked = group.drop(5)   // The rest is disliked
+
+def like = group.randomLikeFunction(.7) // Autogenerate random like relations
+
+val k = 2
+
+Viz.render(group.toDotString(personsLiked, personsDisliked, like))
+
+println("Output SI4: " + SelectingInvitees.si4(group, personsLiked, personsDisliked, like, k))
+println("Output SI5: " + SelectingInvitees.si5(group, personsLiked, personsDisliked, like))
+println("Output SI6: " + SelectingInvitees.si6(group, personsLiked, personsDisliked, like, k))
 ```
 {% endscalafiddle %}
