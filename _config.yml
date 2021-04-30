@@ -14,10 +14,14 @@ exclude: ['Gemfile', 'Gemfile.lock', 'Rakefile', 'UploadToGithub.Rakefile', 'REA
 plugins:
   - jekyll/scholar
   - jekyll-youtube
+  - jekyll-scalafiddle
 
 scholar:
   style: apa
   sort_by: author
+
+scalafiddle:
+  theme: light
 
 collections_dir: content
 
@@ -37,10 +41,3 @@ collections:
 
 git:
   branch: master
-
-scastie:
-  theme: dark
-  sbtConfig: |
-    resolvers += "jitpack" at "https://jitpack.io"
-    libraryDependencies += "com.github.markblokpoel" % "probability4scala" % "master"
-  scalaVersion: 2.12.8

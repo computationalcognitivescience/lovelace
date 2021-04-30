@@ -144,3 +144,7 @@ div.indent-3{
 div.indent-4{
 	margin-left: 4rem;
 }
+
+div[data-scalafiddle], div[data-scalafiddle] pre, div[data-scalafiddle] code {
+	width: 90%;
+}
