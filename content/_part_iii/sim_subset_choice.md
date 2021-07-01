@@ -122,9 +122,9 @@ println(carlos dislikes lela)
 ```
 {% endscalafiddle %}
 
-Specifying a *complete* like function for a set of persons, however, will be quite a chore: for each pair you need to explicate if $$a$$ likes $$b$$ and vice versa. For $$10$$ persons, that is a list of $$10 \cdot 10=100$$ likes. Support functions help us reduce this chore. 
+Specifying a *complete* like function for a set of persons, however, will be quite a chore: for each pair you need to explicate if $$a$$ likes $$b$$ and vice versa. For $$10$$ persons, that is a list of $$10 \cdot 10=100$$ likes. Support functions help us reduce this chore.
 
-When given a partial specification of the like function, we can complete it by assuming that any non-specified relationship is a dislike. Use the support function ```.deriveLikeFunction(partialLikes: Set[Likes])``` on a set of persons to create a like function for which the domain consists of all pairs of persons (including $$(a,b)$$, $$(b,a)$$ and $$a,a$$). It will complete ```partialLikes``` by assuming non-specified relationships are dislikes. 
+When given a partial specification of the like function, we can complete it by assuming that any non-specified relationship is a dislike. Use the support function ```.deriveLikeFunction(partialLikes: Set[Likes])``` on a set of persons to create a like function for which the domain consists of all pairs of persons (including $$(a,b)$$, $$(b,a)$$ and $$a,a$$). It will complete ```partialLikes``` by assuming non-specified relationships are dislikes.
 
 {% scalafiddle template="mathlib" layout="v50" %}
 ```scala
@@ -263,9 +263,9 @@ def si4(persons: Set[Person],
     require(personsLiked \/ personsDisliked == persons, "union of personsLiked and personsLiked must equal persons")
 
     // Specify that invitees is valid if |G /\ D| <= k.
-    def atMostKDislikes(invitees: Set[Person]): Boolean = 
+    def atMostKDislikes(invitees: Set[Person]): Boolean =
         (invitees /\ personsDisliked).size <= k
-    
+
     // Specify the optimality condition.
     def xg(invitees: Set[Person]): Int = {
         val x = invitees.uniquePairs // From all pairs of invitees,
@@ -274,15 +274,15 @@ def si4(persons: Set[Person],
         val g = invitees.size        // Count the number of total invitees.
         x + g
     }
-    
+
     val invitees = powerset(persons)  // From all possible subsets of persons,
         .build(atMostKDislikes)       // select subsets that contain at most k disliked persons,
         .argMax(xg)                   // and select the subsets that maximize the optimality condition.
-    
+
     // If more than one solution exists, return one at random. Always 1 solution must exist,
     // because the empty set is a valid solution. Hence, we can assume random does not
     // return None and 'get' the value.
-    invitees.random.get 
+    invitees.random.get
 }
 
 val group = Person.randomGroup(10)    // Generate random group
@@ -304,19 +304,19 @@ $$G \subseteq P$$ such that $$|G\cap L| + |X| + |G|$$ is maximized (where $$X = 
 {% endfproblem %}
 
 
-{% scalafiddle template="Mathlib", minheight="1000", layout="v45" %}
+{% scalafiddle template="mathlib", minheight="1000", layout="v45" %}
 ```scala
 def si5(persons: Set[Person],
         personsLiked: Set[Person],
         personsDisliked: Set[Person],
         like: (Person, Person) => Boolean): Set[Person] = {
-		
+
     // Input must satisfy these constraints, or program halts.
     require(personsLiked <= persons, "personsLiked must be a subset of persons")
     require(personsDisliked <= persons, "personsDisliked must be a subset of persons")
     require(personsLiked /\ personsDisliked == Set.empty, "intersection between personsLiked and personsDisliked must be emtpy")
     require(personsLiked \/ personsDisliked == persons, "union of personsLiked and personsLiked")
-	
+
     // Specify the optimality condition.
     def gl_x_g(invitees: Set[Person]): Int = {
         val gl = (invitees /\ personsLiked)
@@ -330,11 +330,11 @@ def si5(persons: Set[Person],
 
     val invitees = powerset(persons)  // From all possible subsets of persons,
         .argMax(gl_x_g)               // select those that maximize |G/\L| + |X| + |G|
-    
+
     // If more than one solution exists, return one at random. Always 1 solution must exist,
     // because the empty set is a valid solution. Hence, we can assume random does not
     // return None and 'get' the value.
-    invitees.random.get 
+    invitees.random.get
 }
 
 val group = Person.randomGroup(10)    // Generate random group
@@ -361,7 +361,7 @@ def si6(persons: Set[Person],
         personsDisliked: Set[Person],
         like: (Person, Person) => Boolean,
         k: Int): Set[Person] = {
-    
+
     // Input must satisfy these constraints, or program halts.
     require(personsLiked <= persons, "personsLiked must be a subset of persons")
     require(personsDisliked <= persons, "personsDisliked must be a subset of persons")
@@ -369,9 +369,9 @@ def si6(persons: Set[Person],
     require(personsLiked \/ personsDisliked == persons, "union of personsLiked and personsLiked")
 
 	// Specify that invitees is valid if |Y| <= k.
-    def atMostKPairDislikes(invitees: Set[Person]): Boolean = 
+    def atMostKPairDislikes(invitees: Set[Person]): Boolean =
       { invitees.uniquePairs | like.tupled }.size <= k
-		
+
     // Specify the optimality condition.
     def gl_g(invitees: Set[Person]): Int = {
         val gl = (invitees /\ personsLiked)
@@ -382,11 +382,11 @@ def si6(persons: Set[Person],
 
     val invitees = { powerset(persons) | atMostKPairDislikes _ }
                    .argMax(gl_g)
-    
+
     // If more than one solution exists, return one at random. Always 1 solution must exist,
     // because the empty set is a valid solution. Hence, we can assume random does not
     // return None and 'get' the value.
-    invitees.random.get 
+    invitees.random.get
 }
 
 val group = Person.randomGroup(10)    // Generate random group
