@@ -403,7 +403,7 @@ si6(group, personsLiked, personsDisliked, like, k = 2)
 
 ### Comparing model behaviour
 
-Work in progress.
+Work in progress...
 
 {% scalafiddle template="mathlib", minheight="1000", layout="v30" %}
 ```scala
