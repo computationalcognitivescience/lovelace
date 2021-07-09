@@ -25,9 +25,9 @@ this chapter you want to learn more about Scala, there are various textbooks
 (REFS) and online resources such as the official
 [Tour of Scala](https://docs.scala-lang.org/tour/tour-of-scala.html).
 
-### Variables, functions and types
+### Expressions: Variables, functions and types
 
-The basic concepts in a functional programming language such as Scala are
+The basic expressions in a functional programming language such as Scala are
 variables, functions and types. Variables, like their mathematical counterpart,
 are containers storing a value. For example:
 
@@ -107,39 +107,172 @@ types mathematically:
 |:--:|:--:|
 | Math | $$ add: \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N} $$ |
 
-Since Scala is a functional programming language, and functions have types,
-you could even pass a function as an argument of another function. This is a
-powerful way to organize your code and very useful in writing simulation code
-that is closely tied to formal theories. In a sense, a theory is a function
-itself, mapping a list of arguments (input) to output. We've seen that some
-formal theories can have functions as arguments. For example,
-{% problem Selecting invitees (version 1) %} in
-[Chapter 4](/lovelace/part_ii/subset) takes as input the function
-$$like: P \times P \rightarrow \{true, false\}$$. Here is an (partial) example
-of a function as argument.
+In functional programming languages like Scala you can even pass a function as
+an argument of another function. This is a powerful way to organize your code
+and very useful in writing simulation code that is closely tied to formal
+theories. In a sense, a theory is a function itself, mapping a list of arguments
+(input) to output. We've seen that some formal theories can have functions as
+arguments. For example, {% problem Selecting invitees (version 1) %} in [Chapter
+4](/lovelace/part_ii/subset) takes as input the function $$like: P \times P
+\rightarrow \{true, false\}$$. Here is an (partial) example of a function as
+argument.
 
 ```scala
 def selectingInvitees(..., like: (Person, Person) => Boolean)
 ```
-We return to subset choice in the
-[next chapter](/lovelace/part_iii/sim_subset_choice) where we will complete this
-example.
+We return to selecting invitees in the
+[next chapter](/lovelace/part_iii/sim_subset_choice).
 
 ### Blocks and scope
 
-We have implicitly introduced the notion of *block* and *scope*.
+We have implicitly used the notions of *block* and *scope*, but how are they
+defined? In Scala a block is a sequence of expressions *delineated by curly
+brackets. A block has a value which is the value of the *last statement in the
+block.
+
+{% scalafiddle template="mathlib" %}
+```scala
+{
+  val a = 3
+  val b = 6
+  a + b       // This block evaluates to 9 with type Int.
+}
+```
+{% endscalafiddle %}
+
+Blocks can be nested, but values and functions defined within a block cannot
+be accessed outside that block. This property is known as scope, accessing
+values or functions out of scope results in a compiler error:
+
+{% scalafiddle template="mathlib" %}
+```scala
+{
+  val x = 3
+
+  {
+    val y = 6
+    x + y       // Valid, x and y are in this block's scope.
+  }
+
+  x + y         // Invalid, y is outside this block's scope.
+}
+```
+{% endscalafiddle %}
 
 ### Conditional
+
+The *conditional* expression is more colloquially known as the if-then-else
+expression. It allows for branching paths of code, depending on the truth
+value of the conditional. An example (try changing the value of ```x```):
+
+{% scalafiddle template="mathlib" %}
+```scala
+val x = 4
+if(x % 2 == 0) {
+  println("X is even.")
+} else {
+  println("X is odd.")
+}
+```
+{% endscalafiddle %}
+
+Each part of the conditional consists of a code block, though for single
+expressions the curly brackets to simplify the code:
+
+{% scalafiddle template="mathlib" %}
+```scala
+val x = 4
+if(x % 2 == 0) println("X is even.")
+else println("X is odd.")
+```
+{% endscalafiddle %}
+
+You can have an arbitrary number of branching paths using ```else if```:
+
+{% scalafiddle template="mathlib" %}
+```scala
+val x = 4
+if(x < 0) println("X is negative.")
+else if(x == 0) println("X is zero.")
+else if(x <= 10) println("X is small.")
+else println("X is large.")
+```
+{% endscalafiddle %}
+
+The conditional expression is a block with nested blocks. This means that it
+evaluates to the value of the last expression in the block that is evaluated
+by the conditional. This behaviour is useful when defining a function whose
+output is computed differently depending on some truth condition. For example,
+a function that computes the absolute value of ```x``` multiplies ```x``` with
+-1 if ```x``` is negative and otherwise evaluates to ```x```.
+
+{% scalafiddle template="mathlib" %}
+```scala
+def abs(x: Int): Int = {
+  if(x < 0)
+    -1 * x
+  else
+    x
+}
+```
+{% endscalafiddle %}
 
 
 ### Useful types and datastructures
 
-| Type | Example |
-| :--- |:--- |
-| Int | 3 |
-| Double | 2.7 |
-| String | "Awesome" |
-| Boolean | ```true``` |
+Scala comes with a plethora of types and datastructures, many of which fall
+beyond the scope of this book. However, the following basic types and their
+operators will be very useful to know.
+
+| Type | Math equivalent | Example value |
+| :--- |:--- |:--- |
+| Int | $$\mathbb{N}$$ | 3 |
+| Double |  $$\mathbb{R}$$ | 2.7 |
+| Boolean |  $$\{true, false\}$$ | ```true``` |
+| String |  n.a. | "Awesome" |
+
+```Int``` and ```Double``` share many operators such as addition ```+```,
+subtraction ```-```, multiplication ```*``` and division ```/```. The library
+```Math``` also contains several useful functions which you can apply with the
+dot notation:
+
+{% scalafiddle template="mathlib" %}
+```scala
+val x: Double = 3
+val y: Double = 6
+
+println(x + y)
+println(x - y)
+println(x * 3)
+println(y / 2)            // division
+println(y % 2)            // remainder or modulo
+println(Math.pow(x, y))   // x^y
+println(Math.min(x, y))
+println(Math.max(x, y))
+```
+{% endscalafiddle %}
+
+If you change in the code example above ```Double``` to ```Int``` you might
+notice that there is a certain compatility between the two types. That is, the
+compiler does not give a type error when you add a double to an integer, even
+though the addition function expects two doubles or two integers. {% marginnote
+'mn-id-polymorphism' 'This property is known as *polymorphism* and is an
+advanced topic. For the curious, see this [overview on
+Wikipedia](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)).'
+%} This is because Scala knows it can convert an integer to a double value, which
+it will automatically do.
+
+{% scalafiddle template="mathlib" %}
+```scala
+val x: Int = 3
+val y: Double = 2.5
+x+y    // Evaluates to a Double value 5.5
+```
+{% endscalafiddle %}
+
+
+
+
 
 List
 
