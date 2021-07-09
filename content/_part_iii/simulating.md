@@ -29,7 +29,7 @@ Let's assume that $$G$$, the set of invitees, is stored in ```invitees``` and we
 val x = invitees  // From all invitees,
     .uniquePairs  // give me all unique pairs,
                   // and keep only pairs that like eachother.
-    .build(pair => like(pair._1, pair._2)) 
+    .build(pair => like(pair._1, pair._2))
 ```
 
 A common implementation, e.g. in Python, would be{% sidenote 'sn-id-python' 'We do not intended to argue that Python is a bad language. One could certainly use a functional programing paradigm in Python, something we would recommend you to try out! However, most code we encounter is written in a less transparent manner as illustrated here.' %}:
@@ -46,7 +46,7 @@ for pi in invitees:     # then loop over all pi,
 Not only is the Scala example easier to check if it precisely implements the computational-level model, it also does not tempt the modeller to apply algortihmic level thinking at the computational level.
 
 ### Protection
-Another helpful feature of Scala is its type system, which provides protection from running code on input it was not designed for. In many programming languages, Scala included, variables have a *type*. In the case of Scala, once a variable's type has been defined it cannot change. For example, we can say that the variable ```pets``` is a set consisting of animals: 
+Another helpful feature of Scala is its type system, which provides protection from running code on input it was not designed for. In many programming languages, Scala included, variables have a *type*. In the case of Scala, once a variable's type has been defined it cannot change. For example, we can say that the variable ```pets``` is a set consisting of animals:
 ```
 val pets: Set[Animal]          
 ```
@@ -60,11 +60,12 @@ error: type mismatch;
  found   : List[Animal]
  required: Set[Animal]
 ```
-This mechanism is called *strict typing* and is used to prevent code from being run on inputs whose behaviour is not defined.{% sidenote 'mn-id-type' 'Languages like Python and R are dynamically typed. You can set any variable to any type. Sometimes you will get an error message when running your code, but if you are unlucky you may not discover you have used incorrect inputs after trying to understand why your simulation is behaving so strangely.' %} 
+This mechanism is called *strict typing* and is used to prevent code from being run on inputs whose behaviour is not defined.{% sidenote 'mn-id-type' 'Languages like Python and R are dynamically typed. You can set any variable to any type. Sometimes you will get an error message when running your code, but if you are unlucky you may not discover you have used incorrect inputs after trying to understand why your simulation is behaving so strangely.' %}
 
 ### Open source and open science
 Scala is open source. It is available free of charge and supported by an active community of developers from academia and industry. The principles outlined in this chapter will lead to transparent, accessible and reproducible simulation code. These principles are not limited to Scala and we encourage users of other programming languages to apply them too, even though some additional work might be required.
 
+## Installing Scala and ```mathlib```
 
 ### References
 
