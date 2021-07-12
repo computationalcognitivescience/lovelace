@@ -25,7 +25,7 @@ this chapter you want to learn more about Scala, there are various textbooks
 (REFS) and online resources such as the official
 [Tour of Scala](https://docs.scala-lang.org/tour/tour-of-scala.html).
 
-### Expressions: Variables, functions and types
+### Variables, functions and types
 
 The basic expressions in a functional programming language such as Scala are
 variables, functions and types. Variables, like their mathematical counterpart,
@@ -114,7 +114,7 @@ theories. In a sense, a theory is a function itself, mapping a list of arguments
 (input) to output. We've seen that some formal theories can have functions as
 arguments. For example, {% problem Selecting invitees (version 1) %} in [Chapter
 4](/lovelace/part_ii/subset) takes as input the function $$like: P \times P
-\rightarrow \{true, false\}$$. Here is an (partial) example of a function as
+\rightarrow \{true, false\}$$. Here is a (partial) example of a function as
 argument.
 
 ```scala
@@ -122,6 +122,46 @@ def selectingInvitees(..., like: (Person, Person) => Boolean)
 ```
 We return to selecting invitees in the
 [next chapter](/lovelace/part_iii/sim_subset_choice).
+
+{% question %}
+Fill in the blanks in the code below and write a function that computes the
+following equation: $$f(a, b, c) = a + b * c$$
+{% hidden Hint? %}
+You need to replace the dots ```...``` with a list of comma separated arguments,
+and replace the three question marks ```???``` with the expression that evaluates
+the equation.
+{% endhidden %}
+{% endquestion %}
+
+{% scalafiddle template="mathlib" %}
+```scala
+def equation(...): Int = {
+  ???
+}
+
+equation(2, 5, -1) == -3    // Test the function, true if correct.
+```
+{% endscalafiddle %}
+
+Finally, while we won't go into details of object-orientation here, it is useful
+to know that some functions accompany certain types. For example, the type
+```String``` has functions built-in that can be called with the dot- notation.
+These functions (also called *methods*) have access to the value they are called
+upon. The following example called method ```toUpperCase``` that evaluates to
+the upper-case version of the original string.
+
+{% scalafiddle template="mathlib" %}
+```scala
+"This is a String.".toUpperCase
+```
+{% endscalafiddle %}
+
+{% marginnote 'mn-auto-complete' 'Auto-complete can be triggered with
+```Ctrl-space``` or ```Cmd-space``` in Scalafiddle which we use in this book.
+Other development tools often use the same key-command, or alternatively the
+```Tab``` key.' %} Many Scala development tools allow you to look through the
+list of methods by using *auto completion*. Just add a ```.``` to a value and
+access auto complete to open the list.
 
 ### Blocks and scope
 
@@ -206,19 +246,29 @@ output is computed differently depending on some truth condition. For example,
 a function that computes the absolute value of ```x``` multiplies ```x``` with
 -1 if ```x``` is negative and otherwise evaluates to ```x```.
 
+{% question %}
+Complete the code below by implementing the body of <code>abs(x: Int): Int
+</code>. The function should evaluate to the absolute (positive) value of
+<code>x</code>.
+{% hidden Hint? %}
+You need to use the conditional expression. Look at the examples above where the
+conditional tests for negative numbers. You need to distinguish two cases:
+<code>x</code> is negative or not and for each case compute the right value.
+{% endhidden %}
+{% endquestion %}
+
 {% scalafiddle template="mathlib" %}
 ```scala
 def abs(x: Int): Int = {
-  if(x < 0)
-    -1 * x
-  else
-    x
+  ???
 }
+
+abs(-10) == 10    // Test the function, true if correct.
 ```
 {% endscalafiddle %}
 
 
-### Useful types and datastructures
+### Basic types
 
 Scala comes with a plethora of types and datastructures, many of which fall
 beyond the scope of this book. However, the following basic types and their
@@ -226,10 +276,11 @@ operators will be very useful to know.
 
 | Type | Math equivalent | Example value |
 | :--- |:--- |:--- |
-| Int | $$\mathbb{N}$$ | 3 |
-| Double |  $$\mathbb{R}$$ | 2.7 |
-| Boolean |  $$\{true, false\}$$ | ```true``` |
-| String |  n.a. | "Awesome" |
+| ```Int``` | $$\mathbb{N}$$ | 3 |
+| ```Double``` |  $$\mathbb{R}$$ | 2.7 |
+| ```Boolean``` |  $$\{true, false\}$$ | ```true``` |
+| ```Char``` | n.a. | 'c' |
+| ```String``` |  n.a. | "Awesome" |
 
 ```Int``` and ```Double``` share many operators such as addition ```+```,
 subtraction ```-```, multiplication ```*``` and division ```/```. The library
@@ -252,6 +303,29 @@ println(Math.max(x, y))
 ```
 {% endscalafiddle %}
 
+For Boolean types these are some common expressions:
+{% scalafiddle template="mathlib" %}
+```scala
+println(true && true)   // Logical and.
+println(true || false)  // Logical or.
+println(true ^ true)    // Logical xor.
+println(!true)          // Negation.
+```
+{% endscalafiddle %}
+
+And these can be combined with numbers like so:
+{% scalafiddle template="mathlib" %}
+```scala
+val x: Double = 3
+val y: Double = 6
+
+println(x <= 3 && x > 1)          // Number between 1 and 3 (inclusive).
+println(x % 2 == 0 || x > 0)      // Positive even number.
+println(x % 2 == 0 ^ y % 2 == 0)  // Either x or y is even, not both.
+println(!(x < 0))                 // x is positive.
+```
+{% endscalafiddle %}
+
 If you change in the code example above ```Double``` to ```Int``` you might
 notice that there is a certain compatility between the two types. That is, the
 compiler does not give a type error when you add a double to an integer, even
@@ -270,13 +344,225 @@ x+y    // Evaluates to a Double value 5.5
 ```
 {% endscalafiddle %}
 
+Some types cannot be converted and when you try to mix these, the compiler will
+let you know with an error:
+
+{% scalafiddle template="mathlib" %}
+```scala
+val x: Int = 3
+val b: Boolean = true
+x + b    // How to add a Boolean to an Int?
+```
+{% endscalafiddle %}
+
+This conversion also kicks in when calling a function with compatible arguments:
+
+{% scalafiddle template="mathlib" %}
+```scala
+def add(a: Double, b: Double): Double = a +b
+add(1.4, 3)
+```
+{% endscalafiddle %}
+
+{% question %}
+This conversion often only works one way. It is not possible to convert a Double
+to an Int without loosing information. Observe what happens when you run the
+code example above after changing the type of the arguments of <code>add</code> to
+<code>Int</code>.
+{% endquestion %}
+
+### Lists, sets and tuples
+
+When you want to store multiple values you can use collections. Example
+collections could be the temperature forecast for the next seven days:
+
+|--|
+|-:|
+|22.2 °C|
+|23.1 °C|
+|23.7 °C|
+|22.3 °C|
+|24.3 °C|
+|24.7 °C|
+|25.1 °C|
+
+Or the people that you know: Erik, Lamar, Angelica, Emanuel, Lorraine, Meghan,
+Myron, Erica, Lester, Javier, Kelly, Abraham, Lindsay, Harriet, and Guadalupe.
+Or the cost of a menu card item: Vegan pie costs €9,90.
+
+Some collections, like the temperature forecast and menu card item, are ordered:
+one value follows the next. In math, these are expressed in a list or sequence
+$$\langle 22.2, 23.1, 23.7, 22.3, 24.3, 24.7, 25.1 \rangle$$ or a tuple
+$$(\text{vegan pie}, 9.9)$$. Unordered collections, such as people, are
+expressed in a set $$\{\text{Erik},$$ $$\text{Lamar},$$ $$\text{Angelica},$$
+$$\text{Emanuel},$$ $$\text{Lorraine},$$ $$\text{Meghan},$$ $$\text{Myron},$$
+$$\text{Erica},$$ $$\text{Lester},$$ $$\text{Javier},$$ $$\text{Kelly},$$
+$$\text{Abraham},$$ $$\text{Lindsay},$$ $$\text{Harriet},$$
+$$\text{Guadalupe}\}$$.
+
+In Scala we can store ordered collections in a ```List``` or tuple and unordered
+collections in a ```Set```:
+
+{% scalafiddle template="mathlib" %}
+```scala
+val forecast = List(22.2, 23.1, 23.7, 22.3, 24.3, 24.7, 25.1)
+val menuItem = ("Vegan pie", 9.90)
+val people   = Set("Erik", "Lamar", "Angelica", "Emanuel", "Lorraine",
+                   "Meghan", "Myron", "Erica", "Lester", "Javier", "Kelly",
+                   "Abraham", "Lindsay", "Harriet", "Guadalupe")
+```
+{% endscalafiddle %}
+
+We'll dive into sets below using the ```mathlib``` library, so let's first get
+some familiarity with lists. Some basic examples are in the code block below.
+Try playing around with them to see what they do.
+
+{% scalafiddle template="mathlib" %}
+```scala
+val forecastThisWeek = List(22.2, 23.1, 23.7, 22.3, 24.3, 24.7, 25.1)
+val forecastNextWeek = List(22.3, 19.8, 18.4, 18.0, 17.6, 17.5, 17.2)
+
+println(23.1 :: forecastThisWeek)               // Prepend element.
+println(forecastThisWeek ::: forecastNextWeek)  // Prepend list.
+println(forecastThisWeek.size)                  // Number of elements in list.
+println(forecastThisWeek.contains(23.7))        // Does the list contain element?
+println(forecastThisWeek.head)                  // The first element of the list.
+println(forecastThisWeek.tail)                  // Everything except the first element.
+println(forecastThisWeek(3))                    // The n-th element.
+println(forecastThisWeek.isEmpty)               // Checks whether the list is emtpy.
+```
+{% endscalafiddle %}
+
+The power of collections lies in being able to apply to all of the elements. The
+idea is that if we have a function that applies to one element, e.g., $$sq(x) =
+x^2)$$, we can apply it to all elements in the list. The most common of these
+applications is called ```map```. It takes as argument a function ```f``` and
+evaluates to a list where each element computed using ```f```:
 
 
+|-:|:-:|:-:|:-:|:-:|
+| ```list``` | ```1``` | ```2``` | ```3``` | ```4``` |
+|  | $$\downarrow$$ | $$\downarrow$$ | $$\downarrow$$ | $$\downarrow$$ |
+|  | ```sq(1)``` | ```sq(2)``` | ```sq(3)``` | ```sq(4)``` |
+|  | $$\downarrow$$ | $$\downarrow$$ | $$\downarrow$$ | $$\downarrow$$ |
+| ```list.map(sq)``` | ```1``` | ```4``` | ```9``` | ```16``` |
+
+{% scalafiddle template="mathlib" %}
+```scala
+// Function that computes the square root of x.
+def sq(x: Int): Int = x * x
+val list = List(1, 2, 3, 4)
+
+println(list.map(sq))
+```
+{% endscalafiddle %}
+
+The type of the argument of the function must be the same type as the elements
+in the list, but its output can be of any type. For example, take an ```Int```
+and return a ```String```.
+
+{% scalafiddle template="mathlib" %}
+```scala
+// Function that creates a String with x "x"s.
+def xx(x: Int): String = {
+  if(x==1) "x"
+  else "x" + xx(x-1)
+}
+val list = List(1, 2, 3, 4)
+
+println(list.map(xx))
+```
+{% endscalafiddle %}
+
+What other useful things can we do with lists? Below are some self-explanatory
+examples.
+
+{% scalafiddle template="mathlib" %}
+```scala
+// Function that checks whether x is even.
+def isEven(x: Int): Boolean = {
+  x % 2 == 0
+}
+val list = List(1, 2, 3, 4)
+
+println(list.exists(isEven))    // Does list contain an element that isEven?
+println(list.exists(_ > 3))     // Implicit function, does the list contain an element larger than 3?
+println(list.forall(isEven))    // Do all elements in list return true for isEven?
+println(list.forall(_ <= 100))  // Implicit function, does the list contain an element larger than 3?
+println(list.filter(isEven))    // Filter out all elements that return true for isEven.
+println(list.filter(_ < 3))     // Filter out all elements less than 3.
+```
+{% endscalafiddle %}
+
+There are some special methods for lists that contain numbers:
+{% scalafiddle template="mathlib" %}
+```scala
+// Function that checks whether x is even.
+val list = List(1, 2, 3, 4)
+
+println(list.sum)             // The sum of all numbers in list.
+println(list.product)         // The product of all numbers in list.
+```
+{% endscalafiddle %}
+
+Many of the functions and methods that work for lists, also work for other
+collections such as sets. Even a <code>String</code> can be treated as a
+collection as it is essentially a list of characters.
+
+{% question %}
+Look at the code scaffold below. Implement the body of the function
+<code>consonant</code> and choose the method to apply to <code>sentence</code>
+such that the code evaluates to the sentence with only consonants.
+{% hidden Hint? %}
+The list of vowels (for English) is given. Write code that checks if the
+<code>character</code> does not exist within vowels.
+{% endhidden %}
+{% endquestion %}
+
+{% scalafiddle template="mathlib" %}
+```scala
+val sentence = "Hi, you're doing awesome!"
+val vowels   = List('a', 'e', 'i', 'o', 'u')
+
+def consonant(character: Char): Boolean = {
+  ???
+}
+
+sentence.___(consonant)
+```
+{% endscalafiddle %}
 
 
-List
+Collections in Scala are what is called *generic*. The change their type
+depending on the values you apply to them. The list containing the forecast
+consists of values of type ```Int```, therefore the type of ```forecast``` is
+```List[Int]```. In Scala, the type of a generic includes the type of its
+contents denoted between square brackets.
 
-Set
+{% question %}
+What is the type of <code>vowels</code>? Fill in the blanks: <code>List[___]</code>
+{% endquestion %}
+
+{% stopandthink %}
+What benefits do we get from generics?
+{% endstopandthink %}
+
+Collections, courtesy of being generic, can store different types. A set of
+doubles? No problem ```Set[Double]```. A list of Booleans? Easy
+```Set[Boolean]```! The type of a collection also grants a level of protection
+to the programmer. You cannot prepend a Boolean to a list of integers:
+
+{% scalafiddle template="mathlib" %}
+```scala
+val forecast: List[Double]  = List(22.2, 23.1, 23.7, 22.3, 24.3, 24.7, 25.1)
+val forecast2: List[Double] = true :: forecast
+```
+{% endscalafiddle %}
+
+If you could mix different (incompatible) types in a collection, performing
+calculations on that collection would be either undefined (e.g., what does
+mean to compute the sum of a list of ```Int```, ```Boolean``` and ```String```?)
+or it would have unpredictable effects.
 
 ## ```mathlib```
 
