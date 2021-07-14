@@ -514,7 +514,7 @@ Look at the code scaffold below. Implement the body of the function
 <code>consonant</code> and choose the method to apply to <code>sentence</code>
 such that the code evaluates to the sentence with only consonants.
 {% hidden Hint? %}
-The list of vowels (for English) is given. Write code that checks if the
+The list of (English) vowels is given. Write code that checks if the
 <code>character</code> does not exist within vowels.
 {% endhidden %}
 {% endquestion %}
@@ -532,6 +532,7 @@ sentence.___(consonant)
 ```
 {% endscalafiddle %}
 
+### Generics
 
 Collections in Scala are what is called *generic*. The change their type
 depending on the values you apply to them. The list containing the forecast
@@ -541,6 +542,9 @@ contents denoted between square brackets.
 
 {% question %}
 What is the type of <code>vowels</code>? Fill in the blanks: <code>List[___]</code>
+{% hidden Hint? %}
+What is the type of the values contained in the list?
+{% endhidden %}
 {% endquestion %}
 
 {% stopandthink %}
@@ -566,4 +570,155 @@ or it would have unpredictable effects.
 
 ## ```mathlib```
 
+```mathlib``` is a library written to support the development of simulations of
+formal theories (computational-level models specifically). {% marginnote
+'mn-id-implementation' 'Admittedly, an exact implementation is not always
+possible. Especially when the simulation deviates from the formal theory, it is
+important to be able for experts to understand how the simulation is different.'
+%} Ideally, we want (experts) to be able to read simulation code and
+*understand* that it is an exact implementation of the formal theory. As you may
+have noticed during the Scala introduction, functional programming is closely
+related to the mathematical language of formal theories. Consider the following
+example formal theory:
+
+{% fproblem Pizza Toppings %}
+A set of toppings $$T$$, a budget $$b\in\mathbb{N}$$, and a cost function
+for toppings $$c: T\rightarrow \mathbb{N}$$;;
+A selection of toppings $$T'\subseteq T$$ such that $$\sum_{t \in T}c(t) \leq b$$.
+{% endfproblem %}
+
+In this section you will learn how to read (and write) simulation code that
+implements a formal theory and is easy to understand that it does what we say it
+does. Take a look at the following code implementing {% problem Pizza Toppings
+%}. (We assume toppings are represented by ```Strings```.)
+
+{% scalafiddle template="mathlib" %}
+```scala
+def pizzaToppings(toppings: Set[String], budget: Int, cost: String => Int): Set[String] = {
+  // Sub-function to compute the cost of a subset of toppings.
+  // \sum_{t \in T} c(t)
+  def subsetCost(subset: Set[String]): Int = {
+    subset.map(cost) // Transform each element in subset to its cost using the cost function.
+          .sum       // Sum all costs.
+  }
+
+  // Sub-function to check if a given subset fits within the budget.
+  // \sum_{t \in T} c(t) <= b
+  def subsetWithinBudget(subset: Set[String]): Boolean = {
+    subsetCost(subset) <= budget
+  }
+
+  powerset(toppings)            // The set of all possible subsets.
+    .filter(subsetWithinBudget) // Filter (keep) all subsets that fit the budget.
+    .random                     // Get a random subset.
+    .getOrElse(Set.empty)       // If to random subset exists, return the emtpy set.
+}
+```
+{% endscalafiddle %}
+
+This code example combines several expressions we covered earlier, but by
+breaking down the components it is relatively easy to show that the code
+implements {% problem Pizza Toppings %}. Of course, even though math is much
+less ambiguous as verbal theory, that does not exclude there being multiple
+(equivalent) expressions in math. Some might be easier to translate to Scala
+code than others. We will encounter examples where rewriting the mathematical
+expressions of the formal theory can help in clarifying the relationship with
+the simulation.
+
+In the next section, we explore how ```mathlib``` allows writing code for formal
+theories using set theory. The library also contains support for probability and
+graph theory. You can find out more at the library [Github
+page](https://github.com/markblokpoel/mathlib), but this requires installing
+local development environment such as Jupyter/Almond or Intellij (see
+[Installing Scala and
+```mathlib```](/lovelace/part_iii/simulating#installing-scala-and-mathlib)).
+
 ### Set theory
+
+In this book, set theory plays an important role in formalizing verbal theories,
+so we start exploring ```mathlib``` there. This section follows the same
+structure as [Chapter 3 - Math concepts and notation](/lovelace/part_i/math).
+
+Creating a set is similar to creating other collections such as lists. Set
+membership in Scala is an expression that evaluates to ```true``` if the element
+is within the set or ```false``` if it is not. The Scala code below creates the
+set $$P = \{\text{Ramiro},\text{Brenda},\text{Molly}\}$$, then tests if
+$$\text{Ramiro}\in P$$ and if $$\text{Saki}\in P$$.
+
+{% scalafiddle template="mathlib" %}
+```scala
+val p: Set[String] = Set("Ramiro", "Brenda", "Molly")
+
+println("Ramiro" in p)
+println("Saki" in p)
+```
+{% endscalafiddle %}
+
+Subset and superset expressions also evaluate to ```true``` or ```false```.
+
+{% scalafiddle template="mathlib" %}
+```scala
+val animals = Set("cat", "cuttlefish", "turtle", "blue whale")
+val mammals = Set("cat", "blue whale")
+val thingsOnEarth = Set("cat", "cuttlefish", "turtle", "blue whale", "university", "chair")
+
+println(mammals < animals)        // Mammals is a subset of animals.
+println(thingsOnEarth > animals)  // Things on Earth is a superset of animals.
+```
+{% endscalafiddle %}
+
+Intersection, union and difference evaluate to the correct super- or
+subset.
+
+{% scalafiddle template="mathlib" %}
+```scala
+val yourFriends = Set("John", "Roberto", "Holly", "Doris", "Charlene")
+val myFriends =  Set("Vicky", "Charlene", "Ramiro", "Johnnie", "Roberto")
+
+println(yourFriends /\ myFriends) // Common friends using intersection.
+println(yourFriends \/ myFriends) // Friends we know together using union.
+println(myFriends \ yourFriends)  // Who I know that you don't, using difference.
+```
+{% endscalafiddle %}
+
+In formal theories, we often use set theoretic notation not as Boolean tests,
+but to stipulate the output. E.g., in {% problem Pizza Toppings %}, the output
+is a subset $$T'\subseteq T$$ that fits in budget. This notation, however, does
+not translate clearly into Scala code. Consider the following rewrite of the
+formal theory output:
+
+$$T' \in \mathcal{P}(T)$$ such that $$\sum_{t\in T'}c(t)\leq b$$
+
+This notation still does not easily translate, for two reasons. Firstly, because
+the relationship between $$T'$$ and the desired property (fits in budget) is
+expressed in natural language. Secondly, because there are multiple outputs
+possible. Since the theory does not explicitly state which from the possible
+outputs is preferred, we need to assume it either returns the entire set or
+selects at random.
+
+We can express the set of possible outputs and the relationship between $$T'$$
+and budget-fit explicitly in math using set building notation:
+
+$$\left\{T'~\middle|~\mathcal{P}(T) \wedge \displaystyle\sum_{t\in T'}c(t)\leq
+b\right\}$$
+
+Here, $$\mathcal{P}$$ is the powerset notation. It denotes the set consisting of
+all possible subsets and $$T'$$ is an element in that set. The set-builder
+notation describes the set of all possible subsets that satisfy the budget
+constraint.
+
+{% scalafiddle template="mathlib" %}
+
+```scala
+{ powerset(toppings) | cost }
+
+```
+{% endscalafiddle %}
+
+### Cheat sheet
+
+
+### Simulation structure
+
+- The model
+- Simulation inputs
