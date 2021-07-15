@@ -87,6 +87,26 @@ function which is delineated by curly brackets. Whenever we call this function
 with the right arguments, the value of the body is computed relative to the
 arguments and that value is the output of the function.
 
+{% question %}
+Fill in the blanks in the code below and write a function that computes the
+following equation: $$f(a, b, c) = a + b * c$$
+{% hidden Hint? %}
+You need to replace the dots ```...``` with a list of comma separated arguments,
+and replace the three question marks ```???``` with the expression that evaluates
+the equation.
+{% endhidden %}
+{% endquestion %}
+
+{% scalafiddle template="mathlib" %}
+```scala
+def equation(...): Int = {
+  ???
+}
+
+equation(2, 5, -1) == -3    // Test the function, true if correct.
+```
+{% endscalafiddle %}
+
 Functions in Scala have types too which becomes clearer with the following
 alternative notation.
 
@@ -120,32 +140,29 @@ argument.
 ```scala
 def selectingInvitees(..., like: (Person, Person) => Boolean)
 ```
-We return to selecting invitees in the
-[next chapter](/lovelace/part_iii/sim_subset_choice).
 
-{% question %}
-Fill in the blanks in the code below and write a function that computes the
-following equation: $$f(a, b, c) = a + b * c$$
-{% hidden Hint? %}
-You need to replace the dots ```...``` with a list of comma separated arguments,
-and replace the three question marks ```???``` with the expression that evaluates
-the equation.
-{% endhidden %}
-{% endquestion %}
+We return to selecting invitees in the [next
+chapter](/lovelace/part_iii/sim_subset_choice), where we will use this coding
+strategy. For now, we should note one syntactic oddity in the Scala language.
+Sometimes when you pass a function as an argument, the compiler will complain
+with the following message:
 
-{% scalafiddle template="mathlib" %}
-```scala
-def equation(...): Int = {
-  ???
-}
-
-equation(2, 5, -1) == -3    // Test the function, true if correct.
 ```
-{% endscalafiddle %}
+error: missing argument list for method myFun
+Unapplied methods are only converted to functions when a function type is expected.
+You can make this conversion explicit by writing `myFun _` or `myFun(_)` instead of `myFun`.
+```
+ The solution for this problem is often following the instructions in the error
+ explicitly and add an underscore ```_``` to the function. For example:
+
+ ```scala
+selectingInvitees(..., like)    // Procudes error.
+selectingInvitees(..., like _)  // Correct.
+ ```
 
 Finally, while we won't go into details of object-orientation here, it is useful
 to know that some functions accompany certain types. For example, the type
-```String``` has functions built-in that can be called with the dot- notation.
+```String``` has functions built-in that can be called with the dot-notation.
 These functions (also called *methods*) have access to the value they are called
 upon. The following example called method ```toUpperCase``` that evaluates to
 the upper-case version of the original string.
@@ -295,9 +312,9 @@ val y: Double = 6
 println(x + y)
 println(x - y)
 println(x * 3)
-println(y / 2)            // division
-println(y % 2)            // remainder or modulo
-println(Math.pow(x, y))   // x^y
+println(y / 2)            // Division.
+println(y % 2)            // Remainder or modulo.
+println(Math.pow(x, y))   // Exponentiation, x^y.
 println(Math.min(x, y))
 println(Math.max(x, y))
 ```
@@ -579,7 +596,7 @@ important to be able for experts to understand how the simulation is different.'
 *understand* that it is an exact implementation of the formal theory. As you may
 have noticed during the Scala introduction, functional programming is closely
 related to the mathematical language of formal theories. Consider the following
-example formal theory:
+example (toy) formal theory:
 
 {% fproblem Pizza Toppings %}
 A set of toppings $$T$$, a budget $$b\in\mathbb{N}$$, and a cost function
@@ -595,15 +612,13 @@ does. Take a look at the following code implementing {% problem Pizza Toppings
 {% scalafiddle template="mathlib" %}
 ```scala
 def pizzaToppings(toppings: Set[String], budget: Int, cost: String => Int): Set[String] = {
-  // Sub-function to compute the cost of a subset of toppings.
-  // \sum_{t \in T} c(t)
+  // Helper function to compute the cost of a subset of toppings.
   def subsetCost(subset: Set[String]): Int = {
     subset.map(cost) // Transform each element in subset to its cost using the cost function.
           .sum       // Sum all costs.
   }
 
-  // Sub-function to check if a given subset fits within the budget.
-  // \sum_{t \in T} c(t) <= b
+  // Helper function to check if a given subset fits within the budget.
   def subsetWithinBudget(subset: Set[String]): Boolean = {
     subsetCost(subset) <= budget
   }
@@ -628,10 +643,9 @@ the simulation.
 In the next section, we explore how ```mathlib``` allows writing code for formal
 theories using set theory. The library also contains support for probability and
 graph theory. You can find out more at the library [Github
-page](https://github.com/markblokpoel/mathlib), but this requires installing
-local development environment such as Jupyter/Almond or Intellij (see
-[Installing Scala and
-```mathlib```](/lovelace/part_iii/simulating#installing-scala-and-mathlib)).
+page](https://github.com/markblokpoel/mathlib), but using these advanced
+mathematics requires installing a local development environment such as
+Jupyter/Almond or Intellij (see [Installing Scala and ```mathlib```](/lovelace/part_iii/simulating#installing-scala-and-mathlib)).
 
 ### Set theory
 
@@ -681,11 +695,12 @@ println(myFriends \ yourFriends)  // Who I know that you don't, using difference
 ```
 {% endscalafiddle %}
 
-In formal theories, we often use set theoretic notation not as Boolean tests,
-but to stipulate the output. E.g., in {% problem Pizza Toppings %}, the output
-is a subset $$T'\subseteq T$$ that fits in budget. This notation, however, does
-not translate clearly into Scala code. Consider the following rewrite of the
-formal theory output:
+Before we look at set builder notation, consider the following. In formal
+theories, we often use set theoretic notation not as Boolean tests, but to
+stipulate the output. E.g., in {% problem Pizza Toppings %}, the output is a
+subset $$T'\subseteq T$$ that fits in budget. This notation, however, does not
+translate directly into Scala code. Consider the following rewrite of the formal
+theory output:
 
 $$T' \in \mathcal{P}(T)$$ such that $$\sum_{t\in T'}c(t)\leq b$$
 
@@ -696,26 +711,193 @@ possible. Since the theory does not explicitly state which from the possible
 outputs is preferred, we need to assume it either returns the entire set or
 selects at random.
 
-We can express the set of possible outputs and the relationship between $$T'$$
-and budget-fit explicitly in math using set building notation:
+We can address the first issues by expressing the set of possible outputs and
+the relationship between $$T'$$ and budget-fit explicitly in math using set
+building notation. {% marginnote 'mn-id-helperfunctions' 'The practice of
+decomposing parts of a theory (or code) into sub-parts is well known in
+mathematics and programming. It can help make math and code more readable,
+because we can abstract from the inner workings of a function.' %} We make our
+lives easier by defining a help function for cost of subsets: $$cost:
+\mathcal{P}(T) \rightarrow \mathbb{N}$$, where $$cost(T')=\sum_{t\in T'}c(t)$$.
+Then the set of all subsets within budget can be defined as:
 
-$$\left\{T'~\middle|~\mathcal{P}(T) \wedge \displaystyle\sum_{t\in T'}c(t)\leq
-b\right\}$$
+$$\left\{T'~\middle|~\mathcal{P}(T) \wedge cost(T')\leq b\right\}$$
 
 Here, $$\mathcal{P}$$ is the powerset notation. It denotes the set consisting of
 all possible subsets and $$T'$$ is an element in that set. The set-builder
 notation describes the set of all possible subsets that satisfy the budget
-constraint.
+constraint. Dealing second issue (multiple possible outputs), we make the
+decision to return a random valid output.
 
 {% scalafiddle template="mathlib" %}
 
 ```scala
-{ powerset(toppings) | cost }
+def pizzaToppings(toppings: Set[String], budget: Int, cost: String => Int): Set[String] = {
+```
 
+The helper function that computes the cost of a subset is implemented as:
+```scala
+  // Helper function to compute the cost of a subset of toppings.
+  def subsetCost(subset: Set[String]): Int = {
+    sum(subset, cost)
+  }
+```
+
+We add one more helper function to check if a subset fits within the budget.
+```scala
+  // Helper function to check if a given subset fits within the budget.
+  def subsetWithinBudget(subset: Set[String]): Boolean = {
+    subsetCost(subset) <= budget
+  }
+```
+
+Finally, we can define the output of 	 <span style="font-variant:
+small-caps">Pizza Toppings</span> using set builder notation:
+
+```scala
+  { powerset(toppings) | subsetWithinBudget _ }.random.getOrElse(Set.empty)
+}
+```
+{% endscalafiddle %}
+
+{% marginnote 'mn-id-multicode' 'You may have noticed this code is different
+from the example given at the start of this section. Similarly to multiple
+mathematical expressions being equivalent, there exist (many) different ways of
+implementing the same function.' %} This is a example implementation uses set
+builder to construct a set of subsets that fit within budget. Set builder, in
+essence, filters out all elements (in the case above the elements are sets) from
+the given set that do not satisfy the evaluation function on the right side.
+
+```scala
+{ givenSet | evalFun _ }
+```
+
+{% question %}
+Complete the code scaffold below such that the set builder expression evaluates
+to the subset of odd numbers in <code>numbers</code>.
+{% endquestion %}
+
+{% scalafiddle template="mathlib" %}
+```scala
+// Function that checks if a number is odd.
+def isOdd(n: Int): Boolean = {
+  ???
+}
+
+val numbers: Set[Int] = (0 to 11).toSet   // Set consisting of numbers 0 to 11
+
+{ ___ | ___ }
+```
+{% endscalafiddle %}
+
+
+The final expression for working with sets is the cardinal product $$\times$$. The
+cardinal product between two sets $$A$$ and $$B$$ returns a set with all
+possible pairs of elements in $$A$$ and $$B$$. Pairs, in Scala, are represented
+as tuples.
+
+```scala
+val pair: (Int, String) = (4, "Book")
+```
+
+The type of a tuple combines the types of the elements. The cardinal product
+between two sets yields a set with the subtype of the tuple.
+
+{% scalafiddle template="mathlib" %}
+```scala
+val numbers: Set[Int]  = Set(1, 2, 3, 4)
+val items: Set[String] = Set("Book", "Candle", "Wine")
+
+val itemNumberPairs: Set[(String, Int)] = items x numbers
+
+println(itemNumberPairs)
 ```
 {% endscalafiddle %}
 
 ### Cheat sheet
+
+{% scalafiddle template="mathlib" %}
+```scala
+
+/**** BASIC TYPES ****/
+
+val integer: Int = 3
+val double: Double = 2.7
+val bool: Boolean = true
+val character: Char = 'c'
+val string: String = "Awesome"
+
+val x: Int = integer
+val y: Double = double
+
+println(x + y)
+println(x - y)
+println(x * 3)
+println(y / 2)            // Division.
+println(y % 2)            // Remainder or modulo.
+println(Math.pow(x, y))   // Exponentiation, x^y.
+println(Math.min(x, y))
+println(Math.max(x, y))
+
+println(true && true)   // Logical and.
+println(true || false)  // Logical or.
+println(true ^ true)    // Logical xor.
+println(!true)          // Negation.
+
+/**** Lists ****/
+val forecastThisWeek = List(22.2, 23.1, 23.7, 22.3, 24.3, 24.7, 25.1)
+val forecastNextWeek = List(22.3, 19.8, 18.4, 18.0, 17.6, 17.5, 17.2)
+
+println(23.1 :: forecastThisWeek)               // Prepend element.
+println(forecastThisWeek ::: forecastNextWeek)  // Prepend list.
+println(forecastThisWeek.size)                  // Number of elements in list.
+println(forecastThisWeek.contains(23.7))        // Does the list contain element?
+println(forecastThisWeek.head)                  // The first element of the list.
+println(forecastThisWeek.tail)                  // Everything except the first element.
+println(forecastThisWeek(3))                    // The n-th element.
+println(forecastThisWeek.isEmpty)               // Checks whether the list is emtpy.
+
+val list = List(1, 2, 3, 4)
+def sq(x: Int): Int = x * x   // Function that computes the square root of x.
+println(list.map(sq))         // Map each value in list to sq(_)
+
+def isEven(x: Int): Boolean = x % 2 == 0  // Function that checks whether x is even.
+
+println(list.exists(isEven))    // Does list contain an element that isEven?
+println(list.exists(_ > 3))     // Implicit function, does the list contain an element larger than 3?
+println(list.forall(isEven))    // Do all elements in list return true for isEven?
+println(list.forall(_ <= 100))  // Implicit function, does the list contain an element larger than 3?
+println(list.filter(isEven))    // Filter out all elements that return true for isEven.
+println(list.filter(_ < 3))     // Filter out all elements less than 3.
+println(list.sum)               // The sum of all numbers in list.
+println(list.product)           // The product of all numbers in list.
+
+/**** Tuples ****/
+val menuItem: (String, Double) = ("Vegan pie", 9.90)
+println(menuItem._1)            // Get the first value of the tuple.
+println(menuItem._2)            // Get the second value of the tuple.
+
+/**** Sets ****/
+val animals = Set("cat", "cuttlefish", "turtle", "blue whale")
+val mammals = Set("cat", "blue whale")
+val thingsOnEarth = Set("cat", "cuttlefish", "turtle", "blue whale", "university", "chair")
+
+println("cat" in animals)         // Test if element is in  the set.
+println(mammals < animals)        // Mammals is a subset of animals.
+println(thingsOnEarth > animals)  // Things on Earth is a superset of animals.
+
+val yourFriends = Set("John", "Roberto", "Holly", "Doris", "Charlene")
+val myFriends =  Set("Vicky", "Charlene", "Ramiro", "Johnnie", "Roberto")
+
+println(yourFriends /\ myFriends) // Common friends using intersection.
+println(yourFriends \/ myFriends) // Friends we know together using union.
+println(myFriends \ yourFriends)  // Who I know that you don't, using difference.
+
+println({ Set(0, 1, 2, 3, 4, 5) | isEven _ }) // Build a set of even numbers.
+
+println(myFriends x animals)      // Set of all pairs of friends and animals using cardinal product.
+```
+{% endscalafiddle %}
 
 
 ### Simulation structure
