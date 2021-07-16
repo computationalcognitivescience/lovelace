@@ -14,9 +14,11 @@ The translation from the formal domain to simulation code requires understanding
 the Scala, you have much less ambiguity to deal with.
 
 At the end of this chapter you will be able to understand how concepts from
-[Chapter 3 - Math concepts and notation](/lovelace/part_i/math) can be translated
-to Scala code. The chapter is quite detailed and we recommend to use it as a
-reference guide when reading chapters on simulations or when writing your own.
+[Chapter 3 - Math concepts and notation](/lovelace/part_i/math) can be
+translated to Scala code. The chapter is quite detailed and we recommend to use
+it as a reference guide when reading chapters on simulations or when writing
+your own. The [cheat sheet](/lovelace/part_iii/mathlib#cheat-sheet) down below
+provides a helpful overview.
 
 ## Scala fundamentals
 We cover only a small subset of the full Scala language here. This subset
@@ -814,6 +816,13 @@ println(itemNumberPairs)
 ```
 {% endscalafiddle %}
 
+
+
+### Simulation structure
+
+- The model
+- Simulation inputs
+
 ### Cheat sheet
 
 {% scalafiddle template="mathlib" %}
@@ -898,9 +907,3 @@ println({ Set(0, 1, 2, 3, 4, 5) | isEven _ }) // Build a set of even numbers.
 println(myFriends x animals)      // Set of all pairs of friends and animals using cardinal product.
 ```
 {% endscalafiddle %}
-
-
-### Simulation structure
-
-- The model
-- Simulation inputs
