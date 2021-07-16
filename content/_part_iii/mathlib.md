@@ -600,6 +600,7 @@ have noticed during the Scala introduction, functional programming is closely
 related to the mathematical language of formal theories. Consider the following
 example (toy) formal theory:
 
+{% marginfigure 'mf-id-whatever' 'assets/img/pexels-roman-odintsov-6147834.jpg' '' %}
 {% fproblem Pizza Toppings %}
 A set of toppings $$T$$, a budget $$b\in\mathbb{N}$$, and a cost function
 for toppings $$c: T\rightarrow \mathbb{N}$$;;
@@ -817,13 +818,54 @@ println(itemNumberPairs)
 {% endscalafiddle %}
 
 
+## Simulation architecture
 
-### Simulation structure
+Now that we've covered the basics for Scala and ```mathlib``` we can go cover
+what constitutes a computer simulation of a formal theory. To run a computer
+simulation you minimally need two components: The implementation of the formal
+theory and sample input. The advantage of simulations are that you can let the
+computer do the hard work computing many input-output mappings, but it is still
+a lot of work if have to supply each input manually.
 
-- The model
-- Simulation inputs
+{% maincolumn 'assets/img/simulation-components.svg' 'A simulation architecture
+consists of the implementation of the formal theory and an input generator that
+supplies inputs.' %}
 
-### Cheat sheet
+Manually supplying input can still be useful for checking for errors in the
+code, to investigate particular limit cases of the theory and initial
+explorations. We will use manual inputs throughout the book.
+
+However, a more complete simulation covers many inputs, preferably exploring a
+wide range of different cases. For example, with the {% problem Pizza Toppings %}
+example one might want to explore inputs ranging from few to many toppings, with
+many different cost functions and budget. In these cases it is useful to write
+a helper function that can generate input with various properties.
+
+Unfortunately, like with formalizing verbal theory, there is not a single recipe
+for writing input generators. This is highly contingent on the theory and the
+parts of the input domain you wish to simulate. Over the next two chapters you
+will encounter two example input generators as a  user, i.e., the generators are
+provided.
+
+That said, most often generators fall into two categories: unconstrained random
+generation or constrained random generation.
+
+Unconstrained generators generate random input
+
+, then categorize the random inputs by properties of interest.
+
+
+While
+easy to design, one has often little control how many inputs with particular
+properties will be generated. Some might, under this procedure, be extremely
+unlikely to occur.
+
+Generate random input, then categorize by properties for analysis
+
+Generate input with specific properties
+
+
+## Cheat sheet
 
 {% scalafiddle template="mathlib" %}
 ```scala
