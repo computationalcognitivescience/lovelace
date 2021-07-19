@@ -832,8 +832,8 @@ consists of the implementation of the formal theory and an input generator that
 supplies inputs.' %}
 
 Manually supplying input can still be useful for checking for errors in the
-code, to investigate particular limit cases of the theory and initial
-explorations. We will use manual inputs throughout the book.
+code, or to investigate particular limit cases of the theory and initial
+explorations. We will use manual inputs throughout the next chapters.
 
 However, a more complete simulation covers many inputs, preferably exploring a
 wide range of different cases. For example, with the {% problem Pizza Toppings %}
@@ -842,28 +842,50 @@ many different cost functions and budget. In these cases it is useful to write
 a helper function that can generate input with various properties.
 
 Unfortunately, like with formalizing verbal theory, there is not a single recipe
-for writing input generators. This is highly contingent on the theory and the
-parts of the input domain you wish to simulate. Over the next two chapters you
-will encounter two example input generators as a  user, i.e., the generators are
-provided.
+for writing input generators. Generators are highly contingent on the theory and
+the parts of the input domain you wish to simulate. Within the context of this
+book, you don't need to write your own generators, but over the next chapters
+you will use example input generators provided by us.
 
-That said, most often generators fall into two categories: unconstrained random
-generation or constrained random generation.
+We can put most generators in one of two categories: unconstrained input
+generation or constrained input generation. Understanding the difference
+between the to types of generators is important, as it impacts the kinds of
+inputs one can generate, which in turn will impact the computer simulation
+results.
 
-Unconstrained generators generate random input
+Any procedure for randomly generating input will likely be biased. That means
+that some inputs are more likely to be generated than others. This can be due to
+particular structure in the input space, or due to properties of the generator.
 
-, then categorize the random inputs by properties of interest.
+A simplified representation of this bias is shown in the figure below. Out of
+the set of all possible inputs, the darker areas might be more likely to be
+generated than the light. Of course, input bias will also bias the output of the
+simulations.
 
+{% maincolumn 'assets/img/generator-bias.svg' 'Bias in *unconstrained random
+generator* may not cover all possible inputs.' %}
 
-While
-easy to design, one has often little control how many inputs with particular
-properties will be generated. Some might, under this procedure, be extremely
-unlikely to occur.
+We can deal with this bias by analyzing how well the generated inputs cover the
+parts of the space you are interested in. An *unconstrained input generator* is
+best used as such. These generators have bias over which we have no control such
+as in the figure above. Bias doesn't render the simulations useless, as long as
+we can characterize the bias and have some understanding of how it impacts the
+results.
 
-Generate random input, then categorize by properties for analysis
+Alternatively, we can try to implement a *constrained input generator*. These
+types of generators are still biased, but we have some degree of control over
+the inputs they generate. Since there is still bias, it is wise to take that
+into account, but we may be better able to cover the input space by setting the
+right constraints. We can even use multiple sets of constraints to cover more
+area of the input space, as is shown in the figure below.
 
-Generate input with specific properties
+{% maincolumn 'assets/img/generator-bias-constrained.svg' 'Bias in constrained
+input generators. Each "bubble" is a particular set of constraints on the same
+input generator, moving the bias across all possible inputs. By combining these
+biases, we can cover more of the input domain.' %}
 
+So why don't we always write unconstrained input generators? This is because
+they are hard to design and implement.
 
 ## Cheat sheet
 
