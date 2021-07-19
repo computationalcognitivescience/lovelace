@@ -823,9 +823,9 @@ println(itemNumberPairs)
 Now that we've covered the basics for Scala and ```mathlib``` we can go cover
 what constitutes a computer simulation of a formal theory. To run a computer
 simulation you minimally need two components: The implementation of the formal
-theory and sample input. The advantage of simulations are that you can let the
-computer do the hard work computing many input-output mappings, but it is still
-a lot of work if have to supply each input manually.
+theory and sample input {% cite guest_how_2020 %}. The advantage of simulations
+are that you can let the computer do the hard work computing many input-output
+mappings, but it is still a lot of work if have to supply each input manually.
 
 {% maincolumn 'assets/img/simulation-components.svg' 'A simulation architecture
 consists of the implementation of the formal theory and an input generator that
@@ -862,15 +862,15 @@ the set of all possible inputs, the darker areas might be more likely to be
 generated than the light. Of course, input bias will also bias the output of the
 simulations.
 
-{% maincolumn 'assets/img/generator-bias.svg' 'Bias in *unconstrained random
-generator* may not cover all possible inputs.' %}
+{% maincolumn 'assets/img/generator-bias.svg' 'Bias in an unconstrained random
+generator may not cover all possible inputs.' %}
 
 We can deal with this bias by analyzing how well the generated inputs cover the
 parts of the space you are interested in. An *unconstrained input generator* is
 best used as such. These generators have bias over which we have no control such
 as in the figure above. Bias doesn't render the simulations useless, as long as
 we can characterize the bias and have some understanding of how it impacts the
-results.
+results and limits our conclusions.
 
 Alternatively, we can try to implement a *constrained input generator*. These
 types of generators are still biased, but we have some degree of control over
@@ -885,7 +885,7 @@ input generator, moving the bias across all possible inputs. By combining these
 biases, we can cover more of the input domain.' %}
 
 So why don't we always write unconstrained input generators? This is because
-they are hard to design and implement.
+they are hard to make.
 
 ## Cheat sheet
 
@@ -971,3 +971,7 @@ println({ Set(0, 1, 2, 3, 4, 5) | isEven _ }) // Build a set of even numbers.
 println(myFriends x animals)      // Set of all pairs of friends and animals using cardinal product.
 ```
 {% endscalafiddle %}
+
+### References
+
+{% bibliography --cited %}
