@@ -884,8 +884,12 @@ input generators. Each "bubble" is a particular set of constraints on the same
 input generator, moving the bias across all possible inputs. By combining these
 biases, we can cover more of the input domain.' %}
 
-So why don't we always write unconstrained input generators? This is because
-they are hard to make.
+So why don't we always write constrained input generators? This is because
+they are hard to make, at least harder than the unconstrained versions. It is a
+question we need to ask when developing simulations: Does the bias in the
+unconstrained generator skew the results too much? Then consider investing in
+developing a constrained input generator. For now, you can lean back and enjoy
+the generators we provide.
 
 ## Cheat sheet
 
