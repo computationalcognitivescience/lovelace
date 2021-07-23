@@ -19,14 +19,16 @@ If you're curious why we chose Scala, please read on. Otherwise, continue with t
 ### Trustworthy and transparent code
 Scala is a *functional* programming language. Functional programming languages are very closely tied to mathematical concepts, precisely like the concepts we have been using in this book. This is an important design feature to make *correctness* of code more evident to the coder and user. You can trust your code to do the thing is it designed to do, even when the complexity of your code increases. This is where Scala gets its name: **SCA**lable **LA**nguage. It is also the reason why companies like LinkedIn, Airbnb, Netflix and Twitter chose to build their digital infrastructure in Scala.{% sidenote 'mn-id-scale' 'You might not write code on the same scale as Twitter anytime soon, but the same principles that afford their software to scale are principles that will make your simulation code transparent, verifiable, readable and accessible.' %}
 
-Functional programming languages also promote computational-level thinking because the relationship between specification (theory) and code (implementation) is tight. This guards against the common confusing between computational-level and algorithmic-level explanations (see Chapter X). We will be using the ```mathlib``` library, which provides Scala syntax and functionality very similarly to the mathematical concepts used in computational-level modeling. For example, consider this part of {% problem Selecting Invitees (Variant 4) %} which uses [set builder notation](/lovelace/part_i/math#set-builder):
+Functional programming languages also promote computational-level thinking because the relationship between specification (theory) and code (implementation) is tight. This guards against the common confusion between computational-level and algorithmic-level explanations (see [Chapter 11](/lovelace/part_iii/sim_coherence)). We will be using the ```mathlib``` library, which provides Scala syntax and functionality very similarly to the mathematical concepts used in computational-level modeling. For example, consider this part of {% problem Selecting Invitees (Variant 4) %} which uses [set builder notation](/lovelace/part_i/math#set-builder):
 
 $$X=\left\{p_i,p_j\in G\middle|like(p_i,p_j)=true\wedge i\neq j\right\}$$
 
 Let's assume that $$G$$, the set of invitees, is stored in ```invitees``` and we have a function ```like(x,y)```. In Scala ```mathlib``` the equation can be implemented as:
 
 ```scala
-val x = { invitees.uniquePairs | like _ }
+val uniquePairs = invitees.uniquePairs  // All pairs (p_i, p_j)
+                                        // where p_i != p_j
+val x = { uniquePairs | like _ }        // Pairs liking each other.
 ```
 
 A common implementation, e.g. in Python, would be{% sidenote 'sn-id-python' 'We do not intended to argue that Python is a bad language. One could certainly use a functional programming paradigm in Python, something we would recommend you to try out! However, most code we encounter is written in a less transparent manner as illustrated here.' %}:
