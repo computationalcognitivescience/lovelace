@@ -415,7 +415,7 @@ def like = group.randomLikeFunction(.7) // Autogenerate random like relations
 
 val k = 2
 
-Viz.render(group.toDotString(personsLiked, personsDisliked, like))
+Viz.renderAlt(group.toDotString(personsLiked, personsDisliked, like))
 
 println("Output SI4: " + SelectingInvitees.si4(group, personsLiked, personsDisliked, like, k))
 println("Output SI5: " + SelectingInvitees.si5(group, personsLiked, personsDisliked, like))
