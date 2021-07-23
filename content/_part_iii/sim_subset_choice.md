@@ -24,20 +24,20 @@ We pick up the conversation between Verbal and Formal from [Chapter 4 - Subset C
 {% endindent %}
 
 {% indent 4 %}
-**Formal:** ...wait! Before you leave me alone again for a few months, let's do a bit more theory before the test. Do we even know if the models are different in important and meaningful ways? Even if they are different, are they so under sensible conditions?
+**Formal:** ...wait! Before you leave me alone again for a few months, let's do a bit more theory before the test (van Rooij & Baggio, 2021). Do we even know if the models are different in important and meaningful ways? Even if they are different, are they so under sensible conditions?
 {% endindent %}
 
 {% indent 0 %}
-**Verbal:** But the formalisations are different, so the models must behave differently, right?
+**Verbal:** But the formalizations are different, so the models must behave differently, right?
 {% endindent %}
 
 {% indent 4 %}
 **Formal:**
-While the formalizations are different, it might be actually be possible that they behave the same or very similarly. Sometimes we can formally derive equivalence, but this is not always possible.{% sidenote 'sn-id-equivalence' 'You can read about mathematically proving model equivalence in [Chapter 5 - Coherence](/lovelace/part_ii/coherence#Equivalence).' %} In those cases, we can use computer simulations to explore the qualitative differences between theories.
+Not necessarily. Formalizations that are different may behave the same or very similarly. Sometimes we can analytically derive such equivalence{% sidenote 'sn-id-equivalence' 'You can read about mathematically proving model equivalence in [Chapter 5 - Coherence](/lovelace/part_ii/coherence#Equivalence).' %} but this is not always possible. Then computer simulations can come in handy.
 {% endindent %}
 
 {% indent 0 %}
-**Verbal:** Ah, I would like to know if there are qualitative differences between the theories. I guess we can possibly rule out theories or find ways to update them, just like when we were formalizing my verbal theories.
+**Verbal:** Ah, I see. I would like to know if there are important differences between the theories. That way we can possibly rule out theories that cannot explain the phenomenon or find ways to update them, just like when we were formalizing my verbal theories.
 {% endindent %}
 
 {% indent 4 %}
@@ -48,7 +48,7 @@ If you jumped here directly from [Chapter 4 - Subset choice](/lovelace/part_ii/s
 you may find it helpful to first read [Chapter 9 - Scala and mathlib](/lovelace/part_ii/mathlib) to learn how to read (and write) Scala code using the ```mathlib``` library. In addition to the default ```mathlib``` library, the simulation code on this page includes supporting code which we explain first.
 
 ## Supporting code
-Running simulations requires input instances as specified by the theoretical model. While we could code input by hand, that is a lot of work. The beauty of using computer simulations is that it can do the hard work for us by *automatically* generating input. To that end, Formal has written a supporting code. {% sidenote 'sn-id-helper' 'Supporting code is often written specifically for a domain. For example, [simulating Coherence](/lovelace/part_iii/sim_coherence) uses different support code.' %}
+Running simulations requires input instances as specified by the theoretical model. While we could code input by hand, that is a lot of work. The beauty of using computer simulations is that it can do the hard work for us by *automatically* generating input. To that end, Formal has written supporting code. {% sidenote 'sn-id-helper' 'Supporting code is often written specifically for a domain. For example, [simulating Coherence](/lovelace/part_iii/sim_coherence) uses different support code.' %}
 
 For now, it is not important that you know how to write support code. However, in order to explore and adapt the code that Formal has provided, being able to *use* support code is recommended. Let's explore some examples. Remember that you can run (and adapt) the code in your browser using the <button style="background: rgba(255,255,255,0.6) !important;color: rgba(0, 0, 0, 0.6) !important;border-radius: 5px;border: 1px solid #ddd;font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;font-size: 14px;
 padding: 3px 8px;transition: all 350ms ease;"><img src="https://embed.scalafiddle.io/runicon.png" style="padding: 0;margin: 0 0 4px 0;vertical-align: middle;width: 16px;height: 16px;display: inline;">Run</button> button.
@@ -91,13 +91,13 @@ Person.randomGroup(5)
 ```
 {% endscalafiddle %}
 
-These functions will help us create sets of persons. We can then use ```mathlib``` to work with these sets as expected. For example, we can create a set of random persons who are liked $$L$$, a set of persons who are disliked $$D$$, and the set of all persons $$P=L\cup D$$:  
+These functions will help us create sets of persons. We can then use ```mathlib``` to work with these sets as expected. For example, we can create a set of random persons $$P$$, randomly take 2 persons who are liked $$L$$, and create a set of persons who are disliked $$D=P \setminus L$$:  
 
 {% scalafiddle template="mathlib" %}
 ```scala
 val persons = Person.randomGroup(5)
-val personsLiked = persons.take(2)
-val personsDisliked = persons /\ personsLiked
+val personsLiked = persons.take(2)            // Take 2 people from persons.
+val personsDisliked = persons \ personsLiked
 
 println(personsLiked)
 println(personsDisliked)
@@ -106,7 +106,7 @@ println(persons)
 {% endscalafiddle %}
 
 ### Like-function
-The final support code Formal provided is used to create like relationships between persons. In the formal model this function is defined as $$like: P\times P \rightarrow \{true,false\}$$. After discussing with a colleague (see [Exercise X in Chapter 4](/lovelace/part_ii/subset#try-again)), Formal recognized that the like function was intended to exclude reflection (i.e., self-liking) and is symmetrical $$like(a,b)=like(b,a)$$ (i.e., it formalises like or dislike *eachother*).{% sidenote 'sn-id-helper' 'The formalisations in this chapter are updated with these properties.' %}
+The final support code Formal provided is used to create like relationships between persons. In the formal model this function is defined as $$like: P\times P \rightarrow \{true,false\}$$. After discussing with a colleague (see [Exercise X in Chapter 4](/lovelace/part_ii/subset#try-again)), Formal recognized that the like function was intended to exclude reflection (i.e., self-liking) and is symmetrical $$like(a,b)=like(b,a)$$ (i.e., it formalizes like or dislike *eachother*).{% sidenote 'sn-id-helper' 'The formalizations in this chapter are updated with these properties.' %}
 
 One could specify a like relationship manually. Simply create persons, store them in values so we can refer to them and then use ```likes``` or ```dislikes``` to create like relationships.
 
@@ -422,3 +422,8 @@ println("Output SI5: " + SelectingInvitees.si5(group, personsLiked, personsDisli
 println("Output SI6: " + SelectingInvitees.si6(group, personsLiked, personsDisliked, like, k))
 ```
 {% endscalafiddle %}
+
+
+### References
+
+van Rooij, I., & Baggio, G. (2021). [Theory before the test: How to build high-verisimilitude explanatory theories in psychological science.](https://journals.sagepub.com/doi/full/10.1177/1745691620970604) *Perspectives on Psychological Science, 16*(4) 682–697.
