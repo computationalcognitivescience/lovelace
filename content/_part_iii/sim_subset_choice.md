@@ -425,6 +425,90 @@ Viz.renderAlt(group.toDotString(personsLiked, personsDisliked, like))
 {% endscalafiddle %}
 
 
+{% scalafiddle template="mathlib", minheight="1000", layout="v30" %}
+```scala
+val inputData: List[SelectingInvitees.Input] =
+  SelectingInvitees.inputGenerator(groupSize = 5,
+                                   likeDislikeRatio = .2,
+                                   pairLikeRatio = .4,
+                                   k = 2,
+                                   sampleSize = 10)
+
+val outputData: List[Set[Person]] = inputData.map(input =>
+  SelectingInvitees.si4(input.group,
+                        input.personsLiked,
+                        input.personsDisliked,
+                        input.like,
+                        input.k))
+
+
+
+
+Plotly.render("""
+{
+    "data": [
+        {
+            "x": [
+                "giraffes",
+                "orangutans",
+                "monkeys"
+            ],
+            "y": [
+                20,
+                14,
+                23
+            ],
+            "type": "bar"
+        }
+    ]
+}
+""")
+
+```
+{% endscalafiddle %}
+
+
+{% scalafiddle template="mathlib", minheight="1000", layout="v30" %}
+```scala
+
+val groupSizes = Set(5, 10, 15)
+val likeDislikeRatios = Set(0, 0.5, 1.0)
+val pairLikeRatios = Set(0, 0.5, 1.0)
+val ks = Set(0, 0.5, 1.0)
+val sampleSize = 1
+
+var i = 1
+val inputData =
+  (for(groupSize <- groupSizes;
+      likeDislikeRatio <- likeDislikeRatios;
+      pairLikeRatio <- pairLikeRatios;
+      k <- ks) yield {
+        println(s"$i")
+        i += 1
+        SelectingInvitees.inputGenerator(
+          groupSize,
+          likeDislikeRatio,
+          pairLikeRatio,
+          (k * groupSize).intValue,
+          sampleSize
+          )
+      }).toList.flatten
+
+var n = 1
+val outputData: List[Set[Person]] = inputData.map(input => {
+  println(s"$n / ${inputData.length}")
+  n += 1
+  SelectingInvitees.si4(input.group,
+                        input.personsLiked,
+                        input.personsDisliked,
+                        input.like,
+                        input.k)
+                        })
+
+(inputData zip outputData).foreach(println)
+```
+{% endscalafiddle %}
+
 ### References
 
 van Rooij, I., & Baggio, G. (2021). [Theory before the test: How to build high-verisimilitude explanatory theories in psychological science.](https://journals.sagepub.com/doi/full/10.1177/1745691620970604) *Perspectives on Psychological Science, 16*(4) 682–697.

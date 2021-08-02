@@ -282,7 +282,7 @@ case object Person {
     private val names: Set[String] = Set("Nettie","Lester","Brian","Cody","Erik","William","Molly","Joey","Thelma","Edgar","Emanuel","Sergio","Herman","Kelley","Wilfred","Guadalupe","Paula","Sheila","Javier","Kelly","Jason","Gilbert","Harriet","Meghan","Kenneth","Holly","Rose","Lela","Brenda","Constance","Vera","Ramiro","Diana","Charlene","Betty","Michelle","Frederick","Elmer","Byron","Randal","Roderick","Clark","Mathew","Sammy","Colleen","Marian","Tyrone","Keith","Tonya","John","Kayla","Johanna","Dwayne","Antonia","Kerry","Fannie","Nichole","Jeanne","Roberto","Vicky","Jesus","Angela","Fredrick","Fernando","Vivian","Natalie","Johnnie","Monica","Angelica","Anna","Carlos","Marion","Henry","Lawrence","Alexis","Garry","Bernard","Jana","Ernestine","Deborah","Willard","Eileen","Erica","Elvira","Myron","Elena","Ervin","Jeannette","Veronica","Abraham","Lamar","Wanda","Lorraine","Doris","Leigh","Devin","Lindsay","Isabel","Marlene","Betsy")
 
     def random: Person = Person(names.random.getOrElse("Easter Bunny"))
-    
+
     // Returns a set of k random persons.
     def randomGroup(size: Int): Set[Person] = {
         def rg(size: Int, namesLeft: Set[String]): Set[Person] = {
@@ -293,18 +293,18 @@ case object Person {
                 else rg(size - 1, namesLeft - newPerson.get) + Person(newPerson.get)
             }
         }
-        
+
         rg(size, names)
     }
-	
+
 	implicit class ImplPersons(persons: Set[Person]) {
 		def deriveLikeFunction(partialLikes: Set[Likes]): (Person, Person) => Boolean = {
 			//require(persons.uniquePairs.forall(pair => partialLikes.find(like => like.a == pair._1 && like.b == pair._2) == partialLikes.find(like => like.a == pair._2 && like.b == pair._1)), s"partialLikes contains asymmetric like relations")
-		
+
 			val completeLike: Map[Set[Person], Boolean] = persons.unorderedUniquePairs
 				.map(pair => {
 					val likeOption: Option[Likes] = partialLikes.find(_.isAbout(pair))
-					
+
 					if(likeOption.isDefined)
 						pair -> likeOption.get.likes
 					else
@@ -318,21 +318,21 @@ case object Person {
 
 			like
 		}
-		
+
 		def randomLikeFunction(probability: Double = 0.5): (Person, Person) => Boolean = {
 			require(probability >=0 && probability <= 1, "Probability must range from 0 and 1.")
-			
+
 			val completeLike: Map[Set[Person], Boolean] = persons.unorderedUniquePairs
 				.map(_ -> (Random.nextDouble <= probability)).toMap
-			
+
 			def like(a: Person, b: Person): Boolean = {
 				if(completeLike.contains(Set(a,b))) completeLike(Set(a,b))
 				else false
 			}
-			
-			like 
+
+			like
 		}
-		
+
 		def toDotString(like: (Person, Person) => Boolean): String = {
 			"graph people {\\n" +
 			"size=\"7,7\";\\n" +
@@ -344,7 +344,7 @@ case object Person {
 			}).mkString("\\n")+
 			"}"
 		}
-		
+
 		def toDotString(personsLiked: Set[Person], personsDisliked: Set[Person], like: (Person, Person) => Boolean): String = {
 			"graph people {\\n" +
 			"size=\"7,7\";\\n" +
@@ -356,7 +356,7 @@ case object Person {
 			persons.unorderedUniquePairs.map(pair => {
 			  if(like(pair.head, pair.tail.head))
 				s"${pair.head} -- ${pair.tail.head} [style=dashed];"
-			  else 
+			  else
 				s"${pair.head} -- ${pair.tail.head} [style=solid];"
 			}).mkString("\\n")+
 			"}"
@@ -365,6 +365,27 @@ case object Person {
 }
 
 case object SelectingInvitees {
+  case class Input(group: Set[Person],
+                   personsLiked: Set[Person],
+                   personsDisliked: Set[Person],
+                   like: (Person, Person) => Boolean,
+                   k: Int)
+
+   def inputGenerator(groupSize: Int,
+                      likeDislikeRatio: Double,
+                      pairLikeRatio: Double,
+                      k: Int,
+                      sampleSize: Int): List[Input] = {
+     (for(n <- 0 until sampleSize) yield {
+       val group = Person.randomGroup(groupSize)
+       val personsLiked = group.take((groupSize * likeDislikeRatio).intValue)
+       val personsDisliked = group.drop((groupSize * likeDislikeRatio).intValue)
+       def like = group.randomLikeFunction(pairLikeRatio)
+
+       Input(group, personsLiked, personsDisliked, like, k)
+     }).toList
+   }
+
 	def si4(persons: Set[Person],
         personsLiked: Set[Person],
         personsDisliked: Set[Person],
@@ -378,9 +399,9 @@ case object SelectingInvitees {
     require(personsLiked \/ personsDisliked == persons, "union of personsLiked and personsLiked must equal persons")
 
     // Specify that invitees is valid if |G /\ D| <= k.
-    def atMostKDislikes(invitees: Set[Person]): Boolean = 
+    def atMostKDislikes(invitees: Set[Person]): Boolean =
         (invitees /\ personsDisliked).size <= k
-    
+
     // Specify the optimality condition.
     def xg(invitees: Set[Person]): Int = {
         val x = invitees.uniquePairs // From all pairs of invitees,
@@ -389,28 +410,28 @@ case object SelectingInvitees {
         val g = invitees.size        // Count the number of total invitees.
         x + g
     }
-    
+
     val invitees = powerset(persons)  // From all possible subsets of persons,
         .build(atMostKDislikes)       // select subsets that contain at most k disliked persons,
         .argMax(xg)                   // and select the subsets that maximize the optimality condition.
-    
+
     // If more than one solution exists, return one at random. Always 1 solution must exist,
     // because the empty set is a valid solution. Hence, we can assume random does not
     // return None and 'get' the value.
-    invitees.random.get 
+    invitees.random.get
 }
-	
+
 	def si5(persons: Set[Person],
         personsLiked: Set[Person],
         personsDisliked: Set[Person],
         like: (Person, Person) => Boolean): Set[Person] = {
-		
+
     // Input must satisfy these constraints, or program halts.
     require(personsLiked <= persons, "personsLiked must be a subset of persons")
     require(personsDisliked <= persons, "personsDisliked must be a subset of persons")
     require(personsLiked /\ personsDisliked == Set.empty, "intersection between personsLiked and personsDisliked must be emtpy")
     require(personsLiked \/ personsDisliked == persons, "union of personsLiked and personsLiked")
-	
+
     // Specify the optimality condition.
     def gl_x_g(invitees: Set[Person]): Int = {
         val gl = (invitees /\ personsLiked)
@@ -424,19 +445,19 @@ case object SelectingInvitees {
 
     val invitees = powerset(persons)  // From all possible subsets of persons,
         .argMax(gl_x_g)               // select those that maximize |G/\L| + |X| + |G|
-    
+
     // If more than one solution exists, return one at random. Always 1 solution must exist,
     // because the empty set is a valid solution. Hence, we can assume random does not
     // return None and 'get' the value.
-    invitees.random.get 
+    invitees.random.get
 }
-	
+
 	def si6(persons: Set[Person],
         personsLiked: Set[Person],
         personsDisliked: Set[Person],
         like: (Person, Person) => Boolean,
         k: Int): Set[Person] = {
-    
+
     // Input must satisfy these constraints, or program halts.
     require(personsLiked <= persons, "personsLiked must be a subset of persons")
     require(personsDisliked <= persons, "personsDisliked must be a subset of persons")
@@ -444,9 +465,9 @@ case object SelectingInvitees {
     require(personsLiked \/ personsDisliked == persons, "union of personsLiked and personsLiked")
 
 	// Specify that invitees is valid if |Y| <= k.
-    def atMostKPairDislikes(invitees: Set[Person]): Boolean = 
+    def atMostKPairDislikes(invitees: Set[Person]): Boolean =
       { invitees.uniquePairs | like.tupled }.size <= k
-		
+
     // Specify the optimality condition.
     def gl_g(invitees: Set[Person]): Int = {
         val gl = (invitees /\ personsLiked)
@@ -457,15 +478,16 @@ case object SelectingInvitees {
 
     val invitees = { powerset(persons) | atMostKPairDislikes _ }
                    .argMax(gl_g)
-    
+
     // If more than one solution exists, return one at random. Always 1 solution must exist,
     // because the empty set is a valid solution. Hence, we can assume random does not
     // return None and 'get' the value.
-    invitees.random.get 
+    invitees.random.get
 }
 }
 
 import Person._
+
 import scalatags.JsDom.all._
 
 case object Plotly {
