@@ -51,7 +51,8 @@ case object Viz {
 
   	    require(["d3", "graphviz"], function(d3, viz) {
     		  const dotString = '${dot}';
-          graphviz('#plot$vizCounter').renderDot('digraph  {a -> b}');
+          viz.graphviz('#plot$vizCounter')
+            .renderDot(dotString);
         });
 
   	  };

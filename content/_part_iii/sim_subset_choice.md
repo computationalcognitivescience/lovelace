@@ -415,11 +415,12 @@ def like = group.randomLikeFunction(.7) // Autogenerate random like relations
 
 val k = 2
 
-Viz.renderAlt(group.toDotString(personsLiked, personsDisliked, like))
-
 println("Output SI4: " + SelectingInvitees.si4(group, personsLiked, personsDisliked, like, k))
 println("Output SI5: " + SelectingInvitees.si5(group, personsLiked, personsDisliked, like))
 println("Output SI6: " + SelectingInvitees.si6(group, personsLiked, personsDisliked, like, k))
+
+Viz.renderAlt(group.toDotString(personsLiked, personsDisliked, like))
+
 ```
 {% endscalafiddle %}
 
