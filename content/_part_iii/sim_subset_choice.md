@@ -222,8 +222,12 @@ Can you think of another use?
 
 ## Simulating <span style="font-variant: small-caps; font-style: normal;">Selecting Invitees</span>
 
-In this section we simulate {% problem Selecting invitees (version 4, 5 and 6) %}. Each of the models is copied here, for your convenience. To make the code more readable, we use names in the code that are more descriptive than the single letters used in math (see Table 1).
-
+In this section we cover how to simulate {% problem Selecting invitees (version
+4, 5 and 6) %}. You will learn how to read Scala ```mathlib``` simulation code
+and how it relates to the formalization. We go through {% problem Selecting
+invitees (version 4) %} step by step, after which you can explore versions 5 and
+6 yourself. To make the code more readable, we use names in the code that are
+more descriptive than the single letters used in math (see Table 1).
 
 {% marginnote 'Table-ID1' 'Table 1: the mapping from math notation to Scala code.'  %}
 <div class="table-wrapper" markdown="block" style="margin-top:3rem;">
@@ -241,12 +245,31 @@ In this section we simulate {% problem Selecting invitees (version 4, 5 and 6) %
 
 </div>
 
-From here on, you are free to explore the simulations at your own. Try to get a feeling for how the three formalizations behave. You can even change the simulation code if you want. After simulating the three models individually, we provide a sandbox for you to compare their behaviour directly.
+{% stopandthink %}
+Take a moment to familiarize yourself again with the
+formalization. If you need more context, you can go back to [Chapter 4 - Subset
+choice](/lovelace/part_ii/subset#) where the formalization was introduced.
+{% endstopandthink %}
 
 {% fproblem Selecting invitees (version 4) %}
 A set $$P$$, subsets $$L \subseteq P$$ and $$D \subseteq P$$ with $$L \cap D = \emptyset$$ and $$L \cup D = P$$, a function $$like: P \times P \rightarrow \{true, false\}$$, and a threshold value $$k$$.;;
 $$G \subseteq P$$ such that $$|G\cap D| \leq k$$ and $$|X| + |G|$$ is maximized (where $$X = \{p_i,p_j \in G~|~like(p_i,p_j) = true \wedge i\neq j\}$$).
 {% endfproblem %}
+
+Let's see how this formalization translated to simulation code. Once you press
+<button style="background: rgba(255,255,255,0.6) !important;color: rgba(0, 0, 0,
+0.6) !important;border-radius: 5px;border: 1px solid #ddd;font-family:
+Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;font-size: 14px; padding: 3px
+8px;transition: all 350ms ease;"><img
+src="https://embed.scalafiddle.io/runicon.png" style="padding: 0;margin: 0 0 4px
+0;vertical-align: middle;width: 16px;height: 16px;display: inline;">Run</button>
+to run the code, the explanation text will disappear. You can get it back by
+reloading this webpage.
+
+The formalization is implemented in the ```si4``` function, all of the input
+($$P$$, $$L$$, $$D$$, $$like$$ and $$k$$) is listed as an argument of the
+function. The type of the output also needs to be defined, which in this case is
+a subset $$G\subseteq P$$ of persons, i.e., ```Set[Person]```.
 
 {% scalafiddle template="mathlib" %}
 ```scala
@@ -255,17 +278,27 @@ def si4(persons: Set[Person],
         personsDisliked: Set[Person],
         like: (Person, Person) => Boolean,
         k: Int): Set[Person] = {
+```
 
+The input in the formalization is subject to a few constraints. We check those
+constraints in the code and stop the program of the constraints are not met with
+an informative error message.
+
+```scala
     // Input must satisfy these constraints, or program halts.
     require(personsLiked <= persons, "personsLiked must be a subset of persons")
     require(personsDisliked <= persons, "personsDisliked must be a subset of persons")
     require(personsLiked /\ personsDisliked == Set.empty, "intersection between personsLiked and personsDisliked must be emtpy")
     require(personsLiked \/ personsDisliked == persons, "union of personsLiked and personsLiked must equal persons")
-
+```
+bla
+```scala
     // Specify that invitees is valid if |G /\ D| <= k.
     def atMostKDislikes(invitees: Set[Person]): Boolean =
         (invitees /\ personsDisliked).size <= k
-
+```
+bla
+```scala
     // Specify the optimality condition.
     def xg(invitees: Set[Person]): Int = {
         val x = invitees.uniquePairs // From all pairs of invitees,
@@ -274,17 +307,23 @@ def si4(persons: Set[Person],
         val g = invitees.size        // Count the number of total invitees.
         x + g
     }
-
+```
+bla
+```scala
     val invitees = powerset(persons)  // From all possible subsets of persons,
-        .build(atMostKDislikes)       // select subsets that contain at most k disliked persons,
-        .argMax(xg)                   // and select the subsets that maximize the optimality condition.
-
+      .build(atMostKDislikes)       // select subsets that contain at most k disliked persons,
+      .argMax(xg)                   // and select the subsets that maximize the optimality condition.
+```
+bla
+```scala
     // If more than one solution exists, return one at random. Always 1 solution must exist,
     // because the empty set is a valid solution. Hence, we can assume random does not
     // return None and 'get' the value.
     invitees.random.get
 }
-
+```
+bla
+```scala
 val group = Person.randomGroup(10)    // Generate random group
 val personsLiked = group.take(5)      // The first 5 are liked
 val personsDisliked = group.drop(5)   // The rest is disliked
@@ -292,11 +331,29 @@ val personsDisliked = group.drop(5)   // The rest is disliked
 def like = group.randomLikeFunction(.7) // Autogenerate random like relations
 
 Viz.render(group.toDotString(personsLiked, personsDisliked, like))
-
+```
+bla
+```scala
 si4(group, personsLiked, personsDisliked, like, k = 2)
 ```
 {% endscalafiddle %}
 
+
+From here on, you are free to explore the simulations at your own. Try to get a feeling for how the three formalizations behave. You can even change the simulation code if you want. After simulating the three models individually, we provide a sandbox for you to compare their behaviour directly.
+
+{% question %}
+In the simulations below you can generate groups of any size. The simulation,
+however, considers all possible subsets of people. How many possible subsets
+exist given 3 people? The first person can be *in* or *out*, that's two
+options. The second person can also be *in* or *out*, that's again two options,
+but combined with the first thats $$2 \times 2$$ options. The third person can
+be *in* or *out* making $$2\times 2\times 2=8$$ options. How many possible
+subsets exist for 4 people? And for 8? and 15?
+{% endquestion %}
+
+Keep in mind that the search space grows exponentially with the size of $$P$$.
+If your computer crashes or is taking a long time, you are probably trying to
+simulate for large ($$>10$$) groups.
 
 {% fproblem Selecting invitees (version 5) %}
 A set $$P$$, subsets $$L \subseteq P$$ and $$D \subseteq P$$ with $$L \cap D = \emptyset$$ and $$L \cup D = P$$, and a function $$like: P \times P \rightarrow \{true, false\}$$.;;
@@ -403,7 +460,19 @@ si6(group, personsLiked, personsDisliked, like, k = 2)
 
 ### Comparing model behaviour
 
-Work in progress.
+We can run the simulation for all three versions of {% problem Selecting
+Invitees %} on the same input to compare their behaviour.
+
+{% question %}
+Can you find input where two or more of the models give the same output?
+{% hidden Hint? %}
+Try defining input by hand instead of using the random generation first. Then
+try finding variations of that input for which two or more models are
+equivalent.
+{% endhidden %}
+{% endquestion %}
+
+
 
 {% scalafiddle template="mathlib", minheight="1000", layout="v30" %}
 ```scala
@@ -419,10 +488,12 @@ println("Output SI4: " + SelectingInvitees.si4(group, personsLiked, personsDisli
 println("Output SI5: " + SelectingInvitees.si5(group, personsLiked, personsDisliked, like))
 println("Output SI6: " + SelectingInvitees.si6(group, personsLiked, personsDisliked, like, k))
 
-Viz.renderAlt(group.toDotString(personsLiked, personsDisliked, like))
+Viz.render(group.toDotString(personsLiked, personsDisliked, like))
 
 ```
 {% endscalafiddle %}
+
+
 
 
 {% scalafiddle template="mathlib", minheight="1000", layout="v30" %}
