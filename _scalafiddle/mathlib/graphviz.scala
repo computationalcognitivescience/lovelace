@@ -4,7 +4,7 @@ case object Viz {
 
   var vizCounter = 0
 
-  def renderAlt(dot: String): Unit = {
+  def render(dot: String): Unit = {
     Fiddle.print(
 	  div(id:=s"plot$vizCounter"),
 	  script(s"""
@@ -64,7 +64,7 @@ case object Viz {
     vizCounter = vizCounter + 1
   }
 
-  def render(dot: String): Unit = {
+  def renderAlt(dot: String): Unit = {
     Fiddle.print(
 	  div(id:=s"plot$vizCounter"),
 	  script(s"""
