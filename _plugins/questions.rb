@@ -46,13 +46,18 @@ module Jekyll::Tags
 				context["parents"] = context["parents"].push(@questionNR)
 				context["questionNR"] = 0
 				context["answer_idx"] = 1
-				@content = converter.convert(super) #.strip
+				@content = converter.convert(super.strip)
 				# reset to current level
 				context["parents"].pop
 			end
 
       chapterNR = context.registers[:page]['chapter']
-      "<div class=\"question\" id=\"question-#{@questionLabel}\"><p><em>Question #{chapterNR}.#{@questionLabel}:</em>#{@content}</p></div>"
+
+			if(context["parents"].length == 0)
+      	"<div class=\"question-top\"><div class=\"question\" id=\"question-#{@questionLabel}\"><div class=\"question-body\"><div class=\"question-header\">Question #{chapterNR}.#{@questionLabel}:</div> #{@content}</div></div></div>"
+			else
+				"<div class=\"question\" id=\"question-#{@questionLabel}\"><div class=\"question-body\"><div class=\"question-header\">Question #{chapterNR}.#{@questionLabel}:</div> #{@content}</div></div>"
+			end
 		end
 	end
 
@@ -91,7 +96,7 @@ module Jekyll::Tags
       end
 			content = super.strip
 
-      "<div class=\"answer\" id=\"#{headingID}\"><p><a onclick=\"document.getElementById('#{answerID}').style.display = document.getElementById('#{answerID}').style.display === 'none' ? '' : 'none';\">#{@title}</a></p><div id=\"#{answerID}\" style=\"display: none;\"><p>#{content}</p></div></div>"
+      "<div class=\"answer\" id=\"#{headingID}\"><a onclick=\"document.getElementById('#{answerID}').style.display = document.getElementById('#{answerID}').style.display === 'none' ? '' : 'none';\">#{@title}</a><div id=\"#{answerID}\" style=\"display: none;\">#{content}</div></div>"
 
 		end
 	end
