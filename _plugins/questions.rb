@@ -1,7 +1,10 @@
-## Liquid tag 'epigraph' used to add an epigraph
+## Liquid tag 'question' used to add a question
 ## in the main text area of the layout
-## Usage {% epigraph 'text-body-of-epigraph' 'author-of-epigraph' 'citation-of-epigraph' %}
-#
+## Usage
+# {% question %}
+# What is this?
+# {% endquestion %}
+
 module Jekyll::Tags
 	class QuestionTag < Liquid::Block
 
@@ -12,26 +15,44 @@ module Jekyll::Tags
 		end
 
 		def render(context)
-      # site = context.registers[:site]
-      # converter = site.find_converter_instance(::Jekyll::Converters::Markdown)
+      site = context.registers[:site]
+      converter = site.find_converter_instance(::Jekyll::Converters::Markdown)
 
-      if(context["questionNR"])
-        context["questionNR"] = context["questionNR"] + 1
-      else
-        context["questionNR"] = 1
-      end
 
-      @questionNR = context["questionNR"]
-      @questionID = "question-#{context["questionNR"]}"
+			if(context["questionNR"])
+				context["questionNR"] = context["questionNR"] + 1
+			else
+				context["questionNR"] = 1
+			end
+
+			@questionNR = context["questionNR"]
+
+			if(context["parents"])
+				@questionID = "question-#{context["parents"].join('.')}.#{context["questionNR"]}"
+				if(context["parents"].length == 0)
+					@questionLabel = "#{context["questionNR"]}"
+				else
+					@questionLabel = "#{context["parents"].join('.')}.#{context["questionNR"]}"
+				end
+			else
+				@questionID = "question-#{context["questionNR"]}"
+				@questionLabel = "#{context["questionNR"]}"
+				context["parents"] = Array.new
+			end
 
       context.stack do
+				# go one level deeper
 				context["questionID"] = @questionID
+				context["parents"] = context["parents"].push(@questionNR)
+				context["questionNR"] = 0
 				context["answer_idx"] = 1
-				@content = super.strip
+				@content = converter.convert(super) #.strip
+				# reset to current level
+				context["parents"].pop
 			end
 
       chapterNR = context.registers[:page]['chapter']
-      "<div class=\"question\" id=\"#{@questionID}\"><p><em>Question #{chapterNR}.#{@questionNR}:</em> #{@content}</p></div>"
+      "<div class=\"question\" id=\"question-#{@questionLabel}\"><p><em>Question #{chapterNR}.#{@questionLabel}:</em>#{@content}</p></div>"
 		end
 	end
 
@@ -43,13 +64,18 @@ module Jekyll::Tags
 		end
 
 		def render(context)
+			site = context.registers[:site]
+      converter = site.find_converter_instance(::Jekyll::Converters::Markdown)
+			content = converter.convert(super)
+
       idx = context["answer_idx"]
-      content = super.strip
+
 
       # increment for the next collapsible
       if(idx)
         # question mode
         questionID = context["questionID"]
+				context["questionNR"] = context["questionNR"] - 1
   			answerID = "#{questionID}-answer-#{idx}"
   			headingID = "#{questionID}-heading-#{idx}"
         context["answer_idx"] = idx + 1
@@ -63,6 +89,7 @@ module Jekyll::Tags
         answerID = "hint-#{context["hint_idx"]}"
         headingID = "#{answerID}-heading-#{answerID}"
       end
+			content = super.strip
 
       "<div class=\"answer\" id=\"#{headingID}\"><p><a onclick=\"document.getElementById('#{answerID}').style.display = document.getElementById('#{answerID}').style.display === 'none' ? '' : 'none';\">#{@title}</a></p><div id=\"#{answerID}\" style=\"display: none;\"><p>#{content}</p></div></div>"
 
@@ -76,6 +103,10 @@ module Jekyll::Tags
 		end
 
 		def render(context)
+			site = context.registers[:site]
+      converter = site.find_converter_instance(::Jekyll::Converters::Markdown)
+			content = converter.convert(super)
+
 			questionID = context["questionID"]
 			idx = context["answer_idx"]
 			answerID = "#{questionID}-answer-#{idx}"
