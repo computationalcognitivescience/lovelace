@@ -129,8 +129,22 @@ html{
   font-style: italic;
 }
 
+.stopandthink {
+    width: calc(55% - 1.5em);
+    font-size: 1.4rem;
+    margin-top: 1.5rem;
+    padding-left: 1.5em;
+    text-indent:-1.5em;
+}
+
 .stopandthink > .st-header {
   font-weight: bold;
+  display: inline;
+  margin-right: 1em;
+}
+
+.stopandthink > p {
+  display: inline;
 }
 
 span.problemtitle{

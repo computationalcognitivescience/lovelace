@@ -131,8 +131,10 @@ module Jekyll::Tags
     end
 
     def render(context)
-      content = super
-      "<p class=\"stopandthink\"><div class=\"st-header\">Stop and think</div>#{content}</p>"
+			site = context.registers[:site]
+      converter = site.find_converter_instance(::Jekyll::Converters::Markdown)
+			content = converter.convert(super)
+      "<div class=\"stopandthink\"><div class=\"st-header\">Stop and think</div>#{content}</div>"
     end
   end
 end
