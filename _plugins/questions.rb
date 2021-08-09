@@ -54,9 +54,9 @@ module Jekyll::Tags
       chapterNR = context.registers[:page]['chapter']
 
 			if(context["parents"].length == 0)
-      	"<div class=\"question-top\"><div class=\"question\" id=\"question-#{@questionLabel}\"><div class=\"question-body\"><div class=\"question-header\">Question #{chapterNR}.#{@questionLabel}:</div> #{@content}</div></div></div>"
+      	"<div class=\"question-top\"><div class=\"question\" id=\"question-#{@questionLabel}\"><div class=\"question-body\"><div class=\"question-header\">Question #{chapterNR}.#{@questionLabel}</div> #{@content}</div></div></div>"
 			else
-				"<div class=\"question\" id=\"question-#{@questionLabel}\"><div class=\"question-body\"><div class=\"question-header\">Question #{chapterNR}.#{@questionLabel}:</div> #{@content}</div></div>"
+				"<div class=\"question\" id=\"question-#{@questionLabel}\"><div class=\"question-body\"><div class=\"question-header\">Question #{chapterNR}.#{@questionLabel}</div> #{@content}</div></div>"
 			end
 		end
 	end
@@ -120,7 +120,7 @@ module Jekyll::Tags
 			# increment for the next collapsible
 			context["answer_idx"] = idx + 1
       content = super.strip
-			"<div class='answer' id='#{headingID}'><p><em>#{@title}</em>: #{content}</p></div>"
+			"<div class='answer' id='#{headingID}'><div class=\"answer-header\">#{@title}</div> #{content}</div>"
 
 		end
 	end
@@ -132,7 +132,7 @@ module Jekyll::Tags
 
     def render(context)
       content = super
-      "<p class=\"stopandthink\"><em>Stop and think: </em>#{content}</p>"
+      "<p class=\"stopandthink\"><div class=\"st-header\">Stop and think</div>#{content}</p>"
     end
   end
 end
