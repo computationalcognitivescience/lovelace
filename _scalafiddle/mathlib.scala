@@ -212,7 +212,7 @@ case object Viz {
             "d3-transition": "d3-transition@latest/dist/d3-transition.min",
             "d3-zoom": "d3-zoom@latest/dist/d3-zoom.min",
             "d3": "d3@latest/dist/d3.min",
-            "@hpcc-js/wasm": "@hpcc-js/wasm@latest/dist/index.min",
+            "@hpcc-js/wasm": "@hpcc-js/wasm@1.9.1/dist/index.min",
     			  "graphviz": "d3-graphviz@latest/build/d3-graphviz"
   		    }
   		  });
