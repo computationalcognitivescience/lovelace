@@ -505,23 +505,31 @@ si6(group, personsLiked, personsDisliked, like, k = 2)
 ```
 {% endscalafiddle %}
 
-### Comparing model behaviour
+### Analyzing and comparing formalizations
 
-We can run the simulation for all three versions of {% problem Selecting
-Invitees %} on the same input to compare their behaviour.
+Simulations are a powerful tool to uncover consequences of formalization
+choices, especially those that are hard to derive mathematically. However, the
+full power of simulations is yet to be unlocked. Looking at single input
+instances of single formalizations is not very informative and wouldn't be worth
+the effort of coding. Let's see what we can learn about the three versions of {%
+problem Selecting Invitees %} by comparing them to eachother. We follow the
+example questions from [Chapter 8](/lovelace/part_iii/simulating).
+
+First we ask: *Are these formalizations truly different, or are they
+equivalent?* We can run the simulation for all three versions on the same input
+to compare their output. To prevent redundant copying, the implementations can
+be found in ```SelectingInvitees.si4(.)```, ```SelectingInvitees.si5(.)``` and ```SelectingInvitees.si6(.)```.
 
 {% question %}
-Can you find input where two or more of the models give the same output?
+Using the code below, can you find input where two or more of the models give the same output?
 {% hidden Hint? %}
-Try defining input by hand instead of using the random generation first. Then
-try finding variations of that input for which two or more models are
-equivalent.
+Try defining input by hand instead of using the random generation first. For a
+reminder, see [Supporting code](/lovelace/part_iii/sim_subset_choice#supporting-code) in this chapter. Then try finding variations of that input for which two or more models
+are equivalent.
 {% endhidden %}
 {% endquestion %}
 
-
-
-{% scalafiddle template="mathlib", minheight="1000", layout="v30" %}
+{% scalafiddle template="mathlib", minheight="1000", layout="v25" %}
 ```scala
 val group = Person.randomGroup(10)    // Generate random group
 val personsLiked = group.take(5)      // The first 5 are liked
@@ -540,69 +548,112 @@ Viz.render(group.toDotString(personsLiked, personsDisliked, like))
 ```
 {% endscalafiddle %}
 
+So for some inputs the formalizations might be equivalent, but for many others
+they are not. Next, try to answer the question: *How would you be able tell
+different formalizations apart in terms of the behaviour that they predict?* Of
+course, you can use simulations to do this and finally your hard work will pay
+off. The code below consists of three steps: (1) generate a set of inputs, (2) compute for all inputs the corresponding output for ```si4```, ```si5``` and ```si6```, (3) perform data analysis and plotting.
 
+For Step 1 and 3 some additional (helper) code is introduced. Step 1 introduces
+code that generates input using the same helper functions we've already seen,
+but at a larger scale (i.e., more inputs) and by giving control over input
+properties. This is the *constrained input generator* (see [Chapter
+7](/lovelace/part_iii/mathlib#simulation-architecture)). In Step 3, we perform
+an example analysis of the simulation data.
+
+{% question %}
+Using the code below, what kind of differences can you find between the three
+formal theories and when do you find them? Under what conditions do they
+disappear?
+{% hidden Hint? %}
+You can manipulate parameters of the input generator to run analyses under
+varying conditions. Remember that group sizes larger than 10 will most likely
+not finish simulating before the end of the universe due to exponential growth
+of the search space.
+{% endhidden %}
+{% endquestion %}
 
 
 {% scalafiddle template="mathlib", minheight="1000", layout="v30" %}
 ```scala
+// Generate inputs
 val inputData: List[SelectingInvitees.Input] =
   SelectingInvitees.inputGenerator(groupSize = 5,
                                    likeDislikeRatio = .2,
                                    pairLikeRatio = .4,
                                    k = 2,
-                                   sampleSize = 10)
+                                   sampleSize = 50)
 
-val outputData: List[Set[Person]] = inputData.map(input =>
+// Compute outputs
+val outputDataSI4: List[Set[Person]] = inputData.map(input =>
   SelectingInvitees.si4(input.group,
                         input.personsLiked,
                         input.personsDisliked,
                         input.like,
                         input.k))
 
+val outputDataSI5: List[Set[Person]] = inputData.map(input =>
+  SelectingInvitees.si5(input.group,
+                        input.personsLiked,
+                        input.personsDisliked,
+                        input.like))
 
+val outputDataSI6: List[Set[Person]] = inputData.map(input =>
+  SelectingInvitees.si6(input.group,
+                        input.personsLiked,
+                        input.personsDisliked,
+                        input.like,
+                        input.k))
 
-
-Plotly.render("""
-{
-    "data": [
-        {
-            "x": [
-                "giraffes",
-                "orangutans",
-                "monkeys"
-            ],
-            "y": [
-                20,
-                14,
-                23
-            ],
-            "type": "bar"
-        }
-    ]
+// Perform data analysis
+def analysis1(io: (SelectingInvitees.Input, Set[Person])): (Double, Double) = {
+  val input = io._1
+  val output = io._2
+  val nrLikes = input.group.uniquePairs.filter(input.like.tupled).size
+  val nrDislikes = input.group.uniquePairs.filter(!input.like.tupled(_)).size
+  val ldRatio = nrLikes.toDouble / nrDislikes
+  val size = output.size.doubleValue
+  (ldRatio, size)
 }
-""")
 
+val dataSI4 = (inputData zip outputDataSI4).map(analysis1)
+val dataSI5 = (inputData zip outputDataSI5).map(analysis1)
+val dataSI6 = (inputData zip outputDataSI6).map(analysis1)
+
+// Plot
+val trace4 = Trace(dataSI4, "SI4", PlotType.Line).mean
+val trace5 = Trace(dataSI5, "SI5", PlotType.Line).mean
+val trace6 = Trace(dataSI6, "SI6", PlotType.Line).mean
+
+Plot(List(trace4, trace5, trace6),
+     xAxisTitle = "pair-wise like/dislike ratio",
+     yAxisTitle = "nr invitees").render
 ```
 {% endscalafiddle %}
 
+The analysis and plotting functionality within the online Scala system is quite
+limited. If you want to explore the simulations more extensively consider
+running the simulations in a dedicated Scala development environment (see
+[Installing Scala and ```mathlib```](/lovelace/part_iii/simulating#installing-scala-and-mathlib)) and
+download the code here. You can also use the code block below and download the
+raw data to perform analyses in your favorite statistical analysis software. The
+code below might take longer to run, it simulates {% problem Selecting Invitees
+%} for many more combinations of parameters.
 
 {% scalafiddle template="mathlib", minheight="1000", layout="v30" %}
 ```scala
 
-val groupSizes = Set(5, 10, 15)
-val likeDislikeRatios = Set(0, 0.5, 1.0)
-val pairLikeRatios = Set(0, 0.5, 1.0)
-val ks = Set(0, 0.5, 1.0)
-val sampleSize = 1
+val groupSizes = Set(4, 6, 8, 10)
+val likeDislikeRatios = Set(0, 0.25, 0.5, 0.75, 1.0)
+val pairLikeRatios = Set(0, 0.25, 0.5, 0.75, 1.0)
+val ks = Set(0, 0.25, 0.5, 0.75, 1.0)
+val sampleSize = 10
 
-var i = 1
 val inputData =
   (for(groupSize <- groupSizes;
       likeDislikeRatio <- likeDislikeRatios;
       pairLikeRatio <- pairLikeRatios;
       k <- ks) yield {
-        println(s"$i")
-        i += 1
         SelectingInvitees.inputGenerator(
           groupSize,
           likeDislikeRatio,
@@ -612,10 +663,7 @@ val inputData =
           )
       }).toList.flatten
 
-var n = 1
 val outputData: List[Set[Person]] = inputData.map(input => {
-  println(s"$n / ${inputData.length}")
-  n += 1
   SelectingInvitees.si4(input.group,
                         input.personsLiked,
                         input.personsDisliked,
