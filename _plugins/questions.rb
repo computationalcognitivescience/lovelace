@@ -71,7 +71,7 @@ module Jekyll::Tags
 		def render(context)
 			site = context.registers[:site]
       converter = site.find_converter_instance(::Jekyll::Converters::Markdown)
-			content = converter.convert(super)
+
 
       idx = context["answer_idx"]
 
@@ -94,7 +94,7 @@ module Jekyll::Tags
         answerID = "hint-#{context["hint_idx"]}"
         headingID = "#{answerID}-heading-#{answerID}"
       end
-			content = super.strip
+			content = converter.convert(super.strip)
 
       "<div class=\"answer\" id=\"#{headingID}\"><a onclick=\"document.getElementById('#{answerID}').style.display = document.getElementById('#{answerID}').style.display === 'none' ? '' : 'none';\">#{@title}</a><div id=\"#{answerID}\" style=\"display: none;\">#{content}</div></div>"
 
