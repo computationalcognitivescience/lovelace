@@ -521,11 +521,12 @@ to compare their output. To prevent redundant copying, the implementations can
 be found in ```SelectingInvitees.si4(.)```, ```SelectingInvitees.si5(.)``` and ```SelectingInvitees.si6(.)```.
 
 {% question %}
-Using the code below, can you find input where two or more of the models give the same output?
+Using the code below, can you find input where two or more of the models give
+the same output? If you find such input(s), what is it about them that leads to
+equivalence?
 {% hidden Hint? %}
 Try defining input by hand instead of using the random generation first. For a
-reminder, see [Supporting code](/lovelace/part_iii/sim_subset_choice#supporting-code) in this chapter. Then try finding variations of that input for which two or more models
-are equivalent.
+reminder, see [Supporting code](/lovelace/part_iii/sim_subset_choice#supporting-code) in this chapter. If you find input for which the formalizations are equivalent, then try finding variations of that input that also lead to equivalence.
 {% endhidden %}
 {% endquestion %}
 
@@ -544,15 +545,16 @@ println("Output SI5: " + SelectingInvitees.si5(group, personsLiked, personsDisli
 println("Output SI6: " + SelectingInvitees.si6(group, personsLiked, personsDisliked, like, k))
 
 Viz.render(group.toDotString(personsLiked, personsDisliked, like))
-
 ```
 {% endscalafiddle %}
 
-So for some inputs the formalizations might be equivalent, but for many others
-they are not. Next, try to answer the question: *How would you be able tell
-different formalizations apart in terms of the behaviour that they predict?* Of
-course, you can use simulations to do this and finally your hard work will pay
-off. The code below consists of three steps: (1) generate a set of inputs, (2) compute for all inputs the corresponding output for ```si4```, ```si5``` and ```si6```, (3) perform data analysis and plotting.
+For some inputs the formalizations might be equivalent, but for many others they
+are not. Next, try to answer the question: *How would you be able tell different
+formalizations apart in terms of the behaviour that they predict?* Finally your
+hard work will pay off, because you can use simulations to do this. The code
+below consists of three steps: (1) generate a set of inputs, (2) compute for all
+inputs the corresponding output using ```si4```, ```si5``` and ```si6```, (3)
+perform data analysis and plotting.
 
 For Step 1 and 3 some additional (helper) code is introduced. Step 1 introduces
 code that generates input using the same helper functions we've already seen,
