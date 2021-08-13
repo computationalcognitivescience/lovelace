@@ -94,12 +94,27 @@ html{
   flex: 0 0 50%;
 }
 
-.question em{
-  font-weight: normal;
-  font-style: italic;
+.question-top {
+  width: calc(55% - 1.5em);
 }
-.question > .answer{
-  margin-left: 0;
+.question > .question-body {
+  margin-top: 1.5rem;
+  padding-left: 1.5em;
+  text-indent:-1.5em;
+}
+.question > .question-body .question-header {
+	font-size: 1.4rem;
+  font-weight: bold;
+  display: inline;
+  margin-right: 1em;
+}
+.question > .question-body p {
+  display: inline;
+}
+.question > .question-body > .answer {
+	font-size: 1.4rem;
+  padding-left: 0em;
+  text-indent: 0em;
 }
 .question > .answer .question{
   position: relative;
@@ -109,15 +124,28 @@ html{
 .answer p{
   margin-top: 0;
 }
-.answer em{
+.answer > .st-header{
   font-weight: normal;
   font-style: italic;
 }
 
-.stopandthink em{
-  font-weight: normal;
-  font-style: italic;
+.stopandthink {
+    width: calc(55% - 1.5em);
+    font-size: 1.4rem;
+    margin-top: 1.5rem;
+    padding-left: 1.5em;
+    text-indent:-1.5em;
 }
+
+.stopandthink > .st-header {
+  font-weight: bold;
+  display: inline;
+  margin-right: 1em;
+}
+
+.stopandthink > p {
+  display: inline;
+}55
 
 span.problemtitle{
 	font-variant: small-caps;
@@ -145,6 +173,20 @@ div.indent-4{
 	margin-left: 4rem;
 }
 
-div[data-scalafiddle], div[data-scalafiddle] pre, div[data-scalafiddle] code {
+div[data-scalafiddle] {
+  width: 100%;
+}
+
+div[data-scalafiddle] > iframe {
+  width: 90% !important;
+  max-height: 1000px !important;
+}
+
+div[data-scalafiddle] pre, div[data-scalafiddle] code {
 	width: 90%;
+}
+
+div[data-scalafiddle] > button {
+  top: 0px;
+  left: 60%;
 }

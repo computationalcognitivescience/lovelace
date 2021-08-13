@@ -4,6 +4,76 @@ case object Plotly {
 
   var plotCounter = 0
 
+  case object PlotType extends Enumeration {
+    type PlotType = Value
+    val Line, Bar, Scatter = Value
+  }
+
+  case class Trace(data: List[(Double, Double)], name: String, plotType: PlotType.PlotType = PlotType.Scatter) {
+    val markers = if(plotType == PlotType.Scatter) "\"mode\": \"markers\"," else ""
+
+    def mean: Trace = {
+      def calcMean(xs: Iterable[Double]) = xs.sum / xs.size
+
+      val meanData = data.toMap.groupBy(_._1)
+        .mapValues(xs => calcMean(xs.map(_._2)))
+        .toList
+
+      Trace(meanData, name, plotType)
+    }
+
+    def toJSON: String = {
+      s"""
+      {
+        "name": "$name",
+        "type": "${plotType.toString.toLowerCase}",
+        $markers
+        "x": ${data.sortBy(_._1).map(_._1).mkString("[",",","]")},
+        "y": ${data.sortBy(_._1).map(_._2).mkString("[",",","]")}
+      }
+      """
+    }
+  }
+
+  case class Plot(traces: List[Trace], xAxisTitle: String = "", yAxisTitle: String = "") {
+    val xAxis = if(!xAxisTitle.isEmpty)
+      s"""
+      ,"xaxis": {
+        "title": {
+          "text": "$xAxisTitle"
+        }
+      }
+      """
+    else ""
+    val yAxis = if(!yAxisTitle.isEmpty)
+      s"""
+      ,"yaxis": {
+        "title": {
+          "text": "$yAxisTitle"
+        }
+      }
+      """
+    else ""
+
+    def toJSON: String = {
+      s"""
+      {
+        "data": ${traces.map(_.toJSON).mkString("[",",","]")},
+        "layout": {
+          "showlegend": "true",
+          "legend": {
+            "orientation": "v"
+          }
+          $xAxis
+          $yAxis
+        }
+      }
+      """
+    }
+
+    def render: Unit = Plotly.render(this.toJSON)
+  }
+
   def render(plotJson: String): Unit = {
     Fiddle.print(
 	  div(id:=s"plot$plotCounter"),
@@ -13,7 +83,7 @@ case object Plotly {
 		  requirejs.config({
 		    baseUrl: 'https://cdn.jsdelivr.net/npm/',
 		    paths: {
-			  "plotly": "plotly.js@1.58.4/dist/plotly.min.js?noext"
+			  "plotly": "plotly.js@2.3.1/dist/plotly.min.js?noext"
 		    }
 		  });
 
@@ -30,3 +100,5 @@ case object Plotly {
     plotCounter = plotCounter + 1
   }
 }
+
+import Plotly._
