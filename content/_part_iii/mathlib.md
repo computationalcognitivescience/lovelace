@@ -5,33 +5,33 @@ chapter: 9
 nav_exclude: true
 ---
 
-Learning how to read and write code is quite similar to learning how to use
-math to formalise verbal theories. In this chapter we cover the basics of
-coding in Scala and ```mathlib```. Understanding Scala code might seem
-scary at first, but you have already mastered a more difficult skill: Translating
-verbal theory (which is underspecified) to formal, mathematical characterizations.
-The translation from the formal domain to simulation code requires understanding
-the Scala, you have much less ambiguity to deal with.
+Learning how to read and write code is quite similar to learning how to use math
+to formalise verbal theories. In this chapter we cover the basics of coding in
+Scala and ```mathlib```. Understanding Scala code might seem daunting at first,
+but you have already mastered a more difficult skill: Translating verbal theory
+(which is underspecified) to formal, mathematical characterizations. Translating
+from formalizations to simulation code requires understanding Scala, but it is
+easier in the sense that there is much less ambiguity to deal with.
 
 At the end of this chapter you will be able to understand how concepts from
 [Chapter 3 - Math concepts and notation](/lovelace/part_i/math) can be
 translated to Scala code. The chapter is quite detailed and we recommend to use
 it as a reference guide when reading chapters on simulations or when writing
-your own. The [cheat sheet](/lovelace/part_iii/mathlib#cheat-sheet) down below
-provides a helpful overview.
+your own code. The [cheat sheet](/lovelace/part_iii/mathlib#cheat-sheet) down
+below provides a helpful overview.
 
 ## Scala fundamentals
 We cover only a small subset of the full Scala language here. This subset
 suffices for implementing basic simulations of formal theories. If after reading
 this chapter you want to learn more about Scala, there are various textbooks
-(REFS) and online resources such as the official
-[Tour of Scala](https://docs.scala-lang.org/tour/tour-of-scala.html).
+(e.g. Odersky, Spoon and Venners, 2019; but see also [Scala books](https://docs.scala-lang.org/books.html)) and online resources such as the official
+[Tour of Scala](https://docs.scala-lang.org/tour/tour-of-scala.html) and [Creative Scala](https://www.creativescala.org/).
 
 ### Variables, functions and types
 
 The basic expressions in a functional programming language such as Scala are
 variables, functions and types. Variables, like their mathematical counterpart,
-are containers storing a value. For example:
+are containers that can store a value.{% sidenote 'id-sn-value' 'Variable is not completely accurate terminology here. ```val``` stores a value which is (in functional programming terminology) immutable, i.e., it cannot change. It is more like a constant, rather than a variable. In this book, we will rarely use mutable ```var``` variables.' %} For example:
 
 {% scalafiddle template="mathlib" %}
 ```scala
@@ -42,7 +42,7 @@ val myNumber = 3
 Let's break this example down into its parts. The word ```val``` tells the
 computer that you will specify a *value*, which is a container storing a
 constant (in this case the integer 3). The *identifier* (name) of this value is
-the word ```number```. The *assignment operator* ```=``` takes the value on its
+the word ```myNumber```. The *assignment operator* ```=``` takes the value on its
 right side and stores is in the container on the left side.
 
 Any container in Scala has a *type*. For example, the value ```myNumber```
@@ -55,7 +55,7 @@ val mySecondNumber: Int = 2
 ```
 {% endscalafiddle %}
 
-Types are useful, since they provide a safety net against programming mistakes
+Types are helpful. They provide a safety net against programming mistakes
 since you cannot assign a value that is incompatible with the specified type.
 Running the following code results in a ```type mismatch``` error and the
 compiler (i.e., the software that interprets and runs your code) will even tell
@@ -978,4 +978,8 @@ println(myFriends x animals)      // Set of all pairs of friends and animals usi
 
 ### References
 
-{% bibliography --cited %}
+Guest, O., & Martin, A. E. (2021). How computational modeling can force theory
+building in psychological science. *Perspectives on Psychological Science 16*(4), 789-802.
+
+Odersky, M., Spoon, L., & Venners, B. (2019). *Programming in Scala, 4th
+Edition*. Artima.
