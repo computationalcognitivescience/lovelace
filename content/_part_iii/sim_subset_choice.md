@@ -607,7 +607,7 @@ val outputDataSI6: List[Set[Person]] = inputData.map(input =>
                         input.like,
                         input.k))
 
-// Perform data analysis
+// Perform data analyses
 def analysis1(io: (SelectingInvitees.Input, Set[Person])): (Double, Double) = {
   val input = io._1
   val output = io._2
@@ -618,18 +618,41 @@ def analysis1(io: (SelectingInvitees.Input, Set[Person])): (Double, Double) = {
   (ldRatio, size)
 }
 
-val dataSI4 = (inputData zip outputDataSI4).map(analysis1)
-val dataSI5 = (inputData zip outputDataSI5).map(analysis1)
-val dataSI6 = (inputData zip outputDataSI6).map(analysis1)
+val dataAnalysis1SI4 = (inputData zip outputDataSI4).map(analysis1)
+val dataAnalysis1SI5 = (inputData zip outputDataSI5).map(analysis1)
+val dataAnalysis1SI6 = (inputData zip outputDataSI6).map(analysis1)
 
-// Plot
-val trace4 = Trace(dataSI4, "SI4", PlotType.Line).mean
-val trace5 = Trace(dataSI5, "SI5", PlotType.Line).mean
-val trace6 = Trace(dataSI6, "SI6", PlotType.Line).mean
+def analysis2(io: (SelectingInvitees.Input, Set[Person])): (Double, Double) = {
+  val input = io._1
+  val output = io._2
+  val nrLikes = input.group.uniquePairs.filter(input.like.tupled).size
+  val nrDislikes = input.group.uniquePairs.filter(!input.like.tupled(_)).size
+  val ldRatio = nrLikes.toDouble / nrDislikes
+  val avgLikes = output.uniquePairs.filter(input.like.tupled).size
+  (ldRatio, avgLikes)
+}
 
-Plot(List(trace4, trace5, trace6),
+val dataAnalysis2SI4 = (inputData zip outputDataSI4).map(analysis2)
+val dataAnalysis2SI5 = (inputData zip outputDataSI5).map(analysis2)
+val dataAnalysis2SI6 = (inputData zip outputDataSI6).map(analysis2)
+
+// Plot analysis 1
+val trace14 = Trace(dataAnalysis1SI4, "SI4", PlotType.Line).mean
+val trace15 = Trace(dataAnalysis1SI5, "SI5", PlotType.Line).mean
+val trace16 = Trace(dataAnalysis1SI6, "SI6", PlotType.Line).mean
+
+Plot(List(trace14, trace15, trace16),
      xAxisTitle = "pair-wise like/dislike ratio",
      yAxisTitle = "nr invitees").render
+
+// Plot analysis 2
+val trace24 = Trace(dataAnalysis2SI4, "SI4", PlotType.Line).mean
+val trace25 = Trace(dataAnalysis2SI5, "SI5", PlotType.Line).mean
+val trace26 = Trace(dataAnalysis2SI6, "SI6", PlotType.Line).mean
+
+Plot(List(trace24, trace25, trace26),
+    xAxisTitle = "pair-wise like/dislike ratio",
+    yAxisTitle = "average likes among invitees").render
 ```
 {% endscalafiddle %}
 
@@ -639,21 +662,40 @@ running the simulations in a dedicated Scala development environment (see
 [Installing Scala and ```mathlib```](/lovelace/part_iii/simulating#installing-scala-and-mathlib)) and
 download the code here. You can also use the code block below and download the
 raw data to perform analyses in your favorite statistical analysis software. The
-code below might take longer to run, it simulates {% problem Selecting Invitees
-%} for many more combinations of parameters.
+code below might take longer to run as it simulates {% problem Selecting Invitees
+%} for many more combinations of parameters. The resulting CSV file will also
+be possibly large. Table 2 lists the CSV format.
+
+{% marginnote 'Table-ID2' 'Table 2: CSV format for group size $$n$$.'  %}
+<div class="table-wrapper" markdown="block" style="margin-top:3rem;">
+
+| column |type | description |
+| :--- | :---: | :--- |
+| p0 .. pn | true/false | host likes pi |
+| p0-p1 ..  pn-p(n-1) | true/false | pi and pj like each other |
+| k | int | k value |
+| p0-si4 .. pn-si4 | true/false | pi is invited in si4 |
+| p0-si5 .. pn-si5 | true/false | pi is invited in si5 |
+| p0-si6 .. pn-si6 | true/false | pi is invited in si6 |
+
+</div>
+
+<div class="table-wrapper" markdown="block" style="margin-top:3rem;">
+
+
+
+</div>
 
 {% scalafiddle template="mathlib", minheight="1000", layout="v30" %}
 ```scala
+val groupSize = 6
+val likeDislikeRatios = Set(0, 0.22, 0.66, 1.0)
+val pairLikeRatios = Set(0, 0.22, 0.66, 1.0)
+val ks = Set(0, 0.22, 0.66, 1.0)
+val sampleSize = 1
 
-val groupSizes = Set(4, 6, 8, 10)
-val likeDislikeRatios = Set(0, 0.25, 0.5, 0.75, 1.0)
-val pairLikeRatios = Set(0, 0.25, 0.5, 0.75, 1.0)
-val ks = Set(0, 0.25, 0.5, 0.75, 1.0)
-val sampleSize = 10
-
-val inputData =
-  (for(groupSize <- groupSizes;
-      likeDislikeRatio <- likeDislikeRatios;
+val inputData: List[SelectingInvitees.Input] =
+  (for(likeDislikeRatio <- likeDislikeRatios;
       pairLikeRatio <- pairLikeRatios;
       k <- ks) yield {
         SelectingInvitees.inputGenerator(
@@ -665,15 +707,61 @@ val inputData =
           )
       }).toList.flatten
 
-val outputData: List[Set[Person]] = inputData.map(input => {
+// Compute outputs
+val outputDataSI4: List[Set[Person]] = inputData.map(input =>
   SelectingInvitees.si4(input.group,
                         input.personsLiked,
                         input.personsDisliked,
                         input.like,
-                        input.k)
-                        })
+                        input.k))
 
-(inputData zip outputData).foreach(println)
+val outputDataSI5: List[Set[Person]] = inputData.map(input =>
+  SelectingInvitees.si5(input.group,
+                        input.personsLiked,
+                        input.personsDisliked,
+                        input.like))
+
+val outputDataSI6: List[Set[Person]] = inputData.map(input =>
+  SelectingInvitees.si6(input.group,
+                        input.personsLiked,
+                        input.personsDisliked,
+                        input.like,
+                        input.k))
+
+// Safe data to CSV
+def inputHeader(input: SelectingInvitees.Input): String = {
+  val groupList = input.group.toList
+  val people = for(i <- groupList.indices) yield s"p$i"
+  val pairs = for(i <- groupList.indices; j <- groupList.indices if i != j) yield s"p$i-p$j"
+  people.mkString("", ",\t", ",\t") + pairs.mkString("", ",\t", ",\t") + "k"
+}
+
+def outputHeader(input: SelectingInvitees.Input, label: String): String = {
+  val groupList = input.group.toList
+  val people = for(i <- groupList.indices) yield s"p$i-$label"
+  people.mkString(",\t")
+}
+
+def dataToCSV(input: SelectingInvitees.Input, outputs: List[Set[Person]]): String = {
+  val groupList = input.group.toList
+  val hostLikes = groupList.map(person => person in input.personsLiked)
+  val likings = for(p1 <- groupList; p2 <- groupList if p1 != p2) yield input.like(p1, p2)
+  val k = input.k
+  val results = outputs.map(output => groupList.map(_ in output).mkString(",\t"))
+  hostLikes.mkString("", ",\t", ",\t") + likings.mkString("", ",\t", ",\t") + input.k  + results.mkString(",\t", ",\t", "")
+}
+
+val header = inputHeader(inputData.head) + ",\t" +
+  outputHeader(inputData.head, "si4") + ",\t" +
+  outputHeader(inputData.head, "si5") + ",\t" +
+  outputHeader(inputData.head, "si6")
+
+val rows = for(i <- inputData.indices) yield
+  dataToCSV(inputData(i), List(outputDataSI4(i), outputDataSI5(i), outputDataSI6(i)))
+
+val csv = header + "%0A" + rows.mkString("%0A")
+
+Fiddle.print(a(href:=s"data:text/csv,$csv", target:="_blank", attr("download"):="data.csv", "Right click and Save link as..."))
 ```
 {% endscalafiddle %}
 

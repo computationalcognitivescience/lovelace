@@ -552,9 +552,8 @@ case object Plotly {
         "layout": {
           "showlegend": "true",
           "legend": {
-            "x": 1,
-            "xanchor": "right",
-            "y": 1
+            "orientation": "v",
+            "itemwidth": 10
           }
           $xAxis
           $yAxis
@@ -575,7 +574,7 @@ case object Plotly {
 		  requirejs.config({
 		    baseUrl: 'https://cdn.jsdelivr.net/npm/',
 		    paths: {
-			  "plotly": "plotly.js@1.58.4/dist/plotly.min.js?noext"
+			  "plotly": "plotly.js@2.3.1/dist/plotly.min.js?noext"
 		    }
 		  });
 
