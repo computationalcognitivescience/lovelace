@@ -978,8 +978,7 @@ println(myFriends x animals)      // Set of all pairs of friends and animals usi
 
 ### References
 
-Guest, O., & Martin, A. E. (2021). How computational modeling can force theory
-building in psychological science. *Perspectives on Psychological Science 16*(4), 789-802.
+Guest, O., & Martin, A. E. (2021). [How computational modeling can force theory building in psychological science.](https://doi.org/10.1177/1745691620970585) *Perspectives on Psychological Science 16*(4),789-802.
 
 Odersky, M., Spoon, L., & Venners, B. (2019). *Programming in Scala, 4th
 Edition*. Artima.
