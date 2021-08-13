@@ -71,9 +71,9 @@ case object Viz {
   	    var script = document.createElement('script');
 	    script.onload = function () {
 		  requirejs.config({
-		    baseUrl: 'http://webgraphviz.com/',
+		    baseUrl: 'https://github.com/',
 		    paths: {
-			  "viz": "viz"
+			  "viz": "lovelace/raw/master/assets/js/viz"
 		    }
 		  });
 
