@@ -5,6 +5,13 @@ chapter: 10
 nav_exclude: true
 ---
 
+In this chapter you will learn how to use computer simulations as a theoretical
+tool, namely to analyze the consequences different formalizations of verbal
+theories. To reach that goal, you will also learn how to read an implementation
+of formal theory in Scala ```mathlib```. At the end of this chapter, you will be
+able to use (adapt and run) the provided simulation code to compare three formal
+models. You will be able to test your intuitions about the theory and derive qualitative differences between them.
+
 We pick up the conversation between Verbal and Formal from [Chapter 4 - Subset Choice](/lovelace/part_ii/subset#dialogue-1-formalizing-inviting-guests). Formal is very excited to share the computer simulations they implemented of the theoretical models Formal and Verbal created. Formal has some suggestions on how to use the simulations, which they explain to Verbal.
 
 {% indent 4 %}
