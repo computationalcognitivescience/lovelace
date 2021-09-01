@@ -125,6 +125,21 @@ Judging from experience, it is unlikely that our minds operate this way. More li
 
 ## Data priority principle
 
+The authors of the <span style="font-variant:small-caps;">Coherence</span> model were aware of the problem posed in the previous subsection. They proposed that the *data priority principle* counters the problem.{% sidenote 'sn-id-whatever' 'Data priority principle: "Propositions that describe the results of observation have a
+degree of acceptability on their own." -- Thagard (1989)' %} For instance, if you see the prime minister regularly arriving at the parliament building by bike, then you will believe that he cycles to work. This belief is based on direct observation, and therefore has a degree of acceptability of its own, independent of its coherence with other beliefs you may have. Once you  acceptability may also influence the plausibility of other beliefs: e.g., the belief that the prime minister lives in the Hague where the parliament building is. To the extend that beliefs corresponding to direct observations are truthful or accurate, the beliefs that cohere with them are also more likely to be true; or to Thagard and Verbeurgt proposed.
+
+We can capture this idea in an adjusted formalization of <span style="font-variant:small-caps;">Coherence</span> called <span style="font-variant:small-caps;">Discriminating Coherence</span>
+
+Yet, the belief could still be doubted, e.g., if it were to incohere sufficiently with other beliefs you hold. For instance, if someone told you that the prime minister lives in Amsterdam, not in The Hague the parliament building is *and* you notice that every time the prime minister arrives by bicycle there was is a camera crew and journalist waiting to interview him, then you may no longer believe he is cycling to work from his home. A more coherent interpretation may be that he wants to give a public impression to Dutch voters that he is the kind of person who cycles to work.
+
+
+
+
+
+
+
+{% epigraph 'A pure coherence problem is one that does not favor the acceptance of any particular set of elements. A foundational coherence problem selects a set of favored elements for acceptance as self-justified. A discriminating coherence problem favors a set of elements but their acceptance still depends on their coherence with all the other elements.' 'Thagard & Verbeurgt' '1998' %}
+
 ## NP-hard
 
 ## Scope
