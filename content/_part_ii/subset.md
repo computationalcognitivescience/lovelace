@@ -337,7 +337,7 @@ $$G \subseteq P$$ such that $$|Y| \leq k$$ and  $$|G\cap L|+|G|$$ is maximized (
 {% endfproblem %}
 
 {% indent 4 %}
-**Formal:** There may be other possibilities.{% sidenote 'sn-id-whatever' 'We leave this as an exercise for the reader to explore further.'%} I have created simulation code for these versions, available online [here](), so you can explore their empirical implications via computer simulation.
+**Formal:** There may be other possibilities.{% sidenote 'sn-id-whatever' 'We leave this as an exercise for the reader to explore further.'%} I have created simulation code for these versions, available online [here](/lovelace/part_iii/sim_subset_choice), so you can explore their empirical implications via computer simulation.
 {% endindent %}
 
 
