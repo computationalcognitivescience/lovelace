@@ -47,8 +47,7 @@ reason is that designing computational level theories is hard, especially if you
 do not have the appropriate training. While actual algorithm design is also far
 from trivial, the basic principles are easy to intuit. It comes more naturally
 to intuitively describe cognitive capacities as a step-by-step process, rather
-than the abstract problem (function) that is being solved. So why is this
-problematic? Why not skip the computational level completely?
+than the abstract problem (function) that is being solved.
 
 
 {% question %}
