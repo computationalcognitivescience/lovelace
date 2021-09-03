@@ -1,6 +1,6 @@
 ---
 layout: page
 title: Self-organisation and evolution
-chapter: 13
+chapter: 14
 nav_exclude: true
 ---

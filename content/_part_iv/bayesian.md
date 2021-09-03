@@ -1,6 +1,6 @@
 ---
 layout: page
 title: Bayesian Models
-chapter: 11
+chapter: 12
 nav_exclude: true
 ---
