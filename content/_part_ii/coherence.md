@@ -132,26 +132,24 @@ We can capture this idea in an adjusted formalization of <span style="font-varia
 
 Yet, the belief could still be doubted, e.g., if it were to incohere sufficiently with other beliefs you hold. For instance, if someone told you that the prime minister lives in Amsterdam, not in The Hague the parliament building is *and* you notice that every time the prime minister arrives by bicycle there was is a camera crew and journalist waiting to interview him, then you may no longer believe he is cycling to work from his home. A more coherent interpretation may be that he wants to give a public impression to Dutch voters that he is the kind of person who cycles to work.
 
-
-
-
-
-
-
 {% epigraph 'A pure coherence problem is one that does not favor the acceptance of any particular set of elements. A foundational coherence problem selects a set of favored elements for acceptance as self-justified. A discriminating coherence problem favors a set of elements but their acceptance still depends on their coherence with all the other elements.' 'Thagard & Verbeurgt' '1998' %}
 
 ## NP-hard
 
+*Under construction*
+
 ## Scope
 
+*Under construction*
 
 # Computing coherence
 
-Thagard and Verbeurgt also pursued possible algorithmic-level explanation of how humans may compute coherence. We summarize here three of the five algorithms that they considered.
-
-
+*Under construction*
 
 # Further reading
 
+*Under construction*
 
 ### References
+
+*Under construction*
