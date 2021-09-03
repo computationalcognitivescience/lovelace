@@ -47,9 +47,9 @@
   <link rel="stylesheet" type="text/css" href="/lovelace/css/tufte.css">
   <!-- <link rel="stylesheet" type="text/css" href="/lovelace/css/print.css" media="print"> -->
 
-  <link rel="canonical" href="/lovelace/content/cheatsheet">
+  <link rel="canonical" href="http://localhost:4000/lovelace/content/cheatsheet">
 
-  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="/lovelace/feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="http://localhost:4000/lovelace/feed.xml" />
 </head>
 
   <body>
@@ -92,13 +92,7 @@
   	
 		
 		    
-		      <a href="/lovelace/content/part4">IV - Reflecting</a>
-		    
-	    
-  	
-		
-		    
-		      <a href="/lovelace/content/part5">V - Advanced</a>
+		      <a href="/lovelace/content/part4">IV - Advanced Topics</a>
 		    
 	    
   	
@@ -233,9 +227,9 @@ Okay, let's take a minute and pause.
 
 <p>produces:</p>
 
-<p class="stopandthink"><em>Stop and think: </em>
-Okay, let's take a minute and pause.
-</p>
+<div class="stopandthink"><div class="st-header">Stop and think</div>
+<p>Okay, let’s take a minute and pause.</p>
+</div>
 
 <h3 id="hints">Hints</h3>
 <p>You can add a hint to any part (also inside stop and think of questions) as follows:</p>
@@ -246,7 +240,8 @@ The answer is obvious.
 
 <p>which produces a link with the tag as specified and when clicked shows the body of the tag:</p>
 
-<div class="answer" id="hint-1-heading-hint-1"><p><a onclick="document.getElementById('hint-1').style.display = document.getElementById('hint-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="hint-1" style="display: none;"><p>The answer is obvious.</p></div></div>
+<div class="answer" id="hint-1-heading-hint-1"><a onclick="document.getElementById('hint-1').style.display = document.getElementById('hint-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="hint-1" style="display: none;"><p>The answer is obvious.</p>
+</div></div>
 
 <h3 id="questions">Questions</h3>
 <p>A simple open question can be added using the following liquid tag. It will be automatically numbered using the chapter number specified in the markdown front matter:</p>
@@ -257,7 +252,8 @@ What is the answer to the ulimate question in the universe?
 
 <p>this produces:</p>
 
-<div class="question" id="question-1"><p><em>Question 666.1:</em> What is the answer to the ulimate question in the universe?</p></div>
+<div class="question-top"><div class="question" id="question-1"><div class="question-body"><div class="question-header">Question 666.1</div> <p>What is the answer to the ulimate question in the universe?</p>
+</div></div></div>
 
 <p>You can nest any other liquid tags inside a question (but try to keep it simple for readibility). For example, hints:</p>
 
@@ -269,8 +265,10 @@ Have you read the book?
 {% endquestion %}
 </code></pre></div></div>
 
-<div class="question" id="question-2"><p><em>Question 666.2:</em> What is the answer to the ulimate question in the universe?
-<div class="answer" id="question-2-heading-1"><p><a onclick="document.getElementById('question-2-answer-1').style.display = document.getElementById('question-2-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-2-answer-1" style="display: none;"><p>Have you read the book?</p></div></div></p></div>
+<div class="question-top"><div class="question" id="question-2"><div class="question-body"><div class="question-header">Question 666.2</div> <p>What is the answer to the ulimate question in the universe?</p>
+<div class="answer" id="question-.2-heading-1"><a onclick="document.getElementById('question-.2-answer-1').style.display = document.getElementById('question-.2-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.2-answer-1" style="display: none;"><p>Have you read the book?</p>
+</div></div>
+</div></div></div>
 
 <p>And there are special answer tags in case you want to make a multiple choice question:</p>
 
@@ -289,11 +287,12 @@ What is the answer to the ulimate question in the universe?
 
 <p>produces:</p>
 
-<div class="question" id="question-3"><p><em>Question 666.3:</em> What is the answer to the ulimate question in the universe?
+<div class="question-top"><div class="question" id="question-3"><div class="question-body"><div class="question-header">Question 666.3</div> <p>What is the answer to the ulimate question in the universe?</p>
 
-<div class="answer" id="question-3-heading-1"><p><em>Answer A</em>: 42</p></div>
+<div class="answer" id="question-.3-heading-1"><div class="answer-header">Answer A</div> 42</div>
 
-<div class="answer" id="question-3-heading-2"><p><em>Answer B</em>: -1</p></div></p></div>
+<div class="answer" id="question-.3-heading-2"><div class="answer-header">Answer B</div> -1</div>
+</div></div></div>
 
 <p>You can even have subquestions <strong>this code isn’t working yet..</strong>:</p>
 
@@ -311,11 +310,14 @@ Where is this answer being computed?
 {% endquestion %}
 </code></pre></div></div>
 
-<div class="question" id="question-4"><p><em>Question 666.4:</em> About life, the universe and everything.
+<div class="question-top"><div class="question" id="question-4"><div class="question-body"><div class="question-header">Question 666.4</div> <p>About life, the universe and everything.</p>
 
-<div class="question" id="question-5"><p><em>Question 666.5:</em> What is the answer to the ulimate question in the universe?</p></div>
+<div class="question" id="question-4.1"><div class="question-body"><div class="question-header">Question 666.4.1</div> <p>What is the answer to the ulimate question in the universe?</p>
+</div></div>
 
-<div class="question" id="question-6"><p><em>Question 666.6:</em> Where is this answer being computed?</p></div></p></div>
+<div class="question" id="question-4.2"><div class="question-body"><div class="question-header">Question 666.4.2</div> <p>Where is this answer being computed?</p>
+</div></div>
+</div></div></div>
 
 <h2 id="computational-problems">Computational problems</h2>
 <p>Put the name of the problem inside the tag, then in the body use double semi-colons <code class="language-plaintext highlighter-rouge">;;</code> to separate the input and output.</p>

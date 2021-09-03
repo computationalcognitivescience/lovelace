@@ -47,9 +47,9 @@
   <link rel="stylesheet" type="text/css" href="/lovelace/css/tufte.css">
   <!-- <link rel="stylesheet" type="text/css" href="/lovelace/css/print.css" media="print"> -->
 
-  <link rel="canonical" href="/lovelace/part_ii/coherence">
+  <link rel="canonical" href="http://localhost:4000/lovelace/part_ii/coherence">
 
-  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="/lovelace/feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="http://localhost:4000/lovelace/feed.xml" />
 </head>
 
   <body>
@@ -92,13 +92,7 @@
   	
 		
 		    
-		      <a href="/lovelace/content/part4">IV - Reflecting</a>
-		    
-	    
-  	
-		
-		    
-		      <a href="/lovelace/content/part5">V - Advanced</a>
+		      <a href="/lovelace/content/part4">IV - Advanced Topics</a>
 		    
 	    
   	
@@ -154,8 +148,10 @@ A partition of the vertices \(V\) into sets \(A\) and \(R\) such that \(Coh(A,R)
 
 <figure><img src="/lovelace/assets/img/coherence_capital_example.png" /><figcaption class="maincolumn-figure">An instance of the <span style="font-variant:small-caps;">Coherence</span>  problem, with vertex set \(V = \{a, b, c, d, e, f, g, h, i \}.\)<em>Solid lines</em> indicate positive constraints \(C^+\), and <em>dotted lines</em> indicate negative constraints \(C^-\). Note how it is not possible to satisfy all constraints by a partition of \(V\) into \(A\) and \(R\). But it is still possible to satisfy a <em>maximum</em> of constraints.</figcaption></figure>
 
-<div class="question" id="question-1"><p><em>Question 5.1:</em> What is a maximum coherence partition for the input of <span style="font-variant:small-caps;">Coherence</span>  depicted above?
-<div class="answer" id="question-1-heading-1"><p><a onclick="document.getElementById('question-1-answer-1').style.display = document.getElementById('question-1-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-1-answer-1" style="display: none;"><p>Consider the partition $$A = \{ a, d, f, i \}, R = \{ b, c, e, g, h\}$$ How many constraints are satisfied by that partition? Can you find a partition that satisfies more constraints?</p></div></div></p></div>
+<div class="question-top"><div class="question" id="question-1"><div class="question-body"><div class="question-header">Question 5.1</div> <p>What is a maximum coherence partition for the input of <span style="font-variant:small-caps;">Coherence</span>  depicted above?</p>
+<div class="answer" id="question-1-heading-1"><a onclick="document.getElementById('question-1-answer-1').style.display = document.getElementById('question-1-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-1-answer-1" style="display: none;"><p>Consider the partition \(A = \{ a, d, f, i \}, R = \{ b, c, e, g, h\}\) How many constraints are satisfied by that partition? Can you find a partition that satisfies more constraints?</p>
+</div></div>
+</div></div></div>
 
 <p>Lastly, we introduce <em>weights</em> on the constraints in the model. This captures Thagard and Verbeurgt’s intuition that some pairs of elements can cohere and incohere more strongly than others:</p>
 
@@ -172,8 +168,10 @@ A partition of the vertices \(V\) into sets \(A\) and \(R\) such that \(Coh(A,R)
 <p><span class="problemtitle">Coherence (formal, version 3)</span><br /><span class="probleminout">Input:</span> A graph \(G = (V, E)\), with a weight \(w(u,v) \in \mathbb{N}\) for each edge \((u,v) \in E = C^+ \cup C^- \subseteq V \times V\) (where \(C^+ \cap C^- = \emptyset\)).<br /><span class="probleminout">Output:</span> 
 A truth assignment \(T: V \rightarrow \{\top, \bot \}\) such that \(Coh(T)= \sum_{T(u) = T(v)} w(u,v) + \sum_{T(u) \neq T(v)} w(u,v)\) is maximum.</p>
 
-<div class="question" id="question-2"><p><em>Question 5.2:</em> Are versions 2 and 3 of <span style="font-variant:small-caps;">Coherence</span> the same or different computational-level models?
-<div class="answer" id="question-2-heading-1"><p><a onclick="document.getElementById('question-2-answer-1').style.display = document.getElementById('question-2-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-2-answer-1" style="display: none;"><p>While the models look different on the surface the input-output mappings are equivalent. Try to prove the equivalence. That is, assume that $$A = \top$$ and $$R = \bot$$ and convince yourself (or someone else) that there is no input for which the two models produce different outputs.</p></div></div></p></div>
+<div class="question-top"><div class="question" id="question-2"><div class="question-body"><div class="question-header">Question 5.2</div> <p>Are versions 2 and 3 of <span style="font-variant:small-caps;">Coherence</span> the same or different computational-level models?</p>
+<div class="answer" id="question-.2-heading-1"><a onclick="document.getElementById('question-.2-answer-1').style.display = document.getElementById('question-.2-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.2-answer-1" style="display: none;"><p>While the models look different on the surface the input-output mappings are equivalent. Try to prove the equivalence. That is, assume that \(A = \top\) and \(R = \bot\) and convince yourself (or someone else) that there is no input for which the two models produce different outputs.</p>
+</div></div>
+</div></div></div>
 
 <p>Answering <em>Question 5.1</em> may have been easy enough. Once you recognize that a partition into sets \(A\) and \(R\) can be conceptualized as a truth assignment with \(A = \top\) and \(R = \bot\), and you notice that then \(T(v)=T(u)\) means the same as \(u,v \in A \text{ OR } u,v \in R\), and so on, the equivalence between the two versions becomes apparent.</p>
 
@@ -182,8 +180,10 @@ A truth assignment \(T: V \rightarrow \{\top, \bot \}\) such that \(Coh(T)= \sum
 <p><span class="problemtitle">Harmony Maximization</span><br /><span class="probleminout">Input:</span> A Hopfiel network \(G = (V, E)\), with a weight \(w(u,v) \in \mathbb{Z}\) for each edge \((u,v) \in E = V \times V\) (i.e., the network is fully connected).<br /><span class="probleminout">Output:</span> 
 An activation pattern \(a: V \rightarrow \{-1,1 \}\) such that \(H(a) = \sum_{u,v \in V} a(u)a(v)w(u,v)\) is maximum.</p>
 
-<div class="question" id="question-3"><p><em>Question 5.3:</em> Is <span style="font-variant:small-caps;">Harmony Maximization</span> the same or a different computational-level model as versions 2 and 3 of <span style="font-variant:small-caps;">Coherence</span>?
-<div class="answer" id="question-3-heading-1"><p><a onclick="document.getElementById('question-3-answer-1').style.display = document.getElementById('question-3-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-3-answer-1" style="display: none;"><p>While the models look quite different on the surface the input-output mappings are, again, equivalent. Try to prove the equivalence. That is, assume that $$\top = 1$$ and $$\bot = -1$$ and convince yourself (or someone else) that there is no input for which the two models produce different outputs. Tip: calculate $$\sum_{u,v \in V} a(u)a(v)w(u,v)$$ for a few possible inputs and activations patterns. And compare this to $$\sum_{T(u) = T(v)} w(u,v) + \sum_{T(u) \neq T(v)} w(u,v)$$ for corresponding input and truth assigments. What do you notice?</p></div></div></p></div>
+<div class="question-top"><div class="question" id="question-3"><div class="question-body"><div class="question-header">Question 5.3</div> <p>Is <span style="font-variant:small-caps;">Harmony Maximization</span> the same or a different computational-level model as versions 2 and 3 of <span style="font-variant:small-caps;">Coherence</span>?</p>
+<div class="answer" id="question-.3-heading-1"><a onclick="document.getElementById('question-.3-answer-1').style.display = document.getElementById('question-.3-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.3-answer-1" style="display: none;"><p>While the models look quite different on the surface the input-output mappings are, again, equivalent. Try to prove the equivalence. That is, assume that \(\top = 1\) and \(\bot = -1\) and convince yourself (or someone else) that there is no input for which the two models produce different outputs. Tip: calculate \(\sum_{u,v \in V} a(u)a(v)w(u,v)\) for a few possible inputs and activations patterns. And compare this to \(\sum_{T(u) = T(v)} w(u,v) + \sum_{T(u) \neq T(v)} w(u,v)\) for corresponding input and truth assigments. What do you notice?</p>
+</div></div>
+</div></div></div>
 
 <h3 id="lessons">Lessons</h3>
 
@@ -197,8 +197,10 @@ An activation pattern \(a: V \rightarrow \{-1,1 \}\) such that \(H(a) = \sum_{u,
 
 <p><span style="font-variant:small-caps;">Coherence</span> has the property that \(Coh(A,R) = Coh(R,A)\) (or, equivalently, \(Coh(T) = Coh(\neg T)\)). We call this the <em>symmetry property</em>.</p>
 
-<div class="question" id="question-4"><p><em>Question 5.4:</em> Prove that the symmetry property holds for <span style="font-variant:small-caps;">Coherence</span>.
-<div class="answer" id="question-4-heading-1"><p><a onclick="document.getElementById('question-4-answer-1').style.display = document.getElementById('question-4-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-4-answer-1" style="display: none;"><p>Carefully look at the definitions of versions 1, 2 and 3 of <span style="font-variant:small-caps;">Coherence</span>.</p></div></div></p></div>
+<div class="question-top"><div class="question" id="question-4"><div class="question-body"><div class="question-header">Question 5.4</div> <p>Prove that the symmetry property holds for <span style="font-variant:small-caps;">Coherence</span>.</p>
+<div class="answer" id="question-.4-heading-1"><a onclick="document.getElementById('question-.4-answer-1').style.display = document.getElementById('question-.4-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.4-answer-1" style="display: none;"><p>Carefully look at the definitions of versions 1, 2 and 3 of <span style="font-variant:small-caps;">Coherence</span>.</p>
+</div></div>
+</div></div></div>
 
 <p>The symmetry property seems cognitively implausible when explaining how people decide what to believe as true or false (a capacity known as <em>belief fixation</em>). To see why, consider that the model predicts the following: If you would mentally <em>flip</em> all your beliefs—such that what you currently believe to be true<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">e.g., the belief that Amsterdam is the capital of The Netherlands. </span> you will from then on believe to be false and what you currently believe to be false<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">e.g., the belief that the Moon is made of cheese. </span> you will from then on believe to be true—your new mental state will still be equally (maximally) coherent. This seems wrong!</p>
 
@@ -208,17 +210,34 @@ An activation pattern \(a: V \rightarrow \{-1,1 \}\) such that \(H(a) = \sum_{u,
 
 <h2 id="data-priority-principle">Data priority principle</h2>
 
+<p>The authors of the <span style="font-variant:small-caps;">Coherence</span> model were aware of the problem posed in the previous subsection. They proposed that the <em>data priority principle</em> counters the problem.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">Data priority principle: “Propositions that describe the results of observation have a
+degree of acceptability on their own.” – Thagard (1989) </span> For instance, if you see the prime minister regularly arriving at the parliament building by bike, then you will believe that he cycles to work. This belief is based on direct observation, and therefore has a degree of acceptability of its own, independent of its coherence with other beliefs you may have. Once you  acceptability may also influence the plausibility of other beliefs: e.g., the belief that the prime minister lives in the Hague where the parliament building is. To the extend that beliefs corresponding to direct observations are truthful or accurate, the beliefs that cohere with them are also more likely to be true; or to Thagard and Verbeurgt proposed.</p>
+
+<p>We can capture this idea in an adjusted formalization of <span style="font-variant:small-caps;">Coherence</span> called <span style="font-variant:small-caps;">Discriminating Coherence</span></p>
+
+<p>Yet, the belief could still be doubted, e.g., if it were to incohere sufficiently with other beliefs you hold. For instance, if someone told you that the prime minister lives in Amsterdam, not in The Hague the parliament building is <em>and</em> you notice that every time the prime minister arrives by bicycle there was is a camera crew and journalist waiting to interview him, then you may no longer believe he is cycling to work from his home. A more coherent interpretation may be that he wants to give a public impression to Dutch voters that he is the kind of person who cycles to work.</p>
+
+<div class="epigraph"><blockquote><p>A pure coherence problem is one that does not favor the acceptance of any particular set of elements. A foundational coherence problem selects a set of favored elements for acceptance as self-justified. A discriminating coherence problem favors a set of elements but their acceptance still depends on their coherence with all the other elements.</p><footer>Thagard &amp; Verbeurgt, <cite>1998</cite></footer></blockquote></div>
+
 <h2 id="np-hard">NP-hard</h2>
+
+<p><em>Under construction</em></p>
 
 <h2 id="scope">Scope</h2>
 
+<p><em>Under construction</em></p>
+
 <h1 id="computing-coherence">Computing coherence</h1>
 
-<p>Thagard and Verbeurgt also pursued possible algorithmic-level explanation of how humans may compute coherence. We summarize here three of the five algorithms that they considered.</p>
+<p><em>Under construction</em></p>
 
 <h1 id="further-reading">Further reading</h1>
 
+<p><em>Under construction</em></p>
+
 <h3 id="references">References</h3>
+
+<p><em>Under construction</em></p>
 
 
 <div class="nav-wrapper">
@@ -235,7 +254,7 @@ An activation pattern \(a: V \rightarrow \{-1,1 \}\) such that \(H(a) = \sum_{u,
 </div>
 
     </article>
-    <span class="print-footer">Coherence - July 23, 2021 - Mark Blokpoel and Iris van Rooij</span>
+    <span class="print-footer">Coherence - September 3, 2021 - Mark Blokpoel and Iris van Rooij</span>
     <footer>
   <hr class="slender">
   <ul class="footer-links">

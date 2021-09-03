@@ -47,9 +47,9 @@
   <link rel="stylesheet" type="text/css" href="/lovelace/css/tufte.css">
   <!-- <link rel="stylesheet" type="text/css" href="/lovelace/css/print.css" media="print"> -->
 
-  <link rel="canonical" href="/lovelace/part_ii/subset">
+  <link rel="canonical" href="http://localhost:4000/lovelace/part_ii/subset">
 
-  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="/lovelace/feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="http://localhost:4000/lovelace/feed.xml" />
 </head>
 
   <body>
@@ -92,13 +92,7 @@
   	
 		
 		    
-		      <a href="/lovelace/content/part4">IV - Reflecting</a>
-		    
-	    
-  	
-		
-		    
-		      <a href="/lovelace/content/part5">V - Advanced</a>
+		      <a href="/lovelace/content/part4">IV - Advanced Topics</a>
 		    
 	    
   	
@@ -126,49 +120,68 @@
 
 <p>A classic distinction in the literature on decision-making is between deciding under <em>certainty</em>, <em>risk</em>, or <em>uncertainty</em>. When probabilities of different outcomes for choice options are known we say the decision is made under <em>risk</em>.</p>
 
-<div class="question" id="question-1"><p><em>Question 4.1:</em> What could be an example of decision-making under risk?
-<div class="answer" id="question-1-heading-1"><p><a onclick="document.getElementById('question-1-answer-1').style.display = document.getElementById('question-1-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-1-answer-1" style="display: none;"><p>An example is deciding between lotteries. Imagine two lotteries. In lottery A you win 100 euros with probability 0.25 and lose 10 euro with probability 0.75, and in lottery B you win 500 euros with probability 0.20 and lose 20 euro with probability 0.80. Which lottery would you choose to participate in?</p></div></div></p></div>
+<div class="question-top"><div class="question" id="question-1"><div class="question-body"><div class="question-header">Question 4.1</div> <p>What could be an example of decision-making under risk?</p>
+<div class="answer" id="question-1-heading-1"><a onclick="document.getElementById('question-1-answer-1').style.display = document.getElementById('question-1-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-1-answer-1" style="display: none;"><p>An example is deciding between lotteries. Imagine two lotteries. In lottery A you win 100 euros with probability 0.25 and lose 10 euro with probability 0.75, and in lottery B you win 500 euros with probability 0.20 and lose 20 euro with probability 0.80. Which lottery would you choose to participate in?</p>
+</div></div>
+</div></div></div>
 
 <p>When exact probability information is unavailable, e.g., because the choice problem is more ill-defined, we say the decision is made under <em>uncertainty</em>.</p>
 
-<div class="question" id="question-2"><p><em>Question 4.2:</em> What could be an example of decision-making under uncertainty?
-<div class="answer" id="question-2-heading-1"><p><a onclick="document.getElementById('question-2-answer-1').style.display = document.getElementById('question-2-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-2-answer-1" style="display: none;"><p>An example is choosing what career to pursue. For instance, would you rather be an artist, doctor, politician, accountant, scientist or technician?</p></div></div></p></div>
+<div class="question-top"><div class="question" id="question-2"><div class="question-body"><div class="question-header">Question 4.2</div> <p>What could be an example of decision-making under uncertainty?</p>
+<div class="answer" id="question-.2-heading-1"><a onclick="document.getElementById('question-.2-answer-1').style.display = document.getElementById('question-.2-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.2-answer-1" style="display: none;"><p>An example is choosing what career to pursue. For instance, would you rather be an artist, doctor, politician, accountant, scientist or technician?</p>
+</div></div>
+</div></div></div>
 
-<p><label for="mn-id-whatever" class="margin-toggle"> ⊕</label><input type="checkbox" id="mn-id-whatever" class="margin-toggle" /><span class="marginnote">“This is the essence of intuitive heuristics: when faced with a difficult question, we often answer an easier one instead, usually without noticing the substitution.” – Daniel Kahneman (2017). </span> To make our lives easier, in this chapter we focus on decision making under <em>certainty</em>. That is, we consider choice situations where options are well-defined and the value of options is certain. As we will see, this is usually merely a convenient fiction. But it makes learning to model easier, and allows us to postpone the use of probability theory to the Advanced sections.</p>
+<p><label for="mn-id-whatever" class="margin-toggle"> ⊕</label><input type="checkbox" id="mn-id-whatever" class="margin-toggle" /><span class="marginnote">“This is the essence of intuitive heuristics: when faced with a difficult question, we often answer an easier one instead, usually without noticing the substitution.” – Daniel Kahneman (2017). </span> To make our lives easier, in this chapter we focus on decision making under <em>certainty</em>. That is, we consider choice situations where options are well-defined and the value of options is certain. As we will see, this is usually merely a convenient fiction. But it makes learning to model easier, and allows us to postpone the use of probability theory to the <a href="/lovelace/content/part5">Advanced</a> sections.</p>
 
 <p>We will not review existing theoretical models of decision making. Instead, we’ll be throwing you into the deep waters: We will present you with a capacity to explain and invite you to articulate a verbal theory and try to formalize these ideas. You may think you are unable to and that you first need to learn how others made models. But trust us. You can do it! The goal is specifically not to mimic existing models of decision making, but rather to develop your own. The purpose is to practice using the theoretician’s tools. Think of this and the next chapters as your sandbox for sculpting some sandcastles for fun, and to train your sculpting skills.</p>
 
 <p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace//assets/img/vitrine.png" /><br />So many flavours! How do we choose a subset?</span> The example decision making capacity that we will use for our practices is called <em>subset choice</em>. This is the capacity for chosing a <em>subset</em> of options from a larger set. Take for example choosing Italian ice cream. The set of options is the full set of flavours displayed in the vitrine. Depending on your budget and appetite you may choose one, two, three, or—if you are <em>really</em> craving—more scoops. For instance, you may choose strawberry, lemon, and mango. Or, alternatively, you may choose chocolate and hazelnut.</p>
 
-<div class="question" id="question-3"><p><em>Question 4.3:</em> Can you think of more everyday situations where the choice options are subsets of available options?
-<div class="answer" id="question-3-heading-1"><p><a onclick="document.getElementById('question-3-answer-1').style.display = document.getElementById('question-3-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-3-answer-1" style="display: none;"><p>When we select toppings on a pizza.
+<div class="question-top"><div class="question" id="question-3"><div class="question-body"><div class="question-header">Question 4.3</div> <p>Can you think of more everyday situations where the choice options are subsets of available options?</p>
+<div class="answer" id="question-.3-heading-1"><a onclick="document.getElementById('question-.3-answer-1').style.display = document.getElementById('question-.3-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.3-answer-1" style="display: none;"><p>When we select toppings on a pizza.</p>
 
-<div class="question" id="question-4"><p><em>Question 4.4:</em> Can you think of another one?
-<div class="answer" id="question-4-heading-1"><p><a onclick="document.getElementById('question-4-answer-1').style.display = document.getElementById('question-4-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-4-answer-1" style="display: none;"><p>When we invite people to a party
+<div class="question" id="question-3.0"><div class="question-body"><div class="question-header">Question 4.3.0</div> <p>Can you think of another one?</p>
+<div class="answer" id="question-3.0-heading-1"><a onclick="document.getElementById('question-3.0-answer-1').style.display = document.getElementById('question-3.0-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-3.0-answer-1" style="display: none;"><p>When we invite people to a party</p>
 
-<div class="question" id="question-5"><p><em>Question 4.5:</em> Can you think of another one?
-<div class="answer" id="question-5-heading-1"><p><a onclick="document.getElementById('question-5-answer-1').style.display = document.getElementById('question-5-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-5-answer-1" style="display: none;"><p>When a doctor prescribes combinations of medicine.
+<div class="question" id="question-3.0.0"><div class="question-body"><div class="question-header">Question 4.3.0.0</div> <p>Can you think of another one?</p>
+<div class="answer" id="question-3.0.0-heading-1"><a onclick="document.getElementById('question-3.0.0-answer-1').style.display = document.getElementById('question-3.0.0-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-3.0.0-answer-1" style="display: none;"><p>When a doctor prescribes combinations of medicine.</p>
 
-<div class="question" id="question-6"><p><em>Question 4.6:</em> Can you think of another one?
-<div class="answer" id="question-6-heading-1"><p><a onclick="document.getElementById('question-6-answer-1').style.display = document.getElementById('question-6-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-6-answer-1" style="display: none;"><p>When you shop for groceries.
+<div class="question" id="question-3.0.0.0"><div class="question-body"><div class="question-header">Question 4.3.0.0.0</div> <p>Can you think of another one?</p>
+<div class="answer" id="question-3.0.0.0-heading-1"><a onclick="document.getElementById('question-3.0.0.0-answer-1').style.display = document.getElementById('question-3.0.0.0-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-3.0.0.0-answer-1" style="display: none;"><p>When you shop for groceries.</p>
 
-<div class="question" id="question-7"><p><em>Question 4.7:</em> Can you think of another one?
-<div class="answer" id="question-7-heading-1"><p><a onclick="document.getElementById('question-7-answer-1').style.display = document.getElementById('question-7-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-7-answer-1" style="display: none;"><p>When a manager selects members for a committee or team.
+<div class="question" id="question-3.0.0.0.0"><div class="question-body"><div class="question-header">Question 4.3.0.0.0.0</div> <p>Can you think of another one?</p>
+<div class="answer" id="question-3.0.0.0.0-heading-1"><a onclick="document.getElementById('question-3.0.0.0.0-answer-1').style.display = document.getElementById('question-3.0.0.0.0-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-3.0.0.0.0-answer-1" style="display: none;"><p>When a manager selects members for a committee or team.</p>
 
-<div class="question" id="question-8"><p><em>Question 4.8:</em> Can you think of another one?
-<div class="answer" id="question-8-heading-1"><p><a onclick="document.getElementById('question-8-answer-1').style.display = document.getElementById('question-8-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="question-8-answer-1" style="display: none;"><p>When you select ingredients for cooking a meal.
+<div class="question" id="question-3.0.0.0.0.0"><div class="question-body"><div class="question-header">Question 4.3.0.0.0.0.0</div> <p>Can you think of another one?</p>
+<div class="answer" id="question-3.0.0.0.0.0-heading-1"><a onclick="document.getElementById('question-3.0.0.0.0.0-answer-1').style.display = document.getElementById('question-3.0.0.0.0.0-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-3.0.0.0.0.0-answer-1" style="display: none;"><p>When you select ingredients for cooking a meal.</p>
 
-<div class="question" id="question-9"><p><em>Question 4.9:</em> Can you think of another one?</p></div></p></div></div></p></div></p></div></div></p></div></p></div></div></p></div></p></div></div></p></div></p></div></div></p></div></p></div></div></p></div>
+<div class="question" id="question-3.0.0.0.0.0.0"><div class="question-body"><div class="question-header">Question 4.3.0.0.0.0.0.0</div> <p>Can you think of another one?</p>
+</div></div>
+</div></div>
+</div></div>
+</div></div>
+</div></div>
+</div></div>
+</div></div>
+</div></div>
+</div></div>
+</div></div>
+</div></div>
+</div></div>
+</div></div></div>
 
 <p>If you went down the rabbit hole of that question, you will have discovered that there are many everyday situations that correspond to choosing subsets. Let’s pick one or more of those situations and make a computational-level explanation of the capacity for choosing subsets of that type.</p>
 
-<div class="question" id="question-4"><p><em>Question 4.4:</em> Make a computational level theory of subset choice that incorporates the assumption that people choose options with maximum or satisfactory subjective value (a.k.a. utility).</p></div>
+<div class="question-top"><div class="question" id="question-4"><div class="question-body"><div class="question-header">Question 4.4</div> <p>Make a computational level theory of subset choice that incorporates the assumption that people choose options with maximum or satisfactory subjective value (a.k.a. utility).</p>
+</div></div></div>
 
-<div class="answer" id="hint-1-heading-hint-1"><p><a onclick="document.getElementById('hint-1').style.display = document.getElementById('hint-1').style.display === 'none' ? '' : 'none';">Hint?</a></p><div id="hint-1" style="display: none;"><p>Think about how you want to approach this exercise. You can, for instance, look back at Chapter 2 to refresh your knowledge of what is a computational level theory of a capacity and how you can write it down. You can also use the mathematics from Chapter 3 where useful. Our advice is to first define an informal specification of the capacity's input domain and output domain, and intuitively articulate the mapping, and only then try to formalize your own intuitions.</p></div></div>
+<div class="answer" id="hint-1-heading-hint-1"><a onclick="document.getElementById('hint-1').style.display = document.getElementById('hint-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="hint-1" style="display: none;"><p>Think about how you want to approach this exercise. You can, for instance, look back at Chapter 2 to refresh your knowledge of what is a computational level theory of a capacity and how you can write it down. You can also use the mathematics from Chapter 3 where useful. Our advice is to first define an informal specification of the capacity’s input domain and output domain, and intuitively articulate the mapping, and only then try to formalize your own intuitions.</p>
+</div></div>
 
-<p class="stopandthink"><em>Stop and think: </em>
-It is important that you perform the exercise in Question 4.4 before continuing in this chapter. You will likely get stuck somewhere. This is part of the learning experience. One can only learn to model by trying, just like one can only learn to ride a bicycle by trying, failing, and trying again. Write down for yourself where you get stuck and why.
-</p>
+<div class="stopandthink"><div class="st-header">Stop and think</div>
+<p>It is important that you perform the exercise in Question 4.4 before continuing in this chapter. You will likely get stuck somewhere. This is part of the learning experience. One can only learn to model by trying, just like one can only learn to ride a bicycle by trying, failing, and trying again. Write down for yourself where you get stuck and why.</p>
+</div>
 
 <p>After you have tried to answer Question 4.4 to the best of your abilities, you can continue with the next section.</p>
 
@@ -390,7 +403,7 @@ A subset \(G \subseteq P\) such that \(\forall_{p_i,p_j \in G}  like(p_i,p_j) = 
 \(G \subseteq P\) such that \(|Y| \leq k\) and  \(|G\cap L|+|G|\) is maximized (where \(Y = \{p_i,p_j \in G\}~|~like(p_i,p_j) = false \wedge i\neq j \}\)).</p>
 
 <div class="indent-4 ">
-  <p><strong>Formal:</strong> There may be other possibilities.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">We leave this as an exercise for the reader to explore further. </span> I have created simulation code for these versions, available online <a href="">here</a>, so you can explore their empirical implications via computer simulation.</p>
+  <p><strong>Formal:</strong> There may be other possibilities.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">We leave this as an exercise for the reader to explore further. </span> I have created simulation code for these versions, available online <a href="/lovelace/part_iii/sim_subset_choice">here</a>, so you can explore their empirical implications via computer simulation.</p>
 </div>
 
 <p>We end Dialogue 1 here. At this juncture you can either go <a href="">here</a> and check out the code that <em>Formal</em> made for <em>Verbal</em> and run some simulations of your own; or, alternatively, you can continue with reading Dialogue 2.</p>
@@ -669,7 +682,7 @@ A subset \(G \subseteq P\) such that \(|G| \leq S\) and  \(\sum_{p \in G} c(p) \
 </div>
 
     </article>
-    <span class="print-footer">Subset choice - July 23, 2021 - Mark Blokpoel and Iris van Rooij</span>
+    <span class="print-footer">Subset choice - September 3, 2021 - Mark Blokpoel and Iris van Rooij</span>
     <footer>
   <hr class="slender">
   <ul class="footer-links">
