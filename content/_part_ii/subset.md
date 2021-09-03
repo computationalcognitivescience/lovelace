@@ -26,7 +26,7 @@ An example is choosing what career to pursue. For instance, would you rather be 
 {% endhidden %}
 {% endquestion %}
 
-{% marginnote 'mn-id-whatever' '“This is the essence of intuitive heuristics: when faced with a difficult question, we often answer an easier one instead, usually without noticing the substitution.” – Daniel Kahneman (2017).' %} To make our lives easier, in this chapter we focus on decision making under *certainty*. That is, we consider choice situations where options are well-defined and the value of options is certain. As we will see, this is usually merely a convenient fiction. But it makes learning to model easier, and allows us to postpone the use of probability theory to the Advanced sections.
+{% marginnote 'mn-id-whatever' '“This is the essence of intuitive heuristics: when faced with a difficult question, we often answer an easier one instead, usually without noticing the substitution.” – Daniel Kahneman (2017).' %} To make our lives easier, in this chapter we focus on decision making under *certainty*. That is, we consider choice situations where options are well-defined and the value of options is certain. As we will see, this is usually merely a convenient fiction. But it makes learning to model easier, and allows us to postpone the use of probability theory to the [Advanced](/lovelace/content/part5) sections.
 
 We will not review existing theoretical models of decision making. Instead, we'll be throwing you into the deep waters: We will present you with a capacity to explain and invite you to articulate a verbal theory and try to formalize these ideas. You may think you are unable to and that you first need to learn how others made models. But trust us. You can do it! The goal is specifically not to mimic existing models of decision making, but rather to develop your own. The purpose is to practice using the theoretician's tools. Think of this and the next chapters as your sandbox for sculpting some sandcastles for fun, and to train your sculpting skills.
 
@@ -337,7 +337,7 @@ $$G \subseteq P$$ such that $$|Y| \leq k$$ and  $$|G\cap L|+|G|$$ is maximized (
 {% endfproblem %}
 
 {% indent 4 %}
-**Formal:** There may be other possibilities.{% sidenote 'sn-id-whatever' 'We leave this as an exercise for the reader to explore further.'%} I have created simulation code for these versions, available online [here](), so you can explore their empirical implications via computer simulation.
+**Formal:** There may be other possibilities.{% sidenote 'sn-id-whatever' 'We leave this as an exercise for the reader to explore further.'%} I have created simulation code for these versions, available online [here](/lovelace/part_iii/sim_subset_choice), so you can explore their empirical implications via computer simulation.
 {% endindent %}
 
 
