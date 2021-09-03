@@ -1,8 +1,6 @@
 ---
 layout: page
-title: Categorization
+title: Bayesian Models
 chapter: 11
 nav_exclude: true
 ---
-
-Bla
