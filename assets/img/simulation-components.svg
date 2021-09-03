@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1798 870" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g id="Artboard1" transform="matrix(1.1966,0,0,1.47463,-717.301,-978.009)">
+        <rect x="599.45" y="663.224" width="1502.38" height="589.854" style="fill:none;"/>
+        <g transform="matrix(0.486432,0,0,0.29299,691.999,770.016)">
+            <rect x="950.005" y="740.625" width="758.995" height="575.375" style="fill:white;stroke:black;stroke-width:15.61px;"/>
+        </g>
+        <g transform="matrix(0.716544,0,0,0.310071,547.574,687.454)">
+            <rect x="249.83" y="237.24" width="378.104" height="378.104" style="fill:white;stroke:black;stroke-width:11.64px;"/>
+        </g>
+        <g transform="matrix(0.461504,0,0,0.374491,544.436,676.938)">
+            <text x="1434.14px" y="1024px" style="font-family:'Palatino-Roman', 'Palatino';font-size:183.523px;">F</text>
+            <text x="1536.2px" y="1024px" style="font-family:'Palatino-Roman', 'Palatino';font-size:124.455px;">ORMAL</text>
+            <text x="1445.2px" y="1207.52px" style="font-family:'Palatino-Roman', 'Palatino';font-size:183.523px;">T</text>
+            <text x="1557.66px" y="1207.52px" style="font-family:'Palatino-Roman', 'Palatino';font-size:124.455px;">HEOR<tspan x="1913.64px " y="1207.52px ">Y</tspan></text>
+        </g>
+        <g transform="matrix(0.461504,0,0,0.374491,67.2395,701.985)">
+            <text x="1500.39px" y="1024px" style="font-family:'Palatino-Roman', 'Palatino';font-size:183.523px;">input</text>
+        </g>
+        <g transform="matrix(0.461504,0,0,0.374491,1019.85,701.985)">
+            <text x="1500.39px" y="1024px" style="font-family:'Palatino-Roman', 'Palatino';font-size:183.523px;">output</text>
+        </g>
+        <g transform="matrix(0.298715,0,0,0.242395,347.545,563.976)">
+            <text x="1518.81px" y="1024px" style="font-family:'Menlo-Regular', 'Menlo', monospace;font-size:134.287px;">input</text>
+            <text x="1357.11px" y="1158.29px" style="font-family:'Menlo-Regular', 'Menlo', monospace;font-size:134.287px;">generator</text>
+        </g>
+        <g transform="matrix(0.461504,0,0,0.374491,734.653,709.655)">
+            <path d="M777.274,929.505L522.581,929.505L522.581,1001.9L777.274,1001.9L732.463,1066.8L908.897,965.703L732.463,864.611L777.274,929.505Z" style="fill:white;stroke:black;stroke-width:14.49px;"/>
+        </g>
+        <g transform="matrix(2.82589e-17,0.374491,-0.461504,2.29309e-17,1307.73,682.552)">
+            <path d="M777.274,929.505L522.581,929.505L522.581,1001.9L777.274,1001.9L732.463,1066.8L908.897,965.703L732.463,864.611L777.274,929.505Z" style="fill:white;stroke:black;stroke-width:14.49px;"/>
+        </g>
+        <g transform="matrix(0.461504,0,0,0.374491,1282.14,709.655)">
+            <path d="M777.274,929.505L522.581,929.505L522.581,1001.9L777.274,1001.9L732.463,1066.8L908.897,965.703L732.463,864.611L777.274,929.505Z" style="fill:white;stroke:black;stroke-width:14.49px;"/>
+        </g>
+    </g>
+</svg>
