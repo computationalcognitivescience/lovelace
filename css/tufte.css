@@ -70,7 +70,7 @@ html { text-align: justify; }
 
 .stopandthink > p { display: inline; }
 
-55 span.problemtitle { font-variant: small-caps; font-size: 1.2em; letter-spacing: 0.05rem; }
+span.problemtitle { font-variant: small-caps; font-size: 1.2em; letter-spacing: 0.05rem; }
 
 span.probleminout { font-weight: normal; font-style: italic; }
 

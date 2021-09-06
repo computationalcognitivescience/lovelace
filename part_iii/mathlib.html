@@ -248,7 +248,7 @@ an argument of another function. This is a powerful way to organize your code
 and very useful in writing simulation code that is closely tied to formal
 theories. In a sense, a theory is a function itself, mapping a list of arguments
 (input) to output. We’ve seen that some formal theories can have functions as
-arguments. For example, <span style="font-variant: small-caps;">Selecting invitees (version 1) </span> in <a href="/lovelace/part_ii/subset">Chapter
+arguments. For example, <span class="problemtitle">Selecting invitees (version 1) </span> in <a href="/lovelace/part_ii/subset">Chapter
 4</a> takes as input the function \(like: P \times P
 \rightarrow \{true, false\}\). Here is a (partial) example of a function as
 argument.</p>
@@ -762,7 +762,7 @@ A selection of toppings \(T'\subseteq T\) such that \(\sum_{t \in T}c(t) \leq b\
 
 <p>In this section you will learn how to read (and write) simulation code that
 implements a formal theory and is easy to understand that it does what we say it
-does. Take a look at the following code implementing <span style="font-variant: small-caps;">Pizza Toppings
+does. Take a look at the following code implementing <span class="problemtitle">Pizza Toppings
 </span>. (We assume toppings are represented by <code class="language-plaintext highlighter-rouge">Strings</code>.)</p>
 
 <div data-scalafiddle="" data-template="mathlib" data-theme="light">
@@ -788,7 +788,7 @@ does. Take a look at the following code implementing <span style="font-variant: 
 
 <p>This code example combines several expressions we covered earlier, but by
 breaking down the components it is relatively easy to show that the code
-implements <span style="font-variant: small-caps;">Pizza Toppings </span>. Of course, even though math is much
+implements <span class="problemtitle">Pizza Toppings </span>. Of course, even though math is much
 less ambiguous as verbal theory, that does not exclude there being multiple
 (equivalent) expressions in math. Some might be easier to translate to Scala
 code than others. We will encounter examples where rewriting the mathematical
@@ -849,7 +849,7 @@ subset.</p>
 
 <p>Before we look at set builder notation, consider the following. In formal
 theories, we often use set theoretic notation not as Boolean tests, but to
-stipulate the output. E.g., in <span style="font-variant: small-caps;">Pizza Toppings </span>, the output is a
+stipulate the output. E.g., in <span class="problemtitle">Pizza Toppings </span>, the output is a
 subset \(T'\subseteq T\) that fits in budget. This notation, however, does not
 translate directly into Scala code. Consider the following rewrite of the formal
 theory output:</p>
@@ -972,7 +972,7 @@ code, or to investigate particular limit cases of the theory and initial
 explorations. We will use manual inputs throughout the next chapters.</p>
 
 <p>However, a more complete simulation covers many inputs, preferably exploring a
-wide range of different cases. For example, with the <span style="font-variant: small-caps;">Pizza Toppings </span>
+wide range of different cases. For example, with the <span class="problemtitle">Pizza Toppings </span>
 example one might want to explore inputs ranging from few to many toppings, with
 many different cost functions and budget. In these cases it is useful to write
 a helper function that can generate input with various properties.</p>
