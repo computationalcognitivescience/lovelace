@@ -150,9 +150,89 @@ $$\forall_{a\in A}\text{mammal}(a)$$
 
 You can read this as `does it hold for all objects $$a$$ in $$A$$ that $$a$$ is a mammal?' We implicitly introduced a function $$\text{mammal}:A\rightarrow\{\top,\bot\}$$ with $$\text{mammal}(a)=\top$$ if $$a$$ is a mammal or $$\bot$$ otherwise.
 
-## Existential quantifier (exists)
+### Existential quantifier (exists)
 Another type of question we can ask is, for example, is there someone I know that I like? We use the _existential quantifier_:
 
 $$\exists_{p\in F_{me}}\left[\text{like}(p)>0\right]$$
 
 Which we can read as `does there exist a person $$p$$ in the set of my friends $$F_{me}$$ for which I like them $$\text{like}(p)>0$$?'
+
+## Graph theory
+
+There are cases where we want to express the existence of a relationship between
+two elements in a set. For example, who is friends with who, which two
+ingredients go well together, the distance between two cities or how often words
+co-occur in text. Here, we consider relationships that are Boolean (e.g., you
+are friends or not) or numeric (e.g., distances). Graph theory allows us to
+express in abstract the set of elements $$V$$ called *vertices* and their
+relationships $$E$$ called *edges* which together make up a graph $$G=(V,E)$$.
+The set of edges is a subset of the cardinal product of the vertices
+$$E\subseteq V\times V$$. If there is a relationship between two vertices $$e\in
+V$$ and $$v\in V$$, then $$(u,v)\in E$$.
+
+{% maincolumn '' 'Example graphs.' %}
+
+Depending on their structure, graphs can be classified into different types. In
+this book, we consider only a few but see Futher Reading if you are interested
+in diving deeper.
+
+### Simple graph
+
+The first graph type is called a *simple graph*. A simple graph has no edges
+between a vertex and itself $$\forall_{v\in V}(v,v)\notin E$$, i.e., it has no
+self-loops. A simple graph also has at most one edge between any two vertices,
+i.e. it has no multi-edges.{% sidenote 'sn-id-multi-edge' 'Multi-edges cannot be
+represented by a set of edges alone, since a set cannot contain multiple copies
+of the same edge. ' %} Graphs A-B in the examples above are simple graphs. In
+this book, we assume a graph is simple unless otherwise noted.
+
+### Weighted graph
+
+Graphs who's relationships between vertices is a number, are called *weighted
+graphs*. Here, in addition to the graph $$G=(V,E)$$ a weight function is
+supplied $$w:V\times V\rightarrow \mathbb{Z}$$. Often, weighted graphs are fully
+connected but some edges may have a neutral weight such as $$0$$. Graphs C-D in the examples above are simple graphs. If vertex relationships are Boolean, then the graph is *unweighted*.
+
+### (Un)directed graph
+
+Graphs where edges have no direction are called *undirected graphs*. Here, the
+pairs of vertices $$(u,v)\in E$$ are unordered. This means that $$(u,v)=(v,u)$$.
+Of course, *directed graphs* also exist. Here, the pair is ordered and edges
+have directionality. Graphs A-B in the examples above are directed graphs.
+
+The final graph type we condider here is more a type of graph with specific
+properties, namely a *tree*. Trees are graphs without cycles, which means there
+is exactly one path (a sequence of edges) between any two vertices. Another way
+of thinking of acyclic graphs is that there is no way to 'walk back' to a vertex
+along a different 'route'. Graphs A-B in the examples above are trees. Trees can
+be also be directed, in which case they are called *polytrees*.
+
+### Graph properties
+
+Graphs have many formal properties but for the purposes of this book, only a few
+basic properties are important.
+
+{% marginfigure 'mf-id-degree' '' 'Vertex degree.' '50%' %} The first is the
+*degree* of a vertex. This is the number of connections that a vertex $$v$$ has,
+formally $$deg(v)=\left|\{u=v \wedge w=v|(u,w) \in E\}\right|$$. If a graph is
+directed, then we split degree into *indegree* (the number of edges toward the
+vertex) and *outdegree* (the number of edges away from the vertex). For weighted
+graphs, we ignore the weight.
+
+The maximum number of possible edges in an undirected graph is
+<span>$$\frac{|V|(|V|-1)}{2}$$</span>. The first vertex in the graph can have
+unqiue edges with $$|V|-1$$ vertices, the second with $$|V|-2$$ vertices, the
+third with $$|V|-3$$ vertices, etc., until the $$(|V|-1)^\text{th}$$ vertex
+which can only have a unique edge with $$1$$ vertex: $$(|V|-1) + (|V|-2) +
+(|V|-3) + \dots + 3 + 2 + 1=\frac{|V|(|V|-1)}{2}$$.
+
+The number of possible edges in a directed graph can be derived from the number
+of possible edges in an undirected graph. In a directed graph can be two edges
+between any two vertices, doubling the number of possible edges:
+$$2\frac{|V|(|V|-1)}{2}=|V|(|V|-1)$$.
+
+## Further reading
+
+Wikipedia
+
+Graph theory: Foulds (1998). *Graph Theory Applications*. Springer-Verlag New York.
