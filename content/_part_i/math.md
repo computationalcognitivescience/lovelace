@@ -7,32 +7,33 @@ nav_exclude: true
 
 We saw in the [Introduction](https://computationalcognitivescience.github.io/lovelace/part_i/intro) that, just like sculpting, theoretical modeling requires its own set of dedicated tools. The theoretical modeler's toolbox includes a.o. mathematical concepts, formal expressions, and notational conventions. One can already get quite far with the basics in _set theory_, _functions_ and _logic_. Below we present a brief primer. Readers who have taken introductory classes on these topics can skip this section without loss of continuity. If, however, these materials are new to you, then we recommend carefully studying this chapter before proceeding. A good grasp of the concepts and notation defined here will be necessary for following the examples and exercises in subsequent chapters. In general, developing some fluency in mathematical language is key if one wants to become a theoretical modeler.
 
+{% marginfigure "fig-set-eg" "assets/img/set-eg.svg" "Sets can be visualized as circles." "75%" %}
 ## Set theory
-{% marginfigure "fig-set-eg" "assets/img/set-eg.svg" "Sets can be visualized as circles." %}
 A set is a collection of distinct objects. For example, a set of people $$P=\{\text{Ramiro},\text{Brenda},\text{Molly}\}$$, animals $$A=\{\text{cat},\text{turtle},\text{blue whale}, \text{cuttlefish}\}$$ or numbers $$ N=\{1,5,7,12\}$$. Sets are usually denoted by a capital letter and their elements listed between curly brackets. They can also be visualized as circles.
 
 Sets can contain an infinite number of objects, e.g. all positive odd numbers $$O=\{1,3,5, 7,\dots\}$$.
 
 ### Set membership
+{% marginfigure "fig-set-in" "assets/img/set-in.svg" "Set membership." "75%" %}
+
 When we want to write that an object $$x$$ is (or is not) part of a set $$X$$, we use _set membership_ notation:
 
-{% marginfigure "fig-set-in" "assets/img/set-in.svg" "Set membership."%}
 
 $$5 \in N\\17 \notin N\\\text{Ramiro}\in P\\\text{Saki}\notin P$$
 
 
 ### Subset and superset
-{% marginfigure fig-subset "assets/img/set-sub.svg" "Subset relationship." %}
+{% marginfigure fig-subset "assets/img/set-sub.svg" "Subset relationship." "75%" %}
 Often, we want to express things like 'the set of mammals $$M$$ is part of the set of all animals $$A$$'. We then use _subset_ notation: $$M\subseteq A$$ or $$M\subset A$$. The latter means that $$M$$ is smaller than $$A$$.
 
-{% marginfigure fig-superset "assets/img/set-sup.svg" "Superset relationship." %}
+{% marginfigure fig-superset "assets/img/set-sup.svg" "Superset relationship." "75%" %}
 Vice versa, we can express that 'the set of all things on earth $$T$$ contains all animals $$A$$' using _superset_ notation: $$T\supseteq A$$ or $$T\supset A$$. The latter means that $$T$$ is bigger than $$A$$.
 
 
 
 ### Intersection, union and difference
 Let's look at what more we can do with two sets.
-{% marginfigure fig-set-two "assets/img/set-two.svg" "Example sets." %}
+{% marginfigure fig-set-two "assets/img/set-two.svg" "Example sets." "75%" %}
 For example, take the set of your friends and my friends.
 
 $$F_{you}=\{\text{John},\text{Roberto},\text{Holly},\text{Doris},\text{Charlene}\}$$
@@ -40,7 +41,7 @@ $$F_{you}=\{\text{John},\text{Roberto},\text{Holly},\text{Doris},\text{Charlene}
 $$F_{me}=\{\text{Vicky},\text{Charlene},\text{Ramiro},\text{Johnnie},\text{Roberto}\}$$
 
 
-{% marginfigure fig-set-intersection "assets/img/set-intersection.svg" "Set intersection." %}
+{% marginfigure fig-set-intersection "assets/img/set-intersection.svg" "Set intersection." "75%" %}
 Who are our common friends? We use _set intersection_:
 
 $$F_{you}\cap F_{me} = \{\text{Roberto},\text{Charlene}\}$$
@@ -51,13 +52,13 @@ Who do we know together? We use _set union_:
 
 $$F_{you}\cup F_{me} = \{\text{John},\text{Roberto},\text{Holly},\text{Doris},\text{Charlene},$$ $$\text{Vicky},$$ $$\text{Ramiro},$$ $$\text{Johnnie}\}$$
 
-{% marginfigure fig-set-union "assets/img/set-union.svg" "Set union." %}
+{% marginfigure fig-set-union "assets/img/set-union.svg" "Set union." "75%" %}
 
 Who do I know that you do not know? We use _set difference_:
 
 $$F_{me}\setminus F_{you}=\{\text{Vicky},\text{Ramiro},\text{Johnnie}\}$$
 
-{% marginfigure fig-set-difference "assets/img/set-minus.svg" "Set difference." %}
+{% marginfigure fig-set-difference "assets/img/set-minus.svg" "Set difference." "75%" %}
 
 ### Set builder
 A more advanced way to denote sets, is to define a set using _set builder_ notation. This allows us to define (build) a new set given other set(s). A set builder consists of two parts, a variable and a logical predicate:
@@ -70,14 +71,14 @@ $$M=\{a~|~a\in A\text{ and }a\text{ is a mammal}\}$$
 
 You can read this as '$$M$$ contains all $$a$$'s _with the property that_ $$a\in A$$ and $$a$$ is a mammal'.
 
-{% marginfigure fig-set-builder "assets/img/set-builder.svg" "Set builder." %}
+{% marginfigure fig-set-builder "assets/img/set-builder.svg" "Set builder." "75%" %}
 
 ### Cardinal product
 Set builder notation is useful to filter objects from a single set, but becomes very potent when building from multiple sets. For example:
 
 $$F=\{(p,a)~|~p\in P\text{ AND }a\in A\}$$
 
-{% marginfigure fig-cardinal-product "assets/img/set-cardinal.svg" "Cardinal product." %}
+{% marginfigure fig-cardinal-product "assets/img/set-cardinal.svg" "Cardinal product." "75%" %}
 
 Read this as '$$F$$ contains all pairs of $$p$$ and $$a$$ _with the property that_ $$p$$ is a person and $$a$$ is an animal'. Pairs are denoted in brackets. You can think of $$F$$ containing all possible combinations of person-animal pairs. For example, these are all the options you have when trying to guess what the favorite animals are of your friends.
 
@@ -105,7 +106,7 @@ $$like: P \rightarrow \mathbb{Z}$$
 
 You can read this as '$$like$$ is a function that maps persons $$p\in P$$ to an integer'.
 
-{% marginfigure fig-function "assets/img/fun-basic.svg" "Function." %}
+{% marginfigure fig-function "assets/img/fun-basic.svg" "Function." "75%" %}
 
 We sometimes omit the exact specification of the function when it is clear what it would be. For example, here it could be a list of numbers representing how much you (dis)like the person, based on your social interactions with that person.
 
@@ -116,7 +117,7 @@ $$like_2:P\times P\rightarrow \mathbb{Z}$$
 
 The cardinal product $$P\times P$$ denotes all pairs of persons and $$like_2$$ maps pairs to an integer.
 
-{% marginfigure fig-advanced-function "assets/img/fun-adv.svg" "Advanced function." %}
+{% marginfigure fig-advanced-function "assets/img/fun-adv.svg" "Advanced function." "75%" %}
 
 
 ### Sum and product
