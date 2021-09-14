@@ -118,36 +118,36 @@
 
 <p>We saw in the <a href="https://computationalcognitivescience.github.io/lovelace/part_i/intro">Introduction</a> that, just like sculpting, theoretical modeling requires its own set of dedicated tools. The theoretical modeler’s toolbox includes a.o. mathematical concepts, formal expressions, and notational conventions. One can already get quite far with the basics in <em>set theory</em>, <em>functions</em> and <em>logic</em>. Below we present a brief primer. Readers who have taken introductory classes on these topics can skip this section without loss of continuity. If, however, these materials are new to you, then we recommend carefully studying this chapter before proceeding. A good grasp of the concepts and notation defined here will be necessary for following the examples and exercises in subsequent chapters. In general, developing some fluency in mathematical language is key if one wants to become a theoretical modeler.</p>
 
+<p><label for="fig-set-eg" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-eg" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="75%" src="/lovelace/assets/img/set-eg.svg" /><br />Sets can be visualized as circles.</span></p>
 <h2 id="set-theory">Set theory</h2>
-<p><label for="fig-set-eg" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-eg" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-eg.svg" /><br />Sets can be visualized as circles.</span>
-A set is a collection of distinct objects. For example, a set of people \(P=\{\text{Ramiro},\text{Brenda},\text{Molly}\}\), animals \(A=\{\text{cat},\text{turtle},\text{blue whale}, \text{cuttlefish}\}\) or numbers \(N=\{1,5,7,12\}\). Sets are usually denoted by a capital letter and their elements listed between curly brackets. They can also be visualized as circles.</p>
+<p>A set is a collection of distinct objects. For example, a set of people \(P=\{\text{Ramiro},\text{Brenda},\text{Molly}\}\), animals \(A=\{\text{cat},\text{turtle},\text{blue whale}, \text{cuttlefish}\}\) or numbers \(N=\{1,5,7,12\}\). Sets are usually denoted by a capital letter and their elements listed between curly brackets. They can also be visualized as circles.</p>
 
 <p>Sets can contain an infinite number of objects, e.g. all positive odd numbers \(O=\{1,3,5, 7,\dots\}\).</p>
 
 <h3 id="set-membership">Set membership</h3>
-<p>When we want to write that an object \(x\) is (or is not) part of a set \(X\), we use <em>set membership</em> notation:</p>
+<p><label for="fig-set-in" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-in" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="75%" src="/lovelace/assets/img/set-in.svg" /><br />Set membership.</span></p>
 
-<p><label for="fig-set-in" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-in" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-in.svg" /><br />Set membership.</span></p>
+<p>When we want to write that an object \(x\) is (or is not) part of a set \(X\), we use <em>set membership</em> notation:</p>
 
 \[5 \in N\\17 \notin N\\\text{Ramiro}\in P\\\text{Saki}\notin P\]
 
 <h3 id="subset-and-superset">Subset and superset</h3>
-<p><label for="fig-subset" class="margin-toggle">⊕</label><input type="checkbox" id="fig-subset" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-sub.svg" /><br />Subset relationship.</span>
+<p><label for="fig-subset" class="margin-toggle">⊕</label><input type="checkbox" id="fig-subset" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="75%" src="/lovelace/assets/img/set-sub.svg" /><br />Subset relationship.</span>
 Often, we want to express things like ‘the set of mammals \(M\) is part of the set of all animals \(A\)’. We then use <em>subset</em> notation: \(M\subseteq A\) or \(M\subset A\). The latter means that \(M\) is smaller than \(A\).</p>
 
-<p><label for="fig-superset" class="margin-toggle">⊕</label><input type="checkbox" id="fig-superset" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-sup.svg" /><br />Superset relationship.</span>
+<p><label for="fig-superset" class="margin-toggle">⊕</label><input type="checkbox" id="fig-superset" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="75%" src="/lovelace/assets/img/set-sup.svg" /><br />Superset relationship.</span>
 Vice versa, we can express that ‘the set of all things on earth \(T\) contains all animals \(A\)’ using <em>superset</em> notation: \(T\supseteq A\) or \(T\supset A\). The latter means that \(T\) is bigger than \(A\).</p>
 
 <h3 id="intersection-union-and-difference">Intersection, union and difference</h3>
 <p>Let’s look at what more we can do with two sets.
-<label for="fig-set-two" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-two" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-two.svg" /><br />Example sets.</span>
+<label for="fig-set-two" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-two" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="75%" src="/lovelace/assets/img/set-two.svg" /><br />Example sets.</span>
 For example, take the set of your friends and my friends.</p>
 
 \[F_{you}=\{\text{John},\text{Roberto},\text{Holly},\text{Doris},\text{Charlene}\}\]
 
 \[F_{me}=\{\text{Vicky},\text{Charlene},\text{Ramiro},\text{Johnnie},\text{Roberto}\}\]
 
-<p><label for="fig-set-intersection" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-intersection" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-intersection.svg" /><br />Set intersection.</span>
+<p><label for="fig-set-intersection" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-intersection" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="75%" src="/lovelace/assets/img/set-intersection.svg" /><br />Set intersection.</span>
 Who are our common friends? We use <em>set intersection</em>:</p>
 
 \[F_{you}\cap F_{me} = \{\text{Roberto},\text{Charlene}\}\]
@@ -156,13 +156,13 @@ Who are our common friends? We use <em>set intersection</em>:</p>
 
 <p>\(F_{you}\cup F_{me} = \{\text{John},\text{Roberto},\text{Holly},\text{Doris},\text{Charlene},\) \(\text{Vicky},\) \(\text{Ramiro},\) \(\text{Johnnie}\}\)</p>
 
-<p><label for="fig-set-union" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-union" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-union.svg" /><br />Set union.</span></p>
+<p><label for="fig-set-union" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-union" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="75%" src="/lovelace/assets/img/set-union.svg" /><br />Set union.</span></p>
 
 <p>Who do I know that you do not know? We use <em>set difference</em>:</p>
 
 \[F_{me}\setminus F_{you}=\{\text{Vicky},\text{Ramiro},\text{Johnnie}\}\]
 
-<p><label for="fig-set-difference" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-difference" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-minus.svg" /><br />Set difference.</span></p>
+<p><label for="fig-set-difference" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-difference" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="75%" src="/lovelace/assets/img/set-minus.svg" /><br />Set difference.</span></p>
 
 <h3 id="set-builder">Set builder</h3>
 <p>A more advanced way to denote sets, is to define a set using <em>set builder</em> notation. This allows us to define (build) a new set given other set(s). A set builder consists of two parts, a variable and a logical predicate:</p>
@@ -175,14 +175,14 @@ Who are our common friends? We use <em>set intersection</em>:</p>
 
 <p>You can read this as ‘\(M\) contains all \(a\)’s <em>with the property that</em> \(a\in A\) and \(a\) is a mammal’.</p>
 
-<p><label for="fig-set-builder" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-builder" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-builder.svg" /><br />Set builder.</span></p>
+<p><label for="fig-set-builder" class="margin-toggle">⊕</label><input type="checkbox" id="fig-set-builder" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="75%" src="/lovelace/assets/img/set-builder.svg" /><br />Set builder.</span></p>
 
 <h3 id="cardinal-product">Cardinal product</h3>
 <p>Set builder notation is useful to filter objects from a single set, but becomes very potent when building from multiple sets. For example:</p>
 
 \[F=\{(p,a)~|~p\in P\text{ AND }a\in A\}\]
 
-<p><label for="fig-cardinal-product" class="margin-toggle">⊕</label><input type="checkbox" id="fig-cardinal-product" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/set-cardinal.svg" /><br />Cardinal product.</span></p>
+<p><label for="fig-cardinal-product" class="margin-toggle">⊕</label><input type="checkbox" id="fig-cardinal-product" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="75%" src="/lovelace/assets/img/set-cardinal.svg" /><br />Cardinal product.</span></p>
 
 <p>Read this as ‘\(F\) contains all pairs of \(p\) and \(a\) <em>with the property that</em> \(p\) is a person and \(a\) is an animal’. Pairs are denoted in brackets. You can think of \(F\) containing all possible combinations of person-animal pairs. For example, these are all the options you have when trying to guess what the favorite animals are of your friends.</p>
 
@@ -199,8 +199,32 @@ Who are our common friends? We use <em>set intersection</em>:</p>
   <li>Real numbers <span>\(\mathbb{R}=\{r~|~-\infty&lt;r&lt;\infty\}\)</span></li>
 </ul>
 
+<h2 id="tuple">Tuple</h2>
+
+<p>In sets elements are unordered and no element can exist twice. However, there
+are occasions where the ordering of the elements is relevant and when the same
+element can exist multiple times. For example, a text is a sequence of
+characters where ordering is quite important and characters can occur multiple
+times. To express these <em>sequences</em> or <em>lists</em> we use the mathematical notation
+of <em>tuples</em>. An \(n\)-tuple is a sequence of \(n\geq0\) elements. The sequence
+is most commonly expressed between parentheses \(()\), a convention we follow in
+this book, but sometimes you will encounter other types of brackets such as
+\(\{\}\), \([]\) and \(\langle\rangle\) derived from variations on the tuple
+such as arrays or vectors.</p>
+
+<p>Specific elements in a tuple \((e_1,e_2,\dots,e_n)\) can be referred to by
+their label \(e\) and index \(_i\). Depending on the type of the elements, you can use these in expressions (see below for <a href="#functions">functions</a> and <a href="#logic">logic</a> expressions). Here are some example tuples:</p>
+
+<p>A travel route to the south of France:
+\(r=(\text{Nijmegen},\text{Liège},\text{Metz},\)
+\(\text{Nancy},\text{Dijon},\text{Lyon},\text{Marseille})\). We can refer to the \(3^\text{th}\) waypoint with \(r_3\) which is Metz.</p>
+
+<p>A preference list:
+\(p=(\text{chocolate},\text{hiking},\text{sauna},\text{math})\). This person
+likes chocolate more than math.</p>
+
 <h2 id="functions">Functions</h2>
-<p>Building on set theory, we can define functions. Functions are relations that map all objects from one set (the <em>domain</em>) to exactly one object from another set (the <em>codomain</em>). We define functions with the following notation, here \(f\) is the name of the function:</p>
+<p>To define functions we go back to set theory. Functions are relations that map all objects from one set (the <em>domain</em>) to exactly one object from another set (the <em>codomain</em>). We define functions with the following notation, here \(f\) is the name of the function:</p>
 
 \[f:D \rightarrow C\text{ with }f(d)=c\]
 
@@ -210,7 +234,7 @@ Who are our common friends? We use <em>set intersection</em>:</p>
 
 <p>You can read this as ‘\(like\) is a function that maps persons \(p\in P\) to an integer’.</p>
 
-<p><label for="fig-function" class="margin-toggle">⊕</label><input type="checkbox" id="fig-function" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/fun-basic.svg" /><br />Function.</span></p>
+<p><label for="fig-function" class="margin-toggle">⊕</label><input type="checkbox" id="fig-function" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="75%" src="/lovelace/assets/img/fun-basic.svg" /><br />Function.</span></p>
 
 <p>We sometimes omit the exact specification of the function when it is clear what it would be. For example, here it could be a list of numbers representing how much you (dis)like the person, based on your social interactions with that person.</p>
 
@@ -221,7 +245,7 @@ Who are our common friends? We use <em>set intersection</em>:</p>
 
 <p>The cardinal product \(P\times P\) denotes all pairs of persons and \(like_2\) maps pairs to an integer.</p>
 
-<p><label for="fig-advanced-function" class="margin-toggle">⊕</label><input type="checkbox" id="fig-advanced-function" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/fun-adv.svg" /><br />Advanced function.</span></p>
+<p><label for="fig-advanced-function" class="margin-toggle">⊕</label><input type="checkbox" id="fig-advanced-function" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="75%" src="/lovelace/assets/img/fun-adv.svg" /><br />Advanced function.</span></p>
 
 <h3 id="sum-and-product">Sum and product</h3>
 <p>We can now define <em>summation</em> and <em>product</em>. These functions iterate over members in a set and return a summary value.</p>
@@ -255,12 +279,133 @@ Who are our common friends? We use <em>set intersection</em>:</p>
 
 <p>You can read this as `does it hold for all objects \(a\) in \(A\) that \(a\) is a mammal?’ We implicitly introduced a function \(\text{mammal}:A\rightarrow\{\top,\bot\}\) with \(\text{mammal}(a)=\top\) if \(a\) is a mammal or \(\bot\) otherwise.</p>
 
-<h2 id="existential-quantifier-exists">Existential quantifier (exists)</h2>
+<h3 id="existential-quantifier-exists">Existential quantifier (exists)</h3>
 <p>Another type of question we can ask is, for example, is there someone I know that I like? We use the <em>existential quantifier</em>:</p>
 
 \[\exists_{p\in F_{me}}\left[\text{like}(p)&gt;0\right]\]
 
 <p>Which we can read as `does there exist a person \(p\) in the set of my friends \(F_{me}\) for which I like them \(\text{like}(p)&gt;0\)?’</p>
+
+<h2 id="graph-theory">Graph theory</h2>
+
+<p>There are cases where we want to express the existence of a relationship between
+two elements in a set. For example, who is friends with who, which two
+ingredients go well together, the distance between two cities or how often words
+co-occur in text. Here, we consider relationships that are Boolean (e.g., you
+are friends or not) or numeric (e.g., distances). Graph theory allows us to
+express in abstract the set of elements \(V\) called <em>vertices</em> and their
+relationships \(E\) called <em>edges</em> which together make up a graph \(G=(V,E)\).
+The set of edges is a subset of the cardinal product of the vertices
+\(E\subseteq V\times V\). If there is a relationship between two vertices \(e\in
+V\) and \(v\in V\), then \((u,v)\in E\).</p>
+
+<figure><img width="100%" src="/lovelace/assets/img/graph-examples.svg" /><figcaption class="maincolumn-figure">Example graphs. Graph A is a
+simple graph (a forest of multiple connected graphs) representing two-way like
+relationships. Graph B is a weighted graph representing major roads and
+distances between cities. Graph C is a directed graph representing causal
+relationships (e.g., clouds cause rain). Graph D is a tree representing part
+of the taxonomy of animals.</figcaption></figure>
+
+<p>Depending on their structure, graphs can be classified into different types. In
+this book, we use only a few types of graphs, but see Further Reading if you are
+interested in diving deeper.</p>
+
+<h3 id="simple-graph">Simple graph</h3>
+
+<p>The first graph type is called a <em>simple graph</em>. A simple graph has no edges
+between a vertex and itself \(\forall_{v\in V}(v,v)\notin E\), i.e., it has no
+self-loops. A simple graph also has at most one edge between any two vertices,
+i.e. it has no multi-edges.<label for="sn-id-multi-edge" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-multi-edge" class="margin-toggle" /><span class="sidenote">Multi-edges cannot be
+represented by a set of edges alone, since a set cannot contain multiple copies
+of the same edge.  </span> All graphs in the examples above are simple graphs. In
+this book, we assume a graph is simple unless otherwise noted.</p>
+
+<h3 id="connected-graph">Connected graph</h3>
+
+<p>Not all vertices in a graph need to have an edge, in fact none need to. A graph
+where for some vertices there exists no path between them is called a <em>forest</em>,
+because it is a collection of <em>connected graphs</em>. In a connected graph, there
+always exists a path between any pair of vertices. Graphs B, C, and D in the examples above are connected graphs, graph A is a forest.</p>
+
+<p>In formal notation Graph A is \(V=\{\text{John},\) \(\text{Doris},\)
+\(\text{Roberto},\) \(\text{Ramiro},\) \(\text{Charlene},\) \(\text{Holly}\}\)
+and \(E=\{(\text{John},\text{Doris}),\) \((\text{Doris},\text{Roberto}),\)
+\((\text{Ramiro},\text{Charlene}),\) \((\text{Ramiro},\text{Holly}),\)
+\((\text{Charlene},\text{Holly})\}\).</p>
+
+<h3 id="weighted-graph">Weighted graph</h3>
+
+<p>Graphs who’s relationships between vertices is a number, are called <em>weighted
+graphs</em>. Here, in addition to the graph \(G=(V,E)\) a weight function is
+supplied \(w:V\times V\rightarrow \mathbb{Z}\). Often, weighted graphs are fully
+connected but some edges may have a neutral weight such as \(0\). Graph B in the examples above is a weighted graphs. If vertex relationships are Boolean, then the graph is <em>unweighted</em>. Graphs A, C and D are unweighted graphs.</p>
+
+<p>Graph B is written up analogously to graph A but we add the weight function
+\(w(\text{Amsterdam},\text{Groningen})=180\), \(w(\text{Amsterdam},\text{The
+Hague})=164\), etc.</p>
+
+<h3 id="undirected-graph">(Un)directed graph</h3>
+
+<p>Graphs where edges have no direction are called <em>undirected graphs</em>. Here, the
+pairs of vertices \((u,v)\in E\) are unordered. This means that \((u,v)=(v,u)\).
+Of course, <em>directed graphs</em> also exist. Here, the pair is ordered and edges
+have directionality. Graphs A, B and D in the examples above are undirected graphs, graph C is a directed graph.</p>
+
+<p>Graph C is written as graph A, but the order of edges matter. So
+\((\text{Clouds},\text{Rain})\in E\) but \((\text{Rain},\text{Clouds})\notin E\).</p>
+
+<h3 id="tree">Tree</h3>
+
+<p>The final graph type we condider here is more a type of graph with specific
+properties, namely a <em>tree</em>. Trees are graphs without cycles, which means there
+is exactly one path (a sequence of edges) between any two vertices. Another way
+of thinking of acyclic graphs is that there is no way to ‘walk back’ to a vertex
+along a different ‘route’. Graph D in the examples above is a tree. Trees can
+be also be directed, in which case they are called <em>polytrees</em>.</p>
+
+<p>Graph D is again written as graph A. Nothing special is needed to denote a tree,
+since it follows from the graph’s structure that it is a tree. Sometimes, if you
+want to be very clear, you can write graph/tree \(T=(V,E)\) to denote a tree.</p>
+
+<h3 id="graph-properties">Graph properties</h3>
+
+<p>Graphs have many formal properties but for the purposes of this book, only a few
+basic properties are important.</p>
+
+<p><label for="mf-id-degree" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-degree" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="75%" src="/lovelace/assets/img/vertex-degree.svg" /><br />Vertex degree.
+Vertex \(A\) has degree 4, vertex \(B\) has indegree 3, and vertex \(C\) has
+outdegree 2.</span> The first is the <em>degree</em> of a vertex. This is the number
+of connections that a vertex \(v\) has, formally \(deg(v)=\left|\{u=v \wedge
+w=v|(u,w) \in E\}\right|\). If a graph is directed, then we split degree into
+<em>indegree</em> (the number of edges toward the vertex) and <em>outdegree</em> (the number
+of edges away from the vertex). For weighted graphs, we ignore the weight.</p>
+
+<p>The maximum number of possible edges in an undirected graph is
+<span>\(\frac{|V|(|V|-1)}{2}\)</span>. The first vertex in the graph can have
+unqiue edges with \(|V|-1\) vertices, the second with \(|V|-2\) vertices, the
+third with \(|V|-3\) vertices, etc., until the \((|V|-1)^\text{th}\) vertex
+which can only have a unique edge with \(1\) vertex: \((|V|-1) + (|V|-2) +
+(|V|-3) + \dots + 3 + 2 + 1=\frac{|V|(|V|-1)}{2}\).</p>
+
+<p>The number of possible edges in a directed graph can be derived from the number
+of possible edges in an undirected graph. In a directed graph can be two edges
+between any two vertices, doubling the number of possible edges:
+\(2\frac{|V|(|V|-1)}{2}=|V|(|V|-1)\).</p>
+
+<h2 id="further-reading">Further reading</h2>
+
+<p>For basic principles on mathematics the Internet is a actually a great resource.
+Wikipedia has great pages with much detail on the various concepts introduces in this chapter. See for example:</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Set_theory">https://en.wikipedia.org/wiki/Set_theory</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Tuple">https://en.wikipedia.org/wiki/Tuple</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Function_(mathematics)">https://en.wikipedia.org/wiki/Function_(mathematics)</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Mathematical_logic">https://en.wikipedia.org/wiki/Mathematical_logic</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Graph_theory">https://en.wikipedia.org/wiki/Graph_theory</a></li>
+</ul>
+
+<p>If you prefer video lectures, the YouTube channel  <a href="https://www.youtube.com/user/thetrevtutor">thetrevtutor</a> has some interesting materials.</p>
 
 
 <div class="nav-wrapper">
@@ -275,7 +420,7 @@ Who are our common friends? We use <em>set intersection</em>:</p>
 </div>
 
     </article>
-    <span class="print-footer">Math concepts and notation - September 6, 2021 - Mark Blokpoel and Iris van Rooij</span>
+    <span class="print-footer">Math concepts and notation - September 14, 2021 - Mark Blokpoel and Iris van Rooij</span>
     <footer>
   <hr class="slender">
   <ul class="footer-links">

@@ -755,7 +755,7 @@ have noticed during the Scala introduction, functional programming is closely
 related to the mathematical language of formal theories. Consider the following
 example (toy) formal theory:</p>
 
-<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/lovelace/assets/img/pexels-roman-odintsov-6147834.jpg" /><br /></span>
+<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="100%" src="/lovelace/assets/img/pexels-roman-odintsov-6147834.jpg" /><br /></span>
 <span class="problemtitle">Pizza Toppings</span><br /><span class="probleminout">Input:</span> A set of toppings \(T\), a budget \(b\in\mathbb{N}\), and a cost function
 for toppings \(c: T\rightarrow \mathbb{N}\)<br /><span class="probleminout">Output:</span> 
 A selection of toppings \(T'\subseteq T\) such that \(\sum_{t \in T}c(t) \leq b\).</p>
@@ -963,7 +963,7 @@ theory and sample input <a class="citation" href="#guest_how_2020">(Guest &amp; 
 are that you can let the computer do the hard work computing many input-output
 mappings, but it is still a lot of work if have to supply each input manually.</p>
 
-<figure><img src="/lovelace/assets/img/simulation-components.svg" /><figcaption class="maincolumn-figure">A simulation architecture
+<figure><img width="100%" src="/lovelace/assets/img/simulation-components.svg" /><figcaption class="maincolumn-figure">A simulation architecture
 consists of the implementation of the formal theory and an input generator that
 supplies inputs.</figcaption></figure>
 
@@ -998,7 +998,7 @@ the set of all possible inputs, the darker areas might be more likely to be
 generated than the light. Of course, input bias will also bias the output of the
 simulations.</p>
 
-<figure><img src="/lovelace/assets/img/generator-bias.svg" /><figcaption class="maincolumn-figure">Bias in an unconstrained random
+<figure><img width="100%" src="/lovelace/assets/img/generator-bias.svg" /><figcaption class="maincolumn-figure">Bias in an unconstrained random
 generator may not cover all possible inputs.</figcaption></figure>
 
 <p>We can deal with this bias by analyzing how well the generated inputs cover the
@@ -1015,7 +1015,7 @@ into account, but we may be better able to cover the input space by setting the
 right constraints. We can even use multiple sets of constraints to cover more
 area of the input space, as is shown in the figure below.</p>
 
-<figure><img src="/lovelace/assets/img/generator-bias-constrained.svg" /><figcaption class="maincolumn-figure">Bias in constrained
+<figure><img width="100%" src="/lovelace/assets/img/generator-bias-constrained.svg" /><figcaption class="maincolumn-figure">Bias in constrained
 input generators. Each &#8220;bubble&#8221; is a particular set of constraints on the same
 input generator, moving the bias across all possible inputs. By combining these
 biases, we can cover more of the input domain.</figcaption></figure>
@@ -1133,7 +1133,7 @@ Edition</em>. Artima.</p>
 </div>
 
     </article>
-    <span class="print-footer">Scala and mathlib - September 6, 2021 - Mark Blokpoel and Iris van Rooij</span>
+    <span class="print-footer">Scala and mathlib - September 14, 2021 - Mark Blokpoel and Iris van Rooij</span>
     <footer>
   <hr class="slender">
   <ul class="footer-links">
