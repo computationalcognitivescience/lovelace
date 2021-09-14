@@ -170,11 +170,16 @@ The set of edges is a subset of the cardinal product of the vertices
 $$E\subseteq V\times V$$. If there is a relationship between two vertices $$e\in
 V$$ and $$v\in V$$, then $$(u,v)\in E$$.
 
-{% maincolumn '' 'Example graphs.' %}
+{% maincolumn 'assets/img/graph-examples.svg' 'Example graphs. Graph A is a
+simple graph (a forest of multiple connected graphs) representing two-way like
+relationships. Graph B is a weighted graph representing major roads and
+distances between cities. Graph C is a directed graph representing causal
+relationships (e.g., clouds cause rain). Graph D is a tree representing part
+of the taxonomy of animals.' %}
 
 Depending on their structure, graphs can be classified into different types. In
-this book, we consider only a few but see Futher Reading if you are interested
-in diving deeper.
+this book, we use only a few types of graphs, but see Further Reading if you are
+interested in diving deeper.
 
 ### Simple graph
 
@@ -183,41 +188,68 @@ between a vertex and itself $$\forall_{v\in V}(v,v)\notin E$$, i.e., it has no
 self-loops. A simple graph also has at most one edge between any two vertices,
 i.e. it has no multi-edges.{% sidenote 'sn-id-multi-edge' 'Multi-edges cannot be
 represented by a set of edges alone, since a set cannot contain multiple copies
-of the same edge. ' %} Graphs A-B in the examples above are simple graphs. In
+of the same edge. ' %} All graphs in the examples above are simple graphs. In
 this book, we assume a graph is simple unless otherwise noted.
+
+### Connected graph
+
+Not all vertices in a graph need to have an edge, in fact none need to. A graph
+where for some vertices there exists no path between them is called a *forest*,
+because it is a collection of *connected graphs*. In a connected graph, there
+always exists a path between any pair of vertices. Graphs B, C, and D in the examples above are connected graphs, graph A is a forest.
+
+In formal notation Graph A is $$V=\{\text{John},$$ $$\text{Doris},$$
+$$\text{Roberto},$$ $$\text{Ramiro},$$ $$\text{Charlene},$$ $$\text{Holly}\}$$
+and $$E=\{(\text{John},\text{Doris}),$$ $$(\text{Doris},\text{Roberto}),$$
+$$(\text{Ramiro},\text{Charlene}),$$ $$(\text{Ramiro},\text{Holly}),$$
+$$(\text{Charlene},\text{Holly})\}$$.
 
 ### Weighted graph
 
 Graphs who's relationships between vertices is a number, are called *weighted
 graphs*. Here, in addition to the graph $$G=(V,E)$$ a weight function is
 supplied $$w:V\times V\rightarrow \mathbb{Z}$$. Often, weighted graphs are fully
-connected but some edges may have a neutral weight such as $$0$$. Graphs C-D in the examples above are simple graphs. If vertex relationships are Boolean, then the graph is *unweighted*.
+connected but some edges may have a neutral weight such as $$0$$. Graph B in the examples above is a weighted graphs. If vertex relationships are Boolean, then the graph is *unweighted*. Graphs A, C and D are unweighted graphs.
+
+Graph B is written up analogously to graph A but we add the weight function
+$$w(\text{Amsterdam},\text{Groningen})=180$$, $$w(\text{Amsterdam},\text{The
+Hague})=164$$, etc.
 
 ### (Un)directed graph
 
 Graphs where edges have no direction are called *undirected graphs*. Here, the
 pairs of vertices $$(u,v)\in E$$ are unordered. This means that $$(u,v)=(v,u)$$.
 Of course, *directed graphs* also exist. Here, the pair is ordered and edges
-have directionality. Graphs A-B in the examples above are directed graphs.
+have directionality. Graphs A, B and D in the examples above are undirected graphs, graph C is a directed graph.
+
+Graph C is written as graph A, but the order of edges matter. So
+$$(\text{Clouds},\text{Rain})\in E$$ but $$(\text{Rain},\text{Clouds})\notin E$$.
+
+### Tree
 
 The final graph type we condider here is more a type of graph with specific
 properties, namely a *tree*. Trees are graphs without cycles, which means there
 is exactly one path (a sequence of edges) between any two vertices. Another way
 of thinking of acyclic graphs is that there is no way to 'walk back' to a vertex
-along a different 'route'. Graphs A-B in the examples above are trees. Trees can
+along a different 'route'. Graph D in the examples above is a tree. Trees can
 be also be directed, in which case they are called *polytrees*.
+
+Graph D is again written as graph A. Nothing special is needed to denote a tree,
+since it follows from the graph's structure that it is a tree. Sometimes, if you
+want to be very clear, you can write graph/tree $$T=(V,E)$$ to denote a tree.
 
 ### Graph properties
 
 Graphs have many formal properties but for the purposes of this book, only a few
 basic properties are important.
 
-{% marginfigure 'mf-id-degree' '' 'Vertex degree.' '50%' %} The first is the
-*degree* of a vertex. This is the number of connections that a vertex $$v$$ has,
-formally $$deg(v)=\left|\{u=v \wedge w=v|(u,w) \in E\}\right|$$. If a graph is
-directed, then we split degree into *indegree* (the number of edges toward the
-vertex) and *outdegree* (the number of edges away from the vertex). For weighted
-graphs, we ignore the weight.
+{% marginfigure 'mf-id-degree' 'assets/img/vertex-degree.svg' 'Vertex degree.
+Vertex $$A$$ has degree 4, vertex $$B$$ has indegree 3, and vertex $$C$$ has
+outdegree 2.' '75%' %} The first is the *degree* of a vertex. This is the number
+of connections that a vertex $$v$$ has, formally $$deg(v)=\left|\{u=v \wedge
+w=v|(u,w) \in E\}\right|$$. If a graph is directed, then we split degree into
+*indegree* (the number of edges toward the vertex) and *outdegree* (the number
+of edges away from the vertex). For weighted graphs, we ignore the weight.
 
 The maximum number of possible edges in an undirected graph is
 <span>$$\frac{|V|(|V|-1)}{2}$$</span>. The first vertex in the graph can have
@@ -230,6 +262,7 @@ The number of possible edges in a directed graph can be derived from the number
 of possible edges in an undirected graph. In a directed graph can be two edges
 between any two vertices, doubling the number of possible edges:
 $$2\frac{|V|(|V|-1)}{2}=|V|(|V|-1)$$.
+
 
 ## Further reading
 
