@@ -204,7 +204,7 @@ A subset $$G \subseteq L$$ such that $$\forall_{p_i,p_j \in G}like(p_i,p_j) = tr
 {% indent 4 %}
 **Formal:** We should rigorously check if it really captures what you have in mind. Let's explore this with an example. Say a host knows six people they all like, i.e., $$P=L=\{A,B,C,D,E,F\}$$. We can depict their like and dislike relations in a figure. The color of the lines indicate for each pair of persons $$p_i, p_j \in P$$ the value of $$like(p_i, p_j)$$:
 
-{% maincolumn 'assets/img/selecting-example1.png' '' %}
+{% maincolumn 'assets/img/selecting-example1.svg' '' %}
 
 Who would you predict the host would invite?
 {% endindent %}
@@ -288,7 +288,7 @@ A subset $$G \subseteq P$$ such that $$\forall_{p_i,p_j \in G}  like(p_i,p_j) = 
 {% indent 0 %}
 **Verbal:** For instance, if the situation is like this, with $$L = \{ B, C, D, E, G\}$$ and $$D = \{ A, F\}$$:
 
-{% maincolumn 'assets/img/selecting-example2.png' '' %}
+{% maincolumn 'assets/img/selecting-example2.svg' '' '50%' %}
 
 then hosts tend to invite $$\{ C, D, E, F, G \}$$.
 {% endindent %}
