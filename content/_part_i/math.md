@@ -94,8 +94,32 @@ Finally, there are some special sets which we often use that have their own symb
 * Integer numbers $$\mathbb{Z}=\{\dots,-3,-2,-1,0,1,2,3,\dots\}$$
 * Real numbers <span>$$\mathbb{R}=\{r~|~-\infty<r<\infty\}$$</span>
 
+## Tuple
+
+In sets elements are unordered and no element can exist twice. However, there
+are occasions where the ordering of the elements is relevant and when the same
+element can exist multiple times. For example, a text is a sequence of
+characters where ordering is quite important and characters can occur multiple
+times. To express these *sequences* or *lists* we use the mathematical notation
+of *tuples*. An $$n$$-tuple is a sequence of $$n\geq0$$ elements. The sequence
+is most commonly expressed between parentheses $$()$$, a convention we follow in
+this book, but sometimes you will encounter other types of brackets such as
+$$\{\}$$, $$[]$$ and $$\langle\rangle$$ derived from variations on the tuple
+such as arrays or vectors.
+
+Specific elements in a tuple $$(e_1,e_2,\dots,e_n)$$ can be referred to by
+their label $$e$$ and index $$_i$$. Depending on the type of the elements, you can use these in expressions (see below for [functions](#functions) and [logic](#logic) expressions). Here are some example tuples:
+
+A travel route to the south of France:
+$$r=(\text{Nijmegen},\text{Liège},\text{Metz},$$
+$$\text{Nancy},\text{Dijon},\text{Lyon},\text{Marseille})$$. We can refer to the $$3^\text{th}$$ waypoint with $$r_3$$ which is Metz.
+
+A preference list:
+$$p=(\text{chocolate},\text{hiking},\text{sauna},\text{math})$$. This person
+likes chocolate more than math.
+
 ## Functions
-Building on set theory, we can define functions. Functions are relations that map all objects from one set (the _domain_) to exactly one object from another set (the _codomain_). We define functions with the following notation, here $$f$$ is the name of the function:
+To define functions we go back to set theory. Functions are relations that map all objects from one set (the _domain_) to exactly one object from another set (the _codomain_). We define functions with the following notation, here $$f$$ is the name of the function:
 
 
 $$f:D \rightarrow C\text{ with }f(d)=c$$
@@ -266,6 +290,13 @@ $$2\frac{|V|(|V|-1)}{2}=|V|(|V|-1)$$.
 
 ## Further reading
 
-Wikipedia
+For basic principles on mathematics the Internet is a actually a great resource.
+Wikipedia has great pages with much detail on the various concepts introduces in this chapter. See for example:
 
-Graph theory: Foulds (1998). *Graph Theory Applications*. Springer-Verlag New York.
+* [https://en.wikipedia.org/wiki/Set_theory](https://en.wikipedia.org/wiki/Set_theory)
+* [https://en.wikipedia.org/wiki/Tuple](https://en.wikipedia.org/wiki/Tuple)
+* [https://en.wikipedia.org/wiki/Function_(mathematics)](https://en.wikipedia.org/wiki/Function_(mathematics))
+* [https://en.wikipedia.org/wiki/Mathematical_logic](https://en.wikipedia.org/wiki/Mathematical_logic)
+* [https://en.wikipedia.org/wiki/Graph_theory](https://en.wikipedia.org/wiki/Graph_theory)
+
+If you prefer video lectures, the YouTube channel  [thetrevtutor](https://www.youtube.com/user/thetrevtutor) has some interesting materials.
