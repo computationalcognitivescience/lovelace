@@ -157,7 +157,7 @@ Summation $$\sum$$ takes all $$x$$'s from $$X$$, applies $$f(x)$$ to each and ad
 
 $$\sum_{x\in X}f(x)=f(x_1)+f(x_2)+f(x_3)+\dots$$
 
-Product takes $\prod$ all $x$'s from $$X$$, applies $$f(x)$$ to each and multiplies all values:
+Product takes $$\prod$$ all $$x$$'s from $$X$$, applies $$f(x)$$ to each and multiplies all values:
 
 $$\prod_{x\in X}f(x)=f(x_1)f(x_2)f(x_3)\dots$$
 
