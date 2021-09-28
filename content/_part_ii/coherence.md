@@ -115,7 +115,7 @@ Carefully look at the definitions of versions 1, 2 and 3 of <span style="font-va
 {% endquestion %}
 
 
-The symmetry property seems cognitively implausible when explaining how people decide what to believe as true or false (a capacity known as *belief fixation*). To see why, consider that the model predicts the following: If you would mentally *flip* all your beliefs---such that what you currently believe to be true{% sidenote 'sn-id-whatever' 'e.g., the belief that Amsterdam is the capital of The Netherlands.'%} you will from then on believe to be false and what you currently believe to be false{% sidenote 'sn-id-whatever' 'e.g., the belief that the Moon is made of cheese.'%} you will from then on believe to be true---your new mental state will still be equally (maximally) coherent. This seems wrong!
+The symmetry property seems cognitively implausible when explaining how people decide what to believe as true or false (a capacity known as *belief fixation*). To see why, consider that the model predicts the following: If you would mentally *flip* all your beliefs---such that what you currently believe to be true{% sidenote 'sn-id-whatever' 'e.g., the belief that Amsterdam is the capital of The Netherlands.'%} you will from then on believe to be false and what you currently believe to be false{% sidenote 'sn-id-whatever' 'e.g., the belief that the Moon is made of cheese.'%} you will from then on believe to be true---your new mental state will still be equally (maximally) coherent. This seems wrong!  
 
 
 
