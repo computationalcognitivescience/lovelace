@@ -6,10 +6,10 @@ module Jekyll::Tags
 		end
 
 		def render(context)
-		  "<span style='font-variant: small-caps;'>#{@text}</span>"
+		  "<span class=\"problemtitle\">#{@text}</span>"
 		end
 	end
-	
+
 	class DProblemTag < Liquid::Block
 
 		def initialize(tag_name, block_options, liquid_options)
