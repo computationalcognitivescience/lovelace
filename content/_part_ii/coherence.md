@@ -9,7 +9,7 @@ nav_exclude: true
 
 We have selected this particular model for our purposes because it combines simplicity with wide applicability. It also allows us to illustrate how mathematical proofs can be used to derive model properties.
 
-# Coherence as constraint satisfaction
+## Coherence as constraint satisfaction
 
 In 1998, computational philosopher Paul Thagard and computer scientist Karsten Verbeurgt proposed a model of a wide range of phenomena that can all be seen as falling under a single banner: 'maximizing coherence'.
 
@@ -125,24 +125,81 @@ Judging from experience, it is unlikely that our minds operate this way. More li
 
 ## Data priority principle
 
-*Under construction*
+The authors of the <span style="font-variant:small-caps;">Coherence</span> model were aware of the problem posed in the previous subsection. They proposed that the *data priority principle* counters the problem.{% sidenote 'sn-id-whatever' 'Data priority principle: "Propositions that describe the results of observation have a
+degree of acceptability on their own." -- Thagard (1989)' %} For instance, if you see the prime minister regularly arriving at the parliament building by bike, then you will believe that he cycles to work. This belief is based on direct observation, and therefore has a degree of acceptability of its own, independent of its coherence with other beliefs you may have. Once you  acceptability may also influence the plausibility of other beliefs: e.g., the belief that the prime minister lives in the Hague where the parliament building is. To the extend that beliefs corresponding to direct observations are truthful or accurate, the beliefs that cohere with them are also more likely to be true; or to Thagard and Verbeurgt proposed.
+
+We can capture this idea in an adjusted formalization of <span style="font-variant:small-caps;">Coherence</span> called <span style="font-variant:small-caps;">Discriminating Coherence</span>
+
+Yet, the belief could still be doubted, e.g., if it were to incohere sufficiently with other beliefs you hold. For instance, if someone told you that the prime minister lives in Amsterdam, not in The Hague the parliament building is *and* you notice that every time the prime minister arrives by bicycle there was is a camera crew and journalist waiting to interview him, then you may no longer believe he is cycling to work from his home. A more coherent interpretation may be that he wants to give a public impression to Dutch voters that he is the kind of person who cycles to work.
+
+{% epigraph 'A pure coherence problem is one that does not favor the acceptance of any particular set of elements. A foundational coherence problem selects a set of favored elements for acceptance as self-justified. A discriminating coherence problem favors a set of elements but their acceptance still depends on their coherence with all the other elements.' 'Thagard & Verbeurgt' '1998' %}
 
 ## NP-hard
 
-*Under construction*
+Thagard & Verbeurgt proved another interesting mathematical property of their model, i.e., it is *NP-hard*. You may not yet be familiar with this term. But no worries! We have your back.
 
-## Scope
+Explaining NP-hardness in great depth is beyond the scope of this book{% sidenote 'sn-id-whatever' 'We wrote a different textbook on the topic. [Chapter 1](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/2FBB76A42417F33C409A2EAD17C15046/9781107043992c1_3-22.pdf/introduction.pdf) is a good place to start.'%}, but luckily it is also not necessary. For present purposes it suffices to understand that NP-hard means really quite hard. So hard in fact that such problems are also called *intractable*. Why? Well, if a problem is NP-hard then there cannot exist *any* efficient (read: polynomial-time{% sidenote 'sn-id-whatever' 'An algorithm is said to run in *polynomial time* if the number of steps it takes can be upperbounded by a function of the form $$n^c$$, where $$c$$ is some constant and $$n$$ is the input size. For instance, $$n^2$$ is a polynomial, and so is $$n$$ and $$n^3$$. But e.g. $$2^n$$ is exponential, and not polynomial.'%}) algorithm that computes the problem.{% sidenote 'sn-id-whatever' 'Unless P = NP. For an explanation watch [this video](https://www.youtube.com/watch?v=YX40hbAHx3s).'%} Such problems may be computable in, say, exponential time. But exponential time grows astronomically fast as the input size grows. So fast, in fact, that even for intermediate size inputs the computation time is prohibitive.
 
-*Under construction*
+{% question %}
+In their paper, Thagard and Verbeurgt (1998, p. 8) write "Each person has thousands or millions of beliefs." How long would an exponential algorithm (*any* algorithm) take to compute <span style="font-variant:small-caps;">Coherence</span> for a thousand beliefs?
+{% hidden Hint? %}
+To start, you can assume that the algorithm takes $$2^n$$ steps. Recall that in <span style="font-variant:small-caps;">Coherence</span>, (possible) beliefs are modeled by the nodes in a constraint network. Hence, $$n = 1000$$.
+{% endhidden %}
+{% endquestion %}
+
+You may want to compare the number that you obtained to the number of seconds that have past since the Big Bang, i.e., $$10^{27} < 2^{100}$$ seconds. Now you understand why exponential time is prohibitively long. The type of cognitive capacity that <span style="font-variant:small-caps;">Coherence</span> is intended to explain runs on a time scale of seconds or minutes, or in rare cases, hours, days or weeks, but certainly not on a time scale of eons. The property 'NP-hard' is thus a model property that poses a serious challenge: How could a computational-level model explain (or even describe) a cognitive capacity if the postulated input-output mapping cannot be realized by any algorithm in a reasonable time?
 
 # Computing coherence
 
-*Under construction*
+Thagard and Verbeurgt were not so easily swayed by the NP-hard property. They proposed not one, not two, but even *five* algorithms for computing <span style="font-variant:small-caps;">Coherence</span>. The first algorithm that they considered is known as 'exhaustive search'.
+
+1. an  exhaustive  search  algorithm  that  considers  all  possible  solutions;
+2.  an  incremental  algorithm  that  considers  elements  in  arbitrary  order;
+3.  a connection&  algorithm  that  uses  an  artificial  neural  network  to  assess  coherence;
+4.  a greedy  algorithm  that  uses  locally  optimal  choices  to approximate  a globally  optimal solution;
+5.  a semidefinite  programming  (SDP)  algorithm  that  is guaranteed  to  satisfy  a high  proportion  of the  maximum  satisfiable  constraints.
 
 # Further reading
 
-*Under construction*
+In this chapter we revisited the genesis of a classic model in the cognitive science literature when it was conceived. Since its conception, the constraint satisfaction model of coherence has proven applicable in a large variety of contexts. For instance, it has been used to model how people may change beliefs about climate change (Thagard & Findlay, 2010), how doctors explain disease (Thagard 2018), how people fix miscommunications (van Arkel, 2021), how scientists form explanations of natural phenomena (Thagard, 2000; 2007; see also Maier, van Dongen & Borsboom, 2021), and a whole host of other situations (Thagard, 2000).
+
+In his book [Hot Thought](https://books.google.nl/books?hl=nl&lr=&id=tJV735_HoLAC&oi=fnd&pg=PR9&ots=j0Xhg4JHXz&sig=39hXZAOvkN886h-pDp2ixIBe57Y#v=onepage&q&f=false), Paul Thagard (2008) showed how the modeling principles could be extended to include even emotions, not just beliefs and mental representations. This idea led to new accounts of how emotional coherence plays a role in religious beliefs (Thagard, 2005), how juries make guilty versus innocent verdicts (Thagard, 2003), and the formation of social attitudes (Thagard, 2008; see also Klapper et al., 2018). Most recently, Thagard (2021) also applied the model to account for [people's beliefs about COVID](https://www.sciencedirect.com/science/article/pii/S104620232100075X?casa_token=GRLYXkqHf88AAAAA:oF6iYPMbyXsLHTOXASyYnPxAa3rZgigxTM-AUzICBlCIbxrS9mx2kdETvfun5TnZF0gMgwEAMg).
+
+The coherence model also has its critics.{% sidenote 'sn-id-whatever' 'Maybe you have your own criticisms? Then we invite you to articulate them and write down your arguments as precisely and rigorously as possible.'%} For instance, Millgram (2003) critiqued the model for mixing up 'maximizing coherence' with 'approximating truth' (but see also the response by Thagard, 2012). Millgram's critique furthermore inspired work on different notions of approximation (van Rooij & Wareham, 2012). These distinctions will prove relevant in Chapter 11.
 
 ### References
 
-*Under construction*
+van Arkel, J. (2021). [How do people resolve misunderstanding in conversation through repair? Introducing a framework built on belief revision and coherence](https://fse.studenttheses.ub.rug.nl/24420/1/MasterThesis_vanArkel.pdf). MSc thesis, University of Groningen.
+
+Klapper, A., Dotsch, R., van Rooij, I., & Wigboldus, D. H. (2018). [Social categorization in connectionist models: A conceptual integration](https://guilfordjournals.com/doi/abs/10.1521/soco.2018.36.2.221). Social Cognition, 36(2), 221-246.
+
+Maier, M., van Dongen, N., & Borsboom, D. (2021). [Comparing Theories with the Ising Model of Explanatory Coherence](https://doi.org/10.31234/osf.io/shaef). PsyArXiv.  
+
+Millgram, E. (2000). [Coherence: The price of the ticket](https://www.jstor.org/stable/2678447?casa_token=XY_Q98F_AyQAAAAA%3AwAFqn3CinPzxidwr2UPOxfGLg9SGDgQHZ_6h3V_KkJ9JY5SQ05MOva2jKIlfDC3SlCHkdYeUKDNOcpGVND3zpwQCtdtVEyARaiMhwrva2QG5qbWwPR8&seq=1#metadata_info_tab_contents). The Journal of Philosophy, 97(2), 82-93.
+
+Thagard, P. (1989). [Explanatory coherence](https://www.cambridge.org/core/journals/behavioral-and-brain-sciences/article/explanatory-coherence/E05CB61CD64C26138E794BC601CC9D7A). Behavioral and brain sciences, 12(3), 435-467.
+
+Thagard, P. (2000). Coherence in thought and action. MIT press.
+
+Thagard, P. (2003). [Why wasn't OJ convicted? Emotional coherence in legal inference](https://www.tandfonline.com/doi/abs/10.1080/0269993024400002?casa_token=z0RH6mGSrDoAAAAA:szmDR7rJGsd_mQaPvSp3sFzwnjWEjCCs_U-y2FATZUamvcJLpN34jqINdQlN-p9155wi51J4c-bl). Cognition and emotion, 17(3), 361-383.
+
+Thagard, P. (2005). [The emotional coherence of religion](https://brill.com/view/journals/jocc/5/1-2/article-p58_3.xml). Journal of Cognition and Culture, 5(1-2), 58-74.
+
+Thagard, P. (2007). [Coherence, truth, and the development of scientific knowledge](https://www.journals.uchicago.edu/doi/abs/10.1086/520941?casa_token=04ZmEvNXeT8AAAAA:6xzphVOxpaSx8-f64n-fu493FFnlLjYmZkcbjh55hZGSHXfUHFtPB9VCXrqGsG3xQwkASnY67ow). Philosophy of science, 74(1), 28-47.
+
+Thagard, P. (2008). [Hot thought: Mechanisms and applications of emotional cognition](https://books.google.nl/books?hl=nl&lr=&id=tJV735_HoLAC&oi=fnd&pg=PR9&ots=j0Xhg4JHXz&sig=39hXZAOvkN886h-pDp2ixIBe57Y#v=onepage&q&f=false). MIT press.
+
+Thagard, P. (2012). [Coherence: The price is right](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.2041-6962.2011.00091.x?casa_token=z3hyGuAPj-EAAAAA:ptpEupaVT_6OuBAQ607Hgi9efhHySlq9jiMz0mxoDQlSssCQ4QoFxRpNDr-05NmfDx11ufjEeQqsIXY). The Southern Journal of Philosophy, 50(1), 42-49.
+
+Thagard, P. (2018). [Social equality: Cognitive modeling based on emotional coherence explains attitude change](https://journals.sagepub.com/doi/full/10.1177/2372732218782995?casa_token=Nq19Q3lFh4sAAAAA%3AQEraSsfWE6j3B0UFDwLkxt52_uMwS9xYYwV-9rxzXpk2I8kNUB-Le1aJmGngN3CGP4WkeOoKF1Y1). Policy Insights from the Behavioral and Brain Sciences, 5(2), 247-256.
+
+Thagard, P. (2018). [How scientists explain disease](https://www.degruyter.com/document/doi/10.1515/9780691187303/html). Princeton University Press.
+
+Thagard, P. (2021). [The cognitive science of COVID-19: Acceptance, denial, and belief change](https://www.sciencedirect.com/science/article/pii/S104620232100075X?casa_token=MINX5tN_rPQAAAAA:WPSOZkiiPxJPci-GwsvEaeMjgXCDOH5_agSqT6wPyzi4F6lBiKhL11MysnMi8qSwk0kF14bv0Q). Methods.
+
+Thagard, P., & Findlay, S. (2010). [Changing minds about climate change: Belief revision, coherence, and emotion.](https://link.springer.com/chapter/10.1007/978-90-481-9609-8_14) In Belief revision meets philosophy of science (pp. 329-345). Springer, Dordrecht.
+
+
+Thagard, P., & Verbeurgt, K. (1998). [Coherence as constraint satisfaction](https://www.sciencedirect.com/science/article/pii/S0364021399800330). Cognitive Science, 22(1), 1-24.
+
+van Rooij, I., & Wareham, T. (2012). [Intractability and approximation of optimization theories of cognition](https://www.sciencedirect.com/science/article/pii/S002224961200048X). Journal of Mathematical Psychology, 56(4), 232-247.

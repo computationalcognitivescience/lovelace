@@ -589,7 +589,7 @@ Having read the chapter up to here, we recommend trying Exercise 4.4 again. Obse
 
 A key historical figure in the cognitive science of decision making is [Herbert Simon](https://www.nobelprize.org/prizes/economic-sciences/1978/simon/biographical/). He won the Nobel Prize in economics for his line of work started in the 1950s on *bounded rationality*: the idea that human rationality is to be understood as bounded by the computational limits of our minds. In the 1970s, Daniel Kahneman and Amos Tversky developed a program of *biases and heuristics* that demonstrated how limits of mind lead to systematic fallacies and judgment errors. From 1990s onwards, Gerd Gigerenzer and colleagues returned to the key ideas from Simon and developed a notion of *ecological rationality* that puts the ideas of 'biases and heuristics' in a more positive light, focusing less on human error and more on human smarts.
 
-For examples of formal modeling of subset choice in the literature, see Fishburn & LaValle (1996), van Rooij, Stege, & Kadlec (2005), and Bossaerts, & Murawski (2017). During your formalization exercises you may have noticed that subset choice models can face so-called combinatorial explosion, because the number of subsets grows exponentially as a function of the number of elements one can choose from. We will return to this issue in later chapters. For more information on this issue we also recommend the textbook [Cognition and Intractability](https://cognitionandintractability.com), in particular [Chapter 1](https://www.cambridge.org/core/books/cognition-and-intractability/introduction/2FBB76A42417F33C409A2EAD17C15046) which is open access.    
+For examples of formal modeling of subset choice in the literature, see Fishburn & LaValle (1996), van Rooij, Stege, & Kadlec (2005), Bossaerts, & Murawski (2017) and Bossaerts, Yadav, & Murawski (2018). During your formalization exercises you may have noticed that subset choice models can face so-called combinatorial explosion, because the number of subsets grows exponentially as a function of the number of elements one can choose from. We will return to this issue in later chapters. For more information on this issue we also recommend the textbook [Cognition and Intractability](https://cognitionandintractability.com), in particular [Chapter 1](https://www.cambridge.org/core/books/cognition-and-intractability/introduction/2FBB76A42417F33C409A2EAD17C15046) which is open access.    
 
 ### References
 
@@ -612,6 +612,8 @@ Cooper, R. P., & Guest, O. (2014). [Implementations are not specifications](http
 Fishburn, P. C., & LaValle, I. H. (1996). [Binary interactions and subset choice](https://www.sciencedirect.com/science/article/abs/pii/0377221795000739). *European journal of operational research, 92*(1), 182-192.
 
 Bossaerts, P., & Murawski, C. (2017). [Computational complexity and human decision-making](https://www.sciencedirect.com/science/article/pii/S1364661317301936). *Trends in Cognitive Sciences, 21*(12), 917-929.
+
+Bossaerts, P., Yadav, N. & Murawski, C. (2018). [Uncertainty and computational complexity](https://doi.org/10.1098/rstb.2018.0138). Philosophical Transactions B: Biological Sciences, 374 (1766), pp.1-12.
 
 van Rooij, I., Stege, U., & Kadlec, H. (2005). [Sources of complexity in subset choice](https://www.sciencedirect.com/science/article/abs/pii/S0022249605000052). *Journal of Mathematical Psychology, 49*(2), 160-187.
 

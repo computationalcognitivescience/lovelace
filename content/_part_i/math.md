@@ -296,7 +296,7 @@ $$2\frac{|V|(|V|-1)}{2}=|V|(|V|-1)$$.
 
 ## Further reading
 
-For basic principles on mathematics the Internet is a actually a great resource.
+For basic principles on mathematics the Internet is actually a great resource.
 Wikipedia has great pages with much detail on the various concepts introduces in this chapter. See for example:
 
 * [https://en.wikipedia.org/wiki/Set_theory](https://en.wikipedia.org/wiki/Set_theory)
