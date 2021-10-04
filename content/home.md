@@ -33,7 +33,7 @@ Danielle Navarro's award-winning open textbook [Learning Statistics with R](http
 This open textbook is released under a [CC-BY 4.0 license](https://creativecommons.org/licenses/by/4.0/) and the Scala software used herein is released under an [UGN GPL v3 license]() or any later version. This book is written in [Jekyll](https://jekyllrb.com) using the [tufte-jekyll](https://github.com/clayh53/tufte-jekyll) theme released under an [MIT license](https://github.com/fongandrew/hydeout/blob/master/LICENSE.md). The source code is available on Github [here](https://github.com/computationalcognitivescience/lovelace).
 
 ## How to cite this book
-Blokpoel, M. & van Rooij, I. (2021). Theoretical modeling for cognitive science and psychology. Retrieved year-month-day from [URL].
+Blokpoel, M. & van Rooij, I. (2021). Theoretical modeling for cognitive science and psychology. Retrieved [date] from [URL].
 
 ## In-progress
 At present this book is a living document, some sections have been written while others are still under construction. If the parts you are interested in aren't finished yet, please check back at a later time. Feedback and suggestions are welcome.
