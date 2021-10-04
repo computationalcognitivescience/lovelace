@@ -173,9 +173,9 @@ A truth assignment \(T: V \rightarrow \{\top, \bot \}\) such that \(Coh(T)= \sum
 </div></div>
 </div></div></div>
 
-<p>Answering <em>Question 5.1</em> may have been easy enough. Once you recognize that a partition into sets \(A\) and \(R\) can be conceptualized as a truth assignment with \(A = \top\) and \(R = \bot\), and you notice that then \(T(v)=T(u)\) means the same as \(u,v \in A \text{ OR } u,v \in R\), and so on, the equivalence between the two versions becomes apparent.</p>
+<p>Answering <em>Question 5.2</em> may have been easy enough. Once you recognize that a partition into sets \(A\) and \(R\) can be conceptualized as a truth assignment with \(A = \top\) and \(R = \bot\), and you notice that then \(T(v)=T(u)\) means the same as \(u,v \in A \text{ OR } u,v \in R\), and so on, the equivalence between the two versions becomes apparent.</p>
 
-<p>Now, consider the following computational-level model inspired by the connectionist modeling tradition, and answer <em>Question 5.2</em>:</p>
+<p>Now, consider the following computational-level model inspired by the connectionist modeling tradition, and answer <em>Question 5.3</em>:</p>
 
 <p><span class="problemtitle">Harmony Maximization</span><br /><span class="probleminout">Input:</span> A Hopfiel network \(G = (V, E)\), with a weight \(w(u,v) \in \mathbb{Z}\) for each edge \((u,v) \in E = V \times V\) (i.e., the network is fully connected).<br /><span class="probleminout">Output:</span> 
 An activation pattern \(a: V \rightarrow \{-1,1 \}\) such that \(H(a) = \sum_{u,v \in V} a(u)a(v)w(u,v)\) is maximum.</p>
@@ -210,27 +210,121 @@ An activation pattern \(a: V \rightarrow \{-1,1 \}\) such that \(H(a) = \sum_{u,
 
 <h2 id="data-priority-principle">Data priority principle</h2>
 
-<p><em>Under construction</em></p>
+<p>The authors of the <span style="font-variant:small-caps;">Coherence</span> model seemed aware of the problem posed in the previous subsection. They proposed that the <em>data priority principle</em> counters the problem.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">Data priority principle: “Propositions that describe the results of observation have a
+degree of acceptability on their own.” – Thagard (1989) </span> For instance, if you see the prime minister regularly arriving at the parliament building by bike, then you will believe that he cycles to work. This belief is based on direct observation, and therefore has a degree of acceptability of its own, independent of its coherence with other beliefs you may have. By maximizing coherence grounded in observations our beliefs aren’t merely circular contrivances of our minds.</p>
+
+<p>Thagard and Verbeurgt proposed two different ways in which this idea could be worked out to a revised theory of coherence:</p>
+
+<div class="epigraph"><blockquote><p>A pure coherence problem is one that does not favor the acceptance of any particular set of elements. A foundational coherence problem selects a set of favored elements for acceptance as self-justified. A discriminating coherence problem favors a set of elements but their acceptance still depends on their coherence with all the other elements</p><footer>Thagard &amp; Verbeurgt, <cite>1998</cite></footer></blockquote></div>
+
+<p>Let’s consider how these intuitive ideas can be formalized, starting with <span style="font-variant:small-caps;">Foundational Coherence</span>.</p>
+
+<p><span class="problemtitle">Foundational Coherence</span><br /><span class="probleminout">Input:</span> A graph \(G = (V, E)\), with a weight \(w(u,v) \in \mathbb{N}\) for each edge \((u,v) \in E = C^+ \cup C^- \subseteq V \times V\) (where \(C^+ \cap C^- = \emptyset\)), and special (data) elements \(D \subseteq V\).<br /><span class="probleminout">Output:</span> 
+A truth assignment \(T: V \rightarrow \{\top, \bot \}\) such that \(T(d) = \top\) for each \(d \in D\) and \(Coh(T)= \sum_{T(u) = T(v)} w(u,v) + \sum_{T(u) \neq T(v)} w(u,v)\) is maximum.</p>
+
+<p>The acceptability of beliefs representing direct observations (modelled by \(D\)) can impact the plausibility of other beliefs through maximizing coherence. For instance, if you already know that the parliament building is in The Hague and you observe the prime minister arriving there by bike then it is most coherent to believe that the prime minister lives in The Hague.</p>
+
+<figure><img width="100%" src="/lovelace/assets/img/FoundationalCoherence.png" /><figcaption class="maincolumn-figure">An example instance of the <span style="font-variant:small-caps;">Foundational Coherence</span> problem, with vertex set \(V = \{a, b, c, d, e, f, g, h, i, j \}\) and \(\{f, j\} \in D\).</figcaption></figure>
+
+<p>In <span style="font-variant:small-caps;">Foundational Coherence</span>, the elements of \(D\) cannot themselves be doubted. However, people are able to doubt that their observations are true if disbelieving them is more globally coherent against the background of many other beliefs. For instance, if someone told you that the prime minister lives in Amsterdam <em>and</em> you know that the parliament building is in The Hague <em>and</em> you notice that every time the prime minister arrives by bicycle there was is a camera crew and journalists waiting to interview him, then you may no longer believe he is cycling to work from his home. A more coherent interpretation may be that he wants to give a public impression to Dutch voters that he is the kind of person who cycles to work.</p>
+
+<p>We can capture this idea in an adjusted formalization of <span style="font-variant:small-caps;">Coherence</span> called <span style="font-variant:small-caps;">Discriminating Coherence</span>.</p>
+
+<p><span class="problemtitle">Discriminating Coherence</span><br /><span class="probleminout">Input:</span> A graph \(G = (V, E)\), with a weight \(w(u,v) \in \mathbb{N}\) for each edge \((u,v) \in E = C^+ \cup C^- \subseteq V \times V\) (where \(C^+ \cap C^- = \emptyset\)), and special (data) elements \(D \subseteq V\) with a weight \(w(d) \in \mathbb{N}\) for each \(d \in D\).<br /><span class="probleminout">Output:</span> 
+A truth assignment \(T: V \rightarrow \{\top, \bot \}\) such that \(Coh(T)= \sum_{d \in D, T(d) = \top} w(d) + \sum_{T(u) = T(v)} w(u,v) + \sum_{T(u) \neq T(v)} w(u,v)\) is maximum.</p>
+
+<p>It seems inutuitive that, to the extent that beliefs corresponding to direct observations are truthful or accurate, the beliefs that cohere with them are also more likely to be true. Thagard and Verbeurgt indeed assumed this to be the case. Perform the next exercises to assess whether or not the intuition is founded.</p>
+
+<div class="question-top"><div class="question" id="question-5"><div class="question-body"><div class="question-header">Question 5.5</div> <p>Are there instances of <span style="font-variant:small-caps;">Foundational Coherence</span> for which the symmetry property holds?</p>
+<div class="answer" id="question-.5-heading-1"><a onclick="document.getElementById('question-.5-answer-1').style.display = document.getElementById('question-.5-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.5-answer-1" style="display: none;"><p>Prove by creating one example instance with the symmetry property, if one can exist; or, alternatively, prove that none can exist.</p>
+</div></div>
+</div></div></div>
+
+<div class="question-top"><div class="question" id="question-6"><div class="question-body"><div class="question-header">Question 5.6</div> <p>Are there instances of <span style="font-variant:small-caps;">Discriminating Coherence</span> for which the symmetry property holds?</p>
+<div class="answer" id="question-.6-heading-1"><a onclick="document.getElementById('question-.6-answer-1').style.display = document.getElementById('question-.6-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.6-answer-1" style="display: none;"><p>Prove by creating one example instance with the symmetry property, if one can exist; or, alternatively, prove that none can exist.</p>
+</div></div>
+</div></div></div>
 
 <h2 id="np-hard">NP-hard</h2>
 
-<p><em>Under construction</em></p>
+<p>Thagard &amp; Verbeurgt proved another interesting mathematical property of their model, i.e., it is <em>NP-hard</em>. You may not yet be familiar with this term. But no worries! We have your back.</p>
 
-<h2 id="scope">Scope</h2>
+<p>Explaining NP-hardness in great depth is beyond the scope of this book<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">We wrote a different textbook on the topic. <a href="https://www.cambridge.org/core/services/aop-cambridge-core/content/view/2FBB76A42417F33C409A2EAD17C15046/9781107043992c1_3-22.pdf/introduction.pdf">Chapter 1</a> is a good place to start. </span>, but luckily it is also not necessary. For present purposes it suffices to understand that NP-hard means really quite hard. So hard in fact that such problems are also called <em>intractable</em>. Why? Well, if a problem is NP-hard then there cannot exist <em>any</em> efficient (read: polynomial-time<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">An algorithm is said to run in <em>polynomial time</em> if the number of steps it takes can be upperbounded by a function of the form \(n^c\), where \(c\) is some constant and \(n\) is the input size. For instance, \(n^2\) is a polynomial, and so is \(n\) and \(n^3\). But e.g. \(2^n\) is exponential, and not polynomial. </span>) algorithm that computes the problem.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">Unless P = NP. For an explanation watch <a href="https://www.youtube.com/watch?v=YX40hbAHx3s">this video</a>. </span> Such problems may be computable in, say, exponential time. But exponential time grows astronomically fast as the input size grows. So fast, in fact, that even for intermediate size inputs the computation time is prohibitive.</p>
 
-<p><em>Under construction</em></p>
+<div class="question-top"><div class="question" id="question-7"><div class="question-body"><div class="question-header">Question 5.7</div> <p>In their paper, Thagard and Verbeurgt (1998, p. 8) write “Each person has thousands or millions of beliefs.” How long would an exponential algorithm (<em>any</em> algorithm) take to compute <span style="font-variant:small-caps;">Coherence</span> for a thousand beliefs?</p>
+<div class="answer" id="question-.7-heading-1"><a onclick="document.getElementById('question-.7-answer-1').style.display = document.getElementById('question-.7-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.7-answer-1" style="display: none;"><p>To start, you can assume that the algorithm takes \(2^n\) steps. Recall that in <span style="font-variant:small-caps;">Coherence</span>, (possible) beliefs are modeled by the nodes in a constraint network. Hence, \(n = 1000\).</p>
+</div></div>
+</div></div></div>
+
+<p>You may want to compare the number that you obtained to the number of seconds that have past since the Big Bang, i.e., \(10^{27} &lt; 2^{100}\) seconds. Now you understand why exponential time is prohibitively long. The type of cognitive capacity that <span style="font-variant:small-caps;">Coherence</span> is intended to explain runs on a time scale of seconds or minutes, or in rare cases, hours, days or weeks, but certainly not on a time scale of eons. The property ‘NP-hard’ is thus a model property that poses a serious challenge for cognitive scientists: How could a computational-level model explain (or even describe) a cognitive capacity if the postulated input-output mapping cannot be realized by any algorithm in a reasonable time?</p>
 
 <h1 id="computing-coherence">Computing coherence</h1>
 
-<p><em>Under construction</em></p>
+<p>Thagard and Verbeurgt were not so easily swayed by the NP-hard property. They proposed not one, not two, but even <em>five</em> algorithms for computing <span style="font-variant:small-caps;">Coherence</span>.</p>
+
+<div class="epigraph"><blockquote><p>1. an  exhaustive  search  algorithm  that  considers  all  possible  solutions; 2. an  incremental  algorithm  that  considers  elements  in  arbitrary  order; 3. a connection&amp;  algorithm  that  uses  an  artificial  neural  network  to  assess  coherence; 4. a greedy  algorithm  that  uses  locally  optimal  choices  to approximate  a globally  optimal solution; 5. a semidefinite  programming  (SDP)  algorithm  that  is guaranteed  to  satisfy  a high  proportion  of the  maximum  satisfiable  constraints.</p><footer>Thagard &amp; Verbeurgt, <cite>1998</cite></footer></blockquote></div>
+
+<p>We will consider some of these algorithms more in depth in Chapter 11. For now, it is important to realize that only one of the algorithms is guaranteed to return the maximum coherence truth assignment for any given instance of <span style="font-variant:small-caps;">Coherence</span>.</p>
+
+<div class="question-top"><div class="question" id="question-8"><div class="question-body"><div class="question-header">Question 5.8</div> <p>Which of the five algorithm is guaranteed to correctly compute <span style="font-variant:small-caps;">Coherence</span>? Is that algorithm tractable?</p>
+<div class="answer" id="question-.8-heading-1"><a onclick="document.getElementById('question-.8-answer-1').style.display = document.getElementById('question-.8-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.8-answer-1" style="display: none;"><p>Recall that <span style="font-variant:small-caps;">Coherence</span> is NP-hard. And the number of possible truth assignments for \(n\) nodes is \(2^n\).</p>
+</div></div>
+</div></div></div>
+
+<p>Four of the five algorithms proposed are at best heuristics. That is, they do not guarantee that they compute <span style="font-variant:small-caps;">Coherence</span> correctly. Even the fifth algorithm which makes a kind of guarantee makes no guarantees on how much that truth assignment that it returns resembles the maximum coherent truth assignment. In fact, a truth assignment with close to maximum coherence can be arbitrarily different from the maximum coherence truth assignment.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">See <a href="https://www.sciencedirect.com/science/article/pii/S002224961200048X">van Rooij &amp; Wareham (2012)</a>. </span> Given that <span style="font-variant:small-caps;">Coherence</span> is NP-hard there cannot exist any tractable algorithm that approximates the problem in the latter sense.</p>
+
+<div class="question-top"><div class="question" id="question-9"><div class="question-body"><div class="question-header">Question 5.9</div> <p>Prove that there cannot exist any tractable (read: polynomial-time) algorithm that for any instance of <span style="font-variant:small-caps;">Coherence</span> returns a truth assignment \(T_{approx}\) that differs from the maximum coherence truth assignment \(T_{max}\) in at lost \(k\) truth values.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">In other words, the <a href="https://www.youtube.com/watch?v=P02mJhS9qQ4">hamming distance</a> \(|T_{approx} - T_{max}| \leq k\).. </span></p>
+<div class="answer" id="question-.9-heading-1"><a onclick="document.getElementById('question-.9-answer-1').style.display = document.getElementById('question-.9-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.9-answer-1" style="display: none;"><p>Prove by contradition. That is, assume that such an approximation would exist, and prove that then it is also possible to compute the maximum in polynomial-time.</p>
+</div></div>
+</div></div></div>
+
+<p>We will return to this topic in Chapter 11. There we will explore how well or poorly different algorithms approximate <span style="font-variant:small-caps;">Coherence</span>, <span style="font-variant:small-caps;">Foundational Coherence</span> and <span style="font-variant:small-caps;">Discriminating Coherence</span>, and the implications thereof.</p>
 
 <h1 id="further-reading">Further reading</h1>
 
-<p><em>Under construction</em></p>
+<p>In this chapter we revisited the genesis of a classic model in the cognitive science literature and some of its formal properties.</p>
+
+<p>Since its conception, the constraint satisfaction model of coherence has proven applicable in a large variety of contexts. For instance, it has been used to model how people may change beliefs about climate change (Thagard &amp; Findlay, 2010), how doctors explain disease (Thagard 2018), how people fix miscommunications (van Arkel, 2021), how scientists form explanations of natural phenomena (Thagard, 2000; 2007; see also Maier, van Dongen &amp; Borsboom, 2021), and a whole host of other situations (Thagard, 2000).</p>
+
+<p>In his book <a href="https://books.google.nl/books?hl=nl&amp;lr=&amp;id=tJV735_HoLAC&amp;oi=fnd&amp;pg=PR9&amp;ots=j0Xhg4JHXz&amp;sig=39hXZAOvkN886h-pDp2ixIBe57Y#v=onepage&amp;q&amp;f=false">Hot Thought</a>, Paul Thagard (2008) showed how the modeling principles could be extended to include even emotions, not just beliefs and mental representations. This idea led to new accounts of how emotional coherence plays a role in religious beliefs (Thagard, 2005), how juries make guilty versus innocent verdicts (Thagard, 2003), and the formation of social attitudes (Thagard, 2008; see also Klapper et al., 2018). Most recently, Thagard (2021) also applied the model to account for <a href="https://www.sciencedirect.com/science/article/pii/S104620232100075X?casa_token=GRLYXkqHf88AAAAA:oF6iYPMbyXsLHTOXASyYnPxAa3rZgigxTM-AUzICBlCIbxrS9mx2kdETvfun5TnZF0gMgwEAMg">people’s beliefs about COVID</a>.</p>
+
+<p>The coherence model also has its critics.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">Maybe you have your own criticisms? Then we invite you to articulate them and write down your arguments as precisely and rigorously as possible. </span> For instance, Millgram (2003) critiqued the model for mixing up ‘maximizing coherence’ with ‘approximating truth’ (but see also the response by Thagard, 2012). Millgram’s critique furthermore inspired work on different notions of approximation (van Rooij &amp; Wareham, 2012). These distinctions will prove relevant in Chapter 11.</p>
 
 <h3 id="references">References</h3>
 
-<p><em>Under construction</em></p>
+<p>van Arkel, J. (2021). <a href="https://fse.studenttheses.ub.rug.nl/24420/1/MasterThesis_vanArkel.pdf">How do people resolve misunderstanding in conversation through repair? Introducing a framework built on belief revision and coherence</a>. MSc thesis, University of Groningen.</p>
+
+<p>Klapper, A., Dotsch, R., van Rooij, I., &amp; Wigboldus, D. H. (2018). <a href="https://guilfordjournals.com/doi/abs/10.1521/soco.2018.36.2.221">Social categorization in connectionist models: A conceptual integration</a>. Social Cognition, 36(2), 221-246.</p>
+
+<p>Maier, M., van Dongen, N., &amp; Borsboom, D. (2021). <a href="https://doi.org/10.31234/osf.io/shaef">Comparing Theories with the Ising Model of Explanatory Coherence</a>. PsyArXiv.</p>
+
+<p>Millgram, E. (2000). <a href="https://www.jstor.org/stable/2678447?casa_token=XY_Q98F_AyQAAAAA%3AwAFqn3CinPzxidwr2UPOxfGLg9SGDgQHZ_6h3V_KkJ9JY5SQ05MOva2jKIlfDC3SlCHkdYeUKDNOcpGVND3zpwQCtdtVEyARaiMhwrva2QG5qbWwPR8&amp;seq=1#metadata_info_tab_contents">Coherence: The price of the ticket</a>. The Journal of Philosophy, 97(2), 82-93.</p>
+
+<p>Thagard, P. (1989). <a href="https://www.cambridge.org/core/journals/behavioral-and-brain-sciences/article/explanatory-coherence/E05CB61CD64C26138E794BC601CC9D7A">Explanatory coherence</a>. Behavioral and brain sciences, 12(3), 435-467.</p>
+
+<p>Thagard, P. (2000). Coherence in thought and action. MIT press.</p>
+
+<p>Thagard, P. (2003). <a href="https://www.tandfonline.com/doi/abs/10.1080/0269993024400002?casa_token=z0RH6mGSrDoAAAAA:szmDR7rJGsd_mQaPvSp3sFzwnjWEjCCs_U-y2FATZUamvcJLpN34jqINdQlN-p9155wi51J4c-bl">Why wasn’t OJ convicted? Emotional coherence in legal inference</a>. Cognition and emotion, 17(3), 361-383.</p>
+
+<p>Thagard, P. (2005). <a href="https://brill.com/view/journals/jocc/5/1-2/article-p58_3.xml">The emotional coherence of religion</a>. Journal of Cognition and Culture, 5(1-2), 58-74.</p>
+
+<p>Thagard, P. (2007). <a href="https://www.journals.uchicago.edu/doi/abs/10.1086/520941?casa_token=04ZmEvNXeT8AAAAA:6xzphVOxpaSx8-f64n-fu493FFnlLjYmZkcbjh55hZGSHXfUHFtPB9VCXrqGsG3xQwkASnY67ow">Coherence, truth, and the development of scientific knowledge</a>. Philosophy of science, 74(1), 28-47.</p>
+
+<p>Thagard, P. (2008). <a href="https://books.google.nl/books?hl=nl&amp;lr=&amp;id=tJV735_HoLAC&amp;oi=fnd&amp;pg=PR9&amp;ots=j0Xhg4JHXz&amp;sig=39hXZAOvkN886h-pDp2ixIBe57Y#v=onepage&amp;q&amp;f=false">Hot thought: Mechanisms and applications of emotional cognition</a>. MIT press.</p>
+
+<p>Thagard, P. (2012). <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.2041-6962.2011.00091.x?casa_token=z3hyGuAPj-EAAAAA:ptpEupaVT_6OuBAQ607Hgi9efhHySlq9jiMz0mxoDQlSssCQ4QoFxRpNDr-05NmfDx11ufjEeQqsIXY">Coherence: The price is right</a>. The Southern Journal of Philosophy, 50(1), 42-49.</p>
+
+<p>Thagard, P. (2018). <a href="https://journals.sagepub.com/doi/full/10.1177/2372732218782995?casa_token=Nq19Q3lFh4sAAAAA%3AQEraSsfWE6j3B0UFDwLkxt52_uMwS9xYYwV-9rxzXpk2I8kNUB-Le1aJmGngN3CGP4WkeOoKF1Y1">Social equality: Cognitive modeling based on emotional coherence explains attitude change</a>. Policy Insights from the Behavioral and Brain Sciences, 5(2), 247-256.</p>
+
+<p>Thagard, P. (2018). <a href="https://www.degruyter.com/document/doi/10.1515/9780691187303/html">How scientists explain disease</a>. Princeton University Press.</p>
+
+<p>Thagard, P. (2021). <a href="https://www.sciencedirect.com/science/article/pii/S104620232100075X?casa_token=MINX5tN_rPQAAAAA:WPSOZkiiPxJPci-GwsvEaeMjgXCDOH5_agSqT6wPyzi4F6lBiKhL11MysnMi8qSwk0kF14bv0Q">The cognitive science of COVID-19: Acceptance, denial, and belief change</a>. Methods.</p>
+
+<p>Thagard, P., &amp; Findlay, S. (2010). <a href="https://link.springer.com/chapter/10.1007/978-90-481-9609-8_14">Changing minds about climate change: Belief revision, coherence, and emotion.</a> In Belief revision meets philosophy of science (pp. 329-345). Springer, Dordrecht.</p>
+
+<p>Thagard, P., &amp; Verbeurgt, K. (1998). <a href="https://www.sciencedirect.com/science/article/pii/S0364021399800330">Coherence as constraint satisfaction</a>. Cognitive Science, 22(1), 1-24.</p>
+
+<p>van Rooij, I., &amp; Wareham, T. (2012). <a href="https://www.sciencedirect.com/science/article/pii/S002224961200048X">Intractability and approximation of optimization theories of cognition</a>. Journal of Mathematical Psychology, 56(4), 232-247.</p>
 
 
 <div class="nav-wrapper">
@@ -247,7 +341,7 @@ An activation pattern \(a: V \rightarrow \{-1,1 \}\) such that \(H(a) = \sum_{u,
 </div>
 
     </article>
-    <span class="print-footer">Coherence - September 15, 2021 - Mark Blokpoel and Iris van Rooij</span>
+    <span class="print-footer">Coherence - October 4, 2021 - Mark Blokpoel and Iris van Rooij</span>
     <footer>
   <hr class="slender">
   <ul class="footer-links">
