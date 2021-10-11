@@ -15,32 +15,46 @@ Blokpoel, 2018), and so we've focused on implementing computer simulations at
 the computational level.{% sidenote 'id-sn-realist' 'In other words, Formal and
 Verbal have no commitment to the cognitive plausibility of the algorithms
 underlying the simulation code. The simulation code is only a tool, not a
-theory.' %}  Of course, algorithmic-level theories do form an integral part of
-tri-level framework (see [Chapter 2 -
-Foundations](/lovelace/part_i/foundations)). In this chapter, we take a closer
-look at various relationships between computational- and algorithmic-level
-modeling. What motivates a modeler to consider algorithmic-level explanations?
-How do algorithmic-level models relate to computational-level models? And since
-this is a simulation chapter: How can we use computer simulations to scrutinize
-algorithmic-level theories for their (in)consistency with computational-level
-theory? We will use Coherence theory as a case study to address these questions.
+theory.' %}
 
-First, let's recap. At the computational level, we ask the question, 'what is
-the nature of the problem solved by the capacity?' An answer to this question
-comes in the form of a formally worked out input-output mapping. At the
-algorithmic level, we ask: 'how is the input-output mapping that characterizes
-the capacity computed?' An answer to this question comes in the form of a
-hypothesized algorithm, a step-by-step procedure computing the hypothesized
-mapping.
+Of course, algorithmic-level theories do form an integral part of tri-level
+framework (see [Chapter 2 - Foundations](/lovelace/part_i/foundations)) and
+we've briefly touched upon several algorithmic level theories for {% problem
+Coherence %} in [Chapter 5 - Coherence](/lovelace/part_ii/coherence). In this
+chapter, we take a closer look at various relationships between computational-
+and algorithmic-level modeling. What motivates a modeler to consider
+algorithmic-level explanations? How do algorithmic-level models relate to
+computational-level models? And since this is a simulation chapter: How can we
+use computer simulations to scrutinize algorithmic-level theories for their
+(in)consistency with computational-level theory? We will use Coherence theory as
+a case study to explore these questions.
+
+First, let's recap the levels of explanation.
+
+{% maincolumn 'assets/img/marr-sorting.svg' 'Illustration of Marr&apos;s levels
+of explanation from [Chapter 2 - Foundations](/lovelace/part_i/foundations). Any
+given function can be computed by different algorithms, and any given algorithm
+can be physically realized in different ways. This principle is illustrated for
+the sorting example.' %}
 
 {% question %}
 In your own words, what is the goal of computational level modeling? And what is
 the goal of algorithmic level modeling? Is one better than the other? Why (not)?
 {% endquestion %}
 
-Apart from the motivation to explain how the system is computing a particular
-function, there are other reasons why cognitive scientists move towards the
-algorithmic level. We discuss two.
+At the computational level, we ask the question, 'what is the nature of the
+problem solved by the capacity?' An answer to this question comes in the form of
+a formally worked out input-output mapping as you've learned in [Part
+II](/lovelace/content/part2). At the algorithmic level, we ask: 'how is the
+input-output mapping that characterizes the capacity computed?' An answer to
+this question comes in the form of a hypothesized algorithm, a step-by-step
+procedure computing the hypothesized mapping.
+
+The general motivation to explain how the system is computing a particular
+function is a valid reason to develop algorithmic-level theories. There are in
+practise also other (related) motivations for cognitive scientists to move
+towards the algorithmic level. We discuss two and what possible theoretical
+risks motivations bring.
 
 {% marginfigure 'id-mf-difficult' 'assets/img/thinking-difficult.jpg'
 'Computational-level thinking is often experienced as more difficult than
@@ -79,7 +93,7 @@ algorithmic level is known the computational level theory is prescribed. One
 can, in principle, derive a formal computational level theory from the
 algorithm. Barring the practical challenges in doing so, we also encounter
 another challenge here. Given a computational level theory, i.e., a function
-$$f$$, many alternative algorithms exist that compute the same function $$f$$ (see [Chapter 2 - Foundations](/lovelace/part_i/foundations)). 
+$$f$$, many alternative algorithms exist that compute the same function $$f$$ (see [Chapter 2 - Foundations](/lovelace/part_i/foundations)).
 
 
 
