@@ -42,28 +42,64 @@ In your own words, what is the goal of computational level modeling? And what is
 the goal of algorithmic level modeling? Is one better than the other? Why (not)?
 {% endquestion %}
 
-At the computational level, we ask the question, 'what is the nature of the
-problem solved by the capacity?' An answer to this question comes in the form of
-a formally worked out input-output mapping as you've learned in [Part
+Marr's (1984) levels provide different kinds of explanations. At the
+computational level, we ask the question, 'what is the nature of the problem
+solved by the capacity?' An answer to this question comes in the form of a
+formally worked out input-output mapping as you've learned in [Part
 II](/lovelace/content/part2). At the algorithmic level, we ask: 'how is the
 input-output mapping that characterizes the capacity computed?' An answer to
 this question comes in the form of a hypothesized algorithm, a step-by-step
-procedure computing the hypothesized mapping.
+procedure computing the hypothesized mapping. For example, a computational level
+theory may explain what computations need to be done to transform an acoustic
+signal into a word. An algorithmic level theory of the same phenomenon might be
+able to explain why some acoustic signals take longer to process than others in
+word recognition. Not one type of theory is 'better' than the other, though
+depending on one's research focus a particular level might be more relevant.
 
-The general motivation to explain how the system is computing a particular
-function is a valid reason to develop algorithmic-level theories. There are in
-practise also other (related) motivations for cognitive scientists to move
-towards the algorithmic level. We discuss two and what possible theoretical
-risks motivations bring.
+In the end, a full explanation of the capacity requires theories at all three of
+Marr's levels. In such a tri-level theory it is important there is internal
+consistency between the levels. Consistency means that the mapping computed at
+each level is equivalent:
+
+$$
+\begin{eqnarray}
+\text{Computational level } & f: I \rightarrow O\\
+\text{Algorithmic level } & A: I \rightarrow O\\
+\text{Implementational level } & P: I \rightarrow O\\
+\text{Consistency property } & \forall_{i \in I}f(i)=A(i)=P(i)
+\end{eqnarray}
+$$
+
+{% marginfigure 'id-mf-rocket' 'assets/img/water-rocket.jpg' 'The rocket
+algorithm is inconsistent with the computational-level function. It will not
+reach space. To be fair, [the water rocket world
+record](http://www.wra2.org/WRA2_Standings.php) is 830 meters, which is really
+impressive.<br/>Creative Commons license
+([source](http://www.uswaterrockets.com/construction_&_tutorials/Gardena_Launcher/tutorial.htm)).'
+%} When consistency is violated, the theories at each level give different
+predictions and they will have different properties. Sometimes, these
+differences are completely arbitrary. No guarantee exists that $$f$$, $$A$$ and
+$$P$$ are (even remotely) equivalent. Such algorithms are called *heuristics*
+relative to their computational level counterparts. Sometimes, a guarantee of
+*approximation* is possible. Different kinds of approximation are possible. We
+will come back to this later in this chapter. Regardless of the nature of the
+inconsistency, it is theoretically problematic to combine explanations that are
+not compatible. It would be like believing that your rocket can reach space
+($$f(energy, gravity)=height)$$), but the water-and-pressure-based exhaust can
+never generate enough energy. In this illustration, it might be easy to revise
+the computational level by *adding a constraint* on the energy input. In more complex theories, inconsistencies are harder to discover and correct.
+
+So how come inconsistencies between levels arise? We discuss two common
+causes.
 
 {% marginfigure 'id-mf-difficult' 'assets/img/thinking-difficult.jpg'
 'Computational-level thinking is often experienced as more difficult than
-algorithmic-level thinking' %} The first reason is that designing computational
-level theories is hard, especially if you do not have the appropriate training.
-While actual algorithm design is also far from trivial, the basic principles are
-easy to intuit. For many, it is more intuitive to describe cognitive capacities
-as a step-by-step process, rather than the abstract problem (function) that is
-being solved.
+algorithmic-level thinking' %} The first cause is moving to algorithmic level
+theory too early. Designing computational level theories is hard, especially if
+you do not have the appropriate training. While actual algorithm design is also
+far from trivial, the basic principles are easy to intuit. For many, it is more
+intuitive to describe cognitive capacities as a step-by-step process, rather
+than the abstract problem (function) that is being solved.
 
 ```
 1. first people pick a pizza topping they like
@@ -132,3 +168,5 @@ supplement the computational
 Blokpoel, M. (2018). [Sculpting computational-level models.](http://onlinelibrary.wiley.com/doi/10.1111/tops.12282/full) *Topics in Cognitive Science, 10*(3), 641-648.
 
 Cooper, R.P., & Guest, O. (2014). [Implementations are not specifications: Specification, replication and experimentation in computational cognitive modeling.](https://www.sciencedirect.com/science/article/abs/pii/S1389041713000314) *Cognitive Systems Research 27*, 42-49.
+
+Marr, D. (1982). *Vision: A computational investigation into the human representation and processing of visual information.* New York.
