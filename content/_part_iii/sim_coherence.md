@@ -21,7 +21,7 @@ Of course, algorithmic-level theories do form an integral part of tri-level
 framework (see [Chapter 2 - Foundations](/lovelace/part_i/foundations)) and
 we've briefly touched upon several algorithmic level theories for {% problem
 Coherence %} in [Chapter 5 - Coherence](/lovelace/part_ii/coherence). In this
-chapter, we take a closer look at various relationships between computational-
+chapter, we take a closer look at the relationship between computational-
 and algorithmic-level modeling. What motivates a modeler to consider
 algorithmic-level explanations? How do algorithmic-level models relate to
 computational-level models? And since this is a simulation chapter: How can we
@@ -42,24 +42,29 @@ In your own words, what is the goal of computational level modeling? And what is
 the goal of algorithmic level modeling? Is one better than the other? Why (not)?
 {% endquestion %}
 
-Marr's (1984) levels provide different kinds of explanations. At the
+{% marginnote 'mn-id-levels-example' 'For example, take word processing. A
+computational level theory may explain the nature of the transformation of an
+acoustic signal into a word. It may explain that the transformation has certain
+properties such as abstraction and ambiguity. An algorithmic level theory of the
+same phenomenon will explain what processing steps need to take place to compute
+the transition from signal into word. Such an account will be able to explain
+the order in which the sub-computations are executed. Is the acoustic signal
+first segregated and then processed by part, or is it processed as a whole?' %}
+Marr's (1982) levels provide different kinds of explanations. At the
 computational level, we ask the question, 'what is the nature of the problem
 solved by the capacity?' An answer to this question comes in the form of a
 formally worked out input-output mapping as you've learned in [Part
 II](/lovelace/content/part2). At the algorithmic level, we ask: 'how is the
 input-output mapping that characterizes the capacity computed?' An answer to
-this question comes in the form of a hypothesized algorithm, a step-by-step
-procedure computing the hypothesized mapping. For example, a computational level
-theory may explain what computations need to be done to transform an acoustic
-signal into a word. An algorithmic level theory of the same phenomenon might be
-able to explain why some acoustic signals take longer to process than others in
-word recognition. Not one type of theory is 'better' than the other, though
-depending on one's research focus a particular level might be more relevant.
+this question comes in the form of an algorithm: a step-by-step procedure
+computing the input-output mapping. Not one type of theory is &apos;better&apos;
+than the other and depending on one&apos;s research focus a particular level
+might be more relevant.
 
-In the end, a full explanation of the capacity requires theories at all three of
-Marr's levels. In such a tri-level theory it is important there is internal
-consistency between the levels. Consistency means that the mapping computed at
-each level is equivalent:
+In the end, however, a full explanation of the capacity requires theories at all
+three of Marr's levels. In such a tri-level theory it is important that there is
+internal consistency between the levels. Consistency means that the mapping
+computed at each level is equivalent:
 
 $$
 \begin{eqnarray}
@@ -76,18 +81,24 @@ reach space. To be fair, [the water rocket world
 record](http://www.wra2.org/WRA2_Standings.php) is 830 meters, which is really
 impressive.<br/>Creative Commons license
 ([source](http://www.uswaterrockets.com/construction_&_tutorials/Gardena_Launcher/tutorial.htm)).'
-%} When consistency is violated, the theories at each level give different
-predictions and they will have different properties. Sometimes, these
-differences are completely arbitrary. No guarantee exists that $$f$$, $$A$$ and
-$$P$$ are (even remotely) equivalent. Such algorithms are called *heuristics*
-relative to their computational level counterparts. Sometimes, a guarantee of
-*approximation* is possible. Different kinds of approximation are possible. We
-will come back to this later in this chapter. Regardless of the nature of the
-inconsistency, it is theoretically problematic to combine explanations that are
-not compatible. It would be like believing that your rocket can reach space
-($$f(energy, gravity)=height)$$), but the water-and-pressure-based exhaust can
-never generate enough energy. In this illustration, it might be easy to revise
-the computational level by *adding a constraint* on the energy input. In more complex theories, inconsistencies are harder to discover and correct.
+%} When consistency is violated, the theories at each level describe different
+input-output mappings and hence they will have different properties. Sometimes,
+these differences are completely arbitrary. In this case, no guarantee exists
+that $$f$$, $$A$$ and $$P$$ are (even remotely) equivalent. Such algorithms are
+called *heuristics* relative to their computational level counterparts.
+Sometimes, a guarantee of *approximation* is possible. Different kinds of
+approximation are possible. We will come back to this later in this chapter.
+Regardless of the nature of the inconsistency, it is theoretically problematic
+to combine explanations that are not consistent. It would be like thinking that
+your rocket can reach space ($$f(energy, gravity)=height)$$), but the
+water-and-pressure-based exhaust (the algorithm) can never generate enough
+energy. In this illustration, it might be easy to revise the computational level
+by *adding a constraint* on the energy input. In more complex theories,
+inconsistencies are harder to discover and correct. By understanding the
+possible cause of the inconsistencies, we will be in a better position to prevent
+or restore them.
+
+## Causing intra-level inconsistencies
 
 So how come inconsistencies between levels arise? We discuss two common
 causes.
@@ -95,13 +106,15 @@ causes.
 {% marginfigure 'id-mf-difficult' 'assets/img/thinking-difficult.jpg'
 'Computational-level thinking is often experienced as more difficult than
 algorithmic-level thinking' %} The first cause is moving to algorithmic level
-theory too early. Designing computational level theories is hard, especially if
-you do not have the appropriate training. While actual algorithm design is also
-far from trivial, the basic principles are easy to intuit. For many, it is more
-intuitive to describe cognitive capacities as a step-by-step process, rather
-than the abstract problem (function) that is being solved.
+theory too early, without a clear computational-level theory. Designing
+computational level theories is hard, especially if you do not have the
+appropriate training. While actual algorithm design is also far from trivial,
+the basic principles are easy to intuit. For many, it is more intuitive to
+(verbally) describe cognitive capacities as a step-by-step process, rather than
+the abstract problem (function) that is being solved.
 
 ```
+Subset Choice algorithm (pizza toppings example)
 1. first people pick a pizza topping they like
 2. then they pick a topping that goes well with it
 3. then as long as there are toppings
@@ -114,22 +127,30 @@ to be mindful of possible pitfalls. For example, while the algorithm above makes
 sense, what exactly is it computing? Is it computing the best possible
 combination of toppings? A good enough combination? Some random combination? By
 itself, the algorithm does not explain well what the nature is of the problem
-solved by the capacity.
+solved by the capacity. That is, it doesn't explain well the input-output
+mapping. Let's consider two possible reactions to this situation.
 
-There are two possible reactions to this situation. One can informally posit a
-computational level theory to go with the algorithmic level theory. As long as
-this remains a formal theory, however, there will be limits to it ability to
-explain the capacity due to the inherent ambiguity. In addition, we wouldn't
-know for sure if the algorithm is actually computing the verbal theory and we
-risk introducing inconsistencies between the theories.
+The first response we consider is that writing down a verbal computational level
+theory to go with the algorithmic level theory. As long as this remains a verbal
+theory, however, there will be limits to it ability to explain the capacity due
+to the inherent ambiguity. In addition, we wouldn't know for sure if the
+algorithm is actually computing the verbal theory and there is a high risk
+introducing inconsistencies between the theories.
 
-The other response takes formal computational levels serious from the get go.
-Arguing that, by the nature of the relationships between Marr's levels, once the
-algorithmic level is known the computational level theory is prescribed. One
-can, in principle, derive a formal computational level theory from the
-algorithm. Barring the practical challenges in doing so, we also encounter
-another challenge here. Given a computational level theory, i.e., a function
-$$f$$, many alternative algorithms exist that compute the same function $$f$$ (see [Chapter 2 - Foundations](/lovelace/part_i/foundations)).
+The second response argues that, by the nature of the relationships between
+Marr's levels, once the algorithmic level is known the computational level
+theory is prescribed. One can, in principle, derive a formal computational level
+theory from the algorithm, or even claim that the algorithm *is* the
+computational-level theory. There several theoretical challenges here. First,
+even though there is only one input-output mapping that exactly matches the
+algorithmic level theory, there are (infinitely) many ways to describe that
+mapping. For example, the same mapping could be described with a Bayesian
+formalism, but possibly also with a logic formalism.{% sidenote 'id-sn-formalism' 'Assuming that the formalisms are computationally equally expressive.' %} ...
+
+Given a computational level theory, i.e.,
+a function $$f$$, many alternative algorithms exist that compute the same
+function $$f$$ (see [Chapter 2 - Foundations](/lovelace/part_i/foundations) and
+the figure on sorting above).
 
 
 
