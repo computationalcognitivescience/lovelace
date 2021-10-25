@@ -21,13 +21,10 @@ Of course, algorithmic-level theories do form an integral part of tri-level
 framework (see [Chapter 2 - Foundations](/lovelace/part_i/foundations)) and
 we've briefly touched upon several algorithmic level theories for {% problem
 Coherence %} in [Chapter 5 - Coherence](/lovelace/part_ii/coherence). In this
-chapter, we take a closer look at the relationship between computational-
-and algorithmic-level modeling. What motivates a modeler to consider
-algorithmic-level explanations? How do algorithmic-level models relate to
-computational-level models? And since this is a simulation chapter: How can we
-use computer simulations to scrutinize algorithmic-level theories for their
-(in)consistency with computational-level theory? We will use Coherence theory as
-a case study to explore these questions.
+chapter, we take a closer look at the relationship between computational- and
+algorithmic-level modeling. Specifically, you will learn how to use computer simulations to
+scrutinize claims about (in)consistencies between algorithmic- and
+computational-level theories. We will use Coherence theory as a case study.
 
 First, let's recap the levels of explanation.
 
@@ -40,31 +37,41 @@ the sorting example.' %}
 {% question %}
 In your own words, what is the goal of computational level modeling? And what is
 the goal of algorithmic level modeling? Is one better than the other? Why (not)?
+
+{% hidden Hint %}
+Marr's (1982) levels provide different kinds of explanations.
+{% endhidden %}
+
+{% hidden Hint %}
+At the computational level, we ask the question, 'what is the nature of the
+problem solved by the capacity?' An answer to this question comes in the form of
+a formally worked out input-output mapping. At the algorithmic level, we ask:
+'how is the input-output mapping that characterizes the capacity computed?' An
+answer to this question comes in the form of an algorithm: a step-by-step
+procedure computing the input-output mapping.
+{% endhidden %}
+
+{% hidden Hint %}
+For example, take word processing. A computational level theory may explain the
+nature of the transformation of an acoustic signal into a word. It may explain
+that the transformation has certain properties such as abstraction and
+ambiguity. An algorithmic level theory of the same phenomenon will explain what
+processing steps need to take place to compute the transition from signal into
+word. Such an account will be able to explain the order in which the
+sub-computations are executed. Is the acoustic signal first segregated and then
+processed by part, or is it processed as a whole?
+{% endhidden %}
+
 {% endquestion %}
 
-{% marginnote 'mn-id-levels-example' 'For example, take word processing. A
-computational level theory may explain the nature of the transformation of an
-acoustic signal into a word. It may explain that the transformation has certain
-properties such as abstraction and ambiguity. An algorithmic level theory of the
-same phenomenon will explain what processing steps need to take place to compute
-the transition from signal into word. Such an account will be able to explain
-the order in which the sub-computations are executed. Is the acoustic signal
-first segregated and then processed by part, or is it processed as a whole?' %}
-Marr's (1982) levels provide different kinds of explanations. At the
-computational level, we ask the question, 'what is the nature of the problem
-solved by the capacity?' An answer to this question comes in the form of a
-formally worked out input-output mapping as you've learned in [Part
-II](/lovelace/content/part2). At the algorithmic level, we ask: 'how is the
-input-output mapping that characterizes the capacity computed?' An answer to
-this question comes in the form of an algorithm: a step-by-step procedure
-computing the input-output mapping. Not one type of theory is &apos;better&apos;
-than the other and depending on one&apos;s research focus a particular level
-might be more relevant.
-
-In the end, however, a full explanation of the capacity requires theories at all
-three of Marr's levels. In such a tri-level theory it is important that there is
-internal consistency between the levels. Consistency means that the mapping
-computed at each level is equivalent:
+It is good
+to realize that there is ongoing discussion about the explanatory contributions
+of the levels (see e.g. Peebles,  & Cooper, 2015). Here, we take the
+position that each level of explanation has a non-redundant explanatory
+contribution to make (Bechtel & Shagrir, 2015, Egan, 2017); and that in the end a full explanation of the capacity
+requires theories at all three of Marr's levels. Moreover, we acknowledge that in such a tri-level theory, it is important that there is internal
+consistency between the levels (Blokpoel, 2018). Consistency means that the
+mapping computed at each level is equivalent:
 
 $$
 \begin{eqnarray}
@@ -75,6 +82,9 @@ $$
 \end{eqnarray}
 $$
 
+
+## Reflections
+
 {% marginfigure 'id-mf-rocket' 'assets/img/water-rocket.jpg' 'The rocket
 algorithm is inconsistent with the computational-level function. It will not
 reach space. To be fair, [the water rocket world
@@ -83,14 +93,13 @@ impressive.<br/>Creative Commons license
 ([source](http://www.uswaterrockets.com/construction_&_tutorials/Gardena_Launcher/tutorial.htm)).'
 %} When consistency is violated, the theories at each level describe different
 input-output mappings and hence they will have different properties. Sometimes,
-these differences are completely arbitrary. In this case, no guarantee exists
-that $$f$$, $$A$$ and $$P$$ are (even remotely) equivalent. Such algorithms are
+these differences are completely arbitrary. In this case, no guarantee that the consistency property holds (i.e., that the functions computed by $$f$$, $$A$$ and $$P$$ are equivalent). Such algorithms are
 called *heuristics* relative to their computational level counterparts.
 Sometimes, a guarantee of *approximation* is possible. Different kinds of
 approximation are possible. We will come back to this later in this chapter.
 Regardless of the nature of the inconsistency, it is theoretically problematic
 to combine explanations that are not consistent. It would be like thinking that
-your rocket can reach space ($$f(energy, gravity)=height)$$), but the
+your rocket can reach space $$f(energy, gravity)=height)$$, but the
 water-and-pressure-based exhaust (the algorithm) can never generate enough
 energy. In this illustration, it might be easy to revise the computational level
 by *adding a constraint* on the energy input. In more complex theories,
@@ -184,10 +193,25 @@ However, in the cognitive science literature
 you will often find algorithmic-level theoretical claims in an attempt to
 supplement the computational
 
+## Further reading
+For example, it has been
+debated whether or not  each cognitive capacity has a computational level
+explanation (Marr, 1977).
+
+McClamrock, R. (1991). [Marr's three levels: A re-evaluation](https://link.springer.com/article/10.1007/BF00361036). *Minds and Machines, 1*(2), 185-196.
+
 ### References
 
 Blokpoel, M. (2018). [Sculpting computational-level models.](http://onlinelibrary.wiley.com/doi/10.1111/tops.12282/full) *Topics in Cognitive Science, 10*(3), 641-648.
 
 Cooper, R.P., & Guest, O. (2014). [Implementations are not specifications: Specification, replication and experimentation in computational cognitive modeling.](https://www.sciencedirect.com/science/article/abs/pii/S1389041713000314) *Cognitive Systems Research 27*, 42-49.
 
+Egan, F. (2017). *Function-theoretic explanation.* In Explanation and integration in mind and brain science (pp. 145-163). Oxford University Press.
+
+Marr, D. (1977). [Artificial intelligence—A personal view.](https://doi.org/10.1016/0004-3702(77)90013-3) *Artificial Intelligence 9*, 37-48.
+
 Marr, D. (1982). *Vision: A computational investigation into the human representation and processing of visual information.* New York.
+
+McClamrock, R. (1991). [Marr's three levels: A re-evaluation](https://link.springer.com/article/10.1007/BF00361036). *Minds and Machines, 1*(2), 185-196.
+
+Peebles, D. & Cooper, R.P. (2015). [Thirty years after Marr's Vision: Levels of analysis in Cognitive Science.](https://doi.org/10.1111/tops.12140) *Topics in Cognitive Science, 7*(2), i-iii, 185-381.
