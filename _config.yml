@@ -9,12 +9,18 @@ markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 permalink: /:collection/:name
 timezone: Europe/Amsterdam
 excerpt_separator: <!--more-->  # you can specify your own separator, of course.
-exclude: ['Gemfile', 'Gemfile.lock', 'Rakefile', 'UploadToGithub.Rakefile', 'README.md']
+exclude:
+  - 'Gemfile'
+  - 'Gemfile.lock'
+  - 'Rakefile'
+  - 'UploadToGithub.Rakefile'
+  - 'README.md'
+  - 'content/_part_iv'
+  - 'content/part4.md'
 
 plugins:
   - jekyll/scholar
   - jekyll-youtube
-  - jekyll-scalafiddle
 
 scholar:
   style: apa

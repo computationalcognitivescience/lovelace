@@ -5,6 +5,15 @@ chapter: 9
 nav_exclude: true
 ---
 
+<div class="warning" style='max-width: 55%;background-color:#DF7777; color: #000; border-left: solid #a00000 4px; border-radius: 4px; padding-right: 2em;'>
+<span>
+<p style='width: 100%;margin-top:1em; text-align:center'>
+<b>Interactive code offline</b></p>
+<p style='width: calc(100% - 1em);margin-left: 1em;'>
+Due to the discontinuation of <a href="https://www.scalafiddle.com">www.scalafiddle.com</a>, the code blocks in the book are currently not interactive. We regret the limitations this imposes and are working on a solution.
+</p></span>
+</div>
+
 Learning how to read and write code is quite similar to learning how to use math
 to formalise verbal theories. In this chapter we cover the basics of coding in
 Scala and ```mathlib```. Understanding Scala code might seem daunting at first,
@@ -33,11 +42,9 @@ The basic expressions in a functional programming language such as Scala are
 variables, functions and types. Variables, like their mathematical counterpart,
 are containers that can store a value.{% sidenote 'id-sn-value' 'Variable is not completely accurate terminology here. ```val``` stores a value which is (in functional programming terminology) immutable, i.e., it cannot change. It is more like a constant, rather than a variable. In this book, we will rarely use mutable ```var``` variables.' %} For example:
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val myNumber = 3
 ```
-{% endscalafiddle %}
 
 Let's break this example down into its parts. The word ```val``` tells the
 computer that you will specify a *value*, which is a container storing a
@@ -49,11 +56,9 @@ Any container in Scala has a *type*. For example, the value ```myNumber```
 above has type ```Int``` which stands for integer. Scala can often derive these
 types automatically, but for clarity you may want to use *explicit types*:
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val mySecondNumber: Int = 2
 ```
-{% endscalafiddle %}
 
 Types are helpful. They provide a safety net against programming mistakes
 since you cannot assign a value that is incompatible with the specified type.
@@ -61,16 +66,13 @@ Running the following code results in a ```type mismatch``` error and the
 compiler (i.e., the software that interprets and runs your code) will even tell
 you which type it expected and which type you provided.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val mySecondNumber: Int = 3.9
 ```
-{% endscalafiddle %}
 
 Functions allow us to write code that takes input, one or more *arguments*, and
 returns output. For example, addition $$add(x, y) = x+y$$ can be coded as:
 
-{% scalafiddle template="mathlib" %}
 ```scala
 def add(x: Int, y: Int): Int = {
   x + y
@@ -78,7 +80,6 @@ def add(x: Int, y: Int): Int = {
 
 add(3, 4)
 ```
-{% endscalafiddle %}
 
 The word ```def``` specifies that we are constructing a *function* with the
 *identifier* ```add```. The comma-separated list between parantheses is the list
@@ -99,7 +100,6 @@ the equation.
 {% endhidden %}
 {% endquestion %}
 
-{% scalafiddle template="mathlib" %}
 ```scala
 def equation(...): Int = {
   ???
@@ -107,19 +107,16 @@ def equation(...): Int = {
 
 equation(2, 5, -1) == -3    // Test the function, true if correct.
 ```
-{% endscalafiddle %}
 
 Functions in Scala have types too which becomes clearer with the following
 alternative notation.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 def add: (Int, Int) => Int = (x: Int, y: Int) => {
   x + y
 }
 add(3, 4)
 ```
-{% endscalafiddle %}
 
 This notation is not used often since it is hard to read, but it explicitly
 defines the function's type which is very similar to how we express function
@@ -169,11 +166,9 @@ These functions (also called *methods*) have access to the value they are called
 upon. The following example called method ```toUpperCase``` that evaluates to
 the upper-case version of the original string.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 "This is a String.".toUpperCase
 ```
-{% endscalafiddle %}
 
 {% marginnote 'mn-auto-complete' 'Auto-complete can be triggered with
 ```Ctrl-space``` or ```Cmd-space``` in Scalafiddle which we use in this book.
@@ -189,7 +184,6 @@ defined? In Scala a block is a sequence of expressions *delineated by curly
 brackets. A block has a value which is the value of the *last statement in the
 block.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 {
   val a = 3
@@ -197,13 +191,11 @@ block.
   a + b       // This block evaluates to 9 with type Int.
 }
 ```
-{% endscalafiddle %}
 
 Blocks can be nested, but values and functions defined within a block cannot
 be accessed outside that block. This property is known as scope, accessing
 values or functions out of scope results in a compiler error:
 
-{% scalafiddle template="mathlib" %}
 ```scala
 {
   val x = 3
@@ -216,7 +208,6 @@ values or functions out of scope results in a compiler error:
   x + y         // Invalid, y is outside this block's scope.
 }
 ```
-{% endscalafiddle %}
 
 ### Conditional
 
@@ -224,7 +215,6 @@ The *conditional* expression is more colloquially known as the if-then-else
 expression. It allows for branching paths of code, depending on the truth
 value of the conditional. An example (try changing the value of ```x```):
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val x = 4
 if(x % 2 == 0) {
@@ -233,22 +223,18 @@ if(x % 2 == 0) {
   println("X is odd.")
 }
 ```
-{% endscalafiddle %}
 
 Each part of the conditional consists of a code block, though for single
 expressions the curly brackets to simplify the code:
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val x = 4
 if(x % 2 == 0) println("X is even.")
 else println("X is odd.")
 ```
-{% endscalafiddle %}
 
 You can have an arbitrary number of branching paths using ```else if```:
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val x = 4
 if(x < 0) println("X is negative.")
@@ -256,7 +242,6 @@ else if(x == 0) println("X is zero.")
 else if(x <= 10) println("X is small.")
 else println("X is large.")
 ```
-{% endscalafiddle %}
 
 The conditional expression is a block with nested blocks. This means that it
 evaluates to the value of the last expression in the block that is evaluated
@@ -276,7 +261,6 @@ conditional tests for negative numbers. You need to distinguish two cases:
 {% endhidden %}
 {% endquestion %}
 
-{% scalafiddle template="mathlib" %}
 ```scala
 def abs(x: Int): Int = {
   ???
@@ -284,7 +268,6 @@ def abs(x: Int): Int = {
 
 abs(-10) == 10    // Test the function, true if correct.
 ```
-{% endscalafiddle %}
 
 
 ### Basic types
@@ -306,7 +289,6 @@ subtraction ```-```, multiplication ```*``` and division ```/```. The library
 ```Math``` also contains several useful functions which you can apply with the
 dot notation:
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val x: Double = 3
 val y: Double = 6
@@ -320,20 +302,16 @@ println(Math.pow(x, y))   // Exponentiation, x^y.
 println(Math.min(x, y))
 println(Math.max(x, y))
 ```
-{% endscalafiddle %}
 
 For Boolean types these are some common expressions:
-{% scalafiddle template="mathlib" %}
 ```scala
 println(true && true)   // Logical and.
 println(true || false)  // Logical or.
 println(true ^ true)    // Logical xor.
 println(!true)          // Negation.
 ```
-{% endscalafiddle %}
 
 And these can be combined with numbers like so:
-{% scalafiddle template="mathlib" %}
 ```scala
 val x: Double = 3
 val y: Double = 6
@@ -343,7 +321,6 @@ println(x % 2 == 0 || x > 0)      // Positive even number.
 println(x % 2 == 0 ^ y % 2 == 0)  // Either x or y is even, not both.
 println(!(x < 0))                 // x is positive.
 ```
-{% endscalafiddle %}
 
 If you change in the code example above ```Double``` to ```Int``` you might
 notice that there is a certain compatility between the two types. That is, the
@@ -355,33 +332,27 @@ Wikipedia](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)).'
 %} This is because Scala knows it can convert an integer to a double value, which
 it will automatically do.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val x: Int = 3
 val y: Double = 2.5
 x+y    // Evaluates to a Double value 5.5
 ```
-{% endscalafiddle %}
 
 Some types cannot be converted and when you try to mix these, the compiler will
 let you know with an error:
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val x: Int = 3
 val b: Boolean = true
 x + b    // How to add a Boolean to an Int?
 ```
-{% endscalafiddle %}
 
 This conversion also kicks in when calling a function with compatible arguments:
 
-{% scalafiddle template="mathlib" %}
 ```scala
 def add(a: Double, b: Double): Double = a +b
 add(1.4, 3)
 ```
-{% endscalafiddle %}
 
 {% question %}
 This conversion often only works one way. It is not possible to convert a Double
@@ -422,7 +393,6 @@ $$\text{Guadalupe}\}$$.
 In Scala we can store ordered collections in a ```List``` or tuple and unordered
 collections in a ```Set```:
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val forecast = List(22.2, 23.1, 23.7, 22.3, 24.3, 24.7, 25.1)
 val menuItem = ("Vegan pie", 9.90)
@@ -430,13 +400,11 @@ val people   = Set("Erik", "Lamar", "Angelica", "Emanuel", "Lorraine",
                    "Meghan", "Myron", "Erica", "Lester", "Javier", "Kelly",
                    "Abraham", "Lindsay", "Harriet", "Guadalupe")
 ```
-{% endscalafiddle %}
 
 We'll dive into sets below using the ```mathlib``` library, so let's first get
 some familiarity with lists. Some basic examples are in the code block below.
 Try playing around with them to see what they do.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val forecastThisWeek = List(22.2, 23.1, 23.7, 22.3, 24.3, 24.7, 25.1)
 val forecastNextWeek = List(22.3, 19.8, 18.4, 18.0, 17.6, 17.5, 17.2)
@@ -450,7 +418,6 @@ println(forecastThisWeek.tail)                  // Everything except the first e
 println(forecastThisWeek(3))                    // The n-th element.
 println(forecastThisWeek.isEmpty)               // Checks whether the list is emtpy.
 ```
-{% endscalafiddle %}
 
 The power of collections lies in being able to apply to all of the elements. The
 idea is that if we have a function that applies to one element, e.g., $$sq(x) =
@@ -466,7 +433,6 @@ evaluates to a list where each element computed using ```f```:
 |  | $$\downarrow$$ | $$\downarrow$$ | $$\downarrow$$ | $$\downarrow$$ |
 | ```list.map(sq)``` | ```1``` | ```4``` | ```9``` | ```16``` |
 
-{% scalafiddle template="mathlib" %}
 ```scala
 // Function that computes the square root of x.
 def sq(x: Int): Int = x * x
@@ -474,13 +440,11 @@ val list = List(1, 2, 3, 4)
 
 println(list.map(sq))
 ```
-{% endscalafiddle %}
 
 The type of the argument of the function must be the same type as the elements
 in the list, but its output can be of any type. For example, take an ```Int```
 and return a ```String```.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 // Function that creates a String with x "x"s.
 def xx(x: Int): String = {
@@ -491,12 +455,10 @@ val list = List(1, 2, 3, 4)
 
 println(list.map(xx))
 ```
-{% endscalafiddle %}
 
 What other useful things can we do with lists? Below are some self-explanatory
 examples.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 // Function that checks whether x is even.
 def isEven(x: Int): Boolean = {
@@ -511,10 +473,8 @@ println(list.forall(_ <= 100))  // Implicit function, does the list contain an e
 println(list.filter(isEven))    // Filter out all elements that return true for isEven.
 println(list.filter(_ < 3))     // Filter out all elements less than 3.
 ```
-{% endscalafiddle %}
 
 There are some special methods for lists that contain numbers:
-{% scalafiddle template="mathlib" %}
 ```scala
 // Function that checks whether x is even.
 val list = List(1, 2, 3, 4)
@@ -522,7 +482,6 @@ val list = List(1, 2, 3, 4)
 println(list.sum)             // The sum of all numbers in list.
 println(list.product)         // The product of all numbers in list.
 ```
-{% endscalafiddle %}
 
 Many of the functions and methods that work for lists, also work for other
 collections such as sets. Even a <code>String</code> can be treated as a
@@ -538,7 +497,6 @@ The list of (English) vowels is given. Write code that checks if the
 {% endhidden %}
 {% endquestion %}
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val sentence = "Hi, you're doing awesome!"
 val vowels   = List('a', 'e', 'i', 'o', 'u')
@@ -549,7 +507,6 @@ def consonant(character: Char): Boolean = {
 
 sentence.___(consonant)
 ```
-{% endscalafiddle %}
 
 ### Generics
 
@@ -575,12 +532,10 @@ doubles? No problem ```Set[Double]```. A list of Booleans? Easy
 ```Set[Boolean]```! The type of a collection also grants a level of protection
 to the programmer. You cannot prepend a Boolean to a list of integers:
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val forecast: List[Double]  = List(22.2, 23.1, 23.7, 22.3, 24.3, 24.7, 25.1)
 val forecast2: List[Double] = true :: forecast
 ```
-{% endscalafiddle %}
 
 If you could mix different (incompatible) types in a collection, performing
 calculations on that collection would be either undefined (e.g., what does
@@ -612,7 +567,6 @@ implements a formal theory and is easy to understand that it does what we say it
 does. Take a look at the following code implementing {% problem Pizza Toppings
 %}. (We assume toppings are represented by ```Strings```.)
 
-{% scalafiddle template="mathlib" %}
 ```scala
 def pizzaToppings(toppings: Set[String], budget: Int, cost: String => Int): Set[String] = {
   // Helper function to compute the cost of a subset of toppings.
@@ -632,7 +586,6 @@ def pizzaToppings(toppings: Set[String], budget: Int, cost: String => Int): Set[
     .getOrElse(Set.empty)       // If to random subset exists, return the emtpy set.
 }
 ```
-{% endscalafiddle %}
 
 This code example combines several expressions we covered earlier, but by
 breaking down the components it is relatively easy to show that the code
@@ -662,18 +615,15 @@ is within the set or ```false``` if it is not. The Scala code below creates the
 set $$P = \{\text{Ramiro},\text{Brenda},\text{Molly}\}$$, then tests if
 $$\text{Ramiro}\in P$$ and if $$\text{Saki}\in P$$.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val p: Set[String] = Set("Ramiro", "Brenda", "Molly")
 
 println("Ramiro" in p)
 println("Saki" in p)
 ```
-{% endscalafiddle %}
 
 Subset and superset expressions also evaluate to ```true``` or ```false```.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val animals = Set("cat", "cuttlefish", "turtle", "blue whale")
 val mammals = Set("cat", "blue whale")
@@ -682,12 +632,10 @@ val thingsOnEarth = Set("cat", "cuttlefish", "turtle", "blue whale", "university
 println(mammals < animals)        // Mammals is a subset of animals.
 println(thingsOnEarth > animals)  // Things on Earth is a superset of animals.
 ```
-{% endscalafiddle %}
 
 Intersection, union and difference evaluate to the correct super- or
 subset.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val yourFriends = Set("John", "Roberto", "Holly", "Doris", "Charlene")
 val myFriends =  Set("Vicky", "Charlene", "Ramiro", "Johnnie", "Roberto")
@@ -696,7 +644,6 @@ println(yourFriends /\ myFriends) // Common friends using intersection.
 println(yourFriends \/ myFriends) // Friends we know together using union.
 println(myFriends \ yourFriends)  // Who I know that you don't, using difference.
 ```
-{% endscalafiddle %}
 
 Before we look at set builder notation, consider the following. In formal
 theories, we often use set theoretic notation not as Boolean tests, but to
@@ -732,7 +679,6 @@ notation describes the set of all possible subsets that satisfy the budget
 constraint. Dealing second issue (multiple possible outputs), we make the
 decision to return a random valid output.
 
-{% scalafiddle template="mathlib" %}
 
 ```scala
 def pizzaToppings(toppings: Set[String], budget: Int, cost: String => Int): Set[String] = {
@@ -761,7 +707,6 @@ small-caps">Pizza Toppings</span> using set builder notation:
   { powerset(toppings) | subsetWithinBudget _ }.random.getOrElse(Set.empty)
 }
 ```
-{% endscalafiddle %}
 
 {% marginnote 'mn-id-multicode' 'You may have noticed this code is different
 from the example given at the start of this section. Similarly to multiple
@@ -780,7 +725,6 @@ Complete the code scaffold below such that the set builder expression evaluates
 to the subset of odd numbers in <code>numbers</code>.
 {% endquestion %}
 
-{% scalafiddle template="mathlib" %}
 ```scala
 // Function that checks if a number is odd.
 def isOdd(n: Int): Boolean = {
@@ -791,7 +735,6 @@ val numbers: Set[Int] = (0 to 11).toSet   // Set consisting of numbers 0 to 11
 
 { ___ | ___ }
 ```
-{% endscalafiddle %}
 
 
 The final expression for working with sets is the cardinal product $$\times$$. The
@@ -806,7 +749,6 @@ val pair: (Int, String) = (4, "Book")
 The type of a tuple combines the types of the elements. The cardinal product
 between two sets yields a set with the subtype of the tuple.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val numbers: Set[Int]  = Set(1, 2, 3, 4)
 val items: Set[String] = Set("Book", "Candle", "Wine")
@@ -815,7 +757,6 @@ val itemNumberPairs: Set[(String, Int)] = items x numbers
 
 println(itemNumberPairs)
 ```
-{% endscalafiddle %}
 
 
 ## Simulation architecture
@@ -893,7 +834,6 @@ the generators we provide.
 
 ## Cheat sheet
 
-{% scalafiddle template="mathlib" %}
 ```scala
 
 /**** BASIC TYPES ****/
@@ -974,7 +914,6 @@ println({ Set(0, 1, 2, 3, 4, 5) | isEven _ }) // Build a set of even numbers.
 
 println(myFriends x animals)      // Set of all pairs of friends and animals using cardinal product.
 ```
-{% endscalafiddle %}
 
 ### References
 
