@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Simulating in Scala</title>
-  <meta name="description" content="In Part II we have practiced formalizing verbal theories and we experienced that any verbal theory can be formalized in multiple ways. Sometimes the conseque...">
+  <meta name="description" content="Interactive code offlineDue to the discontinuation of www.scalafiddle.com, the code blocks in the book are currently not interactive. We regret the limitatio...">
 
   <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
   
@@ -47,9 +47,9 @@
   <link rel="stylesheet" type="text/css" href="/lovelace/css/tufte.css">
   <!-- <link rel="stylesheet" type="text/css" href="/lovelace/css/print.css" media="print"> -->
 
-  <link rel="canonical" href="/lovelace/part_iii/simulating">
+  <link rel="canonical" href="http://localhost:4000/lovelace/part_iii/simulating">
 
-  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="/lovelace/feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="http://localhost:4000/lovelace/feed.xml" />
 </head>
 
   <body>
@@ -92,12 +92,6 @@
   	
 		
 		    
-		      <a href="/lovelace/content/part4">IV - Advanced Topics</a>
-		    
-	    
-  	
-		
-		    
 		      <a href="/lovelace/css/print.css"></a>
 		    
 	    
@@ -115,6 +109,15 @@
       
 <h1>Chapter 8 - Simulating in Scala</h1>
 
+
+<div class="warning" style="max-width: 55%;background-color:#DF7777; color: #000; border-left: solid #a00000 4px; border-radius: 4px; padding-right: 2em;">
+<span>
+<p style="width: 100%;margin-top:1em; text-align:center">
+<b>Interactive code offline</b></p>
+<p style="width: calc(100% - 1em);margin-left: 1em;">
+Due to the discontinuation of <a href="https://www.scalafiddle.com">www.scalafiddle.com</a>, the code blocks in the book are currently not interactive. We regret the limitations this imposes and are working on a solution.
+</p></span>
+</div>
 
 <p>In <a href="/lovelace/content/part2">Part II</a> we have practiced formalizing verbal theories and we experienced that any verbal theory can be formalized in multiple ways. Sometimes the consequences of formalization choices are self-evident.<label for="mn-id-easy" class="margin-toggle sidenote-number"></label><input type="checkbox" id="mn-id-easy" class="margin-toggle" /><span class="sidenote">It is easy to understand that if there are only positive constraints, then setting all beliefs to true or false are the valid outputs for <span style="font-variant: small-caps;">Coherence</span>. </span> More often, however, deeper analysis is needed to uncover such consequences.<label for="mn-id-hard" class="margin-toggle sidenote-number"></label><input type="checkbox" id="mn-id-hard" class="margin-toggle" /><span class="sidenote">It is hard to understand the different consequences of interacting positive and negative constraints in <span style="font-variant: small-caps;">Coherence</span>. </span> Answering questions such as “Does it matter if I formalize this concept one way or another?”, “Are these two formalizations truly different, or are they equivalent?”, and “How would I be able tell different formalizations apart in terms of the behaviour that they predict?” provides important insight in the what theories can (or cannot) explain.</p>
 
@@ -168,8 +171,6 @@
 <h3 id="open-source-and-open-science">Open source and open science</h3>
 <p>Scala is open source. It is available free of charge and supported by an active community of developers from academia and industry. The principles outlined in this chapter lead to transparent, accessible and reproducible simulation code. These principles are not limited to Scala and we encourage users of other programming languages to apply them too.</p>
 
-<h2 id="installing-scala-and-mathlib">Installing Scala and <code class="language-plaintext highlighter-rouge">mathlib</code></h2>
-
 <h3 id="references">References</h3>
 
 <p>Guest, O., &amp; Martin, A. E. (2021). <a href="https://doi.org/10.1177/1745691620970585">How computational modeling can force theory building in psychological science.</a> <em>Perspectives on Psychological Science 16</em>(4),789-802.</p>
@@ -187,7 +188,7 @@
 </div>
 
     </article>
-    <span class="print-footer">Simulating in Scala - October 4, 2021 - Mark Blokpoel and Iris van Rooij</span>
+    <span class="print-footer">Simulating in Scala - September 13, 2022 - Mark Blokpoel and Iris van Rooij</span>
     <footer>
   <hr class="slender">
   <ul class="footer-links">
@@ -242,7 +243,7 @@
       
   </ul>
 <div class="credits">
-<span>&copy; 2021 &nbsp;&nbsp;MARK BLOKPOEL AND IRIS VAN ROOIJ</span></br> <br>
+<span>&copy; 2022 &nbsp;&nbsp;MARK BLOKPOEL AND IRIS VAN ROOIJ</span></br> <br>
 <span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
 </div>  
 </footer>
