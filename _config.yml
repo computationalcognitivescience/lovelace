@@ -21,7 +21,6 @@ exclude:
 plugins:
   - jekyll/scholar
   - jekyll-youtube
-  - jekyll-scalafiddle
 
 scholar:
   style: apa
