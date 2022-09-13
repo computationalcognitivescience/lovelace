@@ -5,6 +5,15 @@ chapter: 10
 nav_exclude: true
 ---
 
+<div class="warning" style='max-width: 55%;background-color:#DF7777; color: #000; border-left: solid #a00000 4px; border-radius: 4px; padding-right: 2em;'>
+<span>
+<p style='width: 100%;margin-top:1em; text-align:center'>
+<b>Interactive code offline</b></p>
+<p style='width: calc(100% - 1em);margin-left: 1em;'>
+Due to the discontinuation of <a href="https://www.scalafiddle.com">www.scalafiddle.com</a>, the code blocks in the book are currently not interactive. We regret the limitations this imposes and are working on a solution.
+</p></span>
+</div>
+
 In this chapter you will learn how to use computer simulations as a theoretical
 tool, namely to analyze the consequences different formalizations of verbal
 theories. To reach that goal, you will also learn how to read an implementation
@@ -57,50 +66,40 @@ you may find it helpful to first read [Chapter 9 - Scala and mathlib](/lovelace/
 ## Supporting code
 Running simulations requires input instances as specified by the theoretical model. While we could code input by hand, that is a lot of work. The beauty of using computer simulations is that it can do the hard work for us by *automatically* generating input. To that end, Formal has written supporting code. {% sidenote 'sn-id-helper' 'Supporting code is often written specifically for a domain. For example, [simulating Coherence](/lovelace/part_iii/sim_coherence) uses different support code.' %}
 
-For now, it is not important that you know how to write support code. However, in order to explore and adapt the code that Formal has provided, being able to *use* support code is recommended. Let's explore some examples. Remember that you can run (and adapt) the code in your browser using the <button style="background: rgba(255,255,255,0.6) !important;color: rgba(0, 0, 0, 0.6) !important;border-radius: 5px;border: 1px solid #ddd;font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;font-size: 14px;
-padding: 3px 8px;transition: all 350ms ease;"><img src="https://embed.scalafiddle.io/runicon.png" style="padding: 0;margin: 0 0 4px 0;vertical-align: middle;width: 16px;height: 16px;display: inline;">Run</button> button.
+For now, it is not important that you know how to write support code. However, in order to explore and adapt the code that Formal has provided, being able to *use* support code is recommended. Let's explore some examples.
 
 The theoretical models for selecting invitees (subset choice) take as input sets of persons and a function that for pairs of persons returns if they like eachother or not. The support code helps us generate these parts of the input.
 
 ### Persons
 A particular person is identified by their name, and can be defined by using ```Person(name: String)```. This function takes a string as input and returns a Person object with the given name:
 
-{% scalafiddle template="mathlib" %}
 ```scala
 Person("Jamie")
 ```
-{% endscalafiddle %}
 
 Persons with the same name are considered to refer to the same individual, since the computer cannot distinguish between them.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val person1 = Person("Jamie")
 val person2 = Person("Jamie")
 
 person1 == person2
 ```
-{% endscalafiddle %}
 
 We can also create random persons. Their names are randomly selected from a predefined list with 100 names. Running the code below multiple times will create different persons.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 Person.random
 ```
-{% endscalafiddle %}
 
 We can also generate groups of ```n``` random individuals.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 Person.randomGroup(5)
 ```
-{% endscalafiddle %}
 
 These functions will help us create sets of persons. We can then use ```mathlib``` to work with these sets as expected. For example, we can create a set of random persons $$P$$, randomly take 2 persons who are liked $$L$$, and create a set of persons who are disliked $$D=P \setminus L$$:  
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val persons = Person.randomGroup(5)
 val personsLiked = persons.take(2)            // Take 2 people from persons.
@@ -110,14 +109,12 @@ println(personsLiked)
 println(personsDisliked)
 println(persons)
 ```
-{% endscalafiddle %}
 
 ### Like-function
 The final support code Formal provided is used to create like relationships between persons. In the formal model this function is defined as $$like: P\times P \rightarrow \{true,false\}$$. After discussing with a colleague (see [Exercise X in Chapter 4](/lovelace/part_ii/subset#try-again)), Formal recognized that the like function was intended to exclude reflection (i.e., self-liking) and is symmetrical $$like(a,b)=like(b,a)$$ (i.e., it formalizes like or dislike *eachother*).{% sidenote 'sn-id-helper' 'The formalizations in this chapter are updated with these properties.' %}
 
 One could specify a like relationship manually. Simply create persons, store them in values so we can refer to them and then use ```likes``` or ```dislikes``` to create like relationships.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 val lela = Person("Lela")
 val carlos = Person("Carlos")
@@ -127,13 +124,13 @@ println(lela likes carlos)
 println(carlos dislikes ervin)
 println(carlos dislikes lela)
 ```
-{% endscalafiddle %}
 
 Specifying a *complete* like function for a set of persons, however, will be quite a chore: for each pair you need to explicate if $$a$$ likes $$b$$ and vice versa. For $$10$$ persons, that is a list of $$10 \cdot 10=100$$ likes. Support functions help us reduce this chore.
 
-{% marginnote 'mn-id-runbutton' 'The code snippet below is interleaved with explanation text. Pressing <button style="background: rgba(255,255,255,0.6) !important;color: rgba(0, 0, 0, 0.6) !important;border-radius: 5px;border: 1px solid #ddd;font-family: Lato,,Arial,Helvetica,sans-serif;font-size: 14px; padding: 3px 8px;transition: all 350ms ease;"><img src="https://embed.scalafiddle.io/runicon.png" style="padding: 0;margin: 0 0 4px 0;vertical-align: middle;width: 16px;height: 16px;display: inline;">Run</button> removes the explanation text to run the code. You can get the explanation back by reloading this webpage.' %} When given a partial specification of the like function, we can complete it by assuming that any non-specified relationship is a dislike. Use the support function ```.deriveLikeFunction(partialLikes: Set[Likes])``` on a set of persons to create a like function for which the domain consists of all pairs of persons (including $$(a,b)$$, $$(b,a)$$ and $$a,a$$). It will complete ```partialLikes``` by assuming non-specified relationships are dislikes.
+[//]: # ({% marginnote 'mn-id-runbutton' 'The code snippet below is interleaved with explanation text. Pressing <button style="background: rgba(255,255,255,0.6) !important;color: rgba(0, 0, 0, 0.6) !important;border-radius: 5px;border: 1px solid #ddd;font-family: Lato,,Arial,Helvetica,sans-serif;font-size: 14px; padding: 3px 8px;transition: all 350ms ease;"><img src="https://embed.scalafiddle.io/runicon.png" style="padding: 0;margin: 0 0 4px 0;vertical-align: middle;width: 16px;height: 16px;display: inline;">Run</button> removes the explanation text to run the code. You can get the explanation back by reloading this webpage.' %})
 
-{% scalafiddle template="mathlib" layout="v50" %}
+When given a partial specification of the like function, we can complete it by assuming that any non-specified relationship is a dislike. Use the support function ```.deriveLikeFunction(partialLikes: Set[Likes])``` on a set of persons to create a like function for which the domain consists of all pairs of persons (including $$(a,b)$$, $$(b,a)$$ and $$a,a$$). It will complete ```partialLikes``` by assuming non-specified relationships are dislikes.
+
 ```scala
 val lela = Person("Lela")
 val carlos = Person("Carlos")
@@ -156,11 +153,9 @@ List(
   like(carlos, ervin)
 )
 ```
-{% endscalafiddle %}
 
 While this approach is useful to manually explore small examples, it still is a lot of manual work. Wouldn't it be nice if we can generate a complete like function randomly? Use the support function ```.randomLikeFunction(probability: Double)``` on a set of persons to create a random like function. For each pair (including $$(a,b)$$, $$(b,a)$$ and $$a,a$$), it generates ```true``` with probability equal to the ratio or false otherwise.
 
-{% scalafiddle template="mathlib" layout="v50" minheight="700"%}
 ```scala
 val lela = Person("Lela")
 val carlos = Person("Carlos")
@@ -178,7 +173,6 @@ List(
   like(carlos, ervin)
 )
 ```
-{% endscalafiddle %}
 
 {% question %}
 What happens to the output of the like function when you change the probability?
@@ -189,7 +183,6 @@ Try changing the probability value (the input of the function ```randomLikeFunct
 
 A final example to illustrate how to generate a random input instance. An alternative visualization is used to indicate which persons are liked by the host or not. Note that generating a visualization graph with many persons will not display properly or potentially crash your browser due to the many relationships.
 
-{% scalafiddle template="mathlib" layout="v20" minheight="700"%}
 ```scala
 val persons = Person.randomGroup(5)
 val personsLiked = persons.take(2)
@@ -199,7 +192,6 @@ def like = persons.randomLikeFunction(0.7)
 
 Viz.render(persons.toDotString(personsLiked, personsDisliked, like))
 ```
-{% endscalafiddle %}
 
 
 {% question %}
@@ -269,7 +261,6 @@ $$L$$, $$D$$, $$like$$ and $$k$$) is listed as an argument of the function. The
 type of the output also needs to be defined. In this case the output is a subset
 $$G\subseteq P$$ of persons, translating to type ```Set[Person]```.
 
-{% scalafiddle template="mathlib" %}
 ```scala
 def si4(persons: Set[Person],
         personsLiked: Set[Person],
@@ -370,7 +361,6 @@ Then we simply evaluate ```si4(.)``` on this input.
 ```scala
 si4(group, personsLiked, personsDisliked, like, k = 2)
 ```
-{% endscalafiddle %}
 
 {% question %}
 Try to play around with the ratios of people that are liked by the host and the
@@ -411,7 +401,6 @@ $$G \subseteq P$$ such that $$|G\cap L| + |X| + |G|$$ is maximized (where $$X = 
 {% endfproblem %}
 
 
-{% scalafiddle template="mathlib", minheight="1000", layout="v45" %}
 ```scala
 def si5(persons: Set[Person],
         personsLiked: Set[Person],
@@ -455,14 +444,12 @@ Viz.render(group.toDotString(personsLiked, personsDisliked, like))
 
 si5(group, personsLiked, personsDisliked, like)
 ```
-{% endscalafiddle %}
 
 {% fproblem Selecting invitees (version 6) %}
 A set $$P$$, subsets $$L \subseteq P$$ and $$D \subseteq P$$ with $$L \cap D = \emptyset$$ and $$L \cup D = P$$, a function $$like: P \times P \rightarrow \{true, false\}$$, and a threshold value $$k$$.;;
 $$G \subseteq P$$ such that $$|Y| \leq k$$ and  $$|G\cap L|+|G|$$ is maximized (where $$Y = \{p_i,p_j \in G\}~|~like(p_i,p_j) = false \wedge i\neq j \}$$).
 {% endfproblem %}
 
-{% scalafiddle template="mathlib", minheight="1000", layout="v45" %}
 ```scala
 def si6(persons: Set[Person],
         personsLiked: Set[Person],
@@ -510,7 +497,6 @@ Viz.render(group.toDotString(personsLiked, personsDisliked, like))
 
 si6(group, personsLiked, personsDisliked, like, k = 2)
 ```
-{% endscalafiddle %}
 
 ### Analyzing and comparing formalizations
 
@@ -537,7 +523,6 @@ reminder, see [Supporting code](/lovelace/part_iii/sim_subset_choice#supporting-
 {% endhidden %}
 {% endquestion %}
 
-{% scalafiddle template="mathlib", minheight="1000", layout="v25" %}
 ```scala
 val group = Person.randomGroup(10)    // Generate random group
 val personsLiked = group.take(5)      // The first 5 are liked
@@ -553,7 +538,6 @@ println("Output SI6: " + SelectingInvitees.si6(group, personsLiked, personsDisli
 
 Viz.render(group.toDotString(personsLiked, personsDisliked, like))
 ```
-{% endscalafiddle %}
 
 For some inputs the formalizations might be equivalent, but for many others they
 are not. Next, try to answer the question: *How would you be able tell different
@@ -583,7 +567,6 @@ of the search space.
 {% endquestion %}
 
 
-{% scalafiddle template="mathlib", minheight="1000", layout="v30" %}
 ```scala
 // Generate inputs
 val inputData: List[SelectingInvitees.Input] =
@@ -661,7 +644,6 @@ Plot(List(trace24, trace25, trace26),
     xAxisTitle = "pair-wise like/dislike ratio",
     yAxisTitle = "average likes among invitees").render
 ```
-{% endscalafiddle %}
 
 The analysis and plotting functionality within the online Scala system is quite
 limited. If you want to explore the simulations more extensively consider
@@ -693,7 +675,6 @@ be possibly large. Table 2 lists the CSV format.
 
 </div>
 
-{% scalafiddle template="mathlib", minheight="1000", layout="v30" %}
 ```scala
 val groupSize = 6
 val likeDislikeRatios = Set(0, 0.22, 0.66, 1.0)
@@ -770,7 +751,6 @@ val csv = header + "%0A" + rows.mkString("%0A")
 
 Fiddle.print(a(href:=s"data:text/csv,$csv", target:="_blank", attr("download"):="data.csv", "Right click and Save link as..."))
 ```
-{% endscalafiddle %}
 
 ### References
 
