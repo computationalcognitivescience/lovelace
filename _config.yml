@@ -15,6 +15,7 @@ exclude:
   - 'Rakefile'
   - 'UploadToGithub.Rakefile'
   - 'README.md'
+  - '*.sh'
   - 'content/_part_iv'
   - 'content/part4.md'
 
