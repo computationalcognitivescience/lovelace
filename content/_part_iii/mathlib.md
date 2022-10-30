@@ -737,8 +737,8 @@ val numbers: Set[Int] = (0 to 11).toSet   // Set consisting of numbers 0 to 11
 ```
 
 
-The final expression for working with sets is the cardinal product $$\times$$. The
-cardinal product between two sets $$A$$ and $$B$$ returns a set with all
+The final expression for working with sets is the Cartesian product $$\times$$. The
+Cartesian product between two sets $$A$$ and $$B$$ returns a set with all
 possible pairs of elements in $$A$$ and $$B$$. Pairs, in Scala, are represented
 as tuples.
 
@@ -746,7 +746,7 @@ as tuples.
 val pair: (Int, String) = (4, "Book")
 ```
 
-The type of a tuple combines the types of the elements. The cardinal product
+The type of a tuple combines the types of the elements. The Cartesian product
 between two sets yields a set with the subtype of the tuple.
 
 ```scala
@@ -912,7 +912,7 @@ println(myFriends \ yourFriends)  // Who I know that you don't, using difference
 
 println({ Set(0, 1, 2, 3, 4, 5) | isEven _ }) // Build a set of even numbers.
 
-println(myFriends x animals)      // Set of all pairs of friends and animals using cardinal product.
+println(myFriends x animals)      // Set of all pairs of friends and animals using Cartesian product.
 ```
 
 ### References
