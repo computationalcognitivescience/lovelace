@@ -73,16 +73,16 @@ You can read this as '$$M$$ contains all $$a$$'s _with the property that_ $$a\in
 
 {% marginfigure fig-set-builder "assets/img/set-builder.svg" "Set builder." "75%" %}
 
-### Cardinal product
+### Cartesian product
 Set builder notation is useful to filter objects from a single set, but becomes very potent when building from multiple sets. For example:
 
 $$F=\{(p,a)~|~p\in P\text{ AND }a\in A\}$$
 
-{% marginfigure fig-cardinal-product "assets/img/set-cardinal.svg" "Cardinal product." "75%" %}
+{% marginfigure fig-cartesian-product "assets/img/set-cartesian.svg" "Cartesian product." "75%" %}
 
 Read this as '$$F$$ contains all pairs of $$p$$ and $$a$$ _with the property that_ $$p$$ is a person and $$a$$ is an animal'. Pairs are denoted in brackets. You can think of $$F$$ containing all possible combinations of person-animal pairs. For example, these are all the options you have when trying to guess what the favorite animals are of your friends.
 
-Many other set builders are possible too, but this specific 'pair builder' is called the _cardinal product_ of two sets. It is used often enough that it has its own special symbol: $$F=P\times A$$.
+Many other set builders are possible too, but this specific 'pair builder' is called the _Cartesian product_ of two sets. It is used often enough that it has its own special symbol: $$F=P\times A$$.
 
 ### Special sets
 Finally, there are some special sets which we often use that have their own symbols:
@@ -145,7 +145,7 @@ We can also give functions more complex domains by using set theory. What would 
 
 $$like_2:P\times P\rightarrow \mathbb{Z}$$
 
-The cardinal product $$P\times P$$ denotes all pairs of persons and $$like_2$$ maps pairs to an integer.
+The Cartesian product $$P\times P$$ denotes all pairs of persons and $$like_2$$ maps pairs to an integer.
 
 {% marginfigure fig-advanced-function "assets/img/fun-adv.svg" "Advanced function." "75%" %}
 
@@ -196,7 +196,7 @@ co-occur in text. Here, we consider relationships that are Boolean (e.g., you
 are friends or not) or numeric (e.g., distances). Graph theory allows us to
 express in abstract the set of elements $$V$$ called *vertices* and their
 relationships $$E$$ called *edges* which together make up a graph $$G=(V,E)$$.
-The set of edges is a subset of the cardinal product of the vertices
+The set of edges is a subset of the Cartesian product of the vertices
 $$E\subseteq V\times V$$. If there is a relationship between two vertices $$e\in
 V$$ and $$v\in V$$, then $$(u,v)\in E$$.
 
