@@ -78,6 +78,48 @@ We next cover some of the fascinating history of formal proofs, after which we i
 
 ## History of formal proofs
 
+Similarly to math and formal notation, the long history of formal proofs often is lost in the shadow of more recent (western) approaches. Yet, formal proofs, formal reasoning and logic have a long history dating back to hundrends of years BC all across the world such as China, India, Eqypt, Babylon, Ancient Greece and the Middle East. Even a short summary of this history would require volumes of books (REFS). Here, we highlight several important discoveries in the history of formal proofs so that we may appreciate that our current work is supported by a long tradition that spans millenia and many diverse cultures and people.
+
+
+### India
+In ancient India, the Buddhist Madhyamaka school used the catuṣkoṭi (Sanskrit), a way to systematically analyze a proposition $$P$$. It includes four mutually exclusive possibilities for $$P$$ (for a modern interpretation, see Jayatilleke, 1967):
+
+(1) $$P$$; that is, being.<br/>
+(2) not $$P$$; that is not being.<br/>
+(3) $$P$$ and not $$P$$; that is being and that is not being.<br/>
+(4) not ($$P$$ or not $$P$$); that is neither not being not is that being.
+
+The catuṣkoṭi is a logical tool, but its origins can be traced back even further to the Rig Vega (1500-1000 BC), an ancient collection of sūktas{% sidenote 'sn-id-hymm' 'Rig Veda, 10:129-6:<br/>
+नासदासीन्नो सदासीत्तदानीं नासीद्रजो नो व्योमा परो यत्।<br/>
+किमावरीवः कुह कस्य शर्मन्नम्भः किमासीद्गहनं गभीरम्॥१॥<br/>
+न मृत्युरासीदमृतं न तर्हि न रात्र्या अह्न आसीत्प्रकेतः।<br/>
+आनीदवातं स्वधया तदेकं तस्माद्धान्यन्न परः किं चनास॥२॥<br/>
+तम आसीत्तमसा गूळ्हमग्रेऽप्रकेतं सलिलं सर्वमा इदम्।<br/>
+तुच्छ्येनाभ्वपिहितं यदासीत्तपसस्तन्महिनाजायतैकम्॥३॥<br/>
+कामस्तदग्रे समवर्तताधि मनसो रेतः प्रथमं यदासीत्।<br/>
+सतो बन्धुमसति निरविन्दन् हृदि प्रतीष्या कवयो मनीषा॥४॥<br/>
+तिरश्चीनो विततो रश्मिरेषामधः स्विदासी३दुपरि स्विदासी३त्।<br/>
+रेतोधा आसन्महिमान आसन्त्स्वधा अवस्तात्प्रयतिः परस्तात्॥५॥<br/>
+को अद्धा वेद क इह प्र वोचत्कुत आजाता कुत इयं विसृष्टिः।<br/>
+अर्वाग्देवा अस्य विसर्जनेनाथा को वेद यत आबभूव॥६॥<br/>
+इयं विसृष्टिर्यत आबभूव यदि वा दधे यदि वा न।<br/>
+यो अस्याध्यक्षः परमे व्योमन्त्सो अङ्ग वेद यदि वा न वेद॥७॥<br/>
+'%}. The first verse, as translated by Kramer (1986) illustrates the origins of the catuṣkoṭi:
+{% epigraph 'There was neither non-existence nor existence then;<br/>
+Neither the realm of space, nor the sky which is beyond;<br/>
+What stirred? Where? In whose protection?<br/>' 'Nasadiya Sukta (Hymn of Creation), concerns the origin of the universe' 'Rig Veda, 10:129-6' %}
+
+### China
+
+
+
+
+### Middle East
+
+In the 9th century, the Islamic philosopher أبو نصر محمد الفارابي (Abu Nasr Muhammad al-Farabi) made major contributions to logic. He built on Greek works such as Aristotilian logic and the Stoic tradition. He argued that:
+{% epigraph 'Truth is found in answer and query, or jawab wa-su’al. In this, there is a mas’ul, one who is asked because he has promoted a thesis for which he is responsible, and there is a sa’il, an interrogator, who attempts to question this thesis.' 'أبو نصر محمد الفارابي' 'Paraphrased from Alwali (2018).' %}
+Among the many contributions to logic, he was the first to categorize the notion Takhayyul (idea), and Thubut (proof) in his book Ihsaal-ulum (Enumeration of the Sciences) (Alwali, 2018). 
+
 
 
 
@@ -92,3 +134,17 @@ We next cover some of the fascinating history of formal proofs, after which we i
 ### Proof by contradiction
 
 ### Other strategies
+
+
+### References
+
+<!-- Agrawala Vasudeva, Sharana (1983). Hymn of creation : Nāsadīya sūkta, Rgveda, X. 129. Prithivi Prakashan. -->
+
+Alwali, Abduljaleel (2018). Logic Functions in the Philosophy of Al-Farabi in Handbook of the 6th World Congress and School on Universal Logic.
+
+
+Jayatilleke, K. N. (1967). The Logic of Four Alternatives. Philosophy East and West, 17(1/4), 69–83. https://doi.org/10.2307/1397046
+
+Kramer, K. (1986). World Scriptures: An Introduction to Comparative Religions. Paulist Press. p. 21. ISBN 0-8091-2781-4.
+
+<!-- Walser, J. (2005). Nagarjuna in Context: Mahayana Buddhism and Early Indian Culture. Columbia University Press. [https://doi.org/10.7312/wals13164](https://doi.org/10.7312/wals13164) -->
