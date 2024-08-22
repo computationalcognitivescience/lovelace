@@ -82,14 +82,7 @@ Similarly to math and formal notation, the long history of formal proofs often i
 
 
 ### India
-In ancient India, the Buddhist Madhyamaka school used the catuṣkoṭi (Sanskrit), a way to systematically analyze a proposition $$P$$. It includes four mutually exclusive possibilities for $$P$$ (for a modern interpretation, see Jayatilleke, 1967):
-
-(1) $$P$$; that is, being.<br/>
-(2) not $$P$$; that is not being.<br/>
-(3) $$P$$ and not $$P$$; that is being and that is not being.<br/>
-(4) not ($$P$$ or not $$P$$); that is neither not being not is that being.
-
-The catuṣkoṭi is a logical tool, but its origins can be traced back even further to the Rig Vega (1500-1000 BC), an ancient collection of sūktas{% sidenote 'sn-id-hymm' 'Rig Veda, 10:129-6:<br/>
+{% marginnote 'sn-id-hymm' 'Rig Veda, 10:129-6:<br/>
 नासदासीन्नो सदासीत्तदानीं नासीद्रजो नो व्योमा परो यत्।<br/>
 किमावरीवः कुह कस्य शर्मन्नम्भः किमासीद्गहनं गभीरम्॥१॥<br/>
 न मृत्युरासीदमृतं न तर्हि न रात्र्या अह्न आसीत्प्रकेतः।<br/>
@@ -104,23 +97,49 @@ The catuṣkoṭi is a logical tool, but its origins can be traced back even fur
 अर्वाग्देवा अस्य विसर्जनेनाथा को वेद यत आबभूव॥६॥<br/>
 इयं विसृष्टिर्यत आबभूव यदि वा दधे यदि वा न।<br/>
 यो अस्याध्यक्षः परमे व्योमन्त्सो अङ्ग वेद यदि वा न वेद॥७॥<br/>
-'%}. The first verse, as translated by Kramer (1986) illustrates the origins of the catuṣkoṭi:
+'%}
+In ancient India, the Buddhist Madhyamaka school founded by नागार्जुन Nāgārjuna (Sanskrit) (c. 150 -- c. 250 CE) used the catuṣkoṭi (Sanskrit), a way to systematically analyze a proposition $$P$$. It includes four mutually exclusive possibilities for $$P$$ (for a modern interpretation, see Jayatilleke, 1967):
+
+(1) $$P$$; that is, being.<br/>
+(2) not $$P$$; that is not being.<br/>
+(3) $$P$$ and not $$P$$; that is being and that is not being.<br/>
+(4) not ($$P$$ or not $$P$$); that is neither not being not is that being.
+
+The catuṣkoṭi is a logical tool, but its origins can be traced back even further to the Rig Vega (1500-1000 BC), an ancient collection of sūktas. The first verse, as translated by Kramer (1986) illustrates the origins of the catuṣkoṭi:
 {% epigraph 'There was neither non-existence nor existence then;<br/>
 Neither the realm of space, nor the sky which is beyond;<br/>
 What stirred? Where? In whose protection?<br/>' 'Nasadiya Sukta (Hymn of Creation), concerns the origin of the universe' 'Rig Veda, 10:129-6' %}
 
 ### China
 
+In the Chinese 墨家 Mohist tradition founded by 墨翟 Mozi (c. 470 BC -- c. 391 BC) logic and argumentation are based on analogies rather than mathematical reasoning. In Mohism the concept of fa is a standard or model, in a broad sense (e.g., fa could be a role model such as a teacher). They used the three *fa* method for statements by which "the distinctions between 'this' and 'not' and benefit and harm...can be clearly known" (Book 35, "Rejecting Fatalism"; Fraser, 2023). 
+{% marginfigure 'mf-id-mozi' 'assets/img/Mozi.jpg' 'Text from 7th volume of Mozi (墨子卷之七).' %}
 
+(1) Does the statement have for precidence and origin?<br/>
+(2) Does the statement show a concern for empiricism?<br/>
+(3) Is the statement of consequence and pragmatic utility?
 
+It is important to realise that these methods for reasoning were used in philosophical, societal and political contexts. The three fa were used by the Mozi for the benefit of the people and society (Fraser, 2023).
+
+### Greece
+
+{% marginfigure 'mf-id-prior_analytics' 'assets/img/prior_analytics.jpg' 'Aristotle&#39;s Prior Analytics in Latin, 1290 circa, Biblioteca Medicea Laurenziana, Florence.' %}
+
+Perhaps most recognizable to western culture are the contributions to logic and mathematics by Greek scholars (between c. 520BC -- 200 BC) such as  Pythagoras, Plato and Aristotle. Aristotilian logic is believed to be the first attempt at formal logic with syntax and used variables to show the form of an argument independent of the matter. Aristotle defined a syllogism (an argument) in his book Prior Analytics as consisting of predicates and a conclusion (Aristotle, 1989):
+
+(1) Predicate: $$A$$ belongs to $$S$$ (e.g., <br/>
+(2) Predicate: $$A$$ is predicated of $$S$$<br/>
+(3) Conclusion: $$A$$ is said of $$S$$
+
+This formal system allowed Aristotle, for example, to deal with contradicitions in a systematic way (Bochenski, 1970).
 
 ### Middle East
 
-In the 9th century, the Islamic philosopher أبو نصر محمد الفارابي (Abu Nasr Muhammad al-Farabi) made major contributions to logic. He built on Greek works such as Aristotilian logic and the Stoic tradition. He argued that:
+{% marginfigure 'mf-id-al_farabi' 'assets/img/al_farabi.jpg' 'Pages from Maqala fi aghrad kitab Ma ba&#39;d al-tabi&#39;a (On the scope of Aristotle&#39;s Metaphysics) The Bodleian Library, University of Oxford, Shelfmark: MS. Arab. d. 84.'%}
+
+In the 9th century, the Islamic philosopher أبو نصر محمد الفارابي (Abu Nasr Muhammad al-Farabi) made major contributions to logic. He built on Greek works such as Aristotilian logic and the Stoic tradition. He argued that logic follows a dialogical structure:
 {% epigraph 'Truth is found in answer and query, or jawab wa-su’al. In this, there is a mas’ul, one who is asked because he has promoted a thesis for which he is responsible, and there is a sa’il, an interrogator, who attempts to question this thesis.' 'أبو نصر محمد الفارابي' 'Paraphrased from Alwali (2018).' %}
-Among the many contributions to logic, he was the first to categorize the notion Takhayyul (idea), and Thubut (proof) in his book Ihsaal-ulum (Enumeration of the Sciences) (Alwali, 2018). 
-
-
+Among the many contributions to logic, he was the first to categorize the notion of Takhayyul (idea), and of Thubut (proof) in his book Ihsaal-ulum (Enumeration of the Sciences) (Alwali, 2018).
 
 
 ## Formal proof strategies
@@ -142,9 +161,13 @@ Among the many contributions to logic, he was the first to categorize the notion
 
 Alwali, Abduljaleel (2018). Logic Functions in the Philosophy of Al-Farabi in Handbook of the 6th World Congress and School on Universal Logic.
 
+Bochenski, Joseph M. (1970). A History of Formal Logic. Chelsea Publishing Company.
+
+Fraser, Chris (2023). Mohism in The Stanford Encyclopedia of Philosophy, Edward N. Zalta, Uri Nodelman (eds.)[https://plato.stanford.edu/archives/fall2023/entries/mohism/](https://plato.stanford.edu/archives/fall2023/entries/mohism/)
 
 Jayatilleke, K. N. (1967). The Logic of Four Alternatives. Philosophy East and West, 17(1/4), 69–83. https://doi.org/10.2307/1397046
 
 Kramer, K. (1986). World Scriptures: An Introduction to Comparative Religions. Paulist Press. p. 21. ISBN 0-8091-2781-4.
 
+Aristotle (1989). Prior Analytics (Robin Smith, Trans.). (Original work work published c. 350BC)
 <!-- Walser, J. (2005). Nagarjuna in Context: Mahayana Buddhism and Early Indian Culture. Columbia University Press. [https://doi.org/10.7312/wals13164](https://doi.org/10.7312/wals13164) -->
