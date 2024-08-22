@@ -78,7 +78,7 @@ We next cover some of the fascinating history of formal proofs, after which we i
 
 ## History of formal proofs
 
-Similarly to math and formal notation, the long history of formal proofs often is lost in the shadow of more recent (western) approaches. Yet, formal proofs, formal reasoning and logic have a long history dating back to hundrends of years BC all across the world such as China, India, Eqypt, Babylon, Ancient Greece and the Middle East. Even a short summary of this history would require volumes of books (REFS). Here, we highlight several important discoveries in the history of formal proofs so that we may appreciate that our current work is supported by a long tradition that spans millenia and many diverse cultures and people.
+Similarly to math and formal notation, the long history of formal proofs often is lost in the shadow of more recent (western) approaches. Yet, formal proofs, formal reasoning and logic have a long history dating back to hundrends of years BC all across the world such as China, India, Eqypt, Babylon, Ancient Greece and the Middle East. Even a short summary of this history would require volumes of books. Here, we highlight several important discoveries in the history of formal proofs so that we may appreciate that our current work is supported by a long tradition that spans millenia and many diverse cultures and people.
 
 
 ### India
@@ -144,15 +144,92 @@ Among the many contributions to logic, he was the first to categorize the notion
 
 ## Formal proof strategies
 
+Something about proof intuition.
+
 
 ### Proof by illustration
+
+In the example from the Introduction we showed how a proof by illustration can be used to prove that any list with two or more times the same number cannot be sorted, when 'sort' is defined as the next number being strictly greater than the one before. In general, proof by illustration is useful to prove a statement some property $$P$$ holds for *all* cases or for *some* cases. For example, in the illustration we claimed that all possible lists can be sorted (formally: $$\forall_{l\in L}\text{canBeSorted}(l)$$). Another example statement could be that some lists cannot be sorted (formally: $$\exists_{l\in L}\neg\text{canBeSorted}(l)$$). Proof by illustration can prove two things:
+
+
+(1) The falsity of universal statement $$U\equiv\forall_x P(x)$$; prove that $$U$$ is false by giving one case $$x$$ for which $$P$$ is false<br/>
+(2) The truth of existential statement $$E\equiv\exists_x P(x)$$; prove that $$E$$ is true by giving one case $$x$$ for which $$P$$ is true
+
+We've seen an illustration of (1) in the example in the Introduction. What about the option (2)? We can apply proof by illustration to the existential statement that some lists cannot be sorted (formally: $$\exists_{l\in L}\neg\text{canBeSorted}(l)$$), given the formalization of sorting in the Introduction.
+
+{% stopandthink %}
+Can you think of an example list that cannot be sorted?
+{% hidden Hint? %}
+Its the same illustration that proved the universal statement is false. Can you explain why?
+{% endhidden %}
+{% endstopandthink %}
 
 
 ### Direct proof
 
+A direct proof consists of building an argument with a particular structure, namely a sequence of statements that themselves are either axiomatic (foundational), assumed to be true, or follow logically from an earlier statement. The final statement in this sequence is the statement we want to prove to be true. In a sense, a proof by illustration is a strategy that can be used in a direct proof. Let's make the second proof in the Introduction a bit more formal. In the proof sketch we implicitly assumed formal definition of sorting, we assumed the illustration list, then we showed that the conclusion must follow from the definition and the illustration. More formally, this could be written as the following sequence of statements:
+
+(1) **Assume:** <span style="font-variant:small-caps;">Sorting (formal)</span>;<br/>
+(2) **Assume:** $$L=\langle 6,3,1,3\rangle$$;<br/>
+(3) **Infer:** From 1 and 2 that the sorted list must be in the set of all possible permutations of $$L$$;<br/>
+(4) **Infer:** From 1 and 3 that each permutation must contain a pair of the same number $$n_i, n_j \in L$$, where $$n_i=n_j$$;<br/>
+(5) **Infer:** From 1 that the only place in the output $$L'$$ to place $$n_i$$ and $$n_j$$, is next to each other;<br/>
+(6) **Infer:** From 1 that for the list to be sorted, the numbers before $$n_i$$ should be ordered and the numbers after $$n_j$$ should also be ordered: $$L'=\langle n_1, n_2, \dots, n_i, n_j, \dots, n_p\rangle$$;<br/>
+(7) **Infer:** From 1, 5 and 6 that the list $$L=\langle 6,3,1,3\rangle$$ cannot be sorted, because $$n_i\nless n_j$$ and $$n_j\nless n_i$$;<br/>
+(8) **Conclude:** From 5, 6 and 7 that that any list that contains a number twice cannot be sorted.
+
+In a direct proof, one can use any formally sound inference to infer a statement. However, as illustrated in the Introduction, proof sketches can already be convincing. A further formal analysis such as the sequence above may help to further sharpen one's proof.
+
+Let's also look at an example of a direct proof that is not by illustration. Consider the following formalization, a classical graph problem from computer science:
+
+{% marginfigure 'mn-fig-vc-ill' 'assets/img/vertex_cover_illustration.svg' 'An example instance of <span style="font-variant:small-caps;">Vertex Cover</span>, with vertex set $$V = \{A, B, C, D, E \}$$. $$A$$ is shown to cover edges $$(A, B), (A, C), (A, D)$$.' %}
+{% fproblem Vertex Cover %}
+A graph $$G=(V, E)$$.;;
+An subset of vertices $$V'\subseteq V$$ such that each edge $$e\in E$$ is *covered*. Here, $$e=(u, v)$$, and being covered means that either $$u\in V'$$ or $$v\in V'$$.
+{% endfproblem %}
+
+
+{% question %}
+Can you complete the vertex cover in the figure?
+{% hidden Possible solution: %}
+There are several solutions possible. Here is a possible solution:<br/>
+<img src="/lovelace/assets/img/vertex_cover_solution.svg" />
+{% endhidden %}
+{% endquestion %}
+
+{% stopandthink %}
+Take your solution or the one from above and flip the selected vertices, i.e., if a vertex is red make it white and vice versa. Formally, you are taking the complement of $$V'$$. What do you observe? Why is this the case?
+{% hidden Hint? %}
+Look at the edges between the vertices that are now red in the complement of $$V'$$.
+{% endhidden %}
+{% endstopandthink %}
+
+The vertices in the complement of a vertex cover $$V'$$ have no edges between them, i.e., they are what is called an indepentent set. Can we prove this using a direct proof?
+
+(1) **Assume:** <span style="font-variant:small-caps;">Vertex Cover</span>;<br/>
+(2) **Assume:** An indepentent set is a set of vertices that have no edges between them;<br/>
+(3) **Assume:** The complement of a subset $$V'\subseteq V$$ contains all the other elements in the set $$V\setminus V'$$;<br/> 
+(4) **Infer:** From 1 that an edge is covered if one or more of its vertices is in $$V'$$;<br/>
+(5) **Infer:** From 4 that an edge will.. 
+
+and 3 that if all edges $$E$$ have at least one vertex in the cover $$V'$$, then the cover ;<br/>
+...<br/>
+(N) **Conclude:** The vertices in the complement of a vertex cover $$V'$$ have no edges between them, i.e., they are what is called an indepentent set.
+
 ### Proof by contradiction
 
-### Other strategies
+Is an indirect proof, by assuming the negation of the conclusion, then prove a contradictory statement.
+
+
+### Proof by contraposition
+
+(1) Assume: <span style="font-variant:small-caps;">Sorting (formal)</span>;<br/>
+(2) Assume: $$L=\langle 6,3,1,3\rangle$$;<br/>
+(3) Infer: From 1 and 2 that the sorted list must be in the set of all possible permutations of $$L$$;<br/>
+(4) Infer: From 1, 2 and 3 that none of the permutations satisfy the sorting condition;<br/>
+(5) Infer: From 4 that hence there exists a list that cannot be sorted, namely $$L=\langle 6,3,1,3\rangle$$;<br/>
+(6) Conclude: The statement "any list of numbers $$L$$ can be sorted" is false.
+
 
 
 ### References
