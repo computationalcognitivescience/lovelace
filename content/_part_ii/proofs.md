@@ -142,9 +142,9 @@ In the 9th century, the Islamic philosopher أبو نصر محمد الفارا�
 Among the many contributions to logic, he was the first to categorize the notion of Takhayyul (idea), and of Thubut (proof) in his book Ihsaal-ulum (Enumeration of the Sciences) (Alwali, 2018).
 
 
-## Formal proof strategies
+## Proof strategies
 
-Something about proof intuition.
+Rarely do we come up with proofs in the exact formal structure that we write them down. Often, proofs start with intuitions as shown in the example from the introduction. It takes experience and practise to sharpen your intuitions. The next three sections illustrate three common proof strategies with several examples and exercises to help you built your intuitions. Unfortunately, there is no procedure we can teach you to derive a proof. If we could, then finding formal proofs could be efficiently automated, whereas finding proofs is intractable or worse uncomputable.{% sidenote 'sn-id-finding_proofs' 'Intractable means that is takes astronomical resources to compute for all but the smallest cases. E.g., sorting is tractable and can be efficiently computed, but finding a proof could take more time than the age of the universe. If something is uncomputable it means with no amount of resources can it be computed, it is fundamentally impossible.' %}
 
 
 ## Proof by illustration
@@ -198,13 +198,22 @@ Direct proofs need not be arithmetic, they can be applied to other mathematical 
 (3) **Conclude:** From 1 $$r$$ and 2 $$r\rightarrow a$$ we infer $$a$$, we appreciate you.{% sidenote 'sn-id-appreciate' 'Just to be sure, this does not prove that we do not appreciate people who do not read our book. Although they will never read this.' %}
 
 
-## Proof by contradiction
+## Indirect proof
 
-Is an indirect proof, by assuming the negation of the conclusion, then prove a contradictory statement. 
+You may have wondered that if a direct proof exist, then what is an indirect proof? Indirect proofs do not go straight from assumptions to conclusions, but rather prove a statement in a different manner. There are several indirect proof strategies, here we illustrate one: Proof by contradiction.
 
+In logical inference, contradictions are not allowed. Something cannot be true and false at the same time. For example, I cannot be alive and dead at the same time. Anytime that a proof (which formally follows logical inference) leads to a contradiction, we have to conclude that one of our assumptions was incorrect and the opposite must hold. If we want to prove $$P$$ is true, then in a proof by contradiction we start by assuming not $$P$$. Intuitively, this looks like this:
 
+Say we want to prove $$P$$: We appreciate some people. We prove by contradiction and hence assume not $$P$$: There are not some people we appreciate, i.e., we do not appreciate all people. We also assume, like before, that we appreciate readers of our book and that you are reading our book. Now we have a contradiction, we do not appreciate you because we do not appreciate all people, but we appreciate you because you read our book. Hence, we must conclude that our assumption of not $$P$$ is incorrect and we have to accept that we appreciate some people.
 
+If we want to write this down in a list of statements, it would look like this:
 
+(1) **Assume:** We do not appreciate some people $$\neg\exists_{p\in P}\text{appreciate}(p)$$ which is equivalent{%sidenote 'sn-id-quantifier' 'The negation of the existential quantifier is equivalent to the universal quantifier with the negated proposition: If there are no people that we appreciate, we must not appreciate all people.' %} to we do not appreciate all people $$\forall_{p\in P}\neg\text{appreciate}(p)$$;<br/>
+(2) **Assume:** Predicate $$r \rightarrow a$$: If you are a reader of our book, we appreciate you;<br/>
+(3) **Assume:** Proposition $$r$$: You are a reader of our book;<br/>
+(4) **Infer:** From 1 $$r$$ and 2 $$r\rightarrow a$$ we infer $$a$$, we appreciate you;<br/>
+(5) **Contradiction:** 1 and 4 are in contradiction, we both appreciate and not appreciate you;<br/>
+(6) **Conclusion:** From 5 we conclude that the assumption in 1 must be incorrect, and we accept its opposite: We appreciate some people $$\exists_{p\in P}\text{appreciate}(p)$$.
 
 ### Proof by contradiction example
 
@@ -219,7 +228,7 @@ An subset of vertices $$V'\subseteq V$$ such that all edges $$e\in E$$ are *cove
 
 {% question %}
 Can you complete the vertex cover in the figure?
-{% hidden Possible solution: %}
+{% hidden Possible answer: %}
 There are several solutions possible. Here is a possible solution, can you find another solution?<br/>
 <img src="/lovelace/assets/img/vertex_cover_solution.svg" />
 {% endhidden %}
@@ -233,36 +242,31 @@ Look at the edges between the vertices that are now red in the complement of $$V
 {% endhidden %}
 {% endstopandthink %}
 
-The vertices in the complement of a vertex cover $$V'$$ have no edges between them, i.e., they are what is called an indepentent set. Can we prove that the complement set of a vertex cover is an indepentent set using a direct proof?
+The vertices in the complement of a vertex cover $$V'$$ have no edges between them, i.e., they are what is called an indepentent set. Can we prove that the complement set of a vertex cover is an indepentent set using a proof by contradiction? Let's start by assuming some definitions:
 
-(1) **Assume:** <span style="font-variant:small-caps;">Vertex Cover</span>;<br/>
+(1) **Assume:** <span style="font-variant:small-caps;">Vertex Cover</span> and a cover $$V'$$;<br/>
 (2) **Assume:** An indepentent set is a set of vertices that have no edges between them in graph $$G$$;<br/>
-(3) **Assume:** The complement of a subset $$V'\subseteq V$$ contains all the other elements in the set $$V\setminus V'$$;<br/> 
-(4) **Infer:** From 1 that an edge is covered if one or more of its vertices is in $$V'$$;<br/>
-(5) **Infer:** From 4 there two options:<br/>
-Option 1: Both $$u$$ and $$v$$ are in the vertex cover, and none of them are in the complement set. We do not have to argue this is an independent set, for there is no set.<br/>
-Option 2: Either $$u$$ *or* $$v$$ is in the vertex cover. Let's say $$u$$ is in the cover and covers one or more edges. From 3 we infer that $$v$$ must be in the complement. 
+(3) **Assume:** The complement of a subset $$A\subseteq V$$ contains all the other elements in the set $$A^C=V\setminus A$$;
 
-...<br/>
-(N) **Conclude:** The vertices in the complement of a vertex cover $$V'$$ have no edges between them, i.e., they are what is called an indepentent set.
+Then we assume the opposite of what we want to prove, namely that the complement of a vertex cover is not an independent set. That means we assume that there is an edge between at some pair of vertices in the complement.
+
+(4) **Assume:** The negation of what we want to prove, namely that the complement $$V'^C$$ of a vertex cover $$V'$$ has at least one edge between a pair of vertices $$(u,v)\in V'^C$$;<br/>
+
+(5) **Infer:** From 4 we infer that if $$u$$ and $$v$$ are in the complement set, then they were both not in the vertex cover;<br/>
+
+(6) **Infer:** From 5 we infer that if $$u$$ and $$v$$ were not in the vertex cover, then the edge $$(u,v)$$ is not covered;
 
 {% question %}
-Can you complete the proof that the complement of a vertex cover is an independent set? Complete the argument for Option 2, what can you infer about all the edges connected to $$u$$?
-{% hidden Possible solution: %}
-
+At this point in the proof, we arrive at a contradiction. What is the contradiction? How do you infer it from 1 and 6?
+{% hidden Hint? %}
+A valid vertex cover by definition must cover *all* edges.
+{% endhidden %}
+{% hidden Answer: %}
+(7) **Contradiction:** The edge $$(u,v)$$ is both in $$V'$$ according to 1 and not in $$V'$$ according to 6.
 {% endhidden %}
 {% endquestion %}
 
-
-## Proof by contraposition
-
-(1) Assume: <span style="font-variant:small-caps;">Sorting (formal)</span>;<br/>
-(2) Assume: $$L=\langle 6,3,1,3\rangle$$;<br/>
-(3) Infer: From 1 and 2 that the sorted list must be in the set of all possible permutations of $$L$$;<br/>
-(4) Infer: From 1, 2 and 3 that none of the permutations satisfy the sorting condition;<br/>
-(5) Infer: From 4 that hence there exists a list that cannot be sorted, namely $$L=\langle 6,3,1,3\rangle$$;<br/>
-(6) Conclude: The statement "any list of numbers $$L$$ can be sorted" is false.
-
+(8) **Conclude:** From 7 we must conclude that one of our assumptions is incorrect. Assumptions 1, 2, and 3 are foundational (i.e., definitions), so we reject 4 and conclude that the complement of a vertex cover must be an independent set.
 
 
 ### References
