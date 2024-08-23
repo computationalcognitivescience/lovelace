@@ -167,7 +167,7 @@ Its the same illustration that proved the universal statement is false. Can you 
 
 ## Direct proof
 
-A direct proof consists of building an argument with a particular structure, namely a sequence of statements that themselves are either axiomatic (foundational), assumed to be true, or follow logically from an earlier statement. The final statement in this sequence is the statement we want to prove to be true. In a sense, a proof by illustration is a strategy that can be used in a direct proof. Let's make the second proof in the Introduction a bit more formal. In the proof sketch we implicitly assumed formal definition of sorting, we assumed the illustration list, then we showed that the conclusion must follow from the definition and the illustration. More formally, this could be written as the following sequence of statements:
+A direct proof consists of building an argument with a particular structure, namely a sequence of statements that themselves are either axiomatic (foundational), assumed to be true, or follow logically from an earlier statement. The final statement in this sequence is the statement we want to prove to be true. In a sense, a proof by illustration is a strategy that can be used in a direct proof. Let's make the second proof in the Introduction a bit more formal. In the proof sketch we implicitly assumed formal definition of sorting, we assumed the illustration list, then we showed that the conclusion must follow from the definition and the illustration. We can structure this as the following sequence of statements{% sidenote 'sn-id-narrative' 'We use the list structure here for pedagogical reasons, to convey the structure of a direct proof. In practise, formal proofs are more often written in narrative form, ideally supported with figures and examples.' %}:
 
 (1) **Assume:** <span style="font-variant:small-caps;">Sorting (formal)</span>;<br/>
 (2) **Assume:** $$L=\langle 6,3,1,3\rangle$$;<br/>
@@ -180,9 +180,35 @@ A direct proof consists of building an argument with a particular structure, nam
 
 In a direct proof, one can use any formally sound inference to infer a statement. However, as illustrated in the Introduction, proof sketches can already be convincing. A further formal analysis such as the sequence above may help to further sharpen one's proof.
 
-### Direct proof example
+### Direct proof examples
 
-Let's also look at an example of a direct proof that is not by illustration. Consider the following formalization called <span style="font-variant:small-caps;">Vertex Cover</span>, a classical graph problem from computer science. A vertex cover takes as input a graph and outputs a subset of vertices that *covers* all edges.
+Let's review another direct proof, one that is not a proof by illustration. Consider the statement: "The square of an odd integer $$n\in \mathbb{N}$$ is odd."
+
+(1) **Assume:** An integer $$n$$ is odd if $$n=2\cdot k + 1$$, for some integer $$k$$;<br/>
+(2) **Assume:** The square of $$n$$ is $$n^2=n\cdot n$$;<br/>
+(3) **Infer:** From 1 and 2 that $$n^2=n\cdot n=(2\cdot k + 1)\cdot (2\cdot k + 1)$$;<br/>
+(4) **Infer:** From 3 and rewriting the formula that $$n^2=n\cdot n=(2\cdot k)^2 + 2(2\cdot k) + 1$$;<br/>
+(5) **Infer:** From 4 and rewriting the formula that $$n^2=n\cdot n=4k^2 + 4k + 1$$;<br/>
+(6) **Conclude:** From 1 and 5 that $$4k^2 + 4k$$ is an integer and $$n^2$$ is odd.
+
+Direct proofs need not be arithmetic, they can be applied to other mathematical formalisms too. Take logic, for example. Consider the following proof:
+
+(1) **Assume:** Predicate $$r \rightarrow a$$: If you are a reader of our book, we appreciate you;<br/>
+(2) **Assume:** Proposition $$r$$: You are a reader of our book;<br/>
+(3) **Conclude:** From 1 $$r$$ and 2 $$r\rightarrow a$$ we infer $$a$$, we appreciate you.{% sidenote 'sn-id-appreciate' 'Just to be sure, this does not prove that we do not appreciate people who do not read our book. Although they will never read this.' %}
+
+
+## Proof by contradiction
+
+Is an indirect proof, by assuming the negation of the conclusion, then prove a contradictory statement. 
+
+
+
+
+
+### Proof by contradiction example
+
+Let's also look at an example. Consider the following formalization called <span style="font-variant:small-caps;">Vertex Cover</span>, a classical graph problem from computer science. A vertex cover takes as input a graph and outputs a subset of vertices that *covers* all edges.
 
 {% marginfigure 'mn-fig-vc-ill' 'assets/img/vertex_cover_illustration.svg' 'An example instance of <span style="font-variant:small-caps;">Vertex Cover</span>, with vertex set $$V = \{A, B, C, D, E \}$$. $$A$$ is shown to cover edges $$(A, B), (A, C), (A, D)$$.' %}
 {% fproblem Vertex Cover %}
@@ -202,25 +228,30 @@ There are several solutions possible. Here is a possible solution, can you find 
 {% stopandthink %}
 Take your solution or the one from above and flip the selected vertices, i.e., if a vertex is red make it white and vice versa. What do you observe? Why is this the case?
 {% hidden Hint? %}
-Look at the edges between the vertices that are now red in the complement of $$V'$$.
+Look at the edges between the vertices that are now red in the complement of $$V'$$.<br/>
+<img src="/lovelace/assets/img/vertex_cover_complement.svg" />
 {% endhidden %}
 {% endstopandthink %}
 
-The vertices in the complement of a vertex cover $$V'$$ have no edges between them, i.e., they are what is called an indepentent set. Can we prove this using a direct proof?
+The vertices in the complement of a vertex cover $$V'$$ have no edges between them, i.e., they are what is called an indepentent set. Can we prove that the complement set of a vertex cover is an indepentent set using a direct proof?
 
 (1) **Assume:** <span style="font-variant:small-caps;">Vertex Cover</span>;<br/>
-(2) **Assume:** An indepentent set is a set of vertices that have no edges between them;<br/>
+(2) **Assume:** An indepentent set is a set of vertices that have no edges between them in graph $$G$$;<br/>
 (3) **Assume:** The complement of a subset $$V'\subseteq V$$ contains all the other elements in the set $$V\setminus V'$$;<br/> 
 (4) **Infer:** From 1 that an edge is covered if one or more of its vertices is in $$V'$$;<br/>
-(5) **Infer:** From 4 that an edge will.. 
+(5) **Infer:** From 4 there two options:<br/>
+Option 1: Both $$u$$ and $$v$$ are in the vertex cover, and none of them are in the complement set. We do not have to argue this is an independent set, for there is no set.<br/>
+Option 2: Either $$u$$ *or* $$v$$ is in the vertex cover. Let's say $$u$$ is in the cover and covers one or more edges. From 3 we infer that $$v$$ must be in the complement. 
 
-and 3 that if all edges $$E$$ have at least one vertex in the cover $$V'$$, then the cover ;<br/>
 ...<br/>
 (N) **Conclude:** The vertices in the complement of a vertex cover $$V'$$ have no edges between them, i.e., they are what is called an indepentent set.
 
-## Proof by contradiction
+{% question %}
+Can you complete the proof that the complement of a vertex cover is an independent set? Complete the argument for Option 2, what can you infer about all the edges connected to $$u$$?
+{% hidden Possible solution: %}
 
-Is an indirect proof, by assuming the negation of the conclusion, then prove a contradictory statement.
+{% endhidden %}
+{% endquestion %}
 
 
 ## Proof by contraposition
