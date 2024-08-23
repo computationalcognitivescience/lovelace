@@ -147,7 +147,7 @@ Among the many contributions to logic, he was the first to categorize the notion
 Something about proof intuition.
 
 
-### Proof by illustration
+## Proof by illustration
 
 In the example from the Introduction we showed how a proof by illustration can be used to prove that any list with two or more times the same number cannot be sorted, when 'sort' is defined as the next number being strictly greater than the one before. In general, proof by illustration is useful to prove a statement some property $$P$$ holds for *all* cases or for *some* cases. For example, in the illustration we claimed that all possible lists can be sorted (formally: $$\forall_{l\in L}\text{canBeSorted}(l)$$). Another example statement could be that some lists cannot be sorted (formally: $$\exists_{l\in L}\neg\text{canBeSorted}(l)$$). Proof by illustration can prove two things:
 
@@ -165,7 +165,7 @@ Its the same illustration that proved the universal statement is false. Can you 
 {% endstopandthink %}
 
 
-### Direct proof
+## Direct proof
 
 A direct proof consists of building an argument with a particular structure, namely a sequence of statements that themselves are either axiomatic (foundational), assumed to be true, or follow logically from an earlier statement. The final statement in this sequence is the statement we want to prove to be true. In a sense, a proof by illustration is a strategy that can be used in a direct proof. Let's make the second proof in the Introduction a bit more formal. In the proof sketch we implicitly assumed formal definition of sorting, we assumed the illustration list, then we showed that the conclusion must follow from the definition and the illustration. More formally, this could be written as the following sequence of statements:
 
@@ -180,25 +180,27 @@ A direct proof consists of building an argument with a particular structure, nam
 
 In a direct proof, one can use any formally sound inference to infer a statement. However, as illustrated in the Introduction, proof sketches can already be convincing. A further formal analysis such as the sequence above may help to further sharpen one's proof.
 
-Let's also look at an example of a direct proof that is not by illustration. Consider the following formalization, a classical graph problem from computer science:
+### Direct proof example
+
+Let's also look at an example of a direct proof that is not by illustration. Consider the following formalization called <span style="font-variant:small-caps;">Vertex Cover</span>, a classical graph problem from computer science. A vertex cover takes as input a graph and outputs a subset of vertices that *covers* all edges.
 
 {% marginfigure 'mn-fig-vc-ill' 'assets/img/vertex_cover_illustration.svg' 'An example instance of <span style="font-variant:small-caps;">Vertex Cover</span>, with vertex set $$V = \{A, B, C, D, E \}$$. $$A$$ is shown to cover edges $$(A, B), (A, C), (A, D)$$.' %}
 {% fproblem Vertex Cover %}
 A graph $$G=(V, E)$$.;;
-An subset of vertices $$V'\subseteq V$$ such that each edge $$e\in E$$ is *covered*. Here, $$e=(u, v)$$, and being covered means that either $$u\in V'$$ or $$v\in V'$$.
+An subset of vertices $$V'\subseteq V$$ such that all edges $$e\in E$$ are *covered*. Here, $$e=(u, v)$$, and being covered means that either $$u\in V'$$ or $$v\in V'$$ (or both).
 {% endfproblem %}
 
 
 {% question %}
 Can you complete the vertex cover in the figure?
 {% hidden Possible solution: %}
-There are several solutions possible. Here is a possible solution:<br/>
+There are several solutions possible. Here is a possible solution, can you find another solution?<br/>
 <img src="/lovelace/assets/img/vertex_cover_solution.svg" />
 {% endhidden %}
 {% endquestion %}
 
 {% stopandthink %}
-Take your solution or the one from above and flip the selected vertices, i.e., if a vertex is red make it white and vice versa. Formally, you are taking the complement of $$V'$$. What do you observe? Why is this the case?
+Take your solution or the one from above and flip the selected vertices, i.e., if a vertex is red make it white and vice versa. What do you observe? Why is this the case?
 {% hidden Hint? %}
 Look at the edges between the vertices that are now red in the complement of $$V'$$.
 {% endhidden %}
@@ -216,12 +218,12 @@ and 3 that if all edges $$E$$ have at least one vertex in the cover $$V'$$, then
 ...<br/>
 (N) **Conclude:** The vertices in the complement of a vertex cover $$V'$$ have no edges between them, i.e., they are what is called an indepentent set.
 
-### Proof by contradiction
+## Proof by contradiction
 
 Is an indirect proof, by assuming the negation of the conclusion, then prove a contradictory statement.
 
 
-### Proof by contraposition
+## Proof by contraposition
 
 (1) Assume: <span style="font-variant:small-caps;">Sorting (formal)</span>;<br/>
 (2) Assume: $$L=\langle 6,3,1,3\rangle$$;<br/>
