@@ -71,6 +71,6 @@ Blokpoel, M. (2018). [Sculpting computational-level models](https://onlinelibrar
 
 Devezer, B., Navarro, D. J., Vandekerckhove, J, & Buzbas, E. O. (2020). [The case for formal methodology in scientific reform](https://doi.org/10.1098/rsos.200805). *Royal Society open science, 8*(3), 200805.
 
-Meehl, P. E. (1997). [The problem is epistemology, not statistics](http://meehl.umn.edu/sites/meehl.dl.umn.edu/files/169problemisepistemology.pdf). In Harlow, Mulaik, & Steiger (Eds.), What If There Were No Significance Tests? (pp. 393-425)
+Meehl, P. E. (1997). [The problem is epistemology, not statistics](https://meehl.umn.edu/sites/meehl.umn.edu/files/files/169problemisepistemology.pdf). In Harlow, Mulaik, & Steiger (Eds.), What If There Were No Significance Tests? (pp. 393-425)
 
 van Rooij, I., & Blokpoel, M. (2020). [Formalizing verbal theories: A tutorial by dialogue](https://psycnet.apa.org/doiLanding?doi=10.1027%2F1864-9335%2Fa000428). *Social Psychology, 51*(5), 285-298
