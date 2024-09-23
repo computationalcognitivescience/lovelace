@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Formal proofs
-chapter: 4
+chapter: 3B
 nav_exclude: true
 ---
 
@@ -57,7 +57,7 @@ The conjecture, in fact, is not true, which can be shown by a counter example. C
 | 6 |<| 3 |<| 3 |<| 1 | no, $$6\nless 3$$ |
 
 
-This proves by illustration (or counter example) that a list exists that cannot be sorted, because none of the possible permutations is ordered. Hence, the conjecture must be false. This realization may lead to another conjecture: If the list $$L$$ contains a number twice, then no sorted list $$L'$$ can exist. This conjecture cannot be proven by example as we cannot possible show all lists that contain a number twice, there are infinitely many of them.
+This proves by illustration (or counter example) that a list exists that cannot be sorted, because none of the possible permutations is ordered. Hence, the conjecture must be false. This realization may lead to another conjecture: If the list $$L$$ contains a number twice, then no sorted list $$L'$$ can exist. This conjecture cannot be proven by example as we cannot possibly show all lists that contain a number twice, there are infinitely many of them.
 
 {% stopandthink %}
 Do you think that the second conjecture is true or false? Why do you believe this? How would you convince someone else to accept the conjecture?
@@ -71,7 +71,7 @@ However, the list cannot be sorted, because $$n_i\nless n_j$$ and $$n_j\nless n_
 
 ### What to learn from the example?
 
-The constructions of formal proofs is a creative skill, from the sprouting of conjectures to the formal proofs themselves. While there are formal rules and constraints that are navigated, there is no procedure that one can follow to derive a formal property or prove it. With practise and experience, intuitions can be sharpened that will help constructing formal proofs. A futher perspective to consider is that proofs are intended to convince others of a particular point, they are arguments. Sometimes an argument requires more formal details, other times a sketch can be convincing enough. Think of the formal nature of a proof not as an obstacle, but rather as a way to strengthen theoretical arguments. 
+The constructions of formal proofs is a creative skill, from the sprouting of conjectures to the formal proofs themselves. While there are formal rules and constraints that are navigated, there is no procedure that one can follow to derive a formal property or prove it. With practise and experience, intuitions can be sharpened that will help constructing formal proofs. A further perspective to consider is that proofs are intended to convince others of a particular point, they are arguments. Sometimes an argument requires more formal details, other times a sketch can be convincing enough. Think of the formal nature of a proof not as an obstacle, but rather as a way to strengthen theoretical arguments. 
 
 We next cover some of the fascinating history of formal proofs, after which we illustrate three commonly used formal proof strategies.
 
@@ -125,7 +125,7 @@ It is important to realise that these methods for reasoning were used in philoso
 
 {% marginfigure 'mf-id-prior_analytics' 'assets/img/prior_analytics.jpg' 'Aristotle&#39;s Prior Analytics in Latin, 1290 circa, Biblioteca Medicea Laurenziana, Florence.' %}
 
-Perhaps most recognizable to western culture are the contributions to logic and mathematics by Greek scholars (between c. 520BC -- 200 BC) such as  Pythagoras, Plato and Aristotle. Aristotilian logic is believed to be the first attempt at formal logic with syntax and used variables to show the form of an argument independent of the matter. Aristotle defined a syllogism (an argument) in his book Prior Analytics as consisting of predicates and a conclusion (Aristotle, 1989):
+Perhaps most recognizable to people trained in western philosophy are the contributions to logic and mathematics by Greek scholars (between c. 520BC -- 200 BC) such as  Pythagoras, Plato and Aristotle. Aristotilian logic is believed to be the first attempt at formal logic with syntax and used variables to show the form of an argument independent of the matter. Aristotle defined a syllogism (an argument) in his book Prior Analytics as consisting of predicates and a conclusion (Aristotle, 1989):
 
 (1) Predicate: $$A$$ belongs to $$S$$ (e.g., <br/>
 (2) Predicate: $$A$$ is predicated of $$S$$<br/>
@@ -160,7 +160,7 @@ We've seen an illustration of (1) in the example in the Introduction. What about
 {% stopandthink %}
 Can you think of an example list that cannot be sorted?
 {% hidden Hint? %}
-Its the same illustration that proved the universal statement is false. Can you explain why?
+It's the same illustration that proved the universal statement is false. Can you explain why?
 {% endhidden %}
 {% endstopandthink %}
 
