@@ -144,7 +144,12 @@ Among the many contributions to logic, he was the first to categorize the notion
 
 ## Proof strategies
 
-Rarely do we come up with proofs in the exact formal structure that we write them down. Often, proofs start with intuitions as shown in the example from the introduction. It takes experience and practise to sharpen your intuitions. The next three sections illustrate three common proof strategies with several examples and exercises to help you built your intuitions. Unfortunately, there is no procedure we can teach you to derive a proof. If we could, then finding formal proofs could be efficiently automated, whereas finding proofs is intractable or worse uncomputable.{% sidenote 'sn-id-finding_proofs' 'Intractable means that is takes astronomical resources to compute for all but the smallest cases. E.g., sorting is tractable and can be efficiently computed, but finding a proof could take more time than the age of the universe. If something is uncomputable it means with no amount of resources can it be computed, it is fundamentally impossible.' %}
+Rarely do we come up with proofs in the exact formal structure that we write them down.{% sidenote 'sn-id-ladd-franklin' 'The proof strategies we present here are syllogisms. Other strategies exist, thought, such as the antilogism developed by Christine Ladd-Franklin. The antilogism is the argument of discussion-of rebuttal:<br/>
+*"Nobody eats soup with a fork, Emily," her mother said to her.*<br/>
+*"But I do, and I am somebody," Emily immediately replied.*<br/>
+&#8210; Shen (1927), p. 60<br/>
+Christine Ladd-Franklin was the first woman to receive a PhD in mathematics and logic, 44 years after she wrote her thesis.<br/>
+<img src="../assets/img/ladd-franklin.jpg"  width="60%"/> ' %} Often, proofs start with intuitions as shown in the example from the introduction. It takes experience and practise to sharpen your intuitions. The next three sections illustrate three common proof strategies with several examples and exercises to help you built your intuitions. Unfortunately, there is no procedure we can teach you to derive a proof. If we could, then finding formal proofs could be efficiently automated, whereas finding proofs is intractable or worse uncomputable.{% sidenote 'sn-id-finding_proofs' 'Intractable means that is takes astronomical resources to compute for all but the smallest cases (van Rooij et al., 2019). E.g., sorting is tractable and can be efficiently computed, but finding a proof could take more time than the age of the universe. If something is uncomputable it means with no amount of resources can it be computed, it is fundamentally impossible.' %}
 
 
 ## Proof by illustration
@@ -202,7 +207,7 @@ Direct proofs need not be arithmetic, they can be applied to other mathematical 
 
 You may have wondered that if a direct proof exist, then what is an indirect proof? Indirect proofs do not go straight from assumptions to conclusions, but rather prove a statement in a different manner. There are several indirect proof strategies, here we illustrate one: Proof by contradiction.
 
-In logical inference, contradictions are not allowed. Something cannot be true and false at the same time. For example, I cannot be alive and dead at the same time. Anytime that a proof (which formally follows logical inference) leads to a contradiction, we have to conclude that one of our assumptions was incorrect and the opposite must hold. If we want to prove $$P$$ is true, then in a proof by contradiction we start by assuming not $$P$$. Intuitively, this looks like this:
+In logical inference, contradictions are not allowed. Something cannot be true and false at the same time.{% sidenote 'sn-id-ambrose' 'This assumption is called *law of excluded mean*, a proposition must be true or false. Prof. Alice Ambrose, presents a thorough analysis whether or not *&#39;the law of excluded mean [is] valid universally&#39;* (p. 186; Ambrose, 1935) which she relates to *&#39;the question whether the verbal forms [of formal predicates] are actually values of "p or not-p"&#39;* (p. 199; Ambrose, 1935).<br/> <img src="../assets/img/ambrose.jpg"  width="60%"/>' %} For example, I cannot be alive and dead at the same time. Anytime that a proof (which formally follows logical inference) leads to a contradiction, we have to conclude that one of our assumptions was incorrect and the opposite must hold. If we want to prove $$P$$ is true, then in a proof by contradiction we start by assuming not $$P$$. Intuitively, this looks like this:
 
 Say we want to prove $$P$$: We appreciate some people. We prove by contradiction and hence assume not $$P$$: There are not some people we appreciate, i.e., we do not appreciate all people. We also assume, like before, that we appreciate readers of our book and that you are reading our book. Now we have a contradiction, we do not appreciate you because we do not appreciate all people, but we appreciate you because you read our book. Hence, we must conclude that our assumption of not $$P$$ is incorrect and we have to accept that we appreciate some people.
 
@@ -217,7 +222,7 @@ If we want to write this down in a list of statements, it would look like this:
 
 ### Proof by contradiction example
 
-Let's also look at an example. Consider the following formalization called <span style="font-variant:small-caps;">Vertex Cover</span>, a classical graph problem from computer science. A vertex cover takes as input a graph and outputs a subset of vertices that *covers* all edges.
+Let's also look at an example. Consider the following formalization called <span style="font-variant:small-caps;">Vertex Cover</span>, a classical graph problem from computer science (van Rooij et al., 2019). A vertex cover takes as input a graph and outputs a subset of vertices that *covers* all edges.
 
 {% marginfigure 'mn-fig-vc-ill' 'assets/img/vertex_cover_illustration.svg' 'An example instance of <span style="font-variant:small-caps;">Vertex Cover</span>, with vertex set $$V = \{A, B, C, D, E \}$$. $$A$$ is shown to cover edges $$(A, B), (A, C), (A, D)$$.' %}
 {% fproblem Vertex Cover %}
@@ -275,13 +280,22 @@ A valid vertex cover by definition must cover *all* edges.
 
 Alwali, Abduljaleel (2018). Logic Functions in the Philosophy of Al-Farabi in Handbook of the 6th World Congress and School on Universal Logic.
 
+Ambrose, Alice (1935). Finitism in Mathematics. Mind, 44(174), pp. 186–203. [doi:10.1093/mind/XLIV.174.186](https://doi.org/10.1093/mind/XLIV.174.186).
+
+Aristotle (1989). Prior Analytics (Robin Smith, Trans.). (Original work work published c. 350BC)
+
 Bochenski, Joseph M. (1970). A History of Formal Logic. Chelsea Publishing Company.
 
 Fraser, Chris (2023). Mohism in The Stanford Encyclopedia of Philosophy, Edward N. Zalta, Uri Nodelman (eds.)[https://plato.stanford.edu/archives/fall2023/entries/mohism/](https://plato.stanford.edu/archives/fall2023/entries/mohism/)
 
-Jayatilleke, K. N. (1967). The Logic of Four Alternatives. Philosophy East and West, 17(1/4), 69–83. https://doi.org/10.2307/1397046
+Jayatilleke, Kulatissa Nanda (1967). The Logic of Four Alternatives. Philosophy East and West, 17(1/4), 69–83. https://doi.org/10.2307/1397046
 
 Kramer, K. (1986). World Scriptures: An Introduction to Comparative Religions. Paulist Press. p. 21. ISBN 0-8091-2781-4.
 
-Aristotle (1989). Prior Analytics (Robin Smith, Trans.). (Original work work published c. 350BC)
+Shen, Eugene (1927). The Ladd-Franklin Formula in Logic: The Antilogism. Min 36(141), pp. 54-60.
+
+van Rooij, Iris, Blokpoel, Mark, Kwisthout, Johan, Wareham, Todd (2019). [Intractability and Cognition: A guide to classical and parameterized complexity analysis.](https://cognitionandintractability.wordpress.com/) Cambridge: Cambridge University Press.
+
+
+
 <!-- Walser, J. (2005). Nagarjuna in Context: Mahayana Buddhism and Early Indian Culture. Columbia University Press. [https://doi.org/10.7312/wals13164](https://doi.org/10.7312/wals13164) -->
