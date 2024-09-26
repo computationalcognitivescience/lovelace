@@ -37,11 +37,7 @@ collections:
     sort_by: chapter
     output: true
   part_ii:
-    order:
-      - math.md
-      - proofs.md
-      - subset.md
-      - coherence.md
+    sort_by: chapter
     output: true
   part_iii:
     sort_by: chapter

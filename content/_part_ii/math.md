@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Math concepts and notation
-chapter: 3A
+chapter: 3
 nav_exclude: true
 ---
 
