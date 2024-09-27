@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Formal proofs</title>
+  <meta name="description" content="In the previous chapter we introduced different mathematical frameworks that alllow us to formally define theoretical models. This allows us not only to prec...">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+
+  <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+ <!--   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  
+
+
+  <link rel="stylesheet" type="text/css" href="/lovelace/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/lovelace/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="http://localhost:4000/lovelace/part_ii/proofs">
+
+  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="http://localhost:4000/lovelace/feed.xml" />
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<div class="nav-wrapper">
+	<div class="nav-left">
+	<a href="/lovelace/"><img class="badge" src="/lovelace/assets/img/cover.png" alt="CH"></a>
+	</div>
+	<div class="nav-right">
+	
+		
+  	
+		
+  	
+		
+		    
+		      <a href="/lovelace/home">Home</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part1">I - Intro</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part2">II - Formalizing</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/content/part3">III - Simulating</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/lovelace/css/print.css"></a>
+		    
+	    
+  	
+		
+  	
+		
+  	
+	</div>
+	</div>
+	</nav>
+</header>
+
+    <article class="group">
+      
+<h1>Chapter 4 - Formal proofs</h1>
+
+
+<p>In the previous chapter we introduced different mathematical frameworks that alllow us to formally define theoretical models. This allows us not only to precisely communicate the theory, but it also affords further analysis of the theory. For example, we can use formal proofs to derive implications of our theoretical commitments. In this Chapter, we present a brief primer on <em>formal proofs</em>. The concept of a formal proof may sound intimidating and may evoke images of walls of math. However, it is good to remind ourselves that in essense a formal proof is nothing more than an argument to convince another person that a property is true, relative to our theoretical assumptions. In fact, the roots of formal proofs can be traced back to our ability to dialog or debate (Dutihl Novaes, 2020).</p>
+
+<p>Readers who have taken introductory classes on these topics can skip this chapter without loss of continuity. If, however, these materials are new to you, then we recommend carefully studying this chapter before proceeding.</p>
+
+<h2 id="introductory-example">Introductory example</h2>
+
+<p>Before we explain the history of formal proofs and specific proof techniques, let’s review an example proof to get an impression of what a formal proof entails. In <a href="/lovelace/part_i/foundations">Chapter 2 - Conceptual foundations</a> we informally introduced the notion of sorting.</p>
+
+<p><span class="problemtitle">Sorting (informal)</span><br /><span class="probleminout">Input:</span> A list of unordered numbers \(L\).<br /><span class="probleminout">Output:</span> 
+An ordered list \(L'\) that consists of the elements in \(L\).</p>
+
+<p>Using the math notations from <a href="/lovelace/part_i/math">Chapter 3</a> we can now make sorting formal. Note that we are adding more details, for example the relationship between the numbers in \(L\) and \(L'\) and the notion of <em>ordered</em> is formally specified.</p>
+
+<p><span class="problemtitle">Sorting (formal)</span><br /><span class="probleminout">Input:</span> A list of \(p\) unordered numbers \(L=\langle m_1, m_2, \dots , m_p \rangle\).<br /><span class="probleminout">Output:</span> 
+An ordered list \(L'=\langle n_1, n_2, \dots , n_p\rangle\). Here, each \(m_i\in L\) occurs exactly once in \(L'\) and for all consequitive pairs \(n_i, n_{i+1}\) the next number should be (strictly) bigger, i.e., \(n_i &lt; n_{i+1}\).</p>
+
+<p>Based on this theory, we may conjecture (i.e., think that it holds) that <em>any list of numbers</em> \(L\) can be sorted as specified by the theory.</p>
+
+<div class="stopandthink"><div class="st-header">Stop and think</div>
+<p>Do you think that the conjecture is true or false? Why do you believe this? How would you convince someone else to accept the conjecture?</p>
+<div class="answer" id="hint-1-heading-hint-1"><a onclick="document.getElementById('hint-1').style.display = document.getElementById('hint-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="hint-1" style="display: none;"><p>The details in the formalization are important.</p>
+</div></div>
+</div>
+
+<p>The conjecture, in fact, is not true, which can be shown by a counter example. Consider the input \(L=\langle 6, 3, 1, 3 \rangle\). From the formalization, each of the numbers should occur exactly once in \(L'\). However, no permutation of the numbers exists that satisfies the condition that \(n_i &lt; n_{i+1}\), as we can observe in Table 1.</p>
+
+<p><label for="Table-ID1" class="margin-toggle"> ⊕</label><input type="checkbox" id="Table-ID1" class="margin-toggle" /><span class="marginnote">Table 1: All possible permutations of the numbers in \(L\). </span></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">\(n_1\)</th>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">\(n_2\)</th>
+      <th style="text-align: right"> </th>
+      <th style="text-align: left">\(n_3\)</th>
+      <th> </th>
+      <th>\(n_4\)</th>
+      <th>Is ordered?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: left">3</td>
+      <td>&lt;</td>
+      <td>6</td>
+      <td>no, \(3\nless 3\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: left">6</td>
+      <td>&lt;</td>
+      <td>3</td>
+      <td>no, \(6\nless 3\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: right">6</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: left">3</td>
+      <td>&lt;</td>
+      <td>3</td>
+      <td>no, \(6\nless 3\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: left">3</td>
+      <td>&lt;</td>
+      <td>6</td>
+      <td>no, \(3\nless 1\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: left">6</td>
+      <td>&lt;</td>
+      <td>3</td>
+      <td>no, \(3\nless 1\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: left">1</td>
+      <td>&lt;</td>
+      <td>6</td>
+      <td>no, \(3\nless 1\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: left">6</td>
+      <td>&lt;</td>
+      <td>1</td>
+      <td>no, \(3\nless 3\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: right">6</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: left">1</td>
+      <td>&lt;</td>
+      <td>3</td>
+      <td>no, \(6\nless 1\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: right">6</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: left">3</td>
+      <td>&lt;</td>
+      <td>1</td>
+      <td>no, \(6\nless 3\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">6</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: left">3</td>
+      <td>&lt;</td>
+      <td>3</td>
+      <td>no, \(6\nless 1\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">6</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: left">1</td>
+      <td>&lt;</td>
+      <td>3</td>
+      <td>no, \(6\nless 3\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">6</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">&lt;</td>
+      <td style="text-align: left">3</td>
+      <td>&lt;</td>
+      <td>1</td>
+      <td>no, \(6\nless 3\)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This proves by illustration (or counter example) that a list exists that cannot be sorted, because none of the possible permutations is ordered. Hence, the conjecture must be false. This realization may lead to another conjecture: If the list \(L\) contains a number twice, then no sorted list \(L'\) can exist. This conjecture cannot be proven by example as we cannot possibly show all lists that contain a number twice, there are infinitely many of them.</p>
+
+<div class="stopandthink"><div class="st-header">Stop and think</div>
+<p>Do you think that the second conjecture is true or false? Why do you believe this? How would you convince someone else to accept the conjecture?</p>
+</div>
+
+<p>While we cannot list all possible lists that contain a number twice, we can say something <em>about</em> all those lists. Namely, each such list at minimum must contain a pair of the same number \(n_i, n_j \in L\), where \(n_i=n_j\). The best place in the output \(L'\) to place these two numbers, is next to each other, where the numbers before \(n_i\) are ordered and the numbers after \(n_j\) are also ordered:</p>
+
+\[L'=\langle n_1, n_2, \dots, n_i, n_j, \dots, n_p\rangle\]
+
+<p>However, the list cannot be sorted, because \(n_i\nless n_j\) and \(n_j\nless n_i\). Thus we must conclude that any list that contains a number twice cannot be sorted.</p>
+
+<h3 id="what-to-learn-from-the-example">What to learn from the example?</h3>
+
+<p>The constructions of formal proofs is a creative skill, from the sprouting of conjectures to the formal proofs themselves. While there are formal rules and constraints that are navigated, there is no procedure that one can follow to derive a formal property or prove it. With practise and experience, intuitions can be sharpened that will help constructing formal proofs. A further perspective to consider is that proofs are intended to convince others of a particular point, they are arguments. Sometimes an argument requires more formal details, other times a sketch can be convincing enough. Think of the formal nature of a proof not as an obstacle, but rather as a way to strengthen theoretical arguments.</p>
+
+<p>We next cover some of the fascinating history of formal proofs, after which we illustrate three commonly used formal proof strategies.</p>
+
+<h2 id="history-of-formal-proofs">History of formal proofs</h2>
+
+<p>Similarly to math and formal notation, the long history of formal proofs often is lost in the shadow of more recent (western) approaches. Yet, formal proofs, formal reasoning and logic have a long history dating back to hundrends of years BC all across the world such as China, India, Eqypt, Babylon, Ancient Greece and the Middle East. Even a short summary of this history would require volumes of books. Here, we highlight several important discoveries in the history of formal proofs so that we may appreciate that our current work is supported by a long tradition that spans millenia and many diverse cultures and people.</p>
+
+<h3 id="india">India</h3>
+<p><label for="sn-id-hymm" class="margin-toggle"> ⊕</label><input type="checkbox" id="sn-id-hymm" class="margin-toggle" /><span class="marginnote">Rig Veda, 10:129-6:<br />
+नासदासीन्नो सदासीत्तदानीं नासीद्रजो नो व्योमा परो यत्।<br />
+किमावरीवः कुह कस्य शर्मन्नम्भः किमासीद्गहनं गभीरम्॥१॥<br />
+न मृत्युरासीदमृतं न तर्हि न रात्र्या अह्न आसीत्प्रकेतः।<br />
+आनीदवातं स्वधया तदेकं तस्माद्धान्यन्न परः किं चनास॥२॥<br />
+तम आसीत्तमसा गूळ्हमग्रेऽप्रकेतं सलिलं सर्वमा इदम्।<br />
+तुच्छ्येनाभ्वपिहितं यदासीत्तपसस्तन्महिनाजायतैकम्॥३॥<br />
+कामस्तदग्रे समवर्तताधि मनसो रेतः प्रथमं यदासीत्।<br />
+सतो बन्धुमसति निरविन्दन् हृदि प्रतीष्या कवयो मनीषा॥४॥<br />
+तिरश्चीनो विततो रश्मिरेषामधः स्विदासी३दुपरि स्विदासी३त्।<br />
+रेतोधा आसन्महिमान आसन्त्स्वधा अवस्तात्प्रयतिः परस्तात्॥५॥<br />
+को अद्धा वेद क इह प्र वोचत्कुत आजाता कुत इयं विसृष्टिः।<br />
+अर्वाग्देवा अस्य विसर्जनेनाथा को वेद यत आबभूव॥६॥<br />
+इयं विसृष्टिर्यत आबभूव यदि वा दधे यदि वा न।<br />
+यो अस्याध्यक्षः परमे व्योमन्त्सो अङ्ग वेद यदि वा न वेद॥७॥<br />
+ </span>
+In ancient India, the Buddhist Madhyamaka school founded by नागार्जुन Nāgārjuna (Sanskrit) (c. 150 – c. 250 CE) used the catuṣkoṭi (Sanskrit), a way to systematically analyze a proposition \(P\). It includes four mutually exclusive possibilities for \(P\) (for a modern interpretation, see Jayatilleke, 1967):</p>
+
+<p>(1) \(P\); that is, being.<br />
+(2) not \(P\); that is not being.<br />
+(3) \(P\) and not \(P\); that is being and that is not being.<br />
+(4) not (\(P\) or not \(P\)); that is neither not being not is that being.</p>
+
+<p>The catuṣkoṭi is a logical tool, but its origins can be traced back even further to the Rig Vega (1500-1000 BC), an ancient collection of sūktas. The first verse, as translated by Kramer (1986) illustrates the origins of the catuṣkoṭi:</p>
+<div class="epigraph"><blockquote><p>There was neither non-existence nor existence then;<br />
+Neither the realm of space, nor the sky which is beyond;<br />
+What stirred? Where? In whose protection?<br /></p><footer>Nasadiya Sukta (Hymn of Creation), concerns the origin of the universe, <cite>Rig Veda, 10:129-6</cite></footer></blockquote></div>
+
+<h3 id="china">China</h3>
+
+<p>In the Chinese 墨家 Mohist tradition founded by 墨翟 Mozi (c. 470 BC – c. 391 BC) logic and argumentation are based on analogies rather than mathematical reasoning. In Mohism the concept of fa is a standard or model, in a broad sense (e.g., fa could be a role model such as a teacher). They used the three <em>fa</em> method for statements by which “the distinctions between ‘this’ and ‘not’ and benefit and harm…can be clearly known” (Book 35, “Rejecting Fatalism”; Fraser, 2023). 
+<label for="mf-id-mozi" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-mozi" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="100%" src="/lovelace/assets/img/Mozi.jpg" /><br />Text from 7th volume of Mozi (墨子卷之七).</span></p>
+
+<p>(1) Does the statement have for precidence and origin?<br />
+(2) Does the statement show a concern for empiricism?<br />
+(3) Is the statement of consequence and pragmatic utility?</p>
+
+<p>It is important to realise that these methods for reasoning were used in philosophical, societal and political contexts. The three fa were used by the Mozi for the benefit of the people and society (Fraser, 2023).</p>
+
+<h3 id="greece">Greece</h3>
+
+<p><label for="mf-id-prior_analytics" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-prior_analytics" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="100%" src="/lovelace/assets/img/prior_analytics.jpg" /><br />Aristotle's Prior Analytics in Latin, 1290 circa, Biblioteca Medicea Laurenziana, Florence.</span></p>
+
+<p>Perhaps most recognizable to people trained in western philosophy are the contributions to logic and mathematics by Greek scholars (between c. 520BC – 200 BC) such as  Pythagoras, Plato and Aristotle. Aristotilian logic is believed to be the first attempt at formal logic with syntax and used variables to show the form of an argument independent of the matter. Aristotle defined a syllogism (an argument) in his book Prior Analytics as consisting of predicates and a conclusion (Aristotle, 1989):</p>
+
+<p>(1) Predicate: \(A\) belongs to \(S\) (e.g., <br />
+(2) Predicate: \(A\) is predicated of \(S\)<br />
+(3) Conclusion: \(A\) is said of \(S\)</p>
+
+<p>This formal system allowed Aristotle, for example, to deal with contradicitions in a systematic way (Bochenski, 1970).</p>
+
+<h3 id="middle-east">Middle East</h3>
+
+<p><label for="mf-id-al_farabi" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-al_farabi" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="100%" src="/lovelace/assets/img/al_farabi.jpg" /><br />Pages from Maqala fi aghrad kitab Ma ba'd al-tabi'a (On the scope of Aristotle's Metaphysics) The Bodleian Library, University of Oxford, Shelfmark: MS. Arab. d. 84.</span></p>
+
+<p>In the 9th century, the Islamic philosopher أبو نصر محمد الفارابي (Abu Nasr Muhammad al-Farabi) made major contributions to logic. He built on Greek works such as Aristotilian logic and the Stoic tradition. He argued that logic follows a dialogical structure:</p>
+<div class="epigraph"><blockquote><p>Truth is found in answer and query, or jawab wa-su’al. In this, there is a mas’ul, one who is asked because he has promoted a thesis for which he is responsible, and there is a sa’il, an interrogator, who attempts to question this thesis.</p><footer>أبو نصر محمد الفارابي, <cite>Paraphrased from Alwali (2018).</cite></footer></blockquote></div>
+<p>Among the many contributions to logic, he was the first to categorize the notion of Takhayyul (idea), and of Thubut (proof) in his book Ihsaal-ulum (Enumeration of the Sciences) (Alwali, 2018).</p>
+
+<h2 id="proof-strategies">Proof strategies</h2>
+
+<p>Rarely do we come up with proofs in the exact formal structure that we write them down.<label for="sn-id-ladd-franklin" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-ladd-franklin" class="margin-toggle" /><span class="sidenote">The proof strategies we present here are syllogisms. Other strategies exist, thought, such as the antilogism developed by Christine Ladd-Franklin (1847-1930) (Ladd-Franklin, 1883). The antilogism is the argument of discussion-of rebuttal:<br />
+<em>“Nobody eats soup with a fork, Emily,” her mother said to her.</em><br />
+<em>“But I do, and I am somebody,” Emily immediately replied.</em><br />
+‒ Shen (1927), p. 60<br />
+Christine Ladd-Franklin was the first woman to receive a PhD in mathematics and logic, 44 years after she wrote her thesis.<br />
+<img src="../assets/img/ladd-franklin.jpg" width="60%" />  </span> Often, proofs start with intuitions as shown in the example from the introduction. It takes experience and practise to sharpen your intuitions. The next three sections illustrate three common proof strategies with several examples and exercises to help you built your intuitions. Unfortunately, there is no procedure we can teach you to derive a proof. If we could, then finding formal proofs could be efficiently automated, whereas finding proofs is intractable or worse uncomputable.<label for="sn-id-finding_proofs" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-finding_proofs" class="margin-toggle" /><span class="sidenote">Intractable means that is takes astronomical resources to compute for all but the smallest cases (van Rooij, 2008; van Rooij et al., 2019). E.g., sorting is tractable and can be efficiently computed, but finding a proof could take more time than the age of the universe. If something is uncomputable it means with no amount of resources can it be computed, it is fundamentally impossible. </span></p>
+
+<h2 id="proof-by-illustration">Proof by illustration</h2>
+
+<p>In the example from the Introduction we showed how a proof by illustration can be used to prove that any list with two or more times the same number cannot be sorted, when ‘sort’ is defined as the next number being strictly greater than the one before. In general, proof by illustration is useful to prove a statement some property \(P\) holds for <em>all</em> cases or for <em>some</em> cases. For example, in the illustration we claimed that all possible lists can be sorted (formally: \(\forall_{l\in L}\text{canBeSorted}(l)\)). Another example statement could be that some lists cannot be sorted (formally: \(\exists_{l\in L}\neg\text{canBeSorted}(l)\)). Proof by illustration can prove two things:</p>
+
+<p>(1) The falsity of universal statement \(U\equiv\forall_x P(x)\); prove that \(U\) is false by giving one case \(x\) for which \(P\) is false<br />
+(2) The truth of existential statement \(E\equiv\exists_x P(x)\); prove that \(E\) is true by giving one case \(x\) for which \(P\) is true</p>
+
+<p>We’ve seen an illustration of (1) in the example in the Introduction. What about the option (2)? We can apply proof by illustration to the existential statement that some lists cannot be sorted (formally: \(\exists_{l\in L}\neg\text{canBeSorted}(l)\)), given the formalization of sorting in the Introduction.</p>
+
+<div class="stopandthink"><div class="st-header">Stop and think</div>
+<p>Can you think of an example list that cannot be sorted?</p>
+<div class="answer" id="hint-2-heading-hint-2"><a onclick="document.getElementById('hint-2').style.display = document.getElementById('hint-2').style.display === 'none' ? '' : 'none';">Hint?</a><div id="hint-2" style="display: none;"><p>It’s the same illustration that proved the universal statement is false. Can you explain why?</p>
+</div></div>
+</div>
+
+<h2 id="direct-proof">Direct proof</h2>
+
+<p>A direct proof consists of building an argument with a particular structure, namely a sequence of statements that themselves are either axiomatic (foundational), assumed to be true, or follow logically from an earlier statement. The final statement in this sequence is the statement we want to prove to be true. In a sense, a proof by illustration is a strategy that can be used in a direct proof. Let’s make the second proof in the Introduction a bit more formal. In the proof sketch we implicitly assumed formal definition of sorting, we assumed the illustration list, then we showed that the conclusion must follow from the definition and the illustration. We can structure this as the following sequence of statements<label for="sn-id-narrative" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-narrative" class="margin-toggle" /><span class="sidenote">We use the list structure here for pedagogical reasons, to convey the structure of a direct proof. In practise, formal proofs are more often written in narrative form, ideally supported with figures and examples. </span>:</p>
+
+<p>(1) <strong>Assume:</strong> <span style="font-variant:small-caps;">Sorting (formal)</span>;<br />
+(2) <strong>Assume:</strong> \(L=\langle 6,3,1,3\rangle\);<br />
+(3) <strong>Infer:</strong> From 1 and 2 that the sorted list must be in the set of all possible permutations of \(L\);<br />
+(4) <strong>Infer:</strong> From 1 and 3 that each permutation must contain a pair of the same number \(n_i, n_j \in L\), where \(n_i=n_j\);<br />
+(5) <strong>Infer:</strong> From 1 that the only place in the output \(L'\) to place \(n_i\) and \(n_j\), is next to each other;<br />
+(6) <strong>Infer:</strong> From 1 that for the list to be sorted, the numbers before \(n_i\) should be ordered and the numbers after \(n_j\) should also be ordered: \(L'=\langle n_1, n_2, \dots, n_i, n_j, \dots, n_p\rangle\);<br />
+(7) <strong>Infer:</strong> From 1, 5 and 6 that the list \(L=\langle 6,3,1,3\rangle\) cannot be sorted, because \(n_i\nless n_j\) and \(n_j\nless n_i\);<br />
+(8) <strong>Conclude:</strong> From 5, 6 and 7 that that any list that contains a number twice cannot be sorted.</p>
+
+<p>In a direct proof, one can use any formally sound inference to infer a statement. However, as illustrated in the Introduction, proof sketches can already be convincing. A further formal analysis such as the sequence above may help to further sharpen one’s proof.</p>
+
+<h3 id="direct-proof-examples">Direct proof examples</h3>
+
+<p>Let’s review another direct proof, one that is not a proof by illustration. Consider the statement: “The square of an odd integer \(n\in \mathbb{N}\) is odd.”</p>
+
+<p>(1) <strong>Assume:</strong> An integer \(n\) is odd if \(n=2\cdot k + 1\), for some integer \(k\);<br />
+(2) <strong>Assume:</strong> The square of \(n\) is \(n^2=n\cdot n\);<br />
+(3) <strong>Infer:</strong> From 1 and 2 that \(n^2=n\cdot n=(2\cdot k + 1)\cdot (2\cdot k + 1)\);<br />
+(4) <strong>Infer:</strong> From 3 and rewriting the formula that \(n^2=n\cdot n=(2\cdot k)^2 + 2(2\cdot k) + 1\);<br />
+(5) <strong>Infer:</strong> From 4 and rewriting the formula that \(n^2=n\cdot n=4k^2 + 4k + 1\);<br />
+(6) <strong>Conclude:</strong> From 1 and 5 that \(4k^2 + 4k\) is an integer and \(n^2\) is odd.</p>
+
+<p>Direct proofs need not be arithmetic, they can be applied to other mathematical formalisms too. Take logic, for example. Consider the following proof:</p>
+
+<p>(1) <strong>Assume:</strong> Predicate \(r \rightarrow a\): If you are a reader of our book, we appreciate you;<br />
+(2) <strong>Assume:</strong> Proposition \(r\): You are a reader of our book;<br />
+(3) <strong>Conclude:</strong> From 1 \(r\) and 2 \(r\rightarrow a\) we infer \(a\), we appreciate you.<label for="sn-id-appreciate" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-appreciate" class="margin-toggle" /><span class="sidenote">Just to be sure, this does not prove that we do not appreciate people who do not read our book. Although they will never read this. </span></p>
+
+<h2 id="indirect-proof">Indirect proof</h2>
+
+<p>You may have wondered that if a direct proof exist, then what is an indirect proof? Indirect proofs do not go straight from assumptions to conclusions, but rather prove a statement in a different manner. There are several indirect proof strategies, here we illustrate one: Proof by contradiction.</p>
+
+<p>In logical inference, contradictions are not allowed. Something cannot be true and false at the same time.<label for="sn-id-ambrose" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-ambrose" class="margin-toggle" /><span class="sidenote">This assumption is called <em>law of excluded mean</em>, a proposition must be true or false. Prof. Alice Ambrose (1906-2001), presents a thorough analysis whether or not <em>'the law of excluded mean [is] valid universally'</em> (p. 186; Ambrose, 1935) which she relates to <em>'the question whether the verbal forms [of formal predicates] are actually values of “p or not-p”'</em> (p. 199; Ambrose, 1935).<br /> <img src="../assets/img/ambrose.jpg" width="60%" /> </span> For example, I cannot be alive and dead at the same time. Anytime that a proof (which formally follows logical inference) leads to a contradiction, we have to conclude that one of our assumptions was incorrect and the opposite must hold. If we want to prove \(P\) is true, then in a proof by contradiction we start by assuming not \(P\). Intuitively, this looks like this:</p>
+
+<p>Say we want to prove \(P\): We appreciate some people. We prove by contradiction and hence assume not \(P\): There are not some people we appreciate, i.e., we do not appreciate all people. We also assume, like before, that we appreciate readers of our book and that you are reading our book. Now we have a contradiction, we do not appreciate you because we do not appreciate all people, but we appreciate you because you read our book. Hence, we must conclude that our assumption of not \(P\) is incorrect and we have to accept that we appreciate some people.</p>
+
+<p>If we want to write this down in a list of statements, it would look like this:</p>
+
+<p>(1) <strong>Assume:</strong> We do not appreciate some people \(\neg\exists_{p\in P}\text{appreciate}(p)\) which is equivalent<label for="sn-id-quantifier" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-quantifier" class="margin-toggle" /><span class="sidenote">The negation of the existential quantifier is equivalent to the universal quantifier with the negated proposition: If there are no people that we appreciate, we must not appreciate all people. </span> to we do not appreciate all people \(\forall_{p\in P}\neg\text{appreciate}(p)\);<br />
+(2) <strong>Assume:</strong> Predicate \(r \rightarrow a\): If you are a reader of our book, we appreciate you;<br />
+(3) <strong>Assume:</strong> Proposition \(r\): You are a reader of our book;<br />
+(4) <strong>Infer:</strong> From 1 \(r\) and 2 \(r\rightarrow a\) we infer \(a\), we appreciate you;<br />
+(5) <strong>Contradiction:</strong> 1 and 4 are in contradiction, we both appreciate and not appreciate you;<br />
+(6) <strong>Conclusion:</strong> From 5 we conclude that the assumption in 1 must be incorrect, and we accept its opposite: We appreciate some people \(\exists_{p\in P}\text{appreciate}(p)\).</p>
+
+<h3 id="proof-by-contradiction-example">Proof by contradiction example</h3>
+
+<p>Let’s also look at an example. Consider the following formalization called <span style="font-variant:small-caps;">Vertex Cover</span>, a classical graph problem from computer science (van Rooij et al., 2019). A vertex cover takes as input a graph and outputs a subset of vertices that <em>covers</em> all edges.</p>
+
+<p><label for="mn-fig-vc-ill" class="margin-toggle">⊕</label><input type="checkbox" id="mn-fig-vc-ill" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="100%" src="/lovelace/assets/img/vertex_cover_illustration.svg" /><br />An example instance of <span style="font-variant:small-caps;">Vertex Cover</span>, with vertex set \(V = \{A, B, C, D, E \}\). \(A\) is shown to cover edges \((A, B), (A, C), (A, D)\).</span>
+<span class="problemtitle">Vertex Cover</span><br /><span class="probleminout">Input:</span> A graph \(G=(V, E)\).<br /><span class="probleminout">Output:</span> 
+An subset of vertices \(V'\subseteq V\) such that all edges \(e\in E\) are <em>covered</em>. Here, \(e=(u, v)\), and being covered means that either \(u\in V'\) or \(v\in V'\) (or both).</p>
+
+<div class="question-top"><div class="question" id="question-1"><div class="question-body"><div class="question-header">Question 4.1</div> <p>Can you complete the vertex cover in the figure?</p>
+<div class="answer" id="question-1-heading-1"><a onclick="document.getElementById('question-1-answer-1').style.display = document.getElementById('question-1-answer-1').style.display === 'none' ? '' : 'none';">Possible answer:</a><div id="question-1-answer-1" style="display: none;"><p>There are several solutions possible. Here is a possible solution, can you find another solution?<br />
+<img src="/lovelace/assets/img/vertex_cover_solution.svg" /></p>
+</div></div>
+</div></div></div>
+
+<div class="stopandthink"><div class="st-header">Stop and think</div>
+<p>Take your solution or the one from above and flip the selected vertices, i.e., if a vertex is red make it white and vice versa. What do you observe? Why is this the case?</p>
+<div class="answer" id="hint-3-heading-hint-3"><a onclick="document.getElementById('hint-3').style.display = document.getElementById('hint-3').style.display === 'none' ? '' : 'none';">Hint?</a><div id="hint-3" style="display: none;"><p>Look at the edges between the vertices that are now red in the complement of \(V'\).<br />
+<img src="/lovelace/assets/img/vertex_cover_complement.svg" /></p>
+</div></div>
+</div>
+
+<p>The vertices in the complement of a vertex cover \(V'\) have no edges between them, i.e., they are what is called an indepentent set. Can we prove that the complement set of a vertex cover is an indepentent set using a proof by contradiction? Let’s start by assuming some definitions:</p>
+
+<p>(1) <strong>Assume:</strong> <span style="font-variant:small-caps;">Vertex Cover</span> and a cover \(V'\);<br />
+(2) <strong>Assume:</strong> An indepentent set is a set of vertices that have no edges between them in graph \(G\);<br />
+(3) <strong>Assume:</strong> The complement of a subset \(A\subseteq V\) contains all the other elements in the set \(A^C=V\setminus A\);</p>
+
+<p>Then we assume the opposite of what we want to prove, namely that the complement of a vertex cover is not an independent set. That means we assume that there is an edge between at some pair of vertices in the complement.</p>
+
+<p>(4) <strong>Assume:</strong> The negation of what we want to prove, namely that the complement \(V'^C\) of a vertex cover \(V'\) has at least one edge between a pair of vertices \((u,v)\in V'^C\);<br /></p>
+
+<p>(5) <strong>Infer:</strong> From 4 we infer that if \(u\) and \(v\) are in the complement set, then they were both not in the vertex cover;<br /></p>
+
+<p>(6) <strong>Infer:</strong> From 5 we infer that if \(u\) and \(v\) were not in the vertex cover, then the edge \((u,v)\) is not covered;</p>
+
+<div class="question-top"><div class="question" id="question-2"><div class="question-body"><div class="question-header">Question 4.2</div> <p>At this point in the proof, we arrive at a contradiction. What is the contradiction? How do you infer it from 1 and 6?</p>
+<div class="answer" id="question-.2-heading-1"><a onclick="document.getElementById('question-.2-answer-1').style.display = document.getElementById('question-.2-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.2-answer-1" style="display: none;"><p>A valid vertex cover by definition must cover <em>all</em> edges.</p>
+</div></div>
+<div class="answer" id="question-.2-heading-2"><a onclick="document.getElementById('question-.2-answer-2').style.display = document.getElementById('question-.2-answer-2').style.display === 'none' ? '' : 'none';">Answer:</a><div id="question-.2-answer-2" style="display: none;"><p>(7) <strong>Contradiction:</strong> The edge \((u,v)\) is both in \(V'\) according to 1 and not in \(V'\) according to 6.</p>
+</div></div>
+</div></div></div>
+
+<p>(8) <strong>Conclude:</strong> From 7 we must conclude that one of our assumptions is incorrect. Assumptions 1, 2, and 3 are foundational (i.e., definitions), so we reject 4 and conclude that the complement of a vertex cover must be an independent set.</p>
+
+<h3 id="references">References</h3>
+
+<!-- Agrawala Vasudeva, Sharana (1983). Hymn of creation : Nāsadīya sūkta, Rgveda, X. 129. Prithivi Prakashan. -->
+
+<p>Alwali, Abduljaleel (2018). Logic Functions in the Philosophy of Al-Farabi in Handbook of the 6th World Congress and School on Universal Logic.</p>
+
+<p>Ambrose, Alice (1935). Finitism in Mathematics. Mind, 44(174), pp. 186–203. <a href="https://doi.org/10.1093/mind/XLIV.174.186">doi:10.1093/mind/XLIV.174.186</a>.</p>
+
+<p>Aristotle (1989). Prior Analytics (Robin Smith, Trans.). (Original work work published c. 350BC)</p>
+
+<p>Bochenski, Joseph M. (1970). A History of Formal Logic. Chelsea Publishing Company.</p>
+
+<p>Dutilh Novaes, Catarina (2020). The Dialogical Roots of Deduction: Historical, Cognitive, and Philosophical Perspectives on Reasoning. Cambridge University Press. <a href="https://doi.org/10.1017/9781108800792">doi:10.1017/9781108800792</a>.</p>
+
+<p>Fraser, Chris (2023). Mohism in The Stanford Encyclopedia of Philosophy, Edward N. Zalta, Uri Nodelman (eds.) <a href="https://plato.stanford.edu/archives/fall2023/entries/mohism/">(URL)</a></p>
+
+<p>Jayatilleke, Kulatissa Nanda (1967). The Logic of Four Alternatives. Philosophy East and West, 17(1/4), 69–83. <a href="https://doi.org/10.2307/1397046">doi:10.2307/1397046</a>.</p>
+
+<p>Kramer, K. (1986). World Scriptures: An Introduction to Comparative Religions. Paulist Press. p. 21. ISBN 0-8091-2781-4.</p>
+
+<p>Ladd-Franklin, Christine (1883). On the algebra of logic. In  C. S. Peirce (Eds.), Studies in logic (pp. 17-71), Little, Brown, Boston.</p>
+
+<p>Shen, Eugene (1927). The Ladd-Franklin Formula in Logic: The Antilogism. Min 36(141), pp. 54-60.</p>
+
+<p>van Rooij, Iris (2008). The Tractable Cognition thesis. Cognitive Science, 32, 939-984.</p>
+
+<p>van Rooij, Iris, Blokpoel, Mark, Kwisthout, Johan, Wareham, Todd (2019). <a href="https://cognitionandintractability.wordpress.com/">Intractability and Cognition: A guide to classical and parameterized complexity analysis.</a> Cambridge: Cambridge University Press.</p>
+
+<!-- Walser, J. (2005). Nagarjuna in Context: Mahayana Buddhism and Early Indian Culture. Columbia University Press. [https://doi.org/10.7312/wals13164](https://doi.org/10.7312/wals13164) -->
+
+
+<div class="nav-wrapper">
+	<div class="prev-chapter">
+		
+		<p><a href="/lovelace/part_ii/math">Previous: Math concepts and notation</a></p>
+		
+	</div>
+	<div class="next-chapter">
+		
+		<p><a href="/lovelace/part_ii/subset">Next: Subset choice</a></p>
+		
+	</div>
+</div>
+
+    </article>
+    <span class="print-footer">Formal proofs - September 27, 2024 - Mark Blokpoel and Iris van Rooij</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    
+      <li>
+        <a href="mailto:m.blokpoel@donders.ru.nl">Mark
+		<span class="icon-mail3"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//www.markblokpoel.com">
+		<span class="icon-html-five"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//www.twitter.com/MarkBlokpoel">
+		<span class="icon-twitter"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//github.com/markblokpoel">
+		<span class="icon-github"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="mailto:i.vanrooij@donders.ru.nl">Iris
+		<span class="icon-mail3"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//www.irisvanrooijcogsci.com">
+		<span class="icon-html-five"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//www.twitter.com/IrisVanRooij">
+		<span class="icon-twitter"></span>
+		</a>
+      </li>
+    
+      <li>
+        <a href="//github.com/IrisVanRooij">
+		<span class="icon-github"></span>
+		</a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2024 &nbsp;&nbsp;MARK BLOKPOEL AND IRIS VAN ROOIJ</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

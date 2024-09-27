@@ -107,7 +107,7 @@
 
     <article class="group">
       
-<h1>Chapter 5 - Coherence</h1>
+<h1>Chapter 6 - Coherence</h1>
 
 
 <p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" width="100%" src="/lovelace//assets/img/coherence_network.jpg" /><br />“But what is coherence? Given a large number of elements (propositions, concepts, or whatever) that are coherent or incoherent with each other in various ways, how can we accept some of these elements and reject others in a way that maximizes coherence? How can coherence be computed?” – Thagard &amp; Verbeurgt (1998)</span> In the previous chapter you practiced making a formal computational-level model of <em>subset choice</em>. In this chapter we study a computational-level model of <em>coherence</em> developed by cognitive scientists and published in the journal <a href="https://www.sciencedirect.com/science/article/pii/S0364021399800330"><em>Cognitive Science</em></a>. The pedagogical goal is to see how these scientists motivated their modeling decisions, what properties their formalization has, what limitations it has, and how it may be revised or expanded.</p>
@@ -142,7 +142,7 @@ A partition of the vertices \(V\) into sets \(A\) and \(R\) such that \(Coh(A,R)
 
 <figure><img width="100%" src="/lovelace/assets/img/coherence_capital_example.png" /><figcaption class="maincolumn-figure">An instance of the <span style="font-variant:small-caps;">Coherence</span>  problem, with vertex set \(V = \{a, b, c, d, e, f, g, h, i \}.\)<em>Solid lines</em> indicate positive constraints \(C^+\), and <em>dotted lines</em> indicate negative constraints \(C^-\). Note how it is not possible to satisfy all constraints by a partition of \(V\) into \(A\) and \(R\). But it is still possible to satisfy a <em>maximum</em> of constraints.</figcaption></figure>
 
-<div class="question-top"><div class="question" id="question-1"><div class="question-body"><div class="question-header">Question 5.1</div> <p>What is a maximum coherence partition for the input of <span style="font-variant:small-caps;">Coherence</span>  depicted above?</p>
+<div class="question-top"><div class="question" id="question-1"><div class="question-body"><div class="question-header">Question 6.1</div> <p>What is a maximum coherence partition for the input of <span style="font-variant:small-caps;">Coherence</span>  depicted above?</p>
 <div class="answer" id="question-1-heading-1"><a onclick="document.getElementById('question-1-answer-1').style.display = document.getElementById('question-1-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-1-answer-1" style="display: none;"><p>Consider the partition \(A = \{ a, d, f, i \}, R = \{ b, c, e, g, h\}\) How many constraints are satisfied by that partition? Can you find a partition that satisfies more constraints?</p>
 </div></div>
 </div></div></div>
@@ -162,7 +162,7 @@ A partition of the vertices \(V\) into sets \(A\) and \(R\) such that \(Coh(A,R)
 <p><span class="problemtitle">Coherence (formal, version 3)</span><br /><span class="probleminout">Input:</span> A graph \(G = (V, E)\), with a weight \(w(u,v) \in \mathbb{N}\) for each edge \((u,v) \in E = C^+ \cup C^- \subseteq V \times V\) (where \(C^+ \cap C^- = \emptyset\)).<br /><span class="probleminout">Output:</span> 
 A truth assignment \(T: V \rightarrow \{\top, \bot \}\) such that \(Coh(T)= \sum_{T(u) = T(v)} w(u,v) + \sum_{T(u) \neq T(v)} w(u,v)\) is maximum.</p>
 
-<div class="question-top"><div class="question" id="question-2"><div class="question-body"><div class="question-header">Question 5.2</div> <p>Are versions 2 and 3 of <span style="font-variant:small-caps;">Coherence</span> the same or different computational-level models?</p>
+<div class="question-top"><div class="question" id="question-2"><div class="question-body"><div class="question-header">Question 6.2</div> <p>Are versions 2 and 3 of <span style="font-variant:small-caps;">Coherence</span> the same or different computational-level models?</p>
 <div class="answer" id="question-.2-heading-1"><a onclick="document.getElementById('question-.2-answer-1').style.display = document.getElementById('question-.2-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.2-answer-1" style="display: none;"><p>While the models look different on the surface the input-output mappings are equivalent. Try to prove the equivalence. That is, assume that \(A = \top\) and \(R = \bot\) and convince yourself (or someone else) that there is no input for which the two models produce different outputs.</p>
 </div></div>
 </div></div></div>
@@ -174,7 +174,7 @@ A truth assignment \(T: V \rightarrow \{\top, \bot \}\) such that \(Coh(T)= \sum
 <p><span class="problemtitle">Harmony Maximization</span><br /><span class="probleminout">Input:</span> A Hopfiel network \(G = (V, E)\), with a weight \(w(u,v) \in \mathbb{Z}\) for each edge \((u,v) \in E = V \times V\) (i.e., the network is fully connected).<br /><span class="probleminout">Output:</span> 
 An activation pattern \(a: V \rightarrow \{-1,1 \}\) such that \(H(a) = \sum_{u,v \in V} a(u)a(v)w(u,v)\) is maximum.</p>
 
-<div class="question-top"><div class="question" id="question-3"><div class="question-body"><div class="question-header">Question 5.3</div> <p>Is <span style="font-variant:small-caps;">Harmony Maximization</span> the same or a different computational-level model as versions 2 and 3 of <span style="font-variant:small-caps;">Coherence</span>?</p>
+<div class="question-top"><div class="question" id="question-3"><div class="question-body"><div class="question-header">Question 6.3</div> <p>Is <span style="font-variant:small-caps;">Harmony Maximization</span> the same or a different computational-level model as versions 2 and 3 of <span style="font-variant:small-caps;">Coherence</span>?</p>
 <div class="answer" id="question-.3-heading-1"><a onclick="document.getElementById('question-.3-answer-1').style.display = document.getElementById('question-.3-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.3-answer-1" style="display: none;"><p>While the models look quite different on the surface the input-output mappings are, again, equivalent. Try to prove the equivalence. That is, assume that \(\top = 1\) and \(\bot = -1\) and convince yourself (or someone else) that there is no input for which the two models produce different outputs. Tip: calculate \(\sum_{u,v \in V} a(u)a(v)w(u,v)\) for a few possible inputs and activations patterns. And compare this to \(\sum_{T(u) = T(v)} w(u,v) + \sum_{T(u) \neq T(v)} w(u,v)\) for corresponding input and truth assigments. What do you notice?</p>
 </div></div>
 </div></div></div>
@@ -191,7 +191,7 @@ An activation pattern \(a: V \rightarrow \{-1,1 \}\) such that \(H(a) = \sum_{u,
 
 <p><span style="font-variant:small-caps;">Coherence</span> has the property that \(Coh(A,R) = Coh(R,A)\) (or, equivalently, \(Coh(T) = Coh(\neg T)\)). We call this the <em>symmetry property</em>.</p>
 
-<div class="question-top"><div class="question" id="question-4"><div class="question-body"><div class="question-header">Question 5.4</div> <p>Prove that the symmetry property holds for <span style="font-variant:small-caps;">Coherence</span>.</p>
+<div class="question-top"><div class="question" id="question-4"><div class="question-body"><div class="question-header">Question 6.4</div> <p>Prove that the symmetry property holds for <span style="font-variant:small-caps;">Coherence</span>.</p>
 <div class="answer" id="question-.4-heading-1"><a onclick="document.getElementById('question-.4-answer-1').style.display = document.getElementById('question-.4-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.4-answer-1" style="display: none;"><p>Carefully look at the definitions of versions 1, 2 and 3 of <span style="font-variant:small-caps;">Coherence</span>.</p>
 </div></div>
 </div></div></div>
@@ -229,12 +229,12 @@ A truth assignment \(T: V \rightarrow \{\top, \bot \}\) such that \(Coh(T)= \sum
 
 <p>It seems inutuitive that, to the extent that beliefs corresponding to direct observations are truthful or accurate, the beliefs that cohere with them are also more likely to be true. Thagard and Verbeurgt indeed assumed this to be the case. Perform the next exercises to assess whether or not the intuition is founded.</p>
 
-<div class="question-top"><div class="question" id="question-5"><div class="question-body"><div class="question-header">Question 5.5</div> <p>Are there instances of <span style="font-variant:small-caps;">Foundational Coherence</span> for which the symmetry property holds?</p>
+<div class="question-top"><div class="question" id="question-5"><div class="question-body"><div class="question-header">Question 6.5</div> <p>Are there instances of <span style="font-variant:small-caps;">Foundational Coherence</span> for which the symmetry property holds?</p>
 <div class="answer" id="question-.5-heading-1"><a onclick="document.getElementById('question-.5-answer-1').style.display = document.getElementById('question-.5-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.5-answer-1" style="display: none;"><p>Prove by creating one example instance with the symmetry property, if one can exist; or, alternatively, prove that none can exist.</p>
 </div></div>
 </div></div></div>
 
-<div class="question-top"><div class="question" id="question-6"><div class="question-body"><div class="question-header">Question 5.6</div> <p>Are there instances of <span style="font-variant:small-caps;">Discriminating Coherence</span> for which the symmetry property holds?</p>
+<div class="question-top"><div class="question" id="question-6"><div class="question-body"><div class="question-header">Question 6.6</div> <p>Are there instances of <span style="font-variant:small-caps;">Discriminating Coherence</span> for which the symmetry property holds?</p>
 <div class="answer" id="question-.6-heading-1"><a onclick="document.getElementById('question-.6-answer-1').style.display = document.getElementById('question-.6-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.6-answer-1" style="display: none;"><p>Prove by creating one example instance with the symmetry property, if one can exist; or, alternatively, prove that none can exist.</p>
 </div></div>
 </div></div></div>
@@ -245,7 +245,7 @@ A truth assignment \(T: V \rightarrow \{\top, \bot \}\) such that \(Coh(T)= \sum
 
 <p>Explaining NP-hardness in great depth is beyond the scope of this book<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">We wrote a different textbook on the topic. <a href="https://www.cambridge.org/core/services/aop-cambridge-core/content/view/2FBB76A42417F33C409A2EAD17C15046/9781107043992c1_3-22.pdf/introduction.pdf">Chapter 1</a> is a good place to start. </span>, but luckily it is also not necessary. For present purposes it suffices to understand that NP-hard means really quite hard. So hard in fact that such problems are also called <em>intractable</em>. Why? Well, if a problem is NP-hard then there cannot exist <em>any</em> efficient (read: polynomial-time<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">An algorithm is said to run in <em>polynomial time</em> if the number of steps it takes can be upperbounded by a function of the form \(n^c\), where \(c\) is some constant and \(n\) is the input size. For instance, \(n^2\) is a polynomial, and so is \(n\) and \(n^3\). But e.g. \(2^n\) is exponential, and not polynomial. </span>) algorithm that computes the problem.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">Unless P = NP. For an explanation watch <a href="https://www.youtube.com/watch?v=YX40hbAHx3s">this video</a>. </span> Such problems may be computable in, say, exponential time. But exponential time grows astronomically fast as the input size grows. So fast, in fact, that even for intermediate size inputs the computation time is prohibitive.</p>
 
-<div class="question-top"><div class="question" id="question-7"><div class="question-body"><div class="question-header">Question 5.7</div> <p>In their paper, Thagard and Verbeurgt (1998, p. 8) write “Each person has thousands or millions of beliefs.” How long would an exponential algorithm (<em>any</em> algorithm) take to compute <span style="font-variant:small-caps;">Coherence</span> for a thousand beliefs?</p>
+<div class="question-top"><div class="question" id="question-7"><div class="question-body"><div class="question-header">Question 6.7</div> <p>In their paper, Thagard and Verbeurgt (1998, p. 8) write “Each person has thousands or millions of beliefs.” How long would an exponential algorithm (<em>any</em> algorithm) take to compute <span style="font-variant:small-caps;">Coherence</span> for a thousand beliefs?</p>
 <div class="answer" id="question-.7-heading-1"><a onclick="document.getElementById('question-.7-answer-1').style.display = document.getElementById('question-.7-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.7-answer-1" style="display: none;"><p>To start, you can assume that the algorithm takes \(2^n\) steps. Recall that in <span style="font-variant:small-caps;">Coherence</span>, (possible) beliefs are modeled by the nodes in a constraint network. Hence, \(n = 1000\).</p>
 </div></div>
 </div></div></div>
@@ -260,14 +260,14 @@ A truth assignment \(T: V \rightarrow \{\top, \bot \}\) such that \(Coh(T)= \sum
 
 <p>We will consider some of these algorithms more in depth in Chapter 11. For now, it is important to realize that only one of the algorithms is guaranteed to return the maximum coherence truth assignment for any given instance of <span style="font-variant:small-caps;">Coherence</span>.</p>
 
-<div class="question-top"><div class="question" id="question-8"><div class="question-body"><div class="question-header">Question 5.8</div> <p>Which of the five algorithm is guaranteed to correctly compute <span style="font-variant:small-caps;">Coherence</span>? Is that algorithm tractable?</p>
+<div class="question-top"><div class="question" id="question-8"><div class="question-body"><div class="question-header">Question 6.8</div> <p>Which of the five algorithm is guaranteed to correctly compute <span style="font-variant:small-caps;">Coherence</span>? Is that algorithm tractable?</p>
 <div class="answer" id="question-.8-heading-1"><a onclick="document.getElementById('question-.8-answer-1').style.display = document.getElementById('question-.8-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.8-answer-1" style="display: none;"><p>Recall that <span style="font-variant:small-caps;">Coherence</span> is NP-hard. And the number of possible truth assignments for \(n\) nodes is \(2^n\).</p>
 </div></div>
 </div></div></div>
 
 <p>Four of the five algorithms proposed are at best heuristics. That is, they do not guarantee that they compute <span style="font-variant:small-caps;">Coherence</span> correctly. Even the fifth algorithm which makes a kind of guarantee makes no guarantees on how much that truth assignment that it returns resembles the maximum coherent truth assignment. In fact, a truth assignment with close to maximum coherence can be arbitrarily different from the maximum coherence truth assignment.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">See <a href="https://www.sciencedirect.com/science/article/pii/S002224961200048X">van Rooij &amp; Wareham (2012)</a>. </span> Given that <span style="font-variant:small-caps;">Coherence</span> is NP-hard there cannot exist any tractable algorithm that approximates the problem in the latter sense.</p>
 
-<div class="question-top"><div class="question" id="question-9"><div class="question-body"><div class="question-header">Question 5.9</div> <p>Prove that there cannot exist any tractable (read: polynomial-time) algorithm that for any instance of <span style="font-variant:small-caps;">Coherence</span> returns a truth assignment \(T_{approx}\) that differs from the maximum coherence truth assignment \(T_{max}\) in at lost \(k\) truth values.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">In other words, the <a href="https://www.youtube.com/watch?v=P02mJhS9qQ4">hamming distance</a> \(|T_{approx} - T_{max}| \leq k\).. </span></p>
+<div class="question-top"><div class="question" id="question-9"><div class="question-body"><div class="question-header">Question 6.9</div> <p>Prove that there cannot exist any tractable (read: polynomial-time) algorithm that for any instance of <span style="font-variant:small-caps;">Coherence</span> returns a truth assignment \(T_{approx}\) that differs from the maximum coherence truth assignment \(T_{max}\) in at lost \(k\) truth values.<label for="sn-id-whatever" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-whatever" class="margin-toggle" /><span class="sidenote">In other words, the <a href="https://www.youtube.com/watch?v=P02mJhS9qQ4">hamming distance</a> \(|T_{approx} - T_{max}| \leq k\).. </span></p>
 <div class="answer" id="question-.9-heading-1"><a onclick="document.getElementById('question-.9-answer-1').style.display = document.getElementById('question-.9-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.9-answer-1" style="display: none;"><p>Prove by contradition. That is, assume that such an approximation would exist, and prove that then it is also possible to compute the maximum in polynomial-time.</p>
 </div></div>
 </div></div></div>
@@ -333,7 +333,7 @@ A truth assignment \(T: V \rightarrow \{\top, \bot \}\) such that \(Coh(T)= \sum
 </div>
 
     </article>
-    <span class="print-footer">Coherence - September 6, 2024 - Mark Blokpoel and Iris van Rooij</span>
+    <span class="print-footer">Coherence - September 27, 2024 - Mark Blokpoel and Iris van Rooij</span>
     <footer>
   <hr class="slender">
   <ul class="footer-links">
