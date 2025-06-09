@@ -198,7 +198,7 @@ express in abstract the set of elements $$V$$ called *vertices* and their
 relationships $$E$$ called *edges* which together make up a graph $$G=(V,E)$$.
 The set of edges is a subset of the cardinal product of the vertices
 $$E\subseteq V\times V$$. If there is a relationship between two vertices $$e\in
-V$$ and $$v\in V$$, then $$(u,v)\in E$$.
+V$$ and $$v\in V$$, then $$(e,v)\in E$$.
 
 {% maincolumn 'assets/img/graph-examples.svg' 'Example graphs. Graph A is a
 simple graph (a forest of multiple connected graphs) representing two-way like
@@ -236,7 +236,7 @@ $$(\text{Charlene},\text{Holly})\}$$.
 
 ### Weighted graph
 
-Graphs who's relationships between vertices is a number, are called *weighted
+Graphs whose relationships between vertices is a number, are called *weighted
 graphs*. Here, in addition to the graph $$G=(V,E)$$ a weight function is
 supplied $$w:V\times V\rightarrow \mathbb{Z}$$. Often, weighted graphs are fully
 connected but some edges may have a neutral weight such as $$0$$. Graph B in the examples above is a weighted graphs. If vertex relationships are Boolean, then the graph is *unweighted*. Graphs A, C and D are unweighted graphs.
