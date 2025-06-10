@@ -123,6 +123,7 @@ html{
 
 .answer p{
   margin-top: 0;
+  width: 100%;
 }
 .answer > .st-header{
   font-weight: normal;
@@ -145,6 +146,12 @@ html{
 
 .stopandthink > p {
   display: inline;
+}
+
+.stopandthink > .answer {
+  font-size: 1.4rem;
+  padding-left: 0em;
+  text-indent: 0em;
 }
 
 span.problemtitle{

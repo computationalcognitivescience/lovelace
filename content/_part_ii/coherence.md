@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Coherence
-chapter: 5
+chapter: 6
 nav_exclude: true
 ---
 
