@@ -220,9 +220,19 @@ In his book [Hot Thought](https://books.google.nl/books?hl=nl&lr=&id=tJV735_HoLA
 
 The coherence model also has its critics.{% sidenote 'sn-id-whatever' 'Maybe you have your own criticisms? Then we invite you to articulate them and write down your arguments as precisely and rigorously as possible.'%} For instance, Millgram (2003) critiqued the model for mixing up 'maximizing coherence' with 'approximating truth' (but see also the response by Thagard, 2012). Millgram's critique furthermore inspired work on different notions of approximation (van Rooij & Wareham, 2012). These distinctions will prove relevant in Chapter 11.
 
+The theory of coherence, and especially non-foundational (what we called here dicriminatory) coherence, is also conceptually closely related to the notion of reflective equilibrium advanced by Catherine Z. Elgin (1996, 2013, 2017) among others. Beisbart and colleagues (2021) developed a first formalisation of her notion. 
+
 ### References
 
 van Arkel, J. (2021). [How do people resolve misunderstanding in conversation through repair? Introducing a framework built on belief revision and coherence](https://fse.studenttheses.ub.rug.nl/24420/1/MasterThesis_vanArkel.pdf). MSc thesis, University of Groningen.
+
+Beisbart, C., Betz, G., & Brun, G. (2021). Making reflective equilibrium precise. A formal model. Ergo: an open access journal of philosophy, 8(15), 441-472.
+
+Elgin, C. Z. (1996). Considered Judgment. Princeton University Press.
+
+Elgin, C. Z. (2013). Non-foundationalist epistemology: Holism, coherence, and tenability. In: M. Steup and E. Sosa (Eds.), Contemporary Debates in Epistemology ed. Boston: Blackwell, 2005, pp. 156-167.
+
+Elgin, C. Z. (2017) True enough. MIT press.
 
 Klapper, A., Dotsch, R., van Rooij, I., & Wigboldus, D. H. (2018). [Social categorization in connectionist models: A conceptual integration](https://guilfordjournals.com/doi/abs/10.1521/soco.2018.36.2.221). Social Cognition, 36(2), 221-246.
 
