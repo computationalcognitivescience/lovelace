@@ -73,16 +73,16 @@ You can read this as '$$M$$ contains all $$a$$'s _with the property that_ $$a\in
 
 {% marginfigure fig-set-builder "assets/img/set-builder.svg" "Set builder." "75%" %}
 
-### Cardinal product
+### Cartesian product
 Set builder notation is useful to filter objects from a single set, but becomes very potent when building from multiple sets. For example:
 
 $$F=\{(p,a)~|~p\in P\text{ AND }a\in A\}$$
 
-{% marginfigure fig-cardinal-product "assets/img/set-cardinal.svg" "Cardinal product." "75%" %}
+{% marginfigure fig-cartesian-product "assets/img/set-cardinal.svg" "Cartesian product." "75%" %}
 
 Read this as '$$F$$ contains all pairs of $$p$$ and $$a$$ _with the property that_ $$p$$ is a person and $$a$$ is an animal'. Pairs are denoted in brackets. You can think of $$F$$ containing all possible combinations of person-animal pairs. For example, these are all the options you have when trying to guess what the favorite animals are of your friends.
 
-Many other set builders are possible too, but this specific 'pair builder' is called the _cardinal product_ of two sets. It is used often enough that it has its own special symbol: $$F=P\times A$$.
+Many other set builders are possible too, but this specific 'pair builder' is called the _cartesian product_ of two sets. It is used often enough that it has its own special symbol: $$F=P\times A$$.
 
 ### Special sets
 Finally, there are some special sets which we often use that have their own symbols:
