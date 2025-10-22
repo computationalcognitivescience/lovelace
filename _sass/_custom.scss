@@ -59,32 +59,14 @@ html{
 	height: auto;
 }
 
-.scastie.embedded{
-	width: 87.5% !important;
-    margin-left: 0px !important;
-    margin-right: auto !important;
-	padding-right: 2rem !important;
-
+.scastie.embedded {
+  max-width: 55% !important;
+  margin: 0px !important;
 }
 
-.embedded-menu{
-	width: 150px !important;
+.scastie .embedded-overlay {
+  width: 40px !important;
 }
-
-.run-button span{
-	display: none !important;
-}
-
-.run-button:after{
-	content: 'run' !important;
-}
-
-.output-console li{
-	font-size: 1rem;
-	margin-top: 0;
-	line-height: 1.2rem;
-}
-
 
 .next-chapter{
   flex: 1;

@@ -73,18 +73,18 @@ The theoretical models for selecting invitees (subset choice) take as input sets
 ### Persons
 A particular person is identified by their name, and can be defined by using ```Person(name: String)```. This function takes a string as input and returns a Person object with the given name:
 
-```scala
+<pre class="mathlib">
 Person("Jamie")
-```
+</pre>
 
 Persons with the same name are considered to refer to the same individual, since the computer cannot distinguish between them.
 
-```scala
+<pre class="mathlib">
 val person1 = Person("Jamie")
 val person2 = Person("Jamie")
 
 person1 == person2
-```
+</pre>
 
 We can also create random persons. Their names are randomly selected from a predefined list with 100 names. Running the code below multiple times will create different persons.
 
@@ -98,7 +98,7 @@ We can also generate groups of ```n``` random individuals.
 Person.randomGroup(5)
 ```
 
-These functions will help us create sets of persons. We can then use ```mathlib``` to work with these sets as expected. For example, we can create a set of random persons $$P$$, randomly take 2 persons who are liked $$L$$, and create a set of persons who are disliked $$D=P \setminus L$$:  
+These functions will help us create sets of persons. We can then use ```mathlib``` to work with these sets as expected. For example, we can create a set of random persons $$P$$, randomly take 2 persons who are liked $$L$$, and create a set of persons who are disliked $$D=P \setminus L$$:
 
 ```scala
 val persons = Person.randomGroup(5)
@@ -420,7 +420,7 @@ def si5(persons: Set[Person],
   // Specify the optimality condition.
   def gl_x_g(invitees: Set[Person]): Int = {
     // The number of invitees the host likes.
-    val gl = (invitees /\ personsLiked).size              
+    val gl = (invitees /\ personsLiked).size
     // The number of unique pairs that like eachother.
     val x = { invitees.uniquePairs | like.tupled }.size
     // The number of total invitees.
@@ -474,10 +474,10 @@ def si6(persons: Set[Person],
 
   // Specify the optimality condition.
   def gl_g(invitees: Set[Person]): Int = {
-    // The number of invitees the host likes.  
+    // The number of invitees the host likes.
     val gl = (invitees /\ personsLiked).size
     // The number of total invitees.
-    val g  = invitees.size       
+    val g  = invitees.size
     gl + g
   }
 
