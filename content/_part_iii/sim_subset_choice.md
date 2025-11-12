@@ -74,12 +74,16 @@ The theoretical models for selecting invitees (subset choice) take as input sets
 A particular person is identified by their name, and can be defined by using ```Person(name: String)```. This function takes a string as input and returns a Person object with the given name:
 
 <pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+
 Person("Jamie")
 </pre>
 
 Persons with the same name are considered to refer to the same individual, since the computer cannot distinguish between them.
 
 <pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+
 val person1 = Person("Jamie")
 val person2 = Person("Jamie")
 
@@ -88,42 +92,51 @@ person1 == person2
 
 We can also create random persons. Their names are randomly selected from a predefined list with 100 names. Running the code below multiple times will create different persons.
 
-```scala
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+
 Person.random
-```
+</pre>
 
 We can also generate groups of ```n``` random individuals.
 
-```scala
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+
 Person.randomGroup(5)
-```
+</pre>
 
 These functions will help us create sets of persons. We can then use ```mathlib``` to work with these sets as expected. For example, we can create a set of random persons $$P$$, randomly take 2 persons who are liked $$L$$, and create a set of persons who are disliked $$D=P \setminus L$$:
 
-```scala
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+import mathlib.set.SetTheory._
+
 val persons = Person.randomGroup(5)
 val personsLiked = persons.take(2)            // Take 2 people from persons.
 val personsDisliked = persons \ personsLiked
 
-println(personsLiked)
-println(personsDisliked)
-println(persons)
-```
+personsLiked
+personsDisliked
+persons
+</pre>
 
 ### Like-function
 The final support code Formal provided is used to create like relationships between persons. In the formal model this function is defined as $$like: P\times P \rightarrow \{true,false\}$$. After discussing with a colleague (see [Exercise X in Chapter 4](/lovelace/part_ii/subset#try-again)), Formal recognized that the like function was intended to exclude reflection (i.e., self-liking) and is symmetrical $$like(a,b)=like(b,a)$$ (i.e., it formalizes like or dislike *eachother*).{% sidenote 'sn-id-helper' 'The formalizations in this chapter are updated with these properties.' %}
 
 One could specify a like relationship manually. Simply create persons, store them in values so we can refer to them and then use ```likes``` or ```dislikes``` to create like relationships.
 
-```scala
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+
 val lela = Person("Lela")
 val carlos = Person("Carlos")
 val ervin = Person("Ervin")
 
-println(lela likes carlos)
-println(carlos dislikes ervin)
-println(carlos dislikes lela)
-```
+lela likes carlos
+carlos dislikes ervin
+carlos dislikes lela
+</pre>
 
 Specifying a *complete* like function for a set of persons, however, will be quite a chore: for each pair you need to explicate if $$a$$ likes $$b$$ and vice versa. For $$10$$ persons, that is a list of $$10 \cdot 10=100$$ likes. Support functions help us reduce this chore.
 

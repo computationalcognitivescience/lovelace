@@ -60,9 +60,9 @@
     scastie.Embedded('.mathlib', {
     theme: 'light',
     isWorksheetMode: true,
-    sbtConfig: 'libraryDependencies += "com.markblokpoel" %% "mathlib" % "0.9.2-b2"',
+    sbtConfig: 'libraryDependencies ++= Seq("com.markblokpoel" %% "mathlib" % "0.9.3", "com.markblokpoel" %% "mathlib-repo" % "0.1.1")',
     targetType: 'jvm',
-    scalaVersion: '2.13.16'
+    scalaVersion: '2.13.17'
     });
   });
   </script>

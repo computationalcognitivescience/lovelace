@@ -60,12 +60,18 @@ html{
 }
 
 .scastie.embedded {
-  max-width: 55% !important;
+  max-width: 100% !important;
+  width: 100% !important;
   margin: 0px !important;
 }
 
 .scastie .embedded-overlay {
-  width: 40px !important;
+  width: 40px;
+}
+
+.scastie .console-label p {
+  font-size: 1em;
+  width: fit-content;
 }
 
 .next-chapter{
@@ -160,22 +166,4 @@ div.indent-3{
 }
 div.indent-4{
 	margin-left: 4rem;
-}
-
-div[data-scalafiddle] {
-  width: 100%;
-}
-
-div[data-scalafiddle] > iframe {
-  width: 90% !important;
-  max-height: 1000px !important;
-}
-
-div[data-scalafiddle] pre, div[data-scalafiddle] code {
-	width: 90%;
-}
-
-div[data-scalafiddle] > button {
-  top: 0px;
-  left: 60%;
 }
