@@ -5,15 +5,6 @@ chapter: 10
 nav_exclude: true
 ---
 
-<div class="warning" style='max-width: 55%;background-color:#DF7777; color: #000; border-left: solid #a00000 4px; border-radius: 4px; padding-right: 2em;'>
-<span>
-<p style='width: 100%;margin-top:1em; text-align:center'>
-<b>Interactive code offline</b></p>
-<p style='width: calc(100% - 1em);margin-left: 1em;'>
-Due to the discontinuation of <a href="https://www.scalafiddle.com">www.scalafiddle.com</a>, the code blocks in the book are currently not interactive. We regret the limitations this imposes and are working on a solution.
-</p></span>
-</div>
-
 In this chapter you will learn how to use computer simulations as a theoretical
 tool, namely to analyze the consequences different formalizations of verbal
 theories. To reach that goal, you will also learn how to read an implementation
@@ -144,7 +135,11 @@ Specifying a *complete* like function for a set of persons, however, will be qui
 
 When given a partial specification of the like function, we can complete it by assuming that any non-specified relationship is a dislike. Use the support function ```.deriveLikeFunction(partialLikes: Set[Likes])``` on a set of persons to create a like function for which the domain consists of all pairs of persons (including $$(a,b)$$, $$(b,a)$$ and $$a,a$$). It will complete ```partialLikes``` by assuming non-specified relationships are dislikes.
 
-```scala
+The ```Viz.render()``` function can draw graphs specified in the [DOT language](https://graphviz.org/doc/info/lang.html). The ```.toDotString(like)``` helper function transforms persons and a like function to graph figures.
+
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+
 val lela = Person("Lela")
 val carlos = Person("Carlos")
 val ervin = Person("Ervin")
@@ -153,23 +148,21 @@ val persons = Set(lela, carlos, ervin)
 val partialLikings = Set(lela likes carlos, carlos likes ervin,carlos dislikes lela)
 
 def like = persons.deriveLikeFunction(partialLikings)
-```
-The ```Viz.render()``` function can draw graphs specified in the [DOT language](https://graphviz.org/doc/info/lang.html). The ```.toDotString(like)``` helper function transforms persons and a like function to graph figures.
-```scala
-Viz.render(persons.toDotString(like))
-```
-And we can view the truth values associated with all pairs of persons.
-```scala
+
 List(
   like(lela, carlos),
   like(lela, ervin),
   like(carlos, ervin)
 )
-```
+
+html"<img src=\"https://quickchart.io/graphviz?graph=${persons.toDotString(like)}\" />"
+</pre>
 
 While this approach is useful to manually explore small examples, it still is a lot of manual work. Wouldn't it be nice if we can generate a complete like function randomly? Use the support function ```.randomLikeFunction(probability: Double)``` on a set of persons to create a random like function. For each pair (including $$(a,b)$$, $$(b,a)$$ and $$a,a$$), it generates ```true``` with probability equal to the ratio or false otherwise.
 
-```scala
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+
 val lela = Person("Lela")
 val carlos = Person("Carlos")
 val ervin = Person("Ervin")
@@ -178,14 +171,14 @@ val persons = Set(lela, carlos, ervin)
 
 def like = persons.randomLikeFunction(0.7)
 
-Viz.render(persons.toDotString(like))
-
 List(
   like(lela, carlos),
   like(lela, ervin),
   like(carlos, ervin)
 )
-```
+
+html"<img src=\"https://quickchart.io/graphviz?graph=${persons.toDotString(like)}\" />"
+</pre>
 
 {% question %}
 What happens to the output of the like function when you change the probability?
@@ -196,16 +189,18 @@ Try changing the probability value (the input of the function ```randomLikeFunct
 
 A final example to illustrate how to generate a random input instance. An alternative visualization is used to indicate which persons are liked by the host or not. Note that generating a visualization graph with many persons will not display properly or potentially crash your browser due to the many relationships.
 
-```scala
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+import mathlib.set.SetTheory._
+
 val persons = Person.randomGroup(5)
 val personsLiked = persons.take(2)
 val personsDisliked = persons \ personsLiked
 
 def like = persons.randomLikeFunction(0.7)
 
-Viz.render(persons.toDotString(personsLiked, personsDisliked, like))
-```
-
+html"<img src=\"https://quickchart.io/graphviz?graph=${persons.toDotString(personsLiked, personsDisliked, like)}\" />"
+</pre>
 
 {% question %}
 With these support functions, we can randomly create instances for the formal models of selecting invitees. Why is this helpful?
@@ -579,84 +574,65 @@ of the search space.
 {% endhidden %}
 {% endquestion %}
 
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+import mathlib.set.SetTheory._
 
-```scala
-// Generate inputs
-val inputData: List[SelectingInvitees.Input] =
-  SelectingInvitees.inputGenerator(groupSize = 5,
-                                   likeDislikeRatio = .2,
-                                   pairLikeRatio = .4,
-                                   k = 2,
-                                   sampleSize = 50)
+val inputs = Input.generate(
+  groupSize         = 6,
+  likeDislikeRatios = Set(0, 0.22, 0.66, 1.0),
+  pairLikeRatios    = Set(0, 0.22, 0.66, 1.0),
+  ks                = Set(0, 0.22, 0.66, 1.0),
+  sampleSize        = 1
+)
 
-// Compute outputs
-val outputDataSI4: List[Set[Person]] = inputData.map(input =>
-  SelectingInvitees.si4(input.group,
-                        input.personsLiked,
-                        input.personsDisliked,
-                        input.like,
-                        input.k))
+val io4 = inputs.map(input => input -> SelectingInvitees.si4(
+  input.group,
+  input.personsLiked,
+  input.personsDisliked,
+  input.like,
+  input.k
+))
+val io5 = inputs.map(input => input -> SelectingInvitees.si5(
+  input.group,
+  input.personsLiked,
+  input.personsDisliked,
+  input.like
+))
+val io6 = inputs.map(input => input -> SelectingInvitees.si6(
+  input.group,
+  input.personsLiked,
+  input.personsDisliked,
+  input.like,
+  input.k
+))
 
-val outputDataSI5: List[Set[Person]] = inputData.map(input =>
-  SelectingInvitees.si5(input.group,
-                        input.personsLiked,
-                        input.personsDisliked,
-                        input.like))
-
-val outputDataSI6: List[Set[Person]] = inputData.map(input =>
-  SelectingInvitees.si6(input.group,
-                        input.personsLiked,
-                        input.personsDisliked,
-                        input.like,
-                        input.k))
-
-// Perform data analyses
-def analysis1(io: (SelectingInvitees.Input, Set[Person])): (Double, Double) = {
-  val input = io._1
-  val output = io._2
-  val nrLikes = input.group.uniquePairs.filter(input.like.tupled).size
-  val nrDislikes = input.group.uniquePairs.filter(!input.like.tupled(_)).size
-  val ldRatio = nrLikes.toDouble / nrDislikes
-  val size = output.size.doubleValue
+def analysis1(io: (Input, Set[Person])): (Double, Double) = {
+  val input      = io._1
+  val output     = io._2
+  val nrLikes    = input.group.uniquePairs.count(input.like.tupled)
+  val nrDislikes = input.group.uniquePairs.count(!input.like.tupled(_))
+  val ldRatio    = nrLikes.toDouble / nrDislikes
+  val size       = output.size.doubleValue
   (ldRatio, size)
 }
 
-val dataAnalysis1SI4 = (inputData zip outputDataSI4).map(analysis1)
-val dataAnalysis1SI5 = (inputData zip outputDataSI5).map(analysis1)
-val dataAnalysis1SI6 = (inputData zip outputDataSI6).map(analysis1)
-
-def analysis2(io: (SelectingInvitees.Input, Set[Person])): (Double, Double) = {
-  val input = io._1
-  val output = io._2
-  val nrLikes = input.group.uniquePairs.filter(input.like.tupled).size
-  val nrDislikes = input.group.uniquePairs.filter(!input.like.tupled(_)).size
-  val ldRatio = nrLikes.toDouble / nrDislikes
-  val avgLikes = output.uniquePairs.filter(input.like.tupled).size
-  (ldRatio, avgLikes)
+val data4A1: List[(Double, Double)] = io4 map {
+  case (i: Input, o: Set[Person]) => analysis1(i, o)
+}
+val data5A1: List[(Double, Double)] = io5 map {
+  case (i: Input, o: Set[Person]) => analysis1(i, o)
+}
+val data6A1: List[(Double, Double)] = io6 map {
+  case (i: Input, o: Set[Person]) => analysis1(i, o)
 }
 
-val dataAnalysis2SI4 = (inputData zip outputDataSI4).map(analysis2)
-val dataAnalysis2SI5 = (inputData zip outputDataSI5).map(analysis2)
-val dataAnalysis2SI6 = (inputData zip outputDataSI6).map(analysis2)
+val data4string1 = Analyses.scatterDataToString(data4A1, "SI4")
+val data5string1 = Analyses.scatterDataToString(data5A1, "SI5")
+val data6string1 = Analyses.scatterDataToString(data6A1, "SI6")
 
-// Plot analysis 1
-val trace14 = Trace(dataAnalysis1SI4, "SI4", PlotType.Line).mean
-val trace15 = Trace(dataAnalysis1SI5, "SI5", PlotType.Line).mean
-val trace16 = Trace(dataAnalysis1SI6, "SI6", PlotType.Line).mean
-
-Plot(List(trace14, trace15, trace16),
-     xAxisTitle = "pair-wise like/dislike ratio",
-     yAxisTitle = "nr invitees").render
-
-// Plot analysis 2
-val trace24 = Trace(dataAnalysis2SI4, "SI4", PlotType.Line).mean
-val trace25 = Trace(dataAnalysis2SI5, "SI5", PlotType.Line).mean
-val trace26 = Trace(dataAnalysis2SI6, "SI6", PlotType.Line).mean
-
-Plot(List(trace24, trace25, trace26),
-    xAxisTitle = "pair-wise like/dislike ratio",
-    yAxisTitle = "average likes among invitees").render
-```
+html"<img src=\"https://quickchart.io/chart?c={type:'scatter',data:{datasets:[$data4string1,$data5string1,$data6string1]}}\" />"
+</pre>
 
 The analysis and plotting functionality within the online Scala system is quite
 limited. If you want to explore the simulations more extensively consider
