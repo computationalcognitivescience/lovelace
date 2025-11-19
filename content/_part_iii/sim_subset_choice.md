@@ -8,9 +8,9 @@ nav_exclude: true
 In this chapter you will learn how to use computer simulations as a theoretical
 tool, namely to analyze the consequences different formalizations of verbal
 theories. To reach that goal, you will also learn how to read an implementation
-of formal theory in Scala ```mathlib```. At the end of this chapter, you will be
+of formal theory in Scala ```mathlib``` (Blokpoel, 2024). At the end of this chapter, you will be
 able to use (adapt and run) the provided simulation code to compare three formal
-models. You will be able to test your intuitions about the theory and derive qualitative differences between them.
+models of subset chocie. You will be able to test your intuitions about the theory and derive qualitative differences between them.
 
 We pick up the conversation between Verbal and Formal from [Chapter 4 - Subset Choice](/lovelace/part_ii/subset#dialogue-1-formalizing-inviting-guests). Formal is very excited to share the computer simulations they implemented of the theoretical models Formal and Verbal created. Formal has some suggestions on how to use the simulations, which they explain to Verbal.
 
@@ -40,11 +40,11 @@ We pick up the conversation between Verbal and Formal from [Chapter 4 - Subset C
 
 {% indent 4 %}
 **Formal:**
-Not necessarily. Formalizations that are different may behave the same or very similarly. Sometimes we can analytically derive such equivalence{% sidenote 'sn-id-equivalence' 'You can read about mathematically proving model equivalence in [Chapter 5 - Coherence](/lovelace/part_ii/coherence#Equivalence).' %} but this is not always possible. Then computer simulations can come in handy.
+Not necessarily. Formalizations that are different may behave the same or very similarly. Sometimes we can analytically derive such equivalence{% sidenote 'sn-id-equivalence' 'You can read about mathematically proving model equivalence in [Chapter 5 - Coherence](/lovelace/part_ii/coherence#Equivalence).' %} but this is not always easy. Computer simulations can come in handy.
 {% endindent %}
 
 {% indent 0 %}
-**Verbal:** Ah, I see. I would like to know if there are important differences between the theories. That way we can possibly rule out theories that cannot explain the phenomenon or find ways to update them, just like when we were formalizing my verbal theories.
+**Verbal:** Ah, I see. I would like to know if there are important differences between the theories. That way we can possibly rule out theories that cannot explain the phenomenon or find ways to revise them, just like when we were formalizing my verbal theories.
 {% endindent %}
 
 {% indent 4 %}
@@ -55,9 +55,9 @@ If you jumped here directly from [Chapter 4 - Subset choice](/lovelace/part_ii/s
 you may find it helpful to first read [Chapter 9 - Scala and mathlib](/lovelace/part_ii/mathlib) to learn how to read (and write) Scala code using the ```mathlib``` library. In addition to the default ```mathlib``` library, the simulation code on this page includes supporting code which we explain first.
 
 ## Supporting code
-Running simulations requires input instances as specified by the theoretical model. While we could code input by hand, that is a lot of work. The beauty of using computer simulations is that it can do the hard work for us by *automatically* generating input. To that end, Formal has written supporting code. {% sidenote 'sn-id-helper' 'Supporting code is often written specifically for a domain. For example, [simulating Coherence](/lovelace/part_iii/sim_coherence) uses different support code.' %}
+Running simulations requires input instances as specified by the theoretical model. While we could code input by hand, that is a lot of work. The benefit of using computer simulations is that with some clever coding we can automatically generate input. To that end, Formal has written supporting code. {% sidenote 'sn-id-helper' 'Supporting code is often written specifically for a domain. For example, a simulation of [Coherence](/lovelace/part_ii/coherence) would require different support code.' %}
 
-For now, it is not important that you know how to write support code. However, in order to explore and adapt the code that Formal has provided, being able to *use* support code is recommended. Let's explore some examples.
+For now, it is not important that you know how to write support code. However, in order to explore and adapt the code that Formal has provided, being able to use support code is recommended. Let's explore some examples.
 
 The theoretical models for selecting invitees (subset choice) take as input sets of persons and a function that for pairs of persons returns if they like eachother or not. The support code helps us generate these parts of the input.
 
@@ -70,7 +70,7 @@ import mathlibrepo.selectinginvitees._
 Person("Jamie")
 </pre>
 
-Persons with the same name are considered to refer to the same individual, since the computer cannot distinguish between them.
+Persons with the same name are considered to be the same individual.
 
 <pre class="mathlib">
 import mathlibrepo.selectinginvitees._
@@ -81,7 +81,7 @@ val person2 = Person("Jamie")
 person1 == person2
 </pre>
 
-We can also create random persons. Their names are randomly selected from a predefined list with 100 names. Running the code below multiple times will create different persons.
+We can also generate random persons. Their names are randomly selected from a predefined list with 100 names. Running the code below multiple times will create different persons.
 
 <pre class="mathlib">
 import mathlibrepo.selectinginvitees._
@@ -113,7 +113,7 @@ persons
 </pre>
 
 ### Like-function
-The final support code Formal provided is used to create like relationships between persons. In the formal model this function is defined as $$like: P\times P \rightarrow \{true,false\}$$. After discussing with a colleague (see [Exercise X in Chapter 4](/lovelace/part_ii/subset#try-again)), Formal recognized that the like function was intended to exclude reflection (i.e., self-liking) and is symmetrical $$like(a,b)=like(b,a)$$ (i.e., it formalizes like or dislike *eachother*).{% sidenote 'sn-id-helper' 'The formalizations in this chapter are updated with these properties.' %}
+The final support code Formal provided is used to create like relationships between persons. In the formal model this function is defined as $$like: P\times P \rightarrow \{true,false\}$$. After discussing with a colleague (see [Exercise 4.4 in Chapter 4](/lovelace/part_ii/subset#try-again)), Formal recognized that the like function was intended to exclude reflection (i.e., self-liking) and is symmetrical $$like(a,b)=like(b,a)$$ (i.e., it formalizes like or dislike *eachother*).{% sidenote 'sn-id-helper' 'The formalizations in this chapter are updated with these properties.' %}
 
 One could specify a like relationship manually. Simply create persons, store them in values so we can refer to them and then use ```likes``` or ```dislikes``` to create like relationships.
 
@@ -129,13 +129,11 @@ carlos dislikes ervin
 carlos dislikes lela
 </pre>
 
-Specifying a *complete* like function for a set of persons, however, will be quite a chore: for each pair you need to explicate if $$a$$ likes $$b$$ and vice versa. For $$10$$ persons, that is a list of $$10 \cdot 10=100$$ likes. Support functions help us reduce this chore.
+Specifying a *complete* like function for a set of persons, however, will be quite a chore: for each pair you need to explicate if $$a$$ likes $$b$$ and vice versa. For $$10$$ persons, that is a list of $$10 \cdot 10=100$$ likes. Support functions help us here.
 
-[//]: # ({% marginnote 'mn-id-runbutton' 'The code snippet below is interleaved with explanation text. Pressing <button style="background: rgba(255,255,255,0.6) !important;color: rgba(0, 0, 0, 0.6) !important;border-radius: 5px;border: 1px solid #ddd;font-family: Lato,,Arial,Helvetica,sans-serif;font-size: 14px; padding: 3px 8px;transition: all 350ms ease;"><img src="https://embed.scalafiddle.io/runicon.png" style="padding: 0;margin: 0 0 4px 0;vertical-align: middle;width: 16px;height: 16px;display: inline;">Run</button> removes the explanation text to run the code. You can get the explanation back by reloading this webpage.' %})
+When given an incomplete list of like relationships, we can complete it this into a complete like function by assuming that any non-specified relationship is a dislike. Use the support function ```.deriveLikeFunction(partialLikes: Set[Likes])``` on a set of persons to create a like function for which the domain consists of all pairs of persons (including $$(a,b)$$, $$(b,a)$$ and $$a,a$$). It will complete ```partialLikes``` by assuming non-specified relationships are dislikes.
 
-When given a partial specification of the like function, we can complete it by assuming that any non-specified relationship is a dislike. Use the support function ```.deriveLikeFunction(partialLikes: Set[Likes])``` on a set of persons to create a like function for which the domain consists of all pairs of persons (including $$(a,b)$$, $$(b,a)$$ and $$a,a$$). It will complete ```partialLikes``` by assuming non-specified relationships are dislikes.
-
-The ```Viz.render()``` function can draw graphs specified in the [DOT language](https://graphviz.org/doc/info/lang.html). The ```.toDotString(like)``` helper function transforms persons and a like function to graph figures.
+The ```html``` function is used to draw a graph of the like function. This graph is specified in the [DOT language](https://graphviz.org/doc/info/lang.html) and can be generated using the ```.toDotString(like)``` helper function transforms persons and a like function to graph figures.
 
 <pre class="mathlib">
 import mathlibrepo.selectinginvitees._
@@ -155,10 +153,10 @@ List(
   like(carlos, ervin)
 )
 
-html"<img src=\"https://quickchart.io/graphviz?graph=${persons.toDotString(like)}\" />"
+html"<img src=\"https://quickchart.io/graphviz?layout=circo&graph=${persons.toDotString(like)}\" />"
 </pre>
 
-While this approach is useful to manually explore small examples, it still is a lot of manual work. Wouldn't it be nice if we can generate a complete like function randomly? Use the support function ```.randomLikeFunction(probability: Double)``` on a set of persons to create a random like function. For each pair (including $$(a,b)$$, $$(b,a)$$ and $$a,a$$), it generates ```true``` with probability equal to the ratio or false otherwise.
+While this approach is useful to manually explore small examples, it still is a lot of manual work. Wouldn't it be nice if we can generate a complete like function randomly? Use the support function ```.randomLikeFunction(probability: Double)``` on a set of persons to create a random like function. For each pair (including $$(a,b)$$, $$(b,a)$$ and $$a,a$$), it generates ```false``` with probability equal to the ratio or true otherwise.
 
 <pre class="mathlib">
 import mathlibrepo.selectinginvitees._
@@ -177,7 +175,7 @@ List(
   like(carlos, ervin)
 )
 
-html"<img src=\"https://quickchart.io/graphviz?graph=${persons.toDotString(like)}\" />"
+html"<img src=\"https://quickchart.io/graphviz?layout=circo&graph=${persons.toDotString(like)}\" />"
 </pre>
 
 {% question %}
@@ -199,7 +197,7 @@ val personsDisliked = persons \ personsLiked
 
 def like = persons.randomLikeFunction(0.7)
 
-html"<img src=\"https://quickchart.io/graphviz?graph=${persons.toDotString(personsLiked, personsDisliked, like)}\" />"
+html"<img src=\"https://quickchart.io/graphviz?layout=circo&graph=${persons.toDotString(personsLiked, personsDisliked, like)}\" />"
 </pre>
 
 {% question %}
@@ -267,21 +265,111 @@ Let's see how this formalization translates to simulation code. The
 formalization is implemented in the ```si4``` function, all of the input ($$P$$,
 $$L$$, $$D$$, $$like$$ and $$k$$) is listed as an argument of the function. The
 type of the output also needs to be defined. In this case the output is a subset
-$$G\subseteq P$$ of persons, translating to type ```Set[Person]```.
+$$G\subseteq P$$ of persons, translating to the type ```Set[Person]```.
 
 ```scala
-def si4(persons: Set[Person],
-        personsLiked: Set[Person],
-        personsDisliked: Set[Person],
-        like: (Person, Person) => Boolean,
-        k: Int): Set[Person] = {
+def si4(
+  persons: Set[Person],
+  personsLiked: Set[Person],
+  personsDisliked: Set[Person],
+  like: (Person, Person) => Boolean,
+  k: Int
+): Set[Person]
 ```
 
 The input in the formalization is subject to a few constraints. We check those
-constraints in the code and stop the program of the constraints are not met with
-an informative error message.
+constraints in the code and stop the program with an informative error message
+when the constraints are not met.
 
 ```scala
+// Input must satisfy these constraints, otherwise error.
+require(personsLiked <= persons,
+        "personsLiked must be a subset of persons")
+require(personsDisliked <= persons,
+        "personsDisliked must be a subset of persons")
+require(personsLiked /\ personsDisliked == Set.empty,
+        "personsLiked intersect personsDisliked must be emtpy")
+require(personsLiked \/ personsDisliked == persons,
+        "personsLiked union personsLiked must equal persons")
+```
+
+The output is defined using two properties. To define output using the set
+builder we write two functions that compute these properties. First, the host
+wants to invite at most $$k$$ people they dislike <span>$$|G \cap D|\leq
+k$$</span>. The following function returns a Boolean if a given (sub)set of people does
+not have this property.
+
+```scala
+// Specify that invitees is valid if |G /\ D| <= k.
+def atMostKDislikes(invitees: Set[Person]): Boolean =
+  (invitees /\ personsDisliked).size <= k
+```
+
+Second, the formalization
+states that the number of invited pairs that like each other plus the number of
+invited people $$|X| + |G|$$ is maximal. This is an optimality condition. The next
+function computes for a given (sub)set of people, the set $$X$$ and returns an
+integer corresponding to $$|X| + |G|$$.
+
+{% marginnote 'mn-id-tupled' 'The ```.tupled``` function transforms a function
+with $$n$$ arguments into a function with 1 argument, where that argument is an
+$$n$$-tuple. This is needed when applying a function on a set of tuples such as
+```invitees.uniquePairs``` that correspond to the arguments of that function.' %}
+```scala
+// Specify the optimality condition.
+def xg(invitees: Set[Person]): Int = {
+  // The number of unique pairs that like eachother.
+  val x = { invitees.uniquePairs | like.tupled }.size
+  // The number of total invitees.
+  val g = invitees.size
+  x + g
+}
+```
+
+Finally, we specify the set of possible valid outputs. Remember that for any given
+formalization multiple possible outputs may exist that satisfy the output
+conditions. Below, we consider all possible subsets of people, i.e., the powerset
+$$\mathcal{P}(P)$$. Any $$G\in\mathcal{P}(P)$$ is a subset of people
+$$G\subseteq P$$. From this set of sets we build a set of sets of people that
+satisfy <span>$$|G \cap D|\leq k$$</span> using ```atMostKDislikes``` and the
+optimality condition $$\arg\max_{|X|+|G|}$$ using ```argMax(xg)```.
+
+```scala
+val invitees = { powerset(persons) | atMostKDislikes _ }.argMax(xg)
+```
+
+To complete the implementation, we need to output one valid solution if any
+exist. If multiple possible solutions exist, we return one at random. Minimally
+one solution will always exist, namely the empty set, so we can safely ask for
+a random one.
+
+```scala
+// Return a (valid) set of invitees at random.
+invitees.random.get
+```
+
+This completes the implementation of {% problem Selecting Invitees (version 4)
+%}. Now we need to create some input for which ```si4``` can evaluate the output.
+
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+import mathlib.set.SetTheory._
+
+val group = Person.randomGroup(10)    // Generate random group
+val personsLiked = group.take(5)      // The first 5 are liked
+val personsDisliked = group.drop(5)   // The rest is disliked
+
+def like = group.randomLikeFunction(.7) // Autogenerate random like relations
+
+html"<img src=\"https://quickchart.io/graphviz?layout=circo&graph=${group.toDotString(personsLiked, personsDisliked, like)}\" />"
+
+def si4(
+  persons: Set[Person],
+  personsLiked: Set[Person],
+  personsDisliked: Set[Person],
+  like: (Person, Person) => Boolean,
+  k: Int
+): Set[Person] = {
   // Input must satisfy these constraints, otherwise error.
   require(personsLiked <= persons,
           "personsLiked must be a subset of persons")
@@ -291,32 +379,11 @@ an informative error message.
           "personsLiked intersect personsDisliked must be emtpy")
   require(personsLiked \/ personsDisliked == persons,
           "personsLiked union personsLiked must equal persons")
-```
 
-The output is defined using two properties. To define output using the set
-builder we write two functions that compute these properties. First, the host
-wants to invite at most $$k$$ people they dislike <span>$$|G \cap D|\leq
-k$$</span>. This function returns a Boolean if a given (sub)set of people does
-not have this property.
-
-```scala
   // Specify that invitees is valid if |G /\ D| <= k.
-  def atMostKDislikes(invitees: Set[Person]): Boolean = {
+  def atMostKDislikes(invitees: Set[Person]): Boolean =
     (invitees /\ personsDisliked).size <= k
-  }
-```
 
-Second, the formalization
-states that the number of invited pairs that like each other plus the number of
-invited people $$|X| + |G|$$ is maximal. This is an optimality condition. This
-function computes for a given (sub)set of people, the set $$X$$ and returns an
-integer corresponding to $$|X| + |G|$$.
-
-{% marginnote 'mn-id-tupled' 'The ```.tupled``` function transforms a function
-with $$n$$ arguments into a function with 1 argument, where that argument is an
-$$n$$-tuple. This is needed when applying a function on a set of tuples that
-correspond to the arguments of that function.' %}
-```scala
   // Specify the optimality condition.
   def xg(invitees: Set[Person]): Int = {
     // The number of unique pairs that like eachother.
@@ -325,50 +392,22 @@ correspond to the arguments of that function.' %}
     val g = invitees.size
     x + g
   }
-```
 
-Here we specify the set of possible valid outputs. Remember that for any given
-formalization multiple possible outputs may exist that satisfy the output
-conditions. Below, we consider all possible subsets of people (the powerset
-$$\mathcal{P}(P)$$). Any $$G\in\mathcal{P}(P)$$ is a subset of people
-$$G\subseteq P$$. From this set of sets we build a set of sets of people that
-satisfy <span>$$|G \cap D|\leq k$$</span> using ```atMostKDislikes``` and the
-optimality condition $$\arg\max_{|X|+|G|}$$ using ```argMax(xg)```.
-
-```scala
   val invitees = { powerset(persons) | atMostKDislikes _ }.argMax(xg)
-```
 
-To complete the implementation, we need to output one valid solution if any
-exist. If multiple possible solutions exist, we return one at random. Minimally
-one solution will always exist, namely the empty set, so we can safily ask for
-a random one.
-
-```scala
   // Return a (valid) set of invitees at random.
   invitees.random.get
+
 }
-```
 
-This conclused the implementation of {% problem Selecting Invitees (version 4)
-%}. Now we need to create some input on which it can run and to do that we use
-the helper functions.
-
-```scala
-val group = Person.randomGroup(10)    // Generate random group
-val personsLiked = group.take(5)      // The first 5 are liked
-val personsDisliked = group.drop(5)   // The rest is disliked
-
-def like = group.randomLikeFunction(.7) // Autogenerate random like relations
-
-Viz.render(group.toDotString(personsLiked, personsDisliked, like))
-```
-
-Then we simply evaluate ```si4(.)``` on this input.
-
-```scala
-si4(group, personsLiked, personsDisliked, like, k = 2)
-```
+si4(
+  persons = group,
+  personsLiked,
+  personsDisliked,
+  like,
+  k = 2
+)
+</pre>
 
 {% question %}
 Try to play around with the ratios of people that are liked by the host and the
@@ -634,6 +673,67 @@ val data6string1 = Analyses.scatterDataToString(data6A1, "SI6")
 html"<img src=\"https://quickchart.io/chart?c={type:'scatter',data:{datasets:[$data4string1,$data5string1,$data6string1]}}\" />"
 </pre>
 
+
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+import mathlib.set.SetTheory._
+
+val inputs = Input.generate(
+  groupSize         = 6,
+  likeDislikeRatios = Set(0, 0.22, 0.66, 1.0),
+  pairLikeRatios    = Set(0, 0.22, 0.66, 1.0),
+  ks                = Set(0, 0.22, 0.66, 1.0),
+  sampleSize        = 1
+)
+
+val io4 = inputs.map(input => input -> SelectingInvitees.si4(
+  input.group,
+  input.personsLiked,
+  input.personsDisliked,
+  input.like,
+  input.k
+))
+val io5 = inputs.map(input => input -> SelectingInvitees.si5(
+  input.group,
+  input.personsLiked,
+  input.personsDisliked,
+  input.like
+))
+val io6 = inputs.map(input => input -> SelectingInvitees.si6(
+  input.group,
+  input.personsLiked,
+  input.personsDisliked,
+  input.like,
+  input.k
+))
+
+def analysis2(io: (Input, Set[Person])): (Double, Double) = {
+  val input      = io._1
+  val output     = io._2
+  val nrLikes    = input.group.uniquePairs.count(input.like.tupled)
+  val nrDislikes = input.group.uniquePairs.count(!input.like.tupled(_))
+  val ldRatio    = nrLikes.toDouble / nrDislikes
+  val avgLikes   = output.uniquePairs.count(input.like.tupled)
+  (ldRatio, avgLikes)
+}
+
+val data4A1: List[(Double, Double)] = io4 map {
+  case (i: Input, o: Set[Person]) => analysis2(i, o)
+}
+val data5A1: List[(Double, Double)] = io5 map {
+  case (i: Input, o: Set[Person]) => analysis2(i, o)
+}
+val data6A1: List[(Double, Double)] = io6 map {
+  case (i: Input, o: Set[Person]) => analysis2(i, o)
+}
+
+val data4string1 = Analyses.scatterDataToString(data4A1, "SI4")
+val data5string1 = Analyses.scatterDataToString(data5A1, "SI5")
+val data6string1 = Analyses.scatterDataToString(data6A1, "SI6")
+
+html"<img src=\"https://quickchart.io/chart?c={type:'scatter',data:{datasets:[$data4string1,$data5string1,$data6string1]}}\" />"
+</pre>
+
 The analysis and plotting functionality within the online Scala system is quite
 limited. If you want to explore the simulations more extensively consider
 running the simulations in a dedicated Scala development environment (see
@@ -743,4 +843,6 @@ Fiddle.print(a(href:=s"data:text/csv,$csv", target:="_blank", attr("download"):=
 
 ### References
 
-van Rooij, I., & Baggio, G. (2021). [Theory before the test: How to build high-verisimilitude explanatory theories in psychological science.](https://journals.sagepub.com/doi/full/10.1177/1745691620970604) *Perspectives on Psychological Science, 16*(4) 682–697.
+Blokpoel, Mark (2024). mathlib: A Scala package for readable, verifiable and sustainable simulations of formal theory. Journal of Open Source Software, 9(99), 6049, [https://doi.org/10.21105/joss.06049](https://doi.org/10.21105/joss.06049)
+
+van Rooij, Iris, & Baggio, Giosuè (2021). [Theory before the test: How to build high-verisimilitude explanatory theories in psychological science.](https://journals.sagepub.com/doi/full/10.1177/1745691620970604) *Perspectives on Psychological Science, 16*(4) 682–697.

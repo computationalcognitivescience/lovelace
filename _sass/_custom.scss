@@ -60,7 +60,7 @@ html{
 }
 
 .scastie.embedded {
-  max-width: 100% !important;
+  max-width: 90% !important;
   width: 100% !important;
   margin: 0px !important;
 }
@@ -72,6 +72,16 @@ html{
 .scastie .console-label p {
   font-size: 1em;
   width: fit-content;
+  display: none;
+}
+
+.scastie .run-button span {
+  display: none;
+}
+
+.scastie .run-button {
+  min-width: 25px !important;
+  padding: 0 8px 0 8px !important;
 }
 
 .next-chapter{
