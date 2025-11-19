@@ -448,11 +448,16 @@ $$G \subseteq P$$ such that $$|G\cap L| + |X| + |G|$$ is maximized (where $$X = 
 {% endfproblem %}
 
 
-```scala
-def si5(persons: Set[Person],
-        personsLiked: Set[Person],
-        personsDisliked: Set[Person],
-        like: (Person, Person) => Boolean): Set[Person] = {
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+import mathlib.set.SetTheory._
+
+def si5(
+  persons: Set[Person],
+  personsLiked: Set[Person],
+  personsDisliked: Set[Person],
+  like: (Person, Person) => Boolean
+): Set[Person] = {
 
   // Input must satisfy these constraints, otherwise error.
   require(personsLiked <= persons,
@@ -487,23 +492,32 @@ val personsDisliked = group.drop(5)   // The rest is disliked
 
 def like = group.randomLikeFunction(.7) // Autogenerate random like relations
 
-Viz.render(group.toDotString(personsLiked, personsDisliked, like))
+html"<img src=\"https://quickchart.io/graphviz?layout=circo&graph=${group.toDotString(personsLiked, personsDisliked, like)}\" />"
 
-si5(group, personsLiked, personsDisliked, like)
-```
+si5(
+  persons = group,
+  personsLiked,
+  personsDisliked,
+  like
+)
+</pre>
 
 {% fproblem Selecting invitees (version 6) %}
 A set $$P$$, subsets $$L \subseteq P$$ and $$D \subseteq P$$ with $$L \cap D = \emptyset$$ and $$L \cup D = P$$, a function $$like: P \times P \rightarrow \{true, false\}$$, and a threshold value $$k$$.;;
 $$G \subseteq P$$ such that $$|Y| \leq k$$ and  $$|G\cap L|+|G|$$ is maximized (where $$Y = \{p_i,p_j \in G\}~|~like(p_i,p_j) = false \wedge i\neq j \}$$).
 {% endfproblem %}
 
-```scala
-def si6(persons: Set[Person],
-        personsLiked: Set[Person],
-        personsDisliked: Set[Person],
-        like: (Person, Person) => Boolean,
-        k: Int): Set[Person] = {
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+import mathlib.set.SetTheory._
 
+def si6(
+  persons: Set[Person],
+  personsLiked: Set[Person],
+  personsDisliked: Set[Person],
+  like: (Person, Person) => Boolean,
+  k: Int
+): Set[Person] = {
   // Input must satisfy these constraints, otherwise error.
   require(personsLiked <= persons,
           "personsLiked must be a subset of persons")
@@ -540,20 +554,26 @@ val personsDisliked = group.drop(5)   // The rest is disliked
 
 def like = group.randomLikeFunction(.7) // Autogenerate random like relations
 
-Viz.render(group.toDotString(personsLiked, personsDisliked, like))
+html"<img src=\"https://quickchart.io/graphviz?layout=circo&graph=${group.toDotString(personsLiked, personsDisliked, like)}\" />"
 
-si6(group, personsLiked, personsDisliked, like, k = 2)
-```
+si6(
+  persons = group,
+  personsLiked,
+  personsDisliked,
+  like,
+  k = 2
+)
+</pre>
 
 ### Analyzing and comparing formalizations
 
-Simulations are a powerful tool to uncover consequences of formalization
-choices, especially those that are hard to derive mathematically. However, the
-full power of simulations is yet to be unlocked. Looking at single input
+Simulations are a useful theoretical tool to uncover consequences of formalization
+choices, especially those that are hard to derive mathematically.
+Looking at single input
 instances of single formalizations is not very informative and wouldn't be worth
 the effort of coding. Let's see what we can learn about the three versions of {%
-problem Selecting Invitees %} by comparing them to eachother. We follow the
-example questions from [Chapter 8](/lovelace/part_iii/simulating).
+problem Selecting Invitees %} by comparing them to eachother across many inputs.
+We follow the example questions from [Chapter 8](/lovelace/part_iii/simulating).
 
 First we ask: *Are these formalizations truly different, or are they
 equivalent?* We can run the simulation for all three versions on the same input
@@ -570,7 +590,10 @@ reminder, see [Supporting code](/lovelace/part_iii/sim_subset_choice#supporting-
 {% endhidden %}
 {% endquestion %}
 
-```scala
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+import mathlib.set.SetTheory._
+
 val group = Person.randomGroup(10)    // Generate random group
 val personsLiked = group.take(5)      // The first 5 are liked
 val personsDisliked = group.drop(5)   // The rest is disliked
@@ -579,16 +602,20 @@ def like = group.randomLikeFunction(.7) // Autogenerate random like relations
 
 val k = 2
 
-println("Output SI4: " + SelectingInvitees.si4(group, personsLiked, personsDisliked, like, k))
-println("Output SI5: " + SelectingInvitees.si5(group, personsLiked, personsDisliked, like))
-println("Output SI6: " + SelectingInvitees.si6(group, personsLiked, personsDisliked, like, k))
+html"<img src=\"https://quickchart.io/graphviz?layout=circo&graph=${group.toDotString(personsLiked, personsDisliked, like)}\" />"
 
-Viz.render(group.toDotString(personsLiked, personsDisliked, like))
-```
+val si4out = SelectingInvitees.si4(group, personsLiked, personsDisliked, like, k)
+val si5out = SelectingInvitees.si5(group, personsLiked, personsDisliked, like)
+val si6out = SelectingInvitees.si6(group, personsLiked, personsDisliked, like, k)
+
+html"SI4: ${si4out.mkString("\t")}"
+html"SI5: ${si5out.mkString("\t")}"
+html"SI6: ${si6out.mkString("\t")}"
+</pre>
 
 For some inputs the formalizations might be equivalent, but for many others they
 are not. Next, try to answer the question: *How would you be able tell different
-formalizations apart in terms of the behaviour that they predict?* Finally your
+formalizations apart in terms of the input-output mappings they theorize?* Finally the
 hard work will pay off, because you can use simulations to do this. The code
 below consists of three steps: (1) generate a set of inputs, (2) compute for all
 inputs the corresponding output using ```si4```, ```si5``` and ```si6```, (3)
@@ -670,7 +697,7 @@ val data4string1 = Analyses.scatterDataToString(data4A1, "SI4")
 val data5string1 = Analyses.scatterDataToString(data5A1, "SI5")
 val data6string1 = Analyses.scatterDataToString(data6A1, "SI6")
 
-html"<img src=\"https://quickchart.io/chart?c={type:'scatter',data:{datasets:[$data4string1,$data5string1,$data6string1]}}\" />"
+html"<img src=\"https://quickchart.io/chart?c={type:'scatter',data:{datasets:[$data4string1,$data5string1,$data6string1]},options:{scales:{xAxes:[{scaleLabel:{display: true,labelString:'like/dislike ratio'}}],yAxes:[{scaleLabel:{display:true,labelString:'size'}}]}}}\" />"
 </pre>
 
 
@@ -731,115 +758,13 @@ val data4string1 = Analyses.scatterDataToString(data4A1, "SI4")
 val data5string1 = Analyses.scatterDataToString(data5A1, "SI5")
 val data6string1 = Analyses.scatterDataToString(data6A1, "SI6")
 
-html"<img src=\"https://quickchart.io/chart?c={type:'scatter',data:{datasets:[$data4string1,$data5string1,$data6string1]}}\" />"
+html"<img src=\"https://quickchart.io/chart?c={type:'scatter',data:{datasets:[$data4string1,$data5string1,$data6string1]},options:{scales:{xAxes:[{scaleLabel:{display: true,labelString:'like/dislike ratio'}}],yAxes:[{scaleLabel:{display:true,labelString:'average likes'}}]}}}\" />"
 </pre>
 
-The analysis and plotting functionality within the online Scala system is quite
+The analysis and plotting functionality within the online Scala environment is quite
 limited. If you want to explore the simulations more extensively consider
-running the simulations in a dedicated Scala development environment (see
-[Installing Scala and ```mathlib```](/lovelace/part_iii/simulating#installing-scala-and-mathlib)) and
-download the code here. You can also use the code block below and download the
-raw data to perform analyses in your favorite statistical analysis software. The
-code below might take longer to run as it simulates {% problem Selecting Invitees
-%} for many more combinations of parameters. The resulting CSV file will also
-be possibly large. Table 2 lists the CSV format.
-
-{% marginnote 'Table-ID2' 'Table 2: CSV format for group size $$n$$.'  %}
-<div class="table-wrapper" markdown="block" style="margin-top:3rem;">
-
-| column |type | description |
-| :--- | :---: | :--- |
-| p0 .. pn | true/false | host likes pi |
-| p0-p1 ..  pn-p(n-1) | true/false | pi and pj like each other |
-| k | int | k value |
-| p0-si4 .. pn-si4 | true/false | pi is invited in si4 |
-| p0-si5 .. pn-si5 | true/false | pi is invited in si5 |
-| p0-si6 .. pn-si6 | true/false | pi is invited in si6 |
-
-</div>
-
-<div class="table-wrapper" markdown="block" style="margin-top:3rem;">
-
-
-
-</div>
-
-```scala
-val groupSize = 6
-val likeDislikeRatios = Set(0, 0.22, 0.66, 1.0)
-val pairLikeRatios = Set(0, 0.22, 0.66, 1.0)
-val ks = Set(0, 0.22, 0.66, 1.0)
-val sampleSize = 1
-
-val inputData: List[SelectingInvitees.Input] =
-  (for(likeDislikeRatio <- likeDislikeRatios;
-      pairLikeRatio <- pairLikeRatios;
-      k <- ks) yield {
-        SelectingInvitees.inputGenerator(
-          groupSize,
-          likeDislikeRatio,
-          pairLikeRatio,
-          (k * groupSize).intValue,
-          sampleSize
-          )
-      }).toList.flatten
-
-// Compute outputs
-val outputDataSI4: List[Set[Person]] = inputData.map(input =>
-  SelectingInvitees.si4(input.group,
-                        input.personsLiked,
-                        input.personsDisliked,
-                        input.like,
-                        input.k))
-
-val outputDataSI5: List[Set[Person]] = inputData.map(input =>
-  SelectingInvitees.si5(input.group,
-                        input.personsLiked,
-                        input.personsDisliked,
-                        input.like))
-
-val outputDataSI6: List[Set[Person]] = inputData.map(input =>
-  SelectingInvitees.si6(input.group,
-                        input.personsLiked,
-                        input.personsDisliked,
-                        input.like,
-                        input.k))
-
-// Safe data to CSV
-def inputHeader(input: SelectingInvitees.Input): String = {
-  val groupList = input.group.toList
-  val people = for(i <- groupList.indices) yield s"p$i"
-  val pairs = for(i <- groupList.indices; j <- groupList.indices if i != j) yield s"p$i-p$j"
-  people.mkString("", ",\t", ",\t") + pairs.mkString("", ",\t", ",\t") + "k"
-}
-
-def outputHeader(input: SelectingInvitees.Input, label: String): String = {
-  val groupList = input.group.toList
-  val people = for(i <- groupList.indices) yield s"p$i-$label"
-  people.mkString(",\t")
-}
-
-def dataToCSV(input: SelectingInvitees.Input, outputs: List[Set[Person]]): String = {
-  val groupList = input.group.toList
-  val hostLikes = groupList.map(person => person in input.personsLiked)
-  val likings = for(p1 <- groupList; p2 <- groupList if p1 != p2) yield input.like(p1, p2)
-  val k = input.k
-  val results = outputs.map(output => groupList.map(_ in output).mkString(",\t"))
-  hostLikes.mkString("", ",\t", ",\t") + likings.mkString("", ",\t", ",\t") + input.k  + results.mkString(",\t", ",\t", "")
-}
-
-val header = inputHeader(inputData.head) + ",\t" +
-  outputHeader(inputData.head, "si4") + ",\t" +
-  outputHeader(inputData.head, "si5") + ",\t" +
-  outputHeader(inputData.head, "si6")
-
-val rows = for(i <- inputData.indices) yield
-  dataToCSV(inputData(i), List(outputDataSI4(i), outputDataSI5(i), outputDataSI6(i)))
-
-val csv = header + "%0A" + rows.mkString("%0A")
-
-Fiddle.print(a(href:=s"data:text/csv,$csv", target:="_blank", attr("download"):="data.csv", "Right click and Save link as..."))
-```
+running the simulations in a dedicated Scala development environment. You can
+download the code from the [mathlib-repo repository](https://github.com/markblokpoel/mathlib-repo).
 
 ### References
 
