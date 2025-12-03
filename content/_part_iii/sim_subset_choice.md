@@ -67,7 +67,7 @@ A particular person is identified by their name, and can be defined by using ```
 <pre class="mathlib">
 import mathlibrepo.selectinginvitees._
 
-Person("Jamie")
+Person("Paola")
 </pre>
 
 Persons with the same name are considered to be the same individual.
@@ -75,13 +75,13 @@ Persons with the same name are considered to be the same individual.
 <pre class="mathlib">
 import mathlibrepo.selectinginvitees._
 
-val person1 = Person("Jamie")
-val person2 = Person("Jamie")
+val person1 = Person("Paola")
+val person2 = Person("Paola")
 
 person1 == person2
 </pre>
 
-We can also generate random persons. Their names are randomly selected from a predefined list with 100 names. Running the code below multiple times will create different persons.
+We can also generate random persons. Their names are randomly selected from a predefined list with 100 names based on the [Diverse Name Generator](https://diversenamesgenerator.com/) (Maura, Williams & Peng Lee, 2023). Running the code below multiple times will generate different persons.
 
 <pre class="mathlib">
 import mathlibrepo.selectinginvitees._
@@ -120,13 +120,13 @@ One could specify a like relationship manually. Simply create persons, store the
 <pre class="mathlib">
 import mathlibrepo.selectinginvitees._
 
-val lela = Person("Lela")
-val carlos = Person("Carlos")
-val ervin = Person("Ervin")
+val sanghan   = Person("Sanghan")
+val youngJu   = Person("Young Ju")
+val greny     = Person("Greny")
 
-lela likes carlos
-carlos dislikes ervin
-carlos dislikes lela
+sanghan likes youngJu
+sanghan dislikes greny
+youngJu dislikes greny
 </pre>
 
 Specifying a *complete* like function for a set of persons, however, will be quite a chore: for each pair you need to explicate if $$a$$ likes $$b$$ and vice versa. For $$10$$ persons, that is a list of $$10 \cdot 10=100$$ likes. Support functions help us here.
@@ -138,20 +138,22 @@ The ```html``` function is used to draw a graph of the like function. This graph
 <pre class="mathlib">
 import mathlibrepo.selectinginvitees._
 
-val lela = Person("Lela")
-val carlos = Person("Carlos")
-val ervin = Person("Ervin")
 
-val persons = Set(lela, carlos, ervin)
-val partialLikings = Set(lela likes carlos, carlos likes ervin,carlos dislikes lela)
+val sanghan   = Person("Sanghan")
+val youngJu   = Person("Young Ju")
+val greny     = Person("Greny")
+
+val persons = Set(sanghan, youngJu, greny)
+val partialLikings = Set(sanghan likes youngJu, youngJu likes greny, youngJu dislikes sanghan)
 
 def like = persons.deriveLikeFunction(partialLikings)
 
 List(
-  like(lela, carlos),
-  like(lela, ervin),
-  like(carlos, ervin)
+  like(sanghan, youngJu),
+  like(sanghan, greny),
+  like(youngJu, greny)
 )
+
 
 html"<img src=\"https://quickchart.io/graphviz?layout=circo&graph=${persons.toDotString(like)}\" />"
 </pre>
@@ -161,18 +163,18 @@ While this approach is useful to manually explore small examples, it still is a 
 <pre class="mathlib">
 import mathlibrepo.selectinginvitees._
 
-val lela = Person("Lela")
-val carlos = Person("Carlos")
-val ervin = Person("Ervin")
+val sanghan   = Person("Sanghan")
+val youngJu   = Person("Young Ju")
+val greny     = Person("Greny")
 
-val persons = Set(lela, carlos, ervin)
+val persons = Set(sanghan, youngJu, greny)
 
 def like = persons.randomLikeFunction(0.7)
 
 List(
-  like(lela, carlos),
-  like(lela, ervin),
-  like(carlos, ervin)
+  like(sanghan, youngJu),
+  like(sanghan, greny),
+  like(youngJu, greny)
 )
 
 html"<img src=\"https://quickchart.io/graphviz?layout=circo&graph=${persons.toDotString(like)}\" />"
@@ -769,5 +771,7 @@ download the code from the [mathlib-repo repository](https://github.com/markblok
 ### References
 
 Blokpoel, Mark (2024). mathlib: A Scala package for readable, verifiable and sustainable simulations of formal theory. Journal of Open Source Software, 9(99), 6049, [https://doi.org/10.21105/joss.06049](https://doi.org/10.21105/joss.06049)
+
+O’Leary, Maura, Williams, Rainey, & Peng Lee, Mario (2023). The Diverse Names Generator: An App for Decreasing Bias and Promoting Inclusion. In *Proceedings of the Linguistic Society of America 8*(1): 5541. [https://doi.org/10.3765/plsa.v8i1.5541](https://doi.org/10.3765/plsa.v8i1.5541).
 
 van Rooij, Iris, & Baggio, Giosuè (2021). [Theory before the test: How to build high-verisimilitude explanatory theories in psychological science.](https://journals.sagepub.com/doi/full/10.1177/1745691620970604) *Perspectives on Psychological Science, 16*(4) 682–697.
