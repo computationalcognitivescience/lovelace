@@ -7,7 +7,7 @@ nav_exclude: true
 
 Learning how to read and write code is quite similar to learning how to use math
 to formalise verbal theories. In this chapter we cover the basics of coding in
-Scala and ```mathlib```. Understanding Scala code might seem daunting at first,
+Scala (Odersky et al., 2019) and ```mathlib``` (Blokpoel, 2024). Understanding Scala code might seem daunting at first,
 but you have already mastered a more difficult skill: Translating verbal theory
 (which is underspecified) to formal, mathematical characterizations. Translating
 from formalizations to simulation code requires understanding Scala, but it is
@@ -750,7 +750,7 @@ Here, $$\mathcal{P}$$ is the powerset notation. It denotes the set consisting of
 all possible subsets and $$T'$$ is an element in that set. The set-builder
 notation describes the set of all possible subsets that satisfy the budget
 constraint. To deal with the second issue, multiple possible outputs, we make the
-implementation decision to return a random valid output. 
+implementation decision to return a random valid output.
 
 <pre class="mathlib">
 import mathlib.set.SetTheory._
@@ -1002,7 +1002,8 @@ myFriends x animals      // Set of all pairs of friends and animals using cardin
 
 ### References
 
-Guest, O., & Martin, A. E. (2021). [How computational modeling can force theory building in psychological science.](https://doi.org/10.1177/1745691620970585) *Perspectives on Psychological Science 16*(4),789-802.
+Blokpoel, Mark (2024). mathlib: A Scala package for readable, verifiable and sustainable simulations of formal theory. Journal of Open Source Software, 9(99), 6049, [https://doi.org/10.21105/joss.06049](https://doi.org/10.21105/joss.06049)
 
-Odersky, M., Spoon, L., & Venners, B. (2019). *Programming in Scala, 4th
-Edition*. Artima.
+Guest, Olivia, & Martin, Andrea E. (2021). [How computational modeling can force theory building in psychological science.](https://doi.org/10.1177/1745691620970585) *Perspectives on Psychological Science 16*(4),789-802.
+
+Odersky, Martin, Spoon, Lex, & Venners, Bill (2019). *Programming in Scala, 4th Edition*. Artima.
