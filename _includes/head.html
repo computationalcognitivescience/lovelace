@@ -10,7 +10,7 @@
   {% if site.data.options.lato_font_load %}
     <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
   {% endif %}
-  
+
 
   <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
   {% if site.data.options.mathjax %}
@@ -48,4 +48,23 @@
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
+
+
+  <!-- Embedding Script -->
+  <script src="https://scastie.scala-lang.org/embedded.js"></script>
+
+  <script>
+  window.addEventListener('load', function() {
+    scastie.Embedded('.simple');
+
+    scastie.Embedded('.mathlib', {
+    theme: 'light',
+    isWorksheetMode: true,
+    sbtConfig: 'libraryDependencies ++= Seq("com.markblokpoel" %% "mathlib" % "0.9.3", "com.markblokpoel" %% "mathlib-repo" % "0.1.5")',
+    targetType: 'jvm',
+    scalaVersion: '2.13.18'
+    });
+  });
+  </script>
+
 </head>

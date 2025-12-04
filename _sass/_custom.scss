@@ -59,32 +59,30 @@ html{
 	height: auto;
 }
 
-.scastie.embedded{
-	width: 87.5% !important;
-    margin-left: 0px !important;
-    margin-right: auto !important;
-	padding-right: 2rem !important;
-
+.scastie.embedded {
+  max-width: 90% !important;
+  width: 100% !important;
+  margin: 0px !important;
 }
 
-.embedded-menu{
-	width: 150px !important;
+.scastie .embedded-overlay {
+  width: 40px;
 }
 
-.run-button span{
-	display: none !important;
+.scastie .console-label p {
+  font-size: 1em;
+  width: fit-content;
+  display: none;
 }
 
-.run-button:after{
-	content: 'run' !important;
+.scastie .run-button span {
+  display: none;
 }
 
-.output-console li{
-	font-size: 1rem;
-	margin-top: 0;
-	line-height: 1.2rem;
+.scastie .run-button {
+  min-width: 25px !important;
+  padding: 0 8px 0 8px !important;
 }
-
 
 .next-chapter{
   flex: 1;
@@ -178,22 +176,4 @@ div.indent-3{
 }
 div.indent-4{
 	margin-left: 4rem;
-}
-
-div[data-scalafiddle] {
-  width: 100%;
-}
-
-div[data-scalafiddle] > iframe {
-  width: 90% !important;
-  max-height: 1000px !important;
-}
-
-div[data-scalafiddle] pre, div[data-scalafiddle] code {
-	width: 90%;
-}
-
-div[data-scalafiddle] > button {
-  top: 0px;
-  left: 60%;
 }
