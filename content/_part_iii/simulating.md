@@ -5,15 +5,6 @@ chapter: 8
 nav_exclude: true
 ---
 
-<div class="warning" style='max-width: 55%;background-color:#DF7777; color: #000; border-left: solid #a00000 4px; border-radius: 4px; padding-right: 2em;'>
-<span>
-<p style='width: 100%;margin-top:1em; text-align:center'>
-<b>Interactive code offline</b></p>
-<p style='width: calc(100% - 1em);margin-left: 1em;'>
-Due to the discontinuation of <a href="https://www.scalafiddle.com">www.scalafiddle.com</a>, the code blocks in the book are currently not interactive. We regret the limitations this imposes and are working on a solution.
-</p></span>
-</div>
-
 In [Part II](/lovelace/content/part2) we have practiced formalizing verbal theories and we experienced that any verbal theory can be formalized in multiple ways. Sometimes the consequences of formalization choices are self-evident.{% sidenote 'mn-id-easy' 'It is easy to understand that if there are only positive constraints, then setting all beliefs to true or false are the valid outputs for <span style="font-variant: small-caps;">Coherence</span>.' %} More often, however, deeper analysis is needed to uncover such consequences.{% sidenote 'mn-id-hard' 'It is hard to understand the different consequences of interacting positive and negative constraints in <span style="font-variant: small-caps;">Coherence</span>.' %} Answering questions such as “Does it matter if I formalize this concept one way or another?”, “Are these two formalizations truly different, or are they equivalent?”, and “How would I be able tell different formalizations apart in terms of the behaviour that they predict?” provides important insight in the what theories can (or cannot) explain.
 
 We have seen that sometimes such questions can be answered analytically, using conceptual analysis, rigorous argumentation, or mathematical proofs. These analytical tools are an important part of the theoretical modeler's toolbox. However, they are limited to what our resource-bounded minds can reason about precisely and explicitly. Computer simulations supplement the modeler's mind. They are in a sense automated thought experiments (Cooper, 2005). By running our models on computers other than our minds (Guest & Martin, 2021) {% marginfigure 'mf-id-guest' 'assets/img/simulation-guest.jpg' 'Olivia Guest, reproduced with permission [Joachim Vanderkerckhoven on Twitter](https://archive.md/bEwGU).'%}, we can go beyond the limits of mental simulation and explore model behaviour under a wide range of conditions and at larger input scales. This way we can investigate properties of a theoretical model that are difficult to derive through mathematical analysis because they emerge from the complex interaction of the theory's components. In Part III, we focus on this use of computer simulations.
