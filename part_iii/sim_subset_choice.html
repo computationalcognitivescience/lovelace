@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Subset choice</title>
-  <meta name="description" content="Interactive code offlineDue to the discontinuation of www.scalafiddle.com, the code blocks in the book are currently not interactive. We regret the limitatio...">
+  <meta name="description" content="In this chapter you will learn how to use computer simulations as a theoreticaltool, namely to analyze the consequences different formalizations of verbalthe...">
 
   <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
   
     <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
   
-  
+
 
   <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
   
@@ -47,9 +47,28 @@
   <link rel="stylesheet" type="text/css" href="/lovelace/css/tufte.css">
   <!-- <link rel="stylesheet" type="text/css" href="/lovelace/css/print.css" media="print"> -->
 
-  <link rel="canonical" href="http://localhost:4000/lovelace/part_iii/sim_subset_choice">
+  <link rel="canonical" href="/lovelace/part_iii/sim_subset_choice">
 
-  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="http://localhost:4000/lovelace/feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="/lovelace/feed.xml" />
+
+
+  <!-- Embedding Script -->
+  <script src="https://scastie.scala-lang.org/embedded.js"></script>
+
+  <script>
+  window.addEventListener('load', function() {
+    scastie.Embedded('.simple');
+
+    scastie.Embedded('.mathlib', {
+    theme: 'light',
+    isWorksheetMode: true,
+    sbtConfig: 'libraryDependencies ++= Seq("com.markblokpoel" %% "mathlib" % "0.9.3", "com.markblokpoel" %% "mathlib-repo" % "0.1.5")',
+    targetType: 'jvm',
+    scalaVersion: '2.13.18'
+    });
+  });
+  </script>
+
 </head>
 
   <body>
@@ -110,23 +129,14 @@
 <h1>Chapter 10 - Subset choice</h1>
 
 
-<div class="warning" style="max-width: 55%;background-color:#DF7777; color: #000; border-left: solid #a00000 4px; border-radius: 4px; padding-right: 2em;">
-<span>
-<p style="width: 100%;margin-top:1em; text-align:center">
-<b>Interactive code offline</b></p>
-<p style="width: calc(100% - 1em);margin-left: 1em;">
-Due to the discontinuation of <a href="https://www.scalafiddle.com">www.scalafiddle.com</a>, the code blocks in the book are currently not interactive. We regret the limitations this imposes and are working on a solution.
-</p></span>
-</div>
-
 <p>In this chapter you will learn how to use computer simulations as a theoretical
 tool, namely to analyze the consequences different formalizations of verbal
 theories. To reach that goal, you will also learn how to read an implementation
-of formal theory in Scala <code class="language-plaintext highlighter-rouge">mathlib</code>. At the end of this chapter, you will be
+of formal theory in Scala <code class="language-plaintext highlighter-rouge">mathlib</code> (Blokpoel, 2024). At the end of this chapter, you will be
 able to use (adapt and run) the provided simulation code to compare three formal
-models. You will be able to test your intuitions about the theory and derive qualitative differences between them.</p>
+models of subset chocie. You will be able to test your intuitions about the theory and derive qualitative differences between them.</p>
 
-<p>We pick up the conversation between Verbal and Formal from <a href="/lovelace/part_ii/subset#dialogue-1-formalizing-inviting-guests">Chapter 4 - Subset Choice</a>. Formal is very excited to share the computer simulations they implemented of the theoretical models Formal and Verbal created. Formal has some suggestions on how to use the simulations, which they explain to Verbal.</p>
+<p>We pick up the conversation between Verbal and Formal from <a href="/lovelace/part_ii/subset#dialogue-1-formalizing-inviting-guests">Chapter 5 - Subset Choice</a>. Formal is very excited to share the computer simulations they implemented of the theoretical models Formal and Verbal created. Formal has some suggestions on how to use the simulations, which they explain to Verbal.</p>
 
 <div class="indent-4 ">
   <p><strong>Formal:</strong> Welcome dr. Verbal! As promised, I have implemented computer simulations for three of our computational-level models.</p>
@@ -154,118 +164,145 @@ models. You will be able to test your intuitions about the theory and derive qua
 
 <div class="indent-4 ">
   <p><strong>Formal:</strong>
-Not necessarily. Formalizations that are different may behave the same or very similarly. Sometimes we can analytically derive such equivalence<label for="sn-id-equivalence" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-equivalence" class="margin-toggle" /><span class="sidenote">You can read about mathematically proving model equivalence in <a href="/lovelace/part_ii/coherence#Equivalence">Chapter 5 - Coherence</a>. </span> but this is not always possible. Then computer simulations can come in handy.</p>
+Not necessarily. Formalizations that are different may behave the same or very similarly. Sometimes we can analytically derive such equivalence<label for="sn-id-equivalence" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-equivalence" class="margin-toggle" /><span class="sidenote">You can read about mathematically proving model equivalence in <a href="/lovelace/part_ii/coherence#Equivalence">Chapter 6 - Coherence</a>. </span> but this is not always easy. Computer simulations can come in handy.</p>
 </div>
 
 <div class="indent-0 ">
-  <p><strong>Verbal:</strong> Ah, I see. I would like to know if there are important differences between the theories. That way we can possibly rule out theories that cannot explain the phenomenon or find ways to update them, just like when we were formalizing my verbal theories.</p>
+  <p><strong>Verbal:</strong> Ah, I see. I would like to know if there are important differences between the theories. That way we can possibly rule out theories that cannot explain the phenomenon or find ways to revise them, just like when we were formalizing my verbal theories.</p>
 </div>
 
 <div class="indent-4 ">
   <p><strong>Formal:</strong> Indeed, that is the idea.</p>
 </div>
 
-<p>If you jumped here directly from <a href="/lovelace/part_ii/subset">Chapter 4 - Subset choice</a>
+<p>If you jumped here directly from <a href="/lovelace/part_ii/subset">Chapter 5 - Subset choice</a>
 you may find it helpful to first read <a href="/lovelace/part_ii/mathlib">Chapter 9 - Scala and mathlib</a> to learn how to read (and write) Scala code using the <code class="language-plaintext highlighter-rouge">mathlib</code> library. In addition to the default <code class="language-plaintext highlighter-rouge">mathlib</code> library, the simulation code on this page includes supporting code which we explain first.</p>
 
 <h2 id="supporting-code">Supporting code</h2>
-<p>Running simulations requires input instances as specified by the theoretical model. While we could code input by hand, that is a lot of work. The beauty of using computer simulations is that it can do the hard work for us by <em>automatically</em> generating input. To that end, Formal has written supporting code. <label for="sn-id-helper" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-helper" class="margin-toggle" /><span class="sidenote">Supporting code is often written specifically for a domain. For example, <a href="/lovelace/part_iii/sim_coherence">simulating Coherence</a> uses different support code. </span></p>
+<p>Running simulations requires input instances as specified by the theoretical model. While we could code input by hand, that is a lot of work. The benefit of using computer simulations is that with some clever coding we can automatically generate input. To that end, Formal has written supporting code. <label for="sn-id-helper" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-helper" class="margin-toggle" /><span class="sidenote">Supporting code is often written specifically for a domain. For example, a simulation of <a href="/lovelace/part_ii/coherence">Coherence</a> would require different support code. </span></p>
 
-<p>For now, it is not important that you know how to write support code. However, in order to explore and adapt the code that Formal has provided, being able to <em>use</em> support code is recommended. Let’s explore some examples.</p>
+<p>For now, it is not important that you know how to write support code. However, in order to explore and adapt the code that Formal has provided, being able to use support code is recommended. Let’s explore some examples.</p>
 
 <p>The theoretical models for selecting invitees (subset choice) take as input sets of persons and a function that for pairs of persons returns if they like eachother or not. The support code helps us generate these parts of the input.</p>
 
 <h3 id="persons">Persons</h3>
 <p>A particular person is identified by their name, and can be defined by using <code class="language-plaintext highlighter-rouge">Person(name: String)</code>. This function takes a string as input and returns a Person object with the given name:</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Person</span><span class="o">(</span><span class="s">"Jamie"</span><span class="o">)</span>
-</code></pre></div></div>
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
 
-<p>Persons with the same name are considered to refer to the same individual, since the computer cannot distinguish between them.</p>
+Person("Paola")
+</pre>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">person1</span> <span class="k">=</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Jamie"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">person2</span> <span class="k">=</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Jamie"</span><span class="o">)</span>
+<p>Persons with the same name are considered to be the same individual.</p>
 
-<span class="n">person1</span> <span class="o">==</span> <span class="n">person2</span>
-</code></pre></div></div>
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
 
-<p>We can also create random persons. Their names are randomly selected from a predefined list with 100 names. Running the code below multiple times will create different persons.</p>
+val person1 = Person("Paola")
+val person2 = Person("Paola")
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">Person</span><span class="o">.</span><span class="py">random</span>
-</code></pre></div></div>
+person1 == person2
+</pre>
+
+<p>We can also generate random persons. Their names are randomly selected from a predefined list with 100 names based on the <a href="https://diversenamesgenerator.com/">Diverse Name Generator</a> (Maura, Williams &amp; Peng Lee, 2023). Running the code below multiple times will generate different persons.</p>
+
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+
+Person.random
+</pre>
 
 <p>We can also generate groups of <code class="language-plaintext highlighter-rouge">n</code> random individuals.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">Person</span><span class="o">.</span><span class="py">randomGroup</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
-</code></pre></div></div>
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+
+Person.randomGroup(5)
+</pre>
 
 <p>These functions will help us create sets of persons. We can then use <code class="language-plaintext highlighter-rouge">mathlib</code> to work with these sets as expected. For example, we can create a set of random persons \(P\), randomly take 2 persons who are liked \(L\), and create a set of persons who are disliked \(D=P \setminus L\):</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">persons</span> <span class="k">=</span> <span class="nv">Person</span><span class="o">.</span><span class="py">randomGroup</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">personsLiked</span> <span class="k">=</span> <span class="nv">persons</span><span class="o">.</span><span class="py">take</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>            <span class="c1">// Take 2 people from persons.</span>
-<span class="k">val</span> <span class="nv">personsDisliked</span> <span class="k">=</span> <span class="n">persons</span> <span class="o">\</span> <span class="n">personsLiked</span>
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+import mathlib.set.SetTheory._
 
-<span class="nf">println</span><span class="o">(</span><span class="n">personsLiked</span><span class="o">)</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">personsDisliked</span><span class="o">)</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">persons</span><span class="o">)</span>
-</code></pre></div></div>
+val persons = Person.randomGroup(5)
+val personsLiked = persons.take(2)            // Take 2 people from persons.
+val personsDisliked = persons \ personsLiked
+
+personsLiked
+personsDisliked
+persons
+</pre>
 
 <h3 id="like-function">Like-function</h3>
-<p>The final support code Formal provided is used to create like relationships between persons. In the formal model this function is defined as \(like: P\times P \rightarrow \{true,false\}\). After discussing with a colleague (see <a href="/lovelace/part_ii/subset#try-again">Exercise X in Chapter 4</a>), Formal recognized that the like function was intended to exclude reflection (i.e., self-liking) and is symmetrical \(like(a,b)=like(b,a)\) (i.e., it formalizes like or dislike <em>eachother</em>).<label for="sn-id-helper" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-helper" class="margin-toggle" /><span class="sidenote">The formalizations in this chapter are updated with these properties. </span></p>
+<p>The final support code Formal provided is used to create like relationships between persons. In the formal model this function is defined as \(like: P\times P \rightarrow \{true,false\}\). After discussing with a colleague (see <a href="/lovelace/part_ii/subset#try-again">Exercise 4.4 in Chapter 5</a>), Formal recognized that the like function was intended to exclude reflection (i.e., self-liking) and is symmetrical \(like(a,b)=like(b,a)\) (i.e., it formalizes like or dislike <em>eachother</em>).<label for="sn-id-helper" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-id-helper" class="margin-toggle" /><span class="sidenote">The formalizations in this chapter are updated with these properties. </span></p>
 
 <p>One could specify a like relationship manually. Simply create persons, store them in values so we can refer to them and then use <code class="language-plaintext highlighter-rouge">likes</code> or <code class="language-plaintext highlighter-rouge">dislikes</code> to create like relationships.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">lela</span> <span class="k">=</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Lela"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">carlos</span> <span class="k">=</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Carlos"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">ervin</span> <span class="k">=</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Ervin"</span><span class="o">)</span>
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
 
-<span class="nf">println</span><span class="o">(</span><span class="n">lela</span> <span class="n">likes</span> <span class="n">carlos</span><span class="o">)</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">carlos</span> <span class="n">dislikes</span> <span class="n">ervin</span><span class="o">)</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">carlos</span> <span class="n">dislikes</span> <span class="n">lela</span><span class="o">)</span>
-</code></pre></div></div>
+val sanghan   = Person("Sanghan")
+val youngJu   = Person("Young Ju")
+val greny     = Person("Greny")
 
-<p>Specifying a <em>complete</em> like function for a set of persons, however, will be quite a chore: for each pair you need to explicate if \(a\) likes \(b\) and vice versa. For \(10\) persons, that is a list of \(10 \cdot 10=100\) likes. Support functions help us reduce this chore.</p>
+sanghan likes youngJu
+sanghan dislikes greny
+youngJu dislikes greny
+</pre>
 
-<p>When given a partial specification of the like function, we can complete it by assuming that any non-specified relationship is a dislike. Use the support function <code class="language-plaintext highlighter-rouge">.deriveLikeFunction(partialLikes: Set[Likes])</code> on a set of persons to create a like function for which the domain consists of all pairs of persons (including \((a,b)\), \((b,a)\) and \(a,a\)). It will complete <code class="language-plaintext highlighter-rouge">partialLikes</code> by assuming non-specified relationships are dislikes.</p>
+<p>Specifying a <em>complete</em> like function for a set of persons, however, will be quite a chore: for each pair you need to explicate if \(a\) likes \(b\) and vice versa. For \(10\) persons, that is a list of \(10 \cdot 10=100\) likes. Support functions help us here.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">lela</span> <span class="k">=</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Lela"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">carlos</span> <span class="k">=</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Carlos"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">ervin</span> <span class="k">=</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Ervin"</span><span class="o">)</span>
+<p>When given an incomplete list of like relationships, we can complete it this into a complete like function by assuming that any non-specified relationship is a dislike. Use the support function <code class="language-plaintext highlighter-rouge">.deriveLikeFunction(partialLikes: Set[Likes])</code> on a set of persons to create a like function for which the domain consists of all pairs of persons (including \((a,b)\), \((b,a)\) and \(a,a\)). It will complete <code class="language-plaintext highlighter-rouge">partialLikes</code> by assuming non-specified relationships are dislikes.</p>
 
-<span class="k">val</span> <span class="nv">persons</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="n">lela</span><span class="o">,</span> <span class="n">carlos</span><span class="o">,</span> <span class="n">ervin</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">partialLikings</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="n">lela</span> <span class="n">likes</span> <span class="n">carlos</span><span class="o">,</span> <span class="n">carlos</span> <span class="n">likes</span> <span class="n">ervin</span><span class="o">,</span><span class="n">carlos</span> <span class="n">dislikes</span> <span class="n">lela</span><span class="o">)</span>
+<p>The <code class="language-plaintext highlighter-rouge">html</code> function is used to draw a graph of the like function. This graph is specified in the <a href="https://graphviz.org/doc/info/lang.html">DOT language</a> and can be generated using the <code class="language-plaintext highlighter-rouge">.toDotString(like)</code> helper function transforms persons and a like function to graph figures.</p>
 
-<span class="k">def</span> <span class="nf">like</span> <span class="k">=</span> <span class="nv">persons</span><span class="o">.</span><span class="py">deriveLikeFunction</span><span class="o">(</span><span class="n">partialLikings</span><span class="o">)</span>
-</code></pre></div></div>
-<p>The <code class="language-plaintext highlighter-rouge">Viz.render()</code> function can draw graphs specified in the <a href="https://graphviz.org/doc/info/lang.html">DOT language</a>. The <code class="language-plaintext highlighter-rouge">.toDotString(like)</code> helper function transforms persons and a like function to graph figures.</p>
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">Viz</span><span class="o">.</span><span class="py">render</span><span class="o">(</span><span class="nv">persons</span><span class="o">.</span><span class="py">toDotString</span><span class="o">(</span><span class="n">like</span><span class="o">))</span>
-</code></pre></div></div>
-<p>And we can view the truth values associated with all pairs of persons.</p>
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">(</span>
-  <span class="nf">like</span><span class="o">(</span><span class="n">lela</span><span class="o">,</span> <span class="n">carlos</span><span class="o">),</span>
-  <span class="nf">like</span><span class="o">(</span><span class="n">lela</span><span class="o">,</span> <span class="n">ervin</span><span class="o">),</span>
-  <span class="nf">like</span><span class="o">(</span><span class="n">carlos</span><span class="o">,</span> <span class="n">ervin</span><span class="o">)</span>
-<span class="o">)</span>
-</code></pre></div></div>
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
 
-<p>While this approach is useful to manually explore small examples, it still is a lot of manual work. Wouldn’t it be nice if we can generate a complete like function randomly? Use the support function <code class="language-plaintext highlighter-rouge">.randomLikeFunction(probability: Double)</code> on a set of persons to create a random like function. For each pair (including \((a,b)\), \((b,a)\) and \(a,a\)), it generates <code class="language-plaintext highlighter-rouge">true</code> with probability equal to the ratio or false otherwise.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">lela</span> <span class="k">=</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Lela"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">carlos</span> <span class="k">=</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Carlos"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">ervin</span> <span class="k">=</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Ervin"</span><span class="o">)</span>
+val sanghan   = Person("Sanghan")
+val youngJu   = Person("Young Ju")
+val greny     = Person("Greny")
 
-<span class="k">val</span> <span class="nv">persons</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="n">lela</span><span class="o">,</span> <span class="n">carlos</span><span class="o">,</span> <span class="n">ervin</span><span class="o">)</span>
+val persons = Set(sanghan, youngJu, greny)
+val partialLikings = Set(sanghan likes youngJu, youngJu likes greny, youngJu dislikes sanghan)
 
-<span class="k">def</span> <span class="nf">like</span> <span class="k">=</span> <span class="nv">persons</span><span class="o">.</span><span class="py">randomLikeFunction</span><span class="o">(</span><span class="mf">0.7</span><span class="o">)</span>
+def like = persons.deriveLikeFunction(partialLikings)
 
-<span class="nv">Viz</span><span class="o">.</span><span class="py">render</span><span class="o">(</span><span class="nv">persons</span><span class="o">.</span><span class="py">toDotString</span><span class="o">(</span><span class="n">like</span><span class="o">))</span>
+List(
+  like(sanghan, youngJu),
+  like(sanghan, greny),
+  like(youngJu, greny)
+)
 
-<span class="nc">List</span><span class="o">(</span>
-  <span class="nf">like</span><span class="o">(</span><span class="n">lela</span><span class="o">,</span> <span class="n">carlos</span><span class="o">),</span>
-  <span class="nf">like</span><span class="o">(</span><span class="n">lela</span><span class="o">,</span> <span class="n">ervin</span><span class="o">),</span>
-  <span class="nf">like</span><span class="o">(</span><span class="n">carlos</span><span class="o">,</span> <span class="n">ervin</span><span class="o">)</span>
-<span class="o">)</span>
-</code></pre></div></div>
+
+html"&lt;img src=\"https://quickchart.io/graphviz?layout=circo&amp;graph=${persons.toDotString(like)}\" /&gt;"
+</pre>
+
+<p>While this approach is useful to manually explore small examples, it still is a lot of manual work. Wouldn’t it be nice if we can generate a complete like function randomly? Use the support function <code class="language-plaintext highlighter-rouge">.randomLikeFunction(probability: Double)</code> on a set of persons to create a random like function. For each pair (including \((a,b)\), \((b,a)\) and \(a,a\)), it generates <code class="language-plaintext highlighter-rouge">false</code> with probability equal to the ratio or true otherwise.</p>
+
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+
+val sanghan   = Person("Sanghan")
+val youngJu   = Person("Young Ju")
+val greny     = Person("Greny")
+
+val persons = Set(sanghan, youngJu, greny)
+
+def like = persons.randomLikeFunction(0.7)
+
+List(
+  like(sanghan, youngJu),
+  like(sanghan, greny),
+  like(youngJu, greny)
+)
+
+html"&lt;img src=\"https://quickchart.io/graphviz?layout=circo&amp;graph=${persons.toDotString(like)}\" /&gt;"
+</pre>
 
 <div class="question-top"><div class="question" id="question-1"><div class="question-body"><div class="question-header">Question 10.1</div> <p>What happens to the output of the like function when you change the probability?</p>
 <div class="answer" id="question-1-heading-1"><a onclick="document.getElementById('question-1-answer-1').style.display = document.getElementById('question-1-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-1-answer-1" style="display: none;"><p>Try changing the probability value (the input of the function <code class="language-plaintext highlighter-rouge">randomLikeFunction</code>) and see what changes in the output.</p>
@@ -274,14 +311,18 @@ you may find it helpful to first read <a href="/lovelace/part_ii/mathlib">Chapte
 
 <p>A final example to illustrate how to generate a random input instance. An alternative visualization is used to indicate which persons are liked by the host or not. Note that generating a visualization graph with many persons will not display properly or potentially crash your browser due to the many relationships.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">persons</span> <span class="k">=</span> <span class="nv">Person</span><span class="o">.</span><span class="py">randomGroup</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">personsLiked</span> <span class="k">=</span> <span class="nv">persons</span><span class="o">.</span><span class="py">take</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">personsDisliked</span> <span class="k">=</span> <span class="n">persons</span> <span class="o">\</span> <span class="n">personsLiked</span>
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+import mathlib.set.SetTheory._
 
-<span class="k">def</span> <span class="nf">like</span> <span class="k">=</span> <span class="nv">persons</span><span class="o">.</span><span class="py">randomLikeFunction</span><span class="o">(</span><span class="mf">0.7</span><span class="o">)</span>
+val persons = Person.randomGroup(5)
+val personsLiked = persons.take(2)
+val personsDisliked = persons \ personsLiked
 
-<span class="nv">Viz</span><span class="o">.</span><span class="py">render</span><span class="o">(</span><span class="nv">persons</span><span class="o">.</span><span class="py">toDotString</span><span class="o">(</span><span class="n">personsLiked</span><span class="o">,</span> <span class="n">personsDisliked</span><span class="o">,</span> <span class="n">like</span><span class="o">))</span>
-</code></pre></div></div>
+def like = persons.randomLikeFunction(0.7)
+
+html"&lt;img src=\"https://quickchart.io/graphviz?layout=circo&amp;graph=${persons.toDotString(personsLiked, personsDisliked, like)}\" /&gt;"
+</pre>
 
 <div class="question-top"><div class="question" id="question-2"><div class="question-body"><div class="question-header">Question 10.2</div> <p>With these support functions, we can randomly create instances for the formal models of selecting invitees. Why is this helpful?</p>
 <div class="answer" id="question-.2-heading-1"><a onclick="document.getElementById('question-.2-answer-1').style.display = document.getElementById('question-.2-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.2-answer-1" style="display: none;"><p>It save a lot of manual work.</p>
@@ -369,7 +410,7 @@ more descriptive than the single letters used in math (see Table 1).</p>
 
 <div class="stopandthink"><div class="st-header">Stop and think</div>
 <p>Take a moment to familiarize yourself again with the
-formalization. If you need more context, you can go back to <a href="/lovelace/part_ii/subset#">Chapter 4 - Subset
+formalization. If you need more context, you can go back to <a href="/lovelace/part_ii/subset#">Chapter 5 - Subset
 choice</a> where the formalization was introduced.</p>
 </div>
 
@@ -380,100 +421,143 @@ choice</a> where the formalization was introduced.</p>
 formalization is implemented in the <code class="language-plaintext highlighter-rouge">si4</code> function, all of the input (\(P\),
 \(L\), \(D\), \(like\) and \(k\)) is listed as an argument of the function. The
 type of the output also needs to be defined. In this case the output is a subset
-\(G\subseteq P\) of persons, translating to type <code class="language-plaintext highlighter-rouge">Set[Person]</code>.</p>
+\(G\subseteq P\) of persons, translating to the type <code class="language-plaintext highlighter-rouge">Set[Person]</code>.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">si4</span><span class="o">(</span><span class="n">persons</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">],</span>
-        <span class="n">personsLiked</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">],</span>
-        <span class="n">personsDisliked</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">],</span>
-        <span class="n">like</span><span class="k">:</span> <span class="o">(</span><span class="kt">Person</span><span class="o">,</span> <span class="kt">Person</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Boolean</span><span class="o">,</span>
-        <span class="n">k</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">si4</span><span class="o">(</span>
+  <span class="n">persons</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">],</span>
+  <span class="n">personsLiked</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">],</span>
+  <span class="n">personsDisliked</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">],</span>
+  <span class="n">like</span><span class="k">:</span> <span class="o">(</span><span class="kt">Person</span><span class="o">,</span> <span class="kt">Person</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Boolean</span><span class="o">,</span>
+  <span class="n">k</span><span class="k">:</span> <span class="kt">Int</span>
+<span class="o">)</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">]</span>
 </code></pre></div></div>
 
 <p>The input in the formalization is subject to a few constraints. We check those
-constraints in the code and stop the program of the constraints are not met with
-an informative error message.</p>
+constraints in the code and stop the program with an informative error message
+when the constraints are not met.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// Input must satisfy these constraints, otherwise error.</span>
-  <span class="nf">require</span><span class="o">(</span><span class="n">personsLiked</span> <span class="o">&lt;=</span> <span class="n">persons</span><span class="o">,</span>
-          <span class="s">"personsLiked must be a subset of persons"</span><span class="o">)</span>
-  <span class="nf">require</span><span class="o">(</span><span class="n">personsDisliked</span> <span class="o">&lt;=</span> <span class="n">persons</span><span class="o">,</span>
-          <span class="s">"personsDisliked must be a subset of persons"</span><span class="o">)</span>
-  <span class="nf">require</span><span class="o">(</span><span class="n">personsLiked</span> <span class="o">/\</span> <span class="n">personsDisliked</span> <span class="o">==</span> <span class="nv">Set</span><span class="o">.</span><span class="py">empty</span><span class="o">,</span>
-          <span class="s">"personsLiked intersect personsDisliked must be emtpy"</span><span class="o">)</span>
-  <span class="nf">require</span><span class="o">(</span><span class="n">personsLiked</span> <span class="o">\/</span> <span class="n">personsDisliked</span> <span class="o">==</span> <span class="n">persons</span><span class="o">,</span>
-          <span class="s">"personsLiked union personsLiked must equal persons"</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Input must satisfy these constraints, otherwise error.</span>
+<span class="nf">require</span><span class="o">(</span><span class="n">personsLiked</span> <span class="o">&lt;=</span> <span class="n">persons</span><span class="o">,</span>
+        <span class="s">"personsLiked must be a subset of persons"</span><span class="o">)</span>
+<span class="nf">require</span><span class="o">(</span><span class="n">personsDisliked</span> <span class="o">&lt;=</span> <span class="n">persons</span><span class="o">,</span>
+        <span class="s">"personsDisliked must be a subset of persons"</span><span class="o">)</span>
+<span class="nf">require</span><span class="o">(</span><span class="n">personsLiked</span> <span class="o">/\</span> <span class="n">personsDisliked</span> <span class="o">==</span> <span class="nv">Set</span><span class="o">.</span><span class="py">empty</span><span class="o">,</span>
+        <span class="s">"personsLiked intersect personsDisliked must be emtpy"</span><span class="o">)</span>
+<span class="nf">require</span><span class="o">(</span><span class="n">personsLiked</span> <span class="o">\/</span> <span class="n">personsDisliked</span> <span class="o">==</span> <span class="n">persons</span><span class="o">,</span>
+        <span class="s">"personsLiked union personsLiked must equal persons"</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>The output is defined using two properties. To define output using the set
 builder we write two functions that compute these properties. First, the host
 wants to invite at most \(k\) people they dislike <span>\(|G \cap D|\leq
-k\)</span>. This function returns a Boolean if a given (sub)set of people does
+k\)</span>. The following function returns a Boolean if a given (sub)set of people does
 not have this property.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// Specify that invitees is valid if |G /\ D| &lt;= k.</span>
-  <span class="k">def</span> <span class="nf">atMostKDislikes</span><span class="o">(</span><span class="n">invitees</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">])</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="o">(</span><span class="n">invitees</span> <span class="o">/\</span> <span class="n">personsDisliked</span><span class="o">).</span><span class="py">size</span> <span class="o">&lt;=</span> <span class="n">k</span>
-  <span class="o">}</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Specify that invitees is valid if |G /\ D| &lt;= k.</span>
+<span class="k">def</span> <span class="nf">atMostKDislikes</span><span class="o">(</span><span class="n">invitees</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">])</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span>
+  <span class="o">(</span><span class="n">invitees</span> <span class="o">/\</span> <span class="n">personsDisliked</span><span class="o">).</span><span class="py">size</span> <span class="o">&lt;=</span> <span class="n">k</span>
 </code></pre></div></div>
 
 <p>Second, the formalization
 states that the number of invited pairs that like each other plus the number of
-invited people \(|X| + |G|\) is maximal. This is an optimality condition. This
+invited people \(|X| + |G|\) is maximal. This is an optimality condition. The next
 function computes for a given (sub)set of people, the set \(X\) and returns an
 integer corresponding to \(|X| + |G|\).</p>
 
 <p><label for="mn-id-tupled" class="margin-toggle"> ⊕</label><input type="checkbox" id="mn-id-tupled" class="margin-toggle" /><span class="marginnote">The <code class="language-plaintext highlighter-rouge">.tupled</code> function transforms a function
 with \(n\) arguments into a function with 1 argument, where that argument is an
-\(n\)-tuple. This is needed when applying a function on a set of tuples that
-correspond to the arguments of that function. </span></p>
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// Specify the optimality condition.</span>
-  <span class="k">def</span> <span class="nf">xg</span><span class="o">(</span><span class="n">invitees</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="c1">// The number of unique pairs that like eachother.</span>
-    <span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="o">{</span> <span class="nv">invitees</span><span class="o">.</span><span class="py">uniquePairs</span> <span class="o">|</span> <span class="nv">like</span><span class="o">.</span><span class="py">tupled</span> <span class="o">}.</span><span class="py">size</span>
-    <span class="c1">// The number of total invitees.</span>
-    <span class="k">val</span> <span class="nv">g</span> <span class="k">=</span> <span class="nv">invitees</span><span class="o">.</span><span class="py">size</span>
-    <span class="n">x</span> <span class="o">+</span> <span class="n">g</span>
-  <span class="o">}</span>
+\(n\)-tuple. This is needed when applying a function on a set of tuples such as
+<code class="language-plaintext highlighter-rouge">invitees.uniquePairs</code> that correspond to the arguments of that function. </span></p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Specify the optimality condition.</span>
+<span class="k">def</span> <span class="nf">xg</span><span class="o">(</span><span class="n">invitees</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="c1">// The number of unique pairs that like eachother.</span>
+  <span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="o">{</span> <span class="nv">invitees</span><span class="o">.</span><span class="py">uniquePairs</span> <span class="o">|</span> <span class="nv">like</span><span class="o">.</span><span class="py">tupled</span> <span class="o">}.</span><span class="py">size</span>
+  <span class="c1">// The number of total invitees.</span>
+  <span class="k">val</span> <span class="nv">g</span> <span class="k">=</span> <span class="nv">invitees</span><span class="o">.</span><span class="py">size</span>
+  <span class="n">x</span> <span class="o">+</span> <span class="n">g</span>
+<span class="o">}</span>
 </code></pre></div></div>
 
-<p>Here we specify the set of possible valid outputs. Remember that for any given
+<p>Finally, we specify the set of possible valid outputs. Remember that for any given
 formalization multiple possible outputs may exist that satisfy the output
-conditions. Below, we consider all possible subsets of people (the powerset
-\(\mathcal{P}(P)\)). Any \(G\in\mathcal{P}(P)\) is a subset of people
+conditions. Below, we consider all possible subsets of people, i.e., the powerset
+\(\mathcal{P}(P)\). Any \(G\in\mathcal{P}(P)\) is a subset of people
 \(G\subseteq P\). From this set of sets we build a set of sets of people that
 satisfy <span>\(|G \cap D|\leq k\)</span> using <code class="language-plaintext highlighter-rouge">atMostKDislikes</code> and the
 optimality condition \(\arg\max_{|X|+|G|}\) using <code class="language-plaintext highlighter-rouge">argMax(xg)</code>.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">val</span> <span class="nv">invitees</span> <span class="k">=</span> <span class="o">{</span> <span class="nf">powerset</span><span class="o">(</span><span class="n">persons</span><span class="o">)</span> <span class="o">|</span> <span class="n">atMostKDislikes</span> <span class="k">_</span> <span class="o">}.</span><span class="py">argMax</span><span class="o">(</span><span class="n">xg</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">invitees</span> <span class="k">=</span> <span class="o">{</span> <span class="nf">powerset</span><span class="o">(</span><span class="n">persons</span><span class="o">)</span> <span class="o">|</span> <span class="n">atMostKDislikes</span> <span class="k">_</span> <span class="o">}.</span><span class="py">argMax</span><span class="o">(</span><span class="n">xg</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>To complete the implementation, we need to output one valid solution if any
 exist. If multiple possible solutions exist, we return one at random. Minimally
-one solution will always exist, namely the empty set, so we can safily ask for
+one solution will always exist, namely the empty set, so we can safely ask for
 a random one.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// Return a (valid) set of invitees at random.</span>
-  <span class="nv">invitees</span><span class="o">.</span><span class="py">random</span><span class="o">.</span><span class="py">get</span>
-<span class="o">}</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Return a (valid) set of invitees at random.</span>
+<span class="nv">invitees</span><span class="o">.</span><span class="py">random</span><span class="o">.</span><span class="py">get</span>
 </code></pre></div></div>
 
-<p>This conclused the implementation of <span class="problemtitle">Selecting Invitees (version 4)
-</span>. Now we need to create some input on which it can run and to do that we use
-the helper functions.</p>
+<p>This completes the implementation of <span class="problemtitle">Selecting Invitees (version 4)
+</span>. Now we need to create some input for which <code class="language-plaintext highlighter-rouge">si4</code> can evaluate the output.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">group</span> <span class="k">=</span> <span class="nv">Person</span><span class="o">.</span><span class="py">randomGroup</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>    <span class="c1">// Generate random group</span>
-<span class="k">val</span> <span class="nv">personsLiked</span> <span class="k">=</span> <span class="nv">group</span><span class="o">.</span><span class="py">take</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>      <span class="c1">// The first 5 are liked</span>
-<span class="k">val</span> <span class="nv">personsDisliked</span> <span class="k">=</span> <span class="nv">group</span><span class="o">.</span><span class="py">drop</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>   <span class="c1">// The rest is disliked</span>
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+import mathlib.set.SetTheory._
 
-<span class="k">def</span> <span class="nf">like</span> <span class="k">=</span> <span class="nv">group</span><span class="o">.</span><span class="py">randomLikeFunction</span><span class="o">(.</span><span class="mi">7</span><span class="o">)</span> <span class="c1">// Autogenerate random like relations</span>
+val group = Person.randomGroup(10)    // Generate random group
+val personsLiked = group.take(5)      // The first 5 are liked
+val personsDisliked = group.drop(5)   // The rest is disliked
 
-<span class="nv">Viz</span><span class="o">.</span><span class="py">render</span><span class="o">(</span><span class="nv">group</span><span class="o">.</span><span class="py">toDotString</span><span class="o">(</span><span class="n">personsLiked</span><span class="o">,</span> <span class="n">personsDisliked</span><span class="o">,</span> <span class="n">like</span><span class="o">))</span>
-</code></pre></div></div>
+def like = group.randomLikeFunction(.7) // Autogenerate random like relations
 
-<p>Then we simply evaluate <code class="language-plaintext highlighter-rouge">si4(.)</code> on this input.</p>
+html"&lt;img src=\"https://quickchart.io/graphviz?layout=circo&amp;graph=${group.toDotString(personsLiked, personsDisliked, like)}\" /&gt;"
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">si4</span><span class="o">(</span><span class="n">group</span><span class="o">,</span> <span class="n">personsLiked</span><span class="o">,</span> <span class="n">personsDisliked</span><span class="o">,</span> <span class="n">like</span><span class="o">,</span> <span class="n">k</span> <span class="k">=</span> <span class="mi">2</span><span class="o">)</span>
-</code></pre></div></div>
+def si4(
+  persons: Set[Person],
+  personsLiked: Set[Person],
+  personsDisliked: Set[Person],
+  like: (Person, Person) =&gt; Boolean,
+  k: Int
+): Set[Person] = {
+  // Input must satisfy these constraints, otherwise error.
+  require(personsLiked &lt;= persons,
+          "personsLiked must be a subset of persons")
+  require(personsDisliked &lt;= persons,
+          "personsDisliked must be a subset of persons")
+  require(personsLiked /\ personsDisliked == Set.empty,
+          "personsLiked intersect personsDisliked must be emtpy")
+  require(personsLiked \/ personsDisliked == persons,
+          "personsLiked union personsLiked must equal persons")
+
+  // Specify that invitees is valid if |G /\ D| &lt;= k.
+  def atMostKDislikes(invitees: Set[Person]): Boolean =
+    (invitees /\ personsDisliked).size &lt;= k
+
+  // Specify the optimality condition.
+  def xg(invitees: Set[Person]): Int = {
+    // The number of unique pairs that like eachother.
+    val x = { invitees.uniquePairs | like.tupled }.size
+    // The number of total invitees.
+    val g = invitees.size
+    x + g
+  }
+
+  val invitees = { powerset(persons) | atMostKDislikes _ }.argMax(xg)
+
+  // Return a (valid) set of invitees at random.
+  invitees.random.get
+
+}
+
+si4(
+  persons = group,
+  personsLiked,
+  personsDisliked,
+  like,
+  k = 2
+)
+</pre>
 
 <div class="question-top"><div class="question" id="question-3"><div class="question-body"><div class="question-header">Question 10.3</div> <p>Try to play around with the ratios of people that are liked by the host and the
 ratio of pairs that like eachother. Look at the visualization of the input and
@@ -506,107 +590,129 @@ sandbox for you to compare their behaviour directly.</p>
 <p><span class="problemtitle">Selecting invitees (version 5)</span><br /><span class="probleminout">Input:</span> A set \(P\), subsets \(L \subseteq P\) and \(D \subseteq P\) with \(L \cap D = \emptyset\) and \(L \cup D = P\), and a function \(like: P \times P \rightarrow \{true, false\}\).<br /><span class="probleminout">Output:</span> 
 \(G \subseteq P\) such that \(|G\cap L| + |X| + |G|\) is maximized (where \(X = \{p_i,p_j \in G\}~|~like(p_i,p_j) = true \wedge i\neq j\}\)).</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">si5</span><span class="o">(</span><span class="n">persons</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">],</span>
-        <span class="n">personsLiked</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">],</span>
-        <span class="n">personsDisliked</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">],</span>
-        <span class="n">like</span><span class="k">:</span> <span class="o">(</span><span class="kt">Person</span><span class="o">,</span> <span class="kt">Person</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Boolean</span><span class="o">)</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+import mathlib.set.SetTheory._
 
-  <span class="c1">// Input must satisfy these constraints, otherwise error.</span>
-  <span class="nf">require</span><span class="o">(</span><span class="n">personsLiked</span> <span class="o">&lt;=</span> <span class="n">persons</span><span class="o">,</span>
-          <span class="s">"personsLiked must be a subset of persons"</span><span class="o">)</span>
-  <span class="nf">require</span><span class="o">(</span><span class="n">personsDisliked</span> <span class="o">&lt;=</span> <span class="n">persons</span><span class="o">,</span>
-          <span class="s">"personsDisliked must be a subset of persons"</span><span class="o">)</span>
-  <span class="nf">require</span><span class="o">(</span><span class="n">personsLiked</span> <span class="o">/\</span> <span class="n">personsDisliked</span> <span class="o">==</span> <span class="nv">Set</span><span class="o">.</span><span class="py">empty</span><span class="o">,</span>
-          <span class="s">"personsLiked intersect personsDisliked must be emtpy"</span><span class="o">)</span>
-  <span class="nf">require</span><span class="o">(</span><span class="n">personsLiked</span> <span class="o">\/</span> <span class="n">personsDisliked</span> <span class="o">==</span> <span class="n">persons</span><span class="o">,</span>
-          <span class="s">"personsLiked union personsLiked must equal persons"</span><span class="o">)</span>
+def si5(
+  persons: Set[Person],
+  personsLiked: Set[Person],
+  personsDisliked: Set[Person],
+  like: (Person, Person) =&gt; Boolean
+): Set[Person] = {
 
-  <span class="c1">// Specify the optimality condition.</span>
-  <span class="k">def</span> <span class="nf">gl_x_g</span><span class="o">(</span><span class="n">invitees</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="c1">// The number of invitees the host likes.</span>
-    <span class="k">val</span> <span class="nv">gl</span> <span class="k">=</span> <span class="o">(</span><span class="n">invitees</span> <span class="o">/\</span> <span class="n">personsLiked</span><span class="o">).</span><span class="py">size</span>              
-    <span class="c1">// The number of unique pairs that like eachother.</span>
-    <span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="o">{</span> <span class="nv">invitees</span><span class="o">.</span><span class="py">uniquePairs</span> <span class="o">|</span> <span class="nv">like</span><span class="o">.</span><span class="py">tupled</span> <span class="o">}.</span><span class="py">size</span>
-    <span class="c1">// The number of total invitees.</span>
-    <span class="k">val</span> <span class="nv">g</span>  <span class="k">=</span> <span class="nv">invitees</span><span class="o">.</span><span class="py">size</span>
-    <span class="n">gl</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="n">g</span>
-  <span class="o">}</span>
+  // Input must satisfy these constraints, otherwise error.
+  require(personsLiked &lt;= persons,
+          "personsLiked must be a subset of persons")
+  require(personsDisliked &lt;= persons,
+          "personsDisliked must be a subset of persons")
+  require(personsLiked /\ personsDisliked == Set.empty,
+          "personsLiked intersect personsDisliked must be emtpy")
+  require(personsLiked \/ personsDisliked == persons,
+          "personsLiked union personsLiked must equal persons")
 
-  <span class="k">val</span> <span class="nv">invitees</span> <span class="k">=</span> <span class="nf">powerset</span><span class="o">(</span><span class="n">persons</span><span class="o">).</span><span class="py">argMax</span><span class="o">(</span><span class="n">gl_x_g</span><span class="o">)</span>
+  // Specify the optimality condition.
+  def gl_x_g(invitees: Set[Person]): Int = {
+    // The number of invitees the host likes.
+    val gl = (invitees /\ personsLiked).size
+    // The number of unique pairs that like eachother.
+    val x = { invitees.uniquePairs | like.tupled }.size
+    // The number of total invitees.
+    val g  = invitees.size
+    gl + x + g
+  }
 
-  <span class="c1">// Return a (valid) set of invitees at random.</span>
-  <span class="nv">invitees</span><span class="o">.</span><span class="py">random</span><span class="o">.</span><span class="py">get</span>
-<span class="o">}</span>
+  val invitees = powerset(persons).argMax(gl_x_g)
 
-<span class="k">val</span> <span class="nv">group</span> <span class="k">=</span> <span class="nv">Person</span><span class="o">.</span><span class="py">randomGroup</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>    <span class="c1">// Generate random group</span>
-<span class="k">val</span> <span class="nv">personsLiked</span> <span class="k">=</span> <span class="nv">group</span><span class="o">.</span><span class="py">take</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>      <span class="c1">// The first 5 are liked</span>
-<span class="k">val</span> <span class="nv">personsDisliked</span> <span class="k">=</span> <span class="nv">group</span><span class="o">.</span><span class="py">drop</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>   <span class="c1">// The rest is disliked</span>
+  // Return a (valid) set of invitees at random.
+  invitees.random.get
+}
 
-<span class="k">def</span> <span class="nf">like</span> <span class="k">=</span> <span class="nv">group</span><span class="o">.</span><span class="py">randomLikeFunction</span><span class="o">(.</span><span class="mi">7</span><span class="o">)</span> <span class="c1">// Autogenerate random like relations</span>
+val group = Person.randomGroup(10)    // Generate random group
+val personsLiked = group.take(5)      // The first 5 are liked
+val personsDisliked = group.drop(5)   // The rest is disliked
 
-<span class="nv">Viz</span><span class="o">.</span><span class="py">render</span><span class="o">(</span><span class="nv">group</span><span class="o">.</span><span class="py">toDotString</span><span class="o">(</span><span class="n">personsLiked</span><span class="o">,</span> <span class="n">personsDisliked</span><span class="o">,</span> <span class="n">like</span><span class="o">))</span>
+def like = group.randomLikeFunction(.7) // Autogenerate random like relations
 
-<span class="nf">si5</span><span class="o">(</span><span class="n">group</span><span class="o">,</span> <span class="n">personsLiked</span><span class="o">,</span> <span class="n">personsDisliked</span><span class="o">,</span> <span class="n">like</span><span class="o">)</span>
-</code></pre></div></div>
+html"&lt;img src=\"https://quickchart.io/graphviz?layout=circo&amp;graph=${group.toDotString(personsLiked, personsDisliked, like)}\" /&gt;"
+
+si5(
+  persons = group,
+  personsLiked,
+  personsDisliked,
+  like
+)
+</pre>
 
 <p><span class="problemtitle">Selecting invitees (version 6)</span><br /><span class="probleminout">Input:</span> A set \(P\), subsets \(L \subseteq P\) and \(D \subseteq P\) with \(L \cap D = \emptyset\) and \(L \cup D = P\), a function \(like: P \times P \rightarrow \{true, false\}\), and a threshold value \(k\).<br /><span class="probleminout">Output:</span> 
 \(G \subseteq P\) such that \(|Y| \leq k\) and  \(|G\cap L|+|G|\) is maximized (where \(Y = \{p_i,p_j \in G\}~|~like(p_i,p_j) = false \wedge i\neq j \}\)).</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">si6</span><span class="o">(</span><span class="n">persons</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">],</span>
-        <span class="n">personsLiked</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">],</span>
-        <span class="n">personsDisliked</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">],</span>
-        <span class="n">like</span><span class="k">:</span> <span class="o">(</span><span class="kt">Person</span><span class="o">,</span> <span class="kt">Person</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Boolean</span><span class="o">,</span>
-        <span class="n">k</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+import mathlib.set.SetTheory._
 
-  <span class="c1">// Input must satisfy these constraints, otherwise error.</span>
-  <span class="nf">require</span><span class="o">(</span><span class="n">personsLiked</span> <span class="o">&lt;=</span> <span class="n">persons</span><span class="o">,</span>
-          <span class="s">"personsLiked must be a subset of persons"</span><span class="o">)</span>
-  <span class="nf">require</span><span class="o">(</span><span class="n">personsDisliked</span> <span class="o">&lt;=</span> <span class="n">persons</span><span class="o">,</span>
-          <span class="s">"personsDisliked must be a subset of persons"</span><span class="o">)</span>
-  <span class="nf">require</span><span class="o">(</span><span class="n">personsLiked</span> <span class="o">/\</span> <span class="n">personsDisliked</span> <span class="o">==</span> <span class="nv">Set</span><span class="o">.</span><span class="py">empty</span><span class="o">,</span>
-          <span class="s">"personsLiked intersect personsDisliked must be emtpy"</span><span class="o">)</span>
-  <span class="nf">require</span><span class="o">(</span><span class="n">personsLiked</span> <span class="o">\/</span> <span class="n">personsDisliked</span> <span class="o">==</span> <span class="n">persons</span><span class="o">,</span>
-          <span class="s">"personsLiked union personsLiked must equal persons"</span><span class="o">)</span>
+def si6(
+  persons: Set[Person],
+  personsLiked: Set[Person],
+  personsDisliked: Set[Person],
+  like: (Person, Person) =&gt; Boolean,
+  k: Int
+): Set[Person] = {
+  // Input must satisfy these constraints, otherwise error.
+  require(personsLiked &lt;= persons,
+          "personsLiked must be a subset of persons")
+  require(personsDisliked &lt;= persons,
+          "personsDisliked must be a subset of persons")
+  require(personsLiked /\ personsDisliked == Set.empty,
+          "personsLiked intersect personsDisliked must be emtpy")
+  require(personsLiked \/ personsDisliked == persons,
+          "personsLiked union personsLiked must equal persons")
 
-	<span class="c1">// Specify that invitees is valid if |Y| &lt;= k.</span>
-  <span class="k">def</span> <span class="nf">atMostKPairDislikes</span><span class="o">(</span><span class="n">invitees</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">])</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="o">{</span> <span class="nv">invitees</span><span class="o">.</span><span class="py">uniquePairs</span> <span class="o">|</span> <span class="nv">like</span><span class="o">.</span><span class="py">tupled</span> <span class="o">}.</span><span class="py">size</span> <span class="o">&lt;=</span> <span class="n">k</span>
-  <span class="o">}</span>
+	// Specify that invitees is valid if |Y| &lt;= k.
+  def atMostKPairDislikes(invitees: Set[Person]): Boolean = {
+    { invitees.uniquePairs | like.tupled }.size &lt;= k
+  }
 
-  <span class="c1">// Specify the optimality condition.</span>
-  <span class="k">def</span> <span class="nf">gl_g</span><span class="o">(</span><span class="n">invitees</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="c1">// The number of invitees the host likes.  </span>
-    <span class="k">val</span> <span class="nv">gl</span> <span class="k">=</span> <span class="o">(</span><span class="n">invitees</span> <span class="o">/\</span> <span class="n">personsLiked</span><span class="o">).</span><span class="py">size</span>
-    <span class="c1">// The number of total invitees.</span>
-    <span class="k">val</span> <span class="nv">g</span>  <span class="k">=</span> <span class="nv">invitees</span><span class="o">.</span><span class="py">size</span>       
-    <span class="n">gl</span> <span class="o">+</span> <span class="n">g</span>
-  <span class="o">}</span>
+  // Specify the optimality condition.
+  def gl_g(invitees: Set[Person]): Int = {
+    // The number of invitees the host likes.
+    val gl = (invitees /\ personsLiked).size
+    // The number of total invitees.
+    val g  = invitees.size
+    gl + g
+  }
 
-  <span class="k">val</span> <span class="nv">invitees</span> <span class="k">=</span> <span class="o">{</span> <span class="nf">powerset</span><span class="o">(</span><span class="n">persons</span><span class="o">)</span> <span class="o">|</span> <span class="n">atMostKPairDislikes</span> <span class="k">_</span> <span class="o">}.</span><span class="py">argMax</span><span class="o">(</span><span class="n">gl_g</span><span class="o">)</span>
+  val invitees = { powerset(persons) | atMostKPairDislikes _ }.argMax(gl_g)
 
-  <span class="c1">// Return a (valid) set of invitees at random.</span>
-  <span class="nv">invitees</span><span class="o">.</span><span class="py">random</span><span class="o">.</span><span class="py">get</span>
-<span class="o">}</span>
+  // Return a (valid) set of invitees at random.
+  invitees.random.get
+}
 
-<span class="k">val</span> <span class="nv">group</span> <span class="k">=</span> <span class="nv">Person</span><span class="o">.</span><span class="py">randomGroup</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>    <span class="c1">// Generate random group</span>
-<span class="k">val</span> <span class="nv">personsLiked</span> <span class="k">=</span> <span class="nv">group</span><span class="o">.</span><span class="py">take</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>      <span class="c1">// The first 5 are liked</span>
-<span class="k">val</span> <span class="nv">personsDisliked</span> <span class="k">=</span> <span class="nv">group</span><span class="o">.</span><span class="py">drop</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>   <span class="c1">// The rest is disliked</span>
+val group = Person.randomGroup(10)    // Generate random group
+val personsLiked = group.take(5)      // The first 5 are liked
+val personsDisliked = group.drop(5)   // The rest is disliked
 
-<span class="k">def</span> <span class="nf">like</span> <span class="k">=</span> <span class="nv">group</span><span class="o">.</span><span class="py">randomLikeFunction</span><span class="o">(.</span><span class="mi">7</span><span class="o">)</span> <span class="c1">// Autogenerate random like relations</span>
+def like = group.randomLikeFunction(.7) // Autogenerate random like relations
 
-<span class="nv">Viz</span><span class="o">.</span><span class="py">render</span><span class="o">(</span><span class="nv">group</span><span class="o">.</span><span class="py">toDotString</span><span class="o">(</span><span class="n">personsLiked</span><span class="o">,</span> <span class="n">personsDisliked</span><span class="o">,</span> <span class="n">like</span><span class="o">))</span>
+html"&lt;img src=\"https://quickchart.io/graphviz?layout=circo&amp;graph=${group.toDotString(personsLiked, personsDisliked, like)}\" /&gt;"
 
-<span class="nf">si6</span><span class="o">(</span><span class="n">group</span><span class="o">,</span> <span class="n">personsLiked</span><span class="o">,</span> <span class="n">personsDisliked</span><span class="o">,</span> <span class="n">like</span><span class="o">,</span> <span class="n">k</span> <span class="k">=</span> <span class="mi">2</span><span class="o">)</span>
-</code></pre></div></div>
+si6(
+  persons = group,
+  personsLiked,
+  personsDisliked,
+  like,
+  k = 2
+)
+</pre>
 
 <h3 id="analyzing-and-comparing-formalizations">Analyzing and comparing formalizations</h3>
 
-<p>Simulations are a powerful tool to uncover consequences of formalization
-choices, especially those that are hard to derive mathematically. However, the
-full power of simulations is yet to be unlocked. Looking at single input
+<p>Simulations are a useful theoretical tool to uncover consequences of formalization
+choices, especially those that are hard to derive mathematically.
+Looking at single input
 instances of single formalizations is not very informative and wouldn’t be worth
-the effort of coding. Let’s see what we can learn about the three versions of <span class="problemtitle">Selecting Invitees </span> by comparing them to eachother. We follow the
-example questions from <a href="/lovelace/part_iii/simulating">Chapter 8</a>.</p>
+the effort of coding. Let’s see what we can learn about the three versions of <span class="problemtitle">Selecting Invitees </span> by comparing them to eachother across many inputs.
+We follow the example questions from <a href="/lovelace/part_iii/simulating">Chapter 8</a>.</p>
 
 <p>First we ask: <em>Are these formalizations truly different, or are they
 equivalent?</em> We can run the simulation for all three versions on the same input
@@ -621,24 +727,32 @@ reminder, see <a href="/lovelace/part_iii/sim_subset_choice#supporting-code">Sup
 </div></div>
 </div></div></div>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">group</span> <span class="k">=</span> <span class="nv">Person</span><span class="o">.</span><span class="py">randomGroup</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>    <span class="c1">// Generate random group</span>
-<span class="k">val</span> <span class="nv">personsLiked</span> <span class="k">=</span> <span class="nv">group</span><span class="o">.</span><span class="py">take</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>      <span class="c1">// The first 5 are liked</span>
-<span class="k">val</span> <span class="nv">personsDisliked</span> <span class="k">=</span> <span class="nv">group</span><span class="o">.</span><span class="py">drop</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>   <span class="c1">// The rest is disliked</span>
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+import mathlib.set.SetTheory._
 
-<span class="k">def</span> <span class="nf">like</span> <span class="k">=</span> <span class="nv">group</span><span class="o">.</span><span class="py">randomLikeFunction</span><span class="o">(.</span><span class="mi">7</span><span class="o">)</span> <span class="c1">// Autogenerate random like relations</span>
+val group = Person.randomGroup(10)    // Generate random group
+val personsLiked = group.take(5)      // The first 5 are liked
+val personsDisliked = group.drop(5)   // The rest is disliked
 
-<span class="k">val</span> <span class="nv">k</span> <span class="k">=</span> <span class="mi">2</span>
+def like = group.randomLikeFunction(.7) // Autogenerate random like relations
 
-<span class="nf">println</span><span class="o">(</span><span class="s">"Output SI4: "</span> <span class="o">+</span> <span class="nv">SelectingInvitees</span><span class="o">.</span><span class="py">si4</span><span class="o">(</span><span class="n">group</span><span class="o">,</span> <span class="n">personsLiked</span><span class="o">,</span> <span class="n">personsDisliked</span><span class="o">,</span> <span class="n">like</span><span class="o">,</span> <span class="n">k</span><span class="o">))</span>
-<span class="nf">println</span><span class="o">(</span><span class="s">"Output SI5: "</span> <span class="o">+</span> <span class="nv">SelectingInvitees</span><span class="o">.</span><span class="py">si5</span><span class="o">(</span><span class="n">group</span><span class="o">,</span> <span class="n">personsLiked</span><span class="o">,</span> <span class="n">personsDisliked</span><span class="o">,</span> <span class="n">like</span><span class="o">))</span>
-<span class="nf">println</span><span class="o">(</span><span class="s">"Output SI6: "</span> <span class="o">+</span> <span class="nv">SelectingInvitees</span><span class="o">.</span><span class="py">si6</span><span class="o">(</span><span class="n">group</span><span class="o">,</span> <span class="n">personsLiked</span><span class="o">,</span> <span class="n">personsDisliked</span><span class="o">,</span> <span class="n">like</span><span class="o">,</span> <span class="n">k</span><span class="o">))</span>
+val k = 2
 
-<span class="nv">Viz</span><span class="o">.</span><span class="py">render</span><span class="o">(</span><span class="nv">group</span><span class="o">.</span><span class="py">toDotString</span><span class="o">(</span><span class="n">personsLiked</span><span class="o">,</span> <span class="n">personsDisliked</span><span class="o">,</span> <span class="n">like</span><span class="o">))</span>
-</code></pre></div></div>
+html"&lt;img src=\"https://quickchart.io/graphviz?layout=circo&amp;graph=${group.toDotString(personsLiked, personsDisliked, like)}\" /&gt;"
+
+val si4out = SelectingInvitees.si4(group, personsLiked, personsDisliked, like, k)
+val si5out = SelectingInvitees.si5(group, personsLiked, personsDisliked, like)
+val si6out = SelectingInvitees.si6(group, personsLiked, personsDisliked, like, k)
+
+html"SI4: ${si4out.mkString("\t")}"
+html"SI5: ${si5out.mkString("\t")}"
+html"SI6: ${si6out.mkString("\t")}"
+</pre>
 
 <p>For some inputs the formalizations might be equivalent, but for many others they
 are not. Next, try to answer the question: <em>How would you be able tell different
-formalizations apart in terms of the behaviour that they predict?</em> Finally your
+formalizations apart in terms of the input-output mappings they theorize?</em> Finally the
 hard work will pay off, because you can use simulations to do this. The code
 below consists of three steps: (1) generate a set of inputs, (2) compute for all
 inputs the corresponding output using <code class="language-plaintext highlighter-rouge">si4</code>, <code class="language-plaintext highlighter-rouge">si5</code> and <code class="language-plaintext highlighter-rouge">si6</code>, (3)
@@ -648,7 +762,7 @@ perform data analysis and plotting.</p>
 code that generates input using the same helper functions we’ve already seen,
 but at a larger scale (i.e., more inputs) and by giving control over input
 properties. This is the <em>constrained input generator</em> (see <a href="/lovelace/part_iii/mathlib#simulation-architecture">Chapter
-7</a>). In Step 3, we perform
+9</a>). In Step 3, we perform
 an example analysis of the simulation data.</p>
 
 <div class="question-top"><div class="question" id="question-6"><div class="question-body"><div class="question-header">Question 10.6</div> <p>Using the code below, what kind of differences can you find between the three
@@ -661,223 +775,138 @@ of the search space.</p>
 </div></div>
 </div></div></div>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generate inputs</span>
-<span class="k">val</span> <span class="nv">inputData</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">SelectingInvitees.Input</span><span class="o">]</span> <span class="k">=</span>
-  <span class="nv">SelectingInvitees</span><span class="o">.</span><span class="py">inputGenerator</span><span class="o">(</span><span class="n">groupSize</span> <span class="k">=</span> <span class="mi">5</span><span class="o">,</span>
-                                   <span class="n">likeDislikeRatio</span> <span class="k">=</span> <span class="o">.</span><span class="mi">2</span><span class="o">,</span>
-                                   <span class="n">pairLikeRatio</span> <span class="k">=</span> <span class="o">.</span><span class="mi">4</span><span class="o">,</span>
-                                   <span class="n">k</span> <span class="k">=</span> <span class="mi">2</span><span class="o">,</span>
-                                   <span class="n">sampleSize</span> <span class="k">=</span> <span class="mi">50</span><span class="o">)</span>
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+import mathlib.set.SetTheory._
 
-<span class="c1">// Compute outputs</span>
-<span class="k">val</span> <span class="nv">outputDataSI4</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">]]</span> <span class="k">=</span> <span class="nv">inputData</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">input</span> <span class="k">=&gt;</span>
-  <span class="nv">SelectingInvitees</span><span class="o">.</span><span class="py">si4</span><span class="o">(</span><span class="nv">input</span><span class="o">.</span><span class="py">group</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">personsLiked</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">personsDisliked</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">like</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">k</span><span class="o">))</span>
+val inputs = Input.generate(
+  groupSize         = 6,
+  likeDislikeRatios = Set(0, 0.22, 0.66, 1.0),
+  pairLikeRatios    = Set(0, 0.22, 0.66, 1.0),
+  ks                = Set(0, 0.22, 0.66, 1.0),
+  sampleSize        = 1
+)
 
-<span class="k">val</span> <span class="nv">outputDataSI5</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">]]</span> <span class="k">=</span> <span class="nv">inputData</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">input</span> <span class="k">=&gt;</span>
-  <span class="nv">SelectingInvitees</span><span class="o">.</span><span class="py">si5</span><span class="o">(</span><span class="nv">input</span><span class="o">.</span><span class="py">group</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">personsLiked</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">personsDisliked</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">like</span><span class="o">))</span>
+val io4 = inputs.map(input =&gt; input -&gt; SelectingInvitees.si4(
+  input.group,
+  input.personsLiked,
+  input.personsDisliked,
+  input.like,
+  input.k
+))
+val io5 = inputs.map(input =&gt; input -&gt; SelectingInvitees.si5(
+  input.group,
+  input.personsLiked,
+  input.personsDisliked,
+  input.like
+))
+val io6 = inputs.map(input =&gt; input -&gt; SelectingInvitees.si6(
+  input.group,
+  input.personsLiked,
+  input.personsDisliked,
+  input.like,
+  input.k
+))
 
-<span class="k">val</span> <span class="nv">outputDataSI6</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">]]</span> <span class="k">=</span> <span class="nv">inputData</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">input</span> <span class="k">=&gt;</span>
-  <span class="nv">SelectingInvitees</span><span class="o">.</span><span class="py">si6</span><span class="o">(</span><span class="nv">input</span><span class="o">.</span><span class="py">group</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">personsLiked</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">personsDisliked</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">like</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">k</span><span class="o">))</span>
+def analysis1(io: (Input, Set[Person])): (Double, Double) = {
+  val input      = io._1
+  val output     = io._2
+  val nrLikes    = input.group.uniquePairs.count(input.like.tupled)
+  val nrDislikes = input.group.uniquePairs.count(!input.like.tupled(_))
+  val ldRatio    = nrLikes.toDouble / nrDislikes
+  val size       = output.size.doubleValue
+  (ldRatio, size)
+}
 
-<span class="c1">// Perform data analyses</span>
-<span class="k">def</span> <span class="nf">analysis1</span><span class="o">(</span><span class="n">io</span><span class="k">:</span> <span class="o">(</span><span class="kt">SelectingInvitees.Input</span><span class="o">,</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">]))</span><span class="k">:</span> <span class="o">(</span><span class="kt">Double</span><span class="o">,</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
-  <span class="k">val</span> <span class="nv">input</span> <span class="k">=</span> <span class="nv">io</span><span class="o">.</span><span class="py">_1</span>
-  <span class="k">val</span> <span class="nv">output</span> <span class="k">=</span> <span class="nv">io</span><span class="o">.</span><span class="py">_2</span>
-  <span class="k">val</span> <span class="nv">nrLikes</span> <span class="k">=</span> <span class="nv">input</span><span class="o">.</span><span class="py">group</span><span class="o">.</span><span class="py">uniquePairs</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="nv">input</span><span class="o">.</span><span class="py">like</span><span class="o">.</span><span class="py">tupled</span><span class="o">).</span><span class="py">size</span>
-  <span class="k">val</span> <span class="nv">nrDislikes</span> <span class="k">=</span> <span class="nv">input</span><span class="o">.</span><span class="py">group</span><span class="o">.</span><span class="py">uniquePairs</span><span class="o">.</span><span class="py">filter</span><span class="o">(!</span><span class="nv">input</span><span class="o">.</span><span class="py">like</span><span class="o">.</span><span class="py">tupled</span><span class="o">(</span><span class="k">_</span><span class="o">)).</span><span class="py">size</span>
-  <span class="k">val</span> <span class="nv">ldRatio</span> <span class="k">=</span> <span class="nv">nrLikes</span><span class="o">.</span><span class="py">toDouble</span> <span class="o">/</span> <span class="n">nrDislikes</span>
-  <span class="k">val</span> <span class="nv">size</span> <span class="k">=</span> <span class="nv">output</span><span class="o">.</span><span class="py">size</span><span class="o">.</span><span class="py">doubleValue</span>
-  <span class="o">(</span><span class="n">ldRatio</span><span class="o">,</span> <span class="n">size</span><span class="o">)</span>
-<span class="o">}</span>
+val data4A1: List[(Double, Double)] = io4 map {
+  case (i: Input, o: Set[Person]) =&gt; analysis1(i, o)
+}
+val data5A1: List[(Double, Double)] = io5 map {
+  case (i: Input, o: Set[Person]) =&gt; analysis1(i, o)
+}
+val data6A1: List[(Double, Double)] = io6 map {
+  case (i: Input, o: Set[Person]) =&gt; analysis1(i, o)
+}
 
-<span class="k">val</span> <span class="nv">dataAnalysis1SI4</span> <span class="k">=</span> <span class="o">(</span><span class="n">inputData</span> <span class="n">zip</span> <span class="n">outputDataSI4</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="n">analysis1</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">dataAnalysis1SI5</span> <span class="k">=</span> <span class="o">(</span><span class="n">inputData</span> <span class="n">zip</span> <span class="n">outputDataSI5</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="n">analysis1</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">dataAnalysis1SI6</span> <span class="k">=</span> <span class="o">(</span><span class="n">inputData</span> <span class="n">zip</span> <span class="n">outputDataSI6</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="n">analysis1</span><span class="o">)</span>
+val data4string1 = Analyses.scatterDataToString(data4A1, "SI4")
+val data5string1 = Analyses.scatterDataToString(data5A1, "SI5")
+val data6string1 = Analyses.scatterDataToString(data6A1, "SI6")
 
-<span class="k">def</span> <span class="nf">analysis2</span><span class="o">(</span><span class="n">io</span><span class="k">:</span> <span class="o">(</span><span class="kt">SelectingInvitees.Input</span><span class="o">,</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">]))</span><span class="k">:</span> <span class="o">(</span><span class="kt">Double</span><span class="o">,</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
-  <span class="k">val</span> <span class="nv">input</span> <span class="k">=</span> <span class="nv">io</span><span class="o">.</span><span class="py">_1</span>
-  <span class="k">val</span> <span class="nv">output</span> <span class="k">=</span> <span class="nv">io</span><span class="o">.</span><span class="py">_2</span>
-  <span class="k">val</span> <span class="nv">nrLikes</span> <span class="k">=</span> <span class="nv">input</span><span class="o">.</span><span class="py">group</span><span class="o">.</span><span class="py">uniquePairs</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="nv">input</span><span class="o">.</span><span class="py">like</span><span class="o">.</span><span class="py">tupled</span><span class="o">).</span><span class="py">size</span>
-  <span class="k">val</span> <span class="nv">nrDislikes</span> <span class="k">=</span> <span class="nv">input</span><span class="o">.</span><span class="py">group</span><span class="o">.</span><span class="py">uniquePairs</span><span class="o">.</span><span class="py">filter</span><span class="o">(!</span><span class="nv">input</span><span class="o">.</span><span class="py">like</span><span class="o">.</span><span class="py">tupled</span><span class="o">(</span><span class="k">_</span><span class="o">)).</span><span class="py">size</span>
-  <span class="k">val</span> <span class="nv">ldRatio</span> <span class="k">=</span> <span class="nv">nrLikes</span><span class="o">.</span><span class="py">toDouble</span> <span class="o">/</span> <span class="n">nrDislikes</span>
-  <span class="k">val</span> <span class="nv">avgLikes</span> <span class="k">=</span> <span class="nv">output</span><span class="o">.</span><span class="py">uniquePairs</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="nv">input</span><span class="o">.</span><span class="py">like</span><span class="o">.</span><span class="py">tupled</span><span class="o">).</span><span class="py">size</span>
-  <span class="o">(</span><span class="n">ldRatio</span><span class="o">,</span> <span class="n">avgLikes</span><span class="o">)</span>
-<span class="o">}</span>
+html"&lt;img src=\"https://quickchart.io/chart?c={type:'scatter',data:{datasets:[$data4string1,$data5string1,$data6string1]},options:{scales:{xAxes:[{scaleLabel:{display: true,labelString:'like/dislike ratio'}}],yAxes:[{scaleLabel:{display:true,labelString:'size'}}]}}}\" /&gt;"
+</pre>
 
-<span class="k">val</span> <span class="nv">dataAnalysis2SI4</span> <span class="k">=</span> <span class="o">(</span><span class="n">inputData</span> <span class="n">zip</span> <span class="n">outputDataSI4</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="n">analysis2</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">dataAnalysis2SI5</span> <span class="k">=</span> <span class="o">(</span><span class="n">inputData</span> <span class="n">zip</span> <span class="n">outputDataSI5</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="n">analysis2</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">dataAnalysis2SI6</span> <span class="k">=</span> <span class="o">(</span><span class="n">inputData</span> <span class="n">zip</span> <span class="n">outputDataSI6</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="n">analysis2</span><span class="o">)</span>
+<pre class="mathlib">
+import mathlibrepo.selectinginvitees._
+import mathlib.set.SetTheory._
 
-<span class="c1">// Plot analysis 1</span>
-<span class="k">val</span> <span class="nv">trace14</span> <span class="k">=</span> <span class="nc">Trace</span><span class="o">(</span><span class="n">dataAnalysis1SI4</span><span class="o">,</span> <span class="s">"SI4"</span><span class="o">,</span> <span class="nv">PlotType</span><span class="o">.</span><span class="py">Line</span><span class="o">).</span><span class="py">mean</span>
-<span class="k">val</span> <span class="nv">trace15</span> <span class="k">=</span> <span class="nc">Trace</span><span class="o">(</span><span class="n">dataAnalysis1SI5</span><span class="o">,</span> <span class="s">"SI5"</span><span class="o">,</span> <span class="nv">PlotType</span><span class="o">.</span><span class="py">Line</span><span class="o">).</span><span class="py">mean</span>
-<span class="k">val</span> <span class="nv">trace16</span> <span class="k">=</span> <span class="nc">Trace</span><span class="o">(</span><span class="n">dataAnalysis1SI6</span><span class="o">,</span> <span class="s">"SI6"</span><span class="o">,</span> <span class="nv">PlotType</span><span class="o">.</span><span class="py">Line</span><span class="o">).</span><span class="py">mean</span>
+val inputs = Input.generate(
+  groupSize         = 6,
+  likeDislikeRatios = Set(0, 0.22, 0.66, 1.0),
+  pairLikeRatios    = Set(0, 0.22, 0.66, 1.0),
+  ks                = Set(0, 0.22, 0.66, 1.0),
+  sampleSize        = 1
+)
 
-<span class="nc">Plot</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="n">trace14</span><span class="o">,</span> <span class="n">trace15</span><span class="o">,</span> <span class="n">trace16</span><span class="o">),</span>
-     <span class="n">xAxisTitle</span> <span class="k">=</span> <span class="s">"pair-wise like/dislike ratio"</span><span class="o">,</span>
-     <span class="n">yAxisTitle</span> <span class="k">=</span> <span class="s">"nr invitees"</span><span class="o">).</span><span class="py">render</span>
+val io4 = inputs.map(input =&gt; input -&gt; SelectingInvitees.si4(
+  input.group,
+  input.personsLiked,
+  input.personsDisliked,
+  input.like,
+  input.k
+))
+val io5 = inputs.map(input =&gt; input -&gt; SelectingInvitees.si5(
+  input.group,
+  input.personsLiked,
+  input.personsDisliked,
+  input.like
+))
+val io6 = inputs.map(input =&gt; input -&gt; SelectingInvitees.si6(
+  input.group,
+  input.personsLiked,
+  input.personsDisliked,
+  input.like,
+  input.k
+))
 
-<span class="c1">// Plot analysis 2</span>
-<span class="k">val</span> <span class="nv">trace24</span> <span class="k">=</span> <span class="nc">Trace</span><span class="o">(</span><span class="n">dataAnalysis2SI4</span><span class="o">,</span> <span class="s">"SI4"</span><span class="o">,</span> <span class="nv">PlotType</span><span class="o">.</span><span class="py">Line</span><span class="o">).</span><span class="py">mean</span>
-<span class="k">val</span> <span class="nv">trace25</span> <span class="k">=</span> <span class="nc">Trace</span><span class="o">(</span><span class="n">dataAnalysis2SI5</span><span class="o">,</span> <span class="s">"SI5"</span><span class="o">,</span> <span class="nv">PlotType</span><span class="o">.</span><span class="py">Line</span><span class="o">).</span><span class="py">mean</span>
-<span class="k">val</span> <span class="nv">trace26</span> <span class="k">=</span> <span class="nc">Trace</span><span class="o">(</span><span class="n">dataAnalysis2SI6</span><span class="o">,</span> <span class="s">"SI6"</span><span class="o">,</span> <span class="nv">PlotType</span><span class="o">.</span><span class="py">Line</span><span class="o">).</span><span class="py">mean</span>
+def analysis2(io: (Input, Set[Person])): (Double, Double) = {
+  val input      = io._1
+  val output     = io._2
+  val nrLikes    = input.group.uniquePairs.count(input.like.tupled)
+  val nrDislikes = input.group.uniquePairs.count(!input.like.tupled(_))
+  val ldRatio    = nrLikes.toDouble / nrDislikes
+  val avgLikes   = output.uniquePairs.count(input.like.tupled)
+  (ldRatio, avgLikes)
+}
 
-<span class="nc">Plot</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="n">trace24</span><span class="o">,</span> <span class="n">trace25</span><span class="o">,</span> <span class="n">trace26</span><span class="o">),</span>
-    <span class="n">xAxisTitle</span> <span class="k">=</span> <span class="s">"pair-wise like/dislike ratio"</span><span class="o">,</span>
-    <span class="n">yAxisTitle</span> <span class="k">=</span> <span class="s">"average likes among invitees"</span><span class="o">).</span><span class="py">render</span>
-</code></pre></div></div>
+val data4A1: List[(Double, Double)] = io4 map {
+  case (i: Input, o: Set[Person]) =&gt; analysis2(i, o)
+}
+val data5A1: List[(Double, Double)] = io5 map {
+  case (i: Input, o: Set[Person]) =&gt; analysis2(i, o)
+}
+val data6A1: List[(Double, Double)] = io6 map {
+  case (i: Input, o: Set[Person]) =&gt; analysis2(i, o)
+}
 
-<p>The analysis and plotting functionality within the online Scala system is quite
+val data4string1 = Analyses.scatterDataToString(data4A1, "SI4")
+val data5string1 = Analyses.scatterDataToString(data5A1, "SI5")
+val data6string1 = Analyses.scatterDataToString(data6A1, "SI6")
+
+html"&lt;img src=\"https://quickchart.io/chart?c={type:'scatter',data:{datasets:[$data4string1,$data5string1,$data6string1]},options:{scales:{xAxes:[{scaleLabel:{display: true,labelString:'like/dislike ratio'}}],yAxes:[{scaleLabel:{display:true,labelString:'average likes'}}]}}}\" /&gt;"
+</pre>
+
+<p>The analysis and plotting functionality within the online Scala environment is quite
 limited. If you want to explore the simulations more extensively consider
-running the simulations in a dedicated Scala development environment (see
-<a href="/lovelace/part_iii/simulating#installing-scala-and-mathlib">Installing Scala and <code class="language-plaintext highlighter-rouge">mathlib</code></a>) and
-download the code here. You can also use the code block below and download the
-raw data to perform analyses in your favorite statistical analysis software. The
-code below might take longer to run as it simulates <span class="problemtitle">Selecting Invitees
-</span> for many more combinations of parameters. The resulting CSV file will also
-be possibly large. Table 2 lists the CSV format.</p>
-
-<p><label for="Table-ID2" class="margin-toggle"> ⊕</label><input type="checkbox" id="Table-ID2" class="margin-toggle" /><span class="marginnote">Table 2: CSV format for group size \(n\). </span></p>
-<div class="table-wrapper" style="margin-top:3rem;">
-
-  <table>
-    <thead>
-      <tr>
-        <th style="text-align: left">column</th>
-        <th style="text-align: center">type</th>
-        <th style="text-align: left">description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="text-align: left">p0 .. pn</td>
-        <td style="text-align: center">true/false</td>
-        <td style="text-align: left">host likes pi</td>
-      </tr>
-      <tr>
-        <td style="text-align: left">p0-p1 ..  pn-p(n-1)</td>
-        <td style="text-align: center">true/false</td>
-        <td style="text-align: left">pi and pj like each other</td>
-      </tr>
-      <tr>
-        <td style="text-align: left">k</td>
-        <td style="text-align: center">int</td>
-        <td style="text-align: left">k value</td>
-      </tr>
-      <tr>
-        <td style="text-align: left">p0-si4 .. pn-si4</td>
-        <td style="text-align: center">true/false</td>
-        <td style="text-align: left">pi is invited in si4</td>
-      </tr>
-      <tr>
-        <td style="text-align: left">p0-si5 .. pn-si5</td>
-        <td style="text-align: center">true/false</td>
-        <td style="text-align: left">pi is invited in si5</td>
-      </tr>
-      <tr>
-        <td style="text-align: left">p0-si6 .. pn-si6</td>
-        <td style="text-align: center">true/false</td>
-        <td style="text-align: left">pi is invited in si6</td>
-      </tr>
-    </tbody>
-  </table>
-
-</div>
-
-<div class="table-wrapper" style="margin-top:3rem;">
-
-</div>
-
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">groupSize</span> <span class="k">=</span> <span class="mi">6</span>
-<span class="k">val</span> <span class="nv">likeDislikeRatios</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mf">0.22</span><span class="o">,</span> <span class="mf">0.66</span><span class="o">,</span> <span class="mf">1.0</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">pairLikeRatios</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mf">0.22</span><span class="o">,</span> <span class="mf">0.66</span><span class="o">,</span> <span class="mf">1.0</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">ks</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mf">0.22</span><span class="o">,</span> <span class="mf">0.66</span><span class="o">,</span> <span class="mf">1.0</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">sampleSize</span> <span class="k">=</span> <span class="mi">1</span>
-
-<span class="k">val</span> <span class="nv">inputData</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">SelectingInvitees.Input</span><span class="o">]</span> <span class="k">=</span>
-  <span class="o">(</span><span class="nf">for</span><span class="o">(</span><span class="n">likeDislikeRatio</span> <span class="k">&lt;-</span> <span class="n">likeDislikeRatios</span><span class="o">;</span>
-      <span class="n">pairLikeRatio</span> <span class="k">&lt;-</span> <span class="n">pairLikeRatios</span><span class="o">;</span>
-      <span class="n">k</span> <span class="k">&lt;-</span> <span class="n">ks</span><span class="o">)</span> <span class="k">yield</span> <span class="o">{</span>
-        <span class="nv">SelectingInvitees</span><span class="o">.</span><span class="py">inputGenerator</span><span class="o">(</span>
-          <span class="n">groupSize</span><span class="o">,</span>
-          <span class="n">likeDislikeRatio</span><span class="o">,</span>
-          <span class="n">pairLikeRatio</span><span class="o">,</span>
-          <span class="o">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">groupSize</span><span class="o">).</span><span class="py">intValue</span><span class="o">,</span>
-          <span class="n">sampleSize</span>
-          <span class="o">)</span>
-      <span class="o">}).</span><span class="py">toList</span><span class="o">.</span><span class="py">flatten</span>
-
-<span class="c1">// Compute outputs</span>
-<span class="k">val</span> <span class="nv">outputDataSI4</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">]]</span> <span class="k">=</span> <span class="nv">inputData</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">input</span> <span class="k">=&gt;</span>
-  <span class="nv">SelectingInvitees</span><span class="o">.</span><span class="py">si4</span><span class="o">(</span><span class="nv">input</span><span class="o">.</span><span class="py">group</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">personsLiked</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">personsDisliked</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">like</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">k</span><span class="o">))</span>
-
-<span class="k">val</span> <span class="nv">outputDataSI5</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">]]</span> <span class="k">=</span> <span class="nv">inputData</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">input</span> <span class="k">=&gt;</span>
-  <span class="nv">SelectingInvitees</span><span class="o">.</span><span class="py">si5</span><span class="o">(</span><span class="nv">input</span><span class="o">.</span><span class="py">group</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">personsLiked</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">personsDisliked</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">like</span><span class="o">))</span>
-
-<span class="k">val</span> <span class="nv">outputDataSI6</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">]]</span> <span class="k">=</span> <span class="nv">inputData</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">input</span> <span class="k">=&gt;</span>
-  <span class="nv">SelectingInvitees</span><span class="o">.</span><span class="py">si6</span><span class="o">(</span><span class="nv">input</span><span class="o">.</span><span class="py">group</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">personsLiked</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">personsDisliked</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">like</span><span class="o">,</span>
-                        <span class="nv">input</span><span class="o">.</span><span class="py">k</span><span class="o">))</span>
-
-<span class="c1">// Safe data to CSV</span>
-<span class="k">def</span> <span class="nf">inputHeader</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">SelectingInvitees.Input</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="k">val</span> <span class="nv">groupList</span> <span class="k">=</span> <span class="nv">input</span><span class="o">.</span><span class="py">group</span><span class="o">.</span><span class="py">toList</span>
-  <span class="k">val</span> <span class="nv">people</span> <span class="k">=</span> <span class="nf">for</span><span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="nv">groupList</span><span class="o">.</span><span class="py">indices</span><span class="o">)</span> <span class="k">yield</span> <span class="n">s</span><span class="s">"p$i"</span>
-  <span class="k">val</span> <span class="nv">pairs</span> <span class="k">=</span> <span class="nf">for</span><span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="nv">groupList</span><span class="o">.</span><span class="py">indices</span><span class="o">;</span> <span class="n">j</span> <span class="k">&lt;-</span> <span class="nv">groupList</span><span class="o">.</span><span class="py">indices</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="o">)</span> <span class="k">yield</span> <span class="n">s</span><span class="s">"p$i-p$j"</span>
-  <span class="nv">people</span><span class="o">.</span><span class="py">mkString</span><span class="o">(</span><span class="s">""</span><span class="o">,</span> <span class="s">",\t"</span><span class="o">,</span> <span class="s">",\t"</span><span class="o">)</span> <span class="o">+</span> <span class="nv">pairs</span><span class="o">.</span><span class="py">mkString</span><span class="o">(</span><span class="s">""</span><span class="o">,</span> <span class="s">",\t"</span><span class="o">,</span> <span class="s">",\t"</span><span class="o">)</span> <span class="o">+</span> <span class="s">"k"</span>
-<span class="o">}</span>
-
-<span class="k">def</span> <span class="nf">outputHeader</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">SelectingInvitees.Input</span><span class="o">,</span> <span class="n">label</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="k">val</span> <span class="nv">groupList</span> <span class="k">=</span> <span class="nv">input</span><span class="o">.</span><span class="py">group</span><span class="o">.</span><span class="py">toList</span>
-  <span class="k">val</span> <span class="nv">people</span> <span class="k">=</span> <span class="nf">for</span><span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="nv">groupList</span><span class="o">.</span><span class="py">indices</span><span class="o">)</span> <span class="k">yield</span> <span class="n">s</span><span class="s">"p$i-$label"</span>
-  <span class="nv">people</span><span class="o">.</span><span class="py">mkString</span><span class="o">(</span><span class="s">",\t"</span><span class="o">)</span>
-<span class="o">}</span>
-
-<span class="k">def</span> <span class="nf">dataToCSV</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">SelectingInvitees.Input</span><span class="o">,</span> <span class="n">outputs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Set</span><span class="o">[</span><span class="kt">Person</span><span class="o">]])</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="k">val</span> <span class="nv">groupList</span> <span class="k">=</span> <span class="nv">input</span><span class="o">.</span><span class="py">group</span><span class="o">.</span><span class="py">toList</span>
-  <span class="k">val</span> <span class="nv">hostLikes</span> <span class="k">=</span> <span class="nv">groupList</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">person</span> <span class="k">=&gt;</span> <span class="n">person</span> <span class="n">in</span> <span class="nv">input</span><span class="o">.</span><span class="py">personsLiked</span><span class="o">)</span>
-  <span class="k">val</span> <span class="nv">likings</span> <span class="k">=</span> <span class="nf">for</span><span class="o">(</span><span class="n">p1</span> <span class="k">&lt;-</span> <span class="n">groupList</span><span class="o">;</span> <span class="n">p2</span> <span class="k">&lt;-</span> <span class="n">groupList</span> <span class="k">if</span> <span class="n">p1</span> <span class="o">!=</span> <span class="n">p2</span><span class="o">)</span> <span class="k">yield</span> <span class="nv">input</span><span class="o">.</span><span class="py">like</span><span class="o">(</span><span class="n">p1</span><span class="o">,</span> <span class="n">p2</span><span class="o">)</span>
-  <span class="k">val</span> <span class="nv">k</span> <span class="k">=</span> <span class="nv">input</span><span class="o">.</span><span class="py">k</span>
-  <span class="k">val</span> <span class="nv">results</span> <span class="k">=</span> <span class="nv">outputs</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">output</span> <span class="k">=&gt;</span> <span class="nv">groupList</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="k">_</span> <span class="n">in</span> <span class="n">output</span><span class="o">).</span><span class="py">mkString</span><span class="o">(</span><span class="s">",\t"</span><span class="o">))</span>
-  <span class="nv">hostLikes</span><span class="o">.</span><span class="py">mkString</span><span class="o">(</span><span class="s">""</span><span class="o">,</span> <span class="s">",\t"</span><span class="o">,</span> <span class="s">",\t"</span><span class="o">)</span> <span class="o">+</span> <span class="nv">likings</span><span class="o">.</span><span class="py">mkString</span><span class="o">(</span><span class="s">""</span><span class="o">,</span> <span class="s">",\t"</span><span class="o">,</span> <span class="s">",\t"</span><span class="o">)</span> <span class="o">+</span> <span class="nv">input</span><span class="o">.</span><span class="py">k</span>  <span class="o">+</span> <span class="nv">results</span><span class="o">.</span><span class="py">mkString</span><span class="o">(</span><span class="s">",\t"</span><span class="o">,</span> <span class="s">",\t"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
-<span class="o">}</span>
-
-<span class="k">val</span> <span class="nv">header</span> <span class="k">=</span> <span class="nf">inputHeader</span><span class="o">(</span><span class="nv">inputData</span><span class="o">.</span><span class="py">head</span><span class="o">)</span> <span class="o">+</span> <span class="s">",\t"</span> <span class="o">+</span>
-  <span class="nf">outputHeader</span><span class="o">(</span><span class="nv">inputData</span><span class="o">.</span><span class="py">head</span><span class="o">,</span> <span class="s">"si4"</span><span class="o">)</span> <span class="o">+</span> <span class="s">",\t"</span> <span class="o">+</span>
-  <span class="nf">outputHeader</span><span class="o">(</span><span class="nv">inputData</span><span class="o">.</span><span class="py">head</span><span class="o">,</span> <span class="s">"si5"</span><span class="o">)</span> <span class="o">+</span> <span class="s">",\t"</span> <span class="o">+</span>
-  <span class="nf">outputHeader</span><span class="o">(</span><span class="nv">inputData</span><span class="o">.</span><span class="py">head</span><span class="o">,</span> <span class="s">"si6"</span><span class="o">)</span>
-
-<span class="k">val</span> <span class="nv">rows</span> <span class="k">=</span> <span class="nf">for</span><span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="nv">inputData</span><span class="o">.</span><span class="py">indices</span><span class="o">)</span> <span class="k">yield</span>
-  <span class="nf">dataToCSV</span><span class="o">(</span><span class="nf">inputData</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="nc">List</span><span class="o">(</span><span class="nf">outputDataSI4</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="nf">outputDataSI5</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="nf">outputDataSI6</span><span class="o">(</span><span class="n">i</span><span class="o">)))</span>
-
-<span class="k">val</span> <span class="nv">csv</span> <span class="k">=</span> <span class="n">header</span> <span class="o">+</span> <span class="s">"%0A"</span> <span class="o">+</span> <span class="nv">rows</span><span class="o">.</span><span class="py">mkString</span><span class="o">(</span><span class="s">"%0A"</span><span class="o">)</span>
-
-<span class="nv">Fiddle</span><span class="o">.</span><span class="py">print</span><span class="o">(</span><span class="nf">a</span><span class="o">(</span><span class="n">href</span><span class="o">:=</span><span class="n">s</span><span class="s">"data:text/csv,$csv"</span><span class="o">,</span> <span class="n">target</span><span class="o">:=</span><span class="s">"_blank"</span><span class="o">,</span> <span class="nf">attr</span><span class="o">(</span><span class="s">"download"</span><span class="o">):=</span><span class="s">"data.csv"</span><span class="o">,</span> <span class="s">"Right click and Save link as..."</span><span class="o">))</span>
-</code></pre></div></div>
+running the simulations in a dedicated Scala development environment. You can
+download the code from the <a href="https://github.com/markblokpoel/mathlib-repo">mathlib-repo repository</a>.</p>
 
 <h3 id="references">References</h3>
 
-<p>van Rooij, I., &amp; Baggio, G. (2021). <a href="https://journals.sagepub.com/doi/full/10.1177/1745691620970604">Theory before the test: How to build high-verisimilitude explanatory theories in psychological science.</a> <em>Perspectives on Psychological Science, 16</em>(4) 682–697.</p>
+<p>Blokpoel, Mark (2024). mathlib: A Scala package for readable, verifiable and sustainable simulations of formal theory. Journal of Open Source Software, 9(99), 6049, <a href="https://doi.org/10.21105/joss.06049">https://doi.org/10.21105/joss.06049</a></p>
+
+<p>O’Leary, Maura, Williams, Rainey, &amp; Peng Lee, Mario (2023). The Diverse Names Generator: An App for Decreasing Bias and Promoting Inclusion. In <em>Proceedings of the Linguistic Society of America 8</em>(1): 5541. <a href="https://doi.org/10.3765/plsa.v8i1.5541">https://doi.org/10.3765/plsa.v8i1.5541</a>.</p>
+
+<p>van Rooij, Iris, &amp; Baggio, Giosuè (2021). <a href="https://journals.sagepub.com/doi/full/10.1177/1745691620970604">Theory before the test: How to build high-verisimilitude explanatory theories in psychological science.</a> <em>Perspectives on Psychological Science, 16</em>(4) 682–697.</p>
 
 
 <div class="nav-wrapper">
@@ -892,7 +921,7 @@ be possibly large. Table 2 lists the CSV format.</p>
 </div>
 
     </article>
-    <span class="print-footer">Subset choice - September 10, 2025 - Mark Blokpoel and Iris van Rooij</span>
+    <span class="print-footer">Subset choice - December 4, 2025 - Mark Blokpoel and Iris van Rooij</span>
     <footer>
   <hr class="slender">
   <ul class="footer-links">

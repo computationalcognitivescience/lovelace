@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Scala and mathlib</title>
-  <meta name="description" content="Interactive code offlineDue to the discontinuation of www.scalafiddle.com, the code blocks in the book are currently not interactive. We regret the limitatio...">
+  <meta name="description" content="Learning how to read and write code is quite similar to learning how to use mathto formalise verbal theories. In this chapter we cover the basics of coding i...">
 
   <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
   
     <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
   
-  
+
 
   <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
   
@@ -47,9 +47,28 @@
   <link rel="stylesheet" type="text/css" href="/lovelace/css/tufte.css">
   <!-- <link rel="stylesheet" type="text/css" href="/lovelace/css/print.css" media="print"> -->
 
-  <link rel="canonical" href="http://localhost:4000/lovelace/part_iii/mathlib">
+  <link rel="canonical" href="/lovelace/part_iii/mathlib">
 
-  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="http://localhost:4000/lovelace/feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="/lovelace/feed.xml" />
+
+
+  <!-- Embedding Script -->
+  <script src="https://scastie.scala-lang.org/embedded.js"></script>
+
+  <script>
+  window.addEventListener('load', function() {
+    scastie.Embedded('.simple');
+
+    scastie.Embedded('.mathlib', {
+    theme: 'light',
+    isWorksheetMode: true,
+    sbtConfig: 'libraryDependencies ++= Seq("com.markblokpoel" %% "mathlib" % "0.9.3", "com.markblokpoel" %% "mathlib-repo" % "0.1.5")',
+    targetType: 'jvm',
+    scalaVersion: '2.13.18'
+    });
+  });
+  </script>
+
 </head>
 
   <body>
@@ -110,25 +129,16 @@
 <h1>Chapter 9 - Scala and mathlib</h1>
 
 
-<div class="warning" style="max-width: 55%;background-color:#DF7777; color: #000; border-left: solid #a00000 4px; border-radius: 4px; padding-right: 2em;">
-<span>
-<p style="width: 100%;margin-top:1em; text-align:center">
-<b>Interactive code offline</b></p>
-<p style="width: calc(100% - 1em);margin-left: 1em;">
-Due to the discontinuation of <a href="https://www.scalafiddle.com">www.scalafiddle.com</a>, the code blocks in the book are currently not interactive. We regret the limitations this imposes and are working on a solution.
-</p></span>
-</div>
-
 <p>Learning how to read and write code is quite similar to learning how to use math
 to formalise verbal theories. In this chapter we cover the basics of coding in
-Scala and <code class="language-plaintext highlighter-rouge">mathlib</code>. Understanding Scala code might seem daunting at first,
+Scala (Odersky et al., 2019) and <code class="language-plaintext highlighter-rouge">mathlib</code> (Blokpoel, 2024). Understanding Scala code might seem daunting at first,
 but you have already mastered a more difficult skill: Translating verbal theory
 (which is underspecified) to formal, mathematical characterizations. Translating
 from formalizations to simulation code requires understanding Scala, but it is
 easier in the sense that there is much less ambiguity to deal with.</p>
 
 <p>At the end of this chapter you will be able to understand how concepts from
-<a href="/lovelace/part_i/math">Chapter 3 - Math concepts and notation</a> can be
+<a href="/lovelace/part_ii/math">Chapter 3 - Math concepts and notation</a> can be
 translated to Scala code. The chapter is quite detailed and we recommend to use
 it as a reference guide when reading chapters on simulations or when writing
 your own code. The <a href="/lovelace/part_iii/mathlib#cheat-sheet">cheat sheet</a> down
@@ -142,13 +152,16 @@ this chapter you want to learn more about Scala, there are various textbooks
 <a href="https://docs.scala-lang.org/tour/tour-of-scala.html">Tour of Scala</a> and <a href="https://www.creativescala.org/">Creative Scala</a>.</p>
 
 <h3 id="variables-functions-and-types">Variables, functions and types</h3>
-
 <p>The basic expressions in a functional programming language such as Scala are
 variables, functions and types. Variables, like their mathematical counterpart,
-are containers that can store a value.<label for="id-sn-value" class="margin-toggle sidenote-number"></label><input type="checkbox" id="id-sn-value" class="margin-toggle" /><span class="sidenote">Variable is not completely accurate terminology here. <code class="language-plaintext highlighter-rouge">val</code> stores a value which is (in functional programming terminology) immutable, i.e., it cannot change. It is more like a constant, rather than a variable. In this book, we will rarely use mutable <code class="language-plaintext highlighter-rouge">var</code> variables. </span> For example:</p>
+are containers that can store a value.
+Although, <em>variable</em> is not completely accurate terminology here. The label <code class="language-plaintext highlighter-rouge">val</code> stores a value which is (in functional programming terminology) immutable, i.e., it cannot change. It is more like a constant, rather than a variable. In this book, we will rarely use mutable <code class="language-plaintext highlighter-rouge">var</code> variables.
+For example:</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">myNumber</span> <span class="k">=</span> <span class="mi">3</span>
-</code></pre></div></div>
+<pre class="mathlib">
+val myNumber = 3
+println(myNumber)
+</pre>
 
 <p>Let’s break this example down into its parts. The word <code class="language-plaintext highlighter-rouge">val</code> tells the
 computer that you will specify a <em>value</em>, which is a container storing a
@@ -160,8 +173,10 @@ right side and stores is in the container on the left side.</p>
 above has type <code class="language-plaintext highlighter-rouge">Int</code> which stands for integer. Scala can often derive these
 types automatically, but for clarity you may want to use <em>explicit types</em>:</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">mySecondNumber</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">2</span>
-</code></pre></div></div>
+<pre class="mathlib">
+val mySecondNumber: Int = 2
+println(mySecondNumber)
+</pre>
 
 <p>Types are helpful. They provide a safety net against programming mistakes
 since you cannot assign a value that is incompatible with the specified type.
@@ -169,18 +184,21 @@ Running the following code results in a <code class="language-plaintext highligh
 compiler (i.e., the software that interprets and runs your code) will even tell
 you which type it expected and which type you provided.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">mySecondNumber</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mf">3.9</span>
-</code></pre></div></div>
+<pre class="mathlib">
+val mySecondNumber: Int = 3.9
+</pre>
 
 <p>Functions allow us to write code that takes input, one or more <em>arguments</em>, and
 returns output. For example, addition \(add(x, y) = x+y\) can be coded as:</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">add</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
-<span class="o">}</span>
+<pre class="mathlib">
+def add(x: Int, y: Int): Int = {
+  x + y
+}
 
-<span class="nf">add</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
-</code></pre></div></div>
+val res = add(3, 4)
+println(res)
+</pre>
 
 <p>The word <code class="language-plaintext highlighter-rouge">def</code> specifies that we are constructing a <em>function</em> with the
 <em>identifier</em> <code class="language-plaintext highlighter-rouge">add</code>. The comma-separated list between parantheses is the list
@@ -199,21 +217,26 @@ the equation.</p>
 </div></div>
 </div></div></div>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">equation</span><span class="o">(...)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="o">???</span>
-<span class="o">}</span>
+<pre class="mathlib">
+def equation(...): Int = {
+  ???
+}
 
-<span class="nf">equation</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">3</span>    <span class="c1">// Test the function, true if correct.</span>
-</code></pre></div></div>
+val res = equation(2, 5, -1) == -3    // Test the function, true if correct.
+println(res)
+</pre>
 
 <p>Functions in Scala have types too which becomes clearer with the following
 alternative notation.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">add</span><span class="k">:</span> <span class="o">(</span><span class="kt">Int</span><span class="o">,</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Int</span> <span class="k">=</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
-  <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
-<span class="o">}</span>
-<span class="nf">add</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
-</code></pre></div></div>
+<pre class="mathlib">
+def add: (Int, Int) =&gt; Int =
+  (x: Int, y: Int) =&gt; {
+    x + y
+  }
+val res = add(3, 4)
+println(res)
+</pre>
 
 <p>This notation is not used often since it is hard to read, but it explicitly
 defines the function’s type which is very similar to how we express function
@@ -240,7 +263,7 @@ and very useful in writing simulation code that is closely tied to formal
 theories. In a sense, a theory is a function itself, mapping a list of arguments
 (input) to output. We’ve seen that some formal theories can have functions as
 arguments. For example, <span class="problemtitle">Selecting invitees (version 1) </span> in <a href="/lovelace/part_ii/subset">Chapter
-4</a> takes as input the function \(like: P \times P
+5</a> takes as input the function \(like: P \times P
 \rightarrow \{true, false\}\). Here is a (partial) example of a function as
 argument.</p>
 
@@ -271,8 +294,10 @@ These functions (also called <em>methods</em>) have access to the value they are
 upon. The following example called method <code class="language-plaintext highlighter-rouge">toUpperCase</code> that evaluates to
 the upper-case version of the original string.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"This is a String."</span><span class="o">.</span><span class="py">toUpperCase</span>
-</code></pre></div></div>
+<pre class="mathlib">
+val shout = "This is a String.".toUpperCase
+println(shout)
+</pre>
 
 <p><label for="mn-auto-complete" class="margin-toggle"> ⊕</label><input type="checkbox" id="mn-auto-complete" class="margin-toggle" /><span class="marginnote">Auto-complete can be triggered with
 <code class="language-plaintext highlighter-rouge">Ctrl-space</code> or <code class="language-plaintext highlighter-rouge">Cmd-space</code> in Scalafiddle which we use in this book.
@@ -288,28 +313,44 @@ defined? In Scala a block is a sequence of expressions *delineated by curly
 brackets. A block has a value which is the value of the *last statement in the
 block.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
-  <span class="k">val</span> <span class="nv">a</span> <span class="k">=</span> <span class="mi">3</span>
-  <span class="k">val</span> <span class="nv">b</span> <span class="k">=</span> <span class="mi">6</span>
-  <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>       <span class="c1">// This block evaluates to 9 with type Int.</span>
-<span class="o">}</span>
-</code></pre></div></div>
+<pre class="mathlib">
+{
+  val a = 3
+  val b = 6
+  a + b       // This block evaluates to 9 with type Int.
+}
+</pre>
 
 <p>Blocks can be nested, but values and functions defined within a block cannot
 be accessed outside that block. This property is known as scope, accessing
 values or functions out of scope results in a compiler error:</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
-  <span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="mi">3</span>
+<pre class="mathlib">
+{
+  val x = 3
 
-  <span class="o">{</span>
-    <span class="k">val</span> <span class="nv">y</span> <span class="k">=</span> <span class="mi">6</span>
-    <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>       <span class="c1">// Valid, x and y are in this block's scope.</span>
-  <span class="o">}</span>
+  {
+    val y = 6
+    x + y       // Valid, x and y are in this block's scope.
+  }
 
-  <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>         <span class="c1">// Invalid, y is outside this block's scope.</span>
-<span class="o">}</span>
-</code></pre></div></div>
+  x + y         // Invalid, y is outside this block's scope.
+}
+</pre>
+
+<p>You can also define a value with a block, where the value is assigned the value
+that the block evaluates to. This can be useful to split a single long line of code
+into multiple lines:</p>
+
+<pre class="mathlib">
+val res1 = (1 + 6) * 4
+val res2 = {
+  val a = 1 + 6
+  4 * a
+}
+println(res1)
+println(res2)
+</pre>
 
 <h3 id="conditional">Conditional</h3>
 
@@ -317,30 +358,33 @@ values or functions out of scope results in a compiler error:</p>
 expression. It allows for branching paths of code, depending on the truth
 value of the conditional. An example (try changing the value of <code class="language-plaintext highlighter-rouge">x</code>):</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="mi">4</span>
-<span class="nf">if</span><span class="o">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-  <span class="nf">println</span><span class="o">(</span><span class="s">"X is even."</span><span class="o">)</span>
-<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-  <span class="nf">println</span><span class="o">(</span><span class="s">"X is odd."</span><span class="o">)</span>
-<span class="o">}</span>
-</code></pre></div></div>
+<pre class="mathlib">
+val x = 4
+if(x % 2 == 0) {
+  println("X is even.")
+} else {
+  println("X is odd.")
+}
+</pre>
 
 <p>Each part of the conditional consists of a code block, though for single
 expressions the curly brackets to simplify the code:</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="mi">4</span>
-<span class="nf">if</span><span class="o">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="nf">println</span><span class="o">(</span><span class="s">"X is even."</span><span class="o">)</span>
-<span class="k">else</span> <span class="nf">println</span><span class="o">(</span><span class="s">"X is odd."</span><span class="o">)</span>
-</code></pre></div></div>
+<pre class="mathlib">
+val x = 4
+if(x % 2 == 0) println("X is even.")
+else println("X is odd.")
+</pre>
 
 <p>You can have an arbitrary number of branching paths using <code class="language-plaintext highlighter-rouge">else if</code>:</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="mi">4</span>
-<span class="nf">if</span><span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="nf">println</span><span class="o">(</span><span class="s">"X is negative."</span><span class="o">)</span>
-<span class="k">else</span> <span class="nf">if</span><span class="o">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="nf">println</span><span class="o">(</span><span class="s">"X is zero."</span><span class="o">)</span>
-<span class="k">else</span> <span class="nf">if</span><span class="o">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="o">)</span> <span class="nf">println</span><span class="o">(</span><span class="s">"X is small."</span><span class="o">)</span>
-<span class="k">else</span> <span class="nf">println</span><span class="o">(</span><span class="s">"X is large."</span><span class="o">)</span>
-</code></pre></div></div>
+<pre class="mathlib">
+val x = 4
+if(x &lt; 0) println("X is negative.")
+else if(x == 0) println("X is zero.")
+else if(x &lt;= 10) println("X is small.")
+else println("X is large.")
+</pre>
 
 <p>The conditional expression is a block with nested blocks. This means that it
 evaluates to the value of the last expression in the block that is evaluated
@@ -352,18 +396,19 @@ a function that computes the absolute value of <code class="language-plaintext h
 <div class="question-top"><div class="question" id="question-2"><div class="question-body"><div class="question-header">Question 9.2</div> <p>Complete the code below by implementing the body of <code>abs(x: Int): Int
 </code>. The function should evaluate to the absolute (positive) value of
 <code>x</code>.</p>
-<div class="answer" id="question-.2-heading-1"><a onclick="document.getElementById('question-.2-answer-1').style.display = document.getElementById('question-.2-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.2-answer-1" style="display: none;"><p>You need to use the conditional expression. Look at the examples above where the
+<div class="answer" id="question-.2-heading-1"><a onclick="document.getElementById('question-.2-answer-1').style.display = document.getElementById('question-.2-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.2-answer-1" style="display: none;"><p>Here you can use the conditional expression. Look at the examples above where the
 conditional tests for negative numbers. You need to distinguish two cases:
 <code>x</code> is negative or not and for each case compute the right value.</p>
 </div></div>
 </div></div></div>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">abs</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="o">???</span>
-<span class="o">}</span>
+<pre class="mathlib">
+def abs(x: Int): Int = {
+  ???
+}
 
-<span class="nf">abs</span><span class="o">(-</span><span class="mi">10</span><span class="o">)</span> <span class="o">==</span> <span class="mi">10</span>    <span class="c1">// Test the function, true if correct.</span>
-</code></pre></div></div>
+abs(-10) == 10    // Test the function, true if correct.
+</pre>
 
 <h3 id="basic-types">Basic types</h3>
 
@@ -413,35 +458,38 @@ subtraction <code class="language-plaintext highlighter-rouge">-</code>, multipl
 <code class="language-plaintext highlighter-rouge">Math</code> also contains several useful functions which you can apply with the
 dot notation:</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="k">val</span> <span class="nv">y</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mi">6</span>
+<pre class="mathlib">
+val x: Double = 3
+val y: Double = 6
 
-<span class="nf">println</span><span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">)</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">)</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">x</span> <span class="o">*</span> <span class="mi">3</span><span class="o">)</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">y</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span>            <span class="c1">// Division.</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">y</span> <span class="o">%</span> <span class="mi">2</span><span class="o">)</span>            <span class="c1">// Remainder or modulo.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">Math</span><span class="o">.</span><span class="py">pow</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">))</span>   <span class="c1">// Exponentiation, x^y.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">Math</span><span class="o">.</span><span class="py">min</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">))</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">Math</span><span class="o">.</span><span class="py">max</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">))</span>
-</code></pre></div></div>
+x + y
+x - y
+x * 3
+y / 2            // Division.
+y % 2            // Remainder or modulo.
+Math.pow(x, y)   // Exponentiation, x^y.
+Math.min(x, y)
+Math.max(x, y)
+</pre>
 
 <p>For Boolean types these are some common expressions:</p>
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">println</span><span class="o">(</span><span class="kc">true</span> <span class="o">&amp;&amp;</span> <span class="kc">true</span><span class="o">)</span>   <span class="c1">// Logical and.</span>
-<span class="nf">println</span><span class="o">(</span><span class="kc">true</span> <span class="o">||</span> <span class="kc">false</span><span class="o">)</span>  <span class="c1">// Logical or.</span>
-<span class="nf">println</span><span class="o">(</span><span class="kc">true</span> <span class="o">^</span> <span class="kc">true</span><span class="o">)</span>    <span class="c1">// Logical xor.</span>
-<span class="nf">println</span><span class="o">(!</span><span class="kc">true</span><span class="o">)</span>          <span class="c1">// Negation.</span>
-</code></pre></div></div>
+<pre class="mathlib">
+true &amp;&amp; true   // Logical and.
+true || false  // Logical or.
+true ^ true    // Logical xor.
+!true          // Negation.
+</pre>
 
 <p>And these can be combined with numbers like so:</p>
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="k">val</span> <span class="nv">y</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mi">6</span>
+<pre class="mathlib">
+val x: Double = 3
+val y: Double = 6
 
-<span class="nf">println</span><span class="o">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">3</span> <span class="o">&amp;&amp;</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span>          <span class="c1">// Number between 1 and 3 (inclusive).</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>      <span class="c1">// Positive even number.</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">^</span> <span class="n">y</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>  <span class="c1">// Either x or y is even, not both.</span>
-<span class="nf">println</span><span class="o">(!(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">))</span>                 <span class="c1">// x is positive.</span>
-</code></pre></div></div>
+x &lt;= 3 &amp;&amp; x &gt; 1          // Number between 1 and 3 (inclusive).
+x % 2 == 0 || x &gt; 0      // Positive even number.
+x % 2 == 0 ^ y % 2 == 0  // Either x or y is even, not both.
+!(x &lt; 0)                 // x is positive.
+</pre>
 
 <p>If you change in the code example above <code class="language-plaintext highlighter-rouge">Double</code> to <code class="language-plaintext highlighter-rouge">Int</code> you might
 notice that there is a certain compatility between the two types. That is, the
@@ -451,24 +499,30 @@ advanced topic. For the curious, see this <a href="https://en.wikipedia.org/wiki
 Wikipedia</a>. </span> This is because Scala knows it can convert an integer to a double value, which
 it will automatically do.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="k">val</span> <span class="nv">y</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mf">2.5</span>
-<span class="n">x</span><span class="o">+</span><span class="n">y</span>    <span class="c1">// Evaluates to a Double value 5.5</span>
-</code></pre></div></div>
+<pre class="mathlib">
+val x: Int      = 3
+val y: Double   = 2.5
+val res: Double = x+y    // Evaluates to a Double value 5.5
+println(res)
+</pre>
 
 <p>Some types cannot be converted and when you try to mix these, the compiler will
 let you know with an error:</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="k">val</span> <span class="nv">b</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">true</span>
-<span class="n">x</span> <span class="o">+</span> <span class="n">b</span>    <span class="c1">// How to add a Boolean to an Int?</span>
-</code></pre></div></div>
+<pre class="mathlib">
+val x: Int     = 3
+val b: Boolean = true
+x + b    // How to add a Boolean to an Int?
+</pre>
 
-<p>This conversion also kicks in when calling a function with compatible arguments:</p>
+<p>This conversion also is applied when calling a function with compatible arguments:</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">add</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span><span class="n">b</span>
-<span class="nf">add</span><span class="o">(</span><span class="mf">1.4</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
-</code></pre></div></div>
+<pre class="mathlib">
+def add(a: Double, b: Double): Double = a +b
+val double = 1.4
+val integer = 3
+add(double, integer)
+</pre>
 
 <div class="question-top"><div class="question" id="question-3"><div class="question-body"><div class="question-header">Question 9.3</div> <p>This conversion often only works one way. It is not possible to convert a Double
 to an Int without loosing information. Observe what happens when you run the
@@ -524,29 +578,34 @@ expressed in a set \(\{\text{Erik},\) \(\text{Lamar},\) \(\text{Angelica},\)
 <p>In Scala we can store ordered collections in a <code class="language-plaintext highlighter-rouge">List</code> or tuple and unordered
 collections in a <code class="language-plaintext highlighter-rouge">Set</code>:</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">forecast</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mf">22.2</span><span class="o">,</span> <span class="mf">23.1</span><span class="o">,</span> <span class="mf">23.7</span><span class="o">,</span> <span class="mf">22.3</span><span class="o">,</span> <span class="mf">24.3</span><span class="o">,</span> <span class="mf">24.7</span><span class="o">,</span> <span class="mf">25.1</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">menuItem</span> <span class="k">=</span> <span class="o">(</span><span class="s">"Vegan pie"</span><span class="o">,</span> <span class="mf">9.90</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">people</span>   <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"Erik"</span><span class="o">,</span> <span class="s">"Lamar"</span><span class="o">,</span> <span class="s">"Angelica"</span><span class="o">,</span> <span class="s">"Emanuel"</span><span class="o">,</span> <span class="s">"Lorraine"</span><span class="o">,</span>
-                   <span class="s">"Meghan"</span><span class="o">,</span> <span class="s">"Myron"</span><span class="o">,</span> <span class="s">"Erica"</span><span class="o">,</span> <span class="s">"Lester"</span><span class="o">,</span> <span class="s">"Javier"</span><span class="o">,</span> <span class="s">"Kelly"</span><span class="o">,</span>
-                   <span class="s">"Abraham"</span><span class="o">,</span> <span class="s">"Lindsay"</span><span class="o">,</span> <span class="s">"Harriet"</span><span class="o">,</span> <span class="s">"Guadalupe"</span><span class="o">)</span>
-</code></pre></div></div>
+<pre class="mathlib">
+val forecast = List(22.2, 23.1, 23.7, 22.3, 24.3, 24.7, 25.1)
+val menuItem = ("Vegan pie", 9.90)
+val people   = Set("Erik", "Lamar", "Angelica", "Emanuel", "Lorraine",
+                   "Meghan", "Myron", "Erica", "Lester", "Javier", "Kelly",
+                   "Abraham", "Lindsay", "Harriet", "Guadalupe")
+println(forecast)
+println(menuItem)
+println(people)
+</pre>
 
 <p>We’ll dive into sets below using the <code class="language-plaintext highlighter-rouge">mathlib</code> library, so let’s first get
 some familiarity with lists. Some basic examples are in the code block below.
 Try playing around with them to see what they do.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">forecastThisWeek</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mf">22.2</span><span class="o">,</span> <span class="mf">23.1</span><span class="o">,</span> <span class="mf">23.7</span><span class="o">,</span> <span class="mf">22.3</span><span class="o">,</span> <span class="mf">24.3</span><span class="o">,</span> <span class="mf">24.7</span><span class="o">,</span> <span class="mf">25.1</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">forecastNextWeek</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mf">22.3</span><span class="o">,</span> <span class="mf">19.8</span><span class="o">,</span> <span class="mf">18.4</span><span class="o">,</span> <span class="mf">18.0</span><span class="o">,</span> <span class="mf">17.6</span><span class="o">,</span> <span class="mf">17.5</span><span class="o">,</span> <span class="mf">17.2</span><span class="o">)</span>
+<pre class="mathlib">
+val forecastThisWeek = List(22.2, 23.1, 23.7, 22.3, 24.3, 24.7, 25.1)
+val forecastNextWeek = List(22.3, 19.8, 18.4, 18.0, 17.6, 17.5, 17.2)
 
-<span class="nf">println</span><span class="o">(</span><span class="mf">23.1</span> <span class="o">::</span> <span class="n">forecastThisWeek</span><span class="o">)</span>               <span class="c1">// Prepend element.</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">forecastThisWeek</span> <span class="o">:::</span> <span class="n">forecastNextWeek</span><span class="o">)</span>  <span class="c1">// Prepend list.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">forecastThisWeek</span><span class="o">.</span><span class="py">size</span><span class="o">)</span>                  <span class="c1">// Number of elements in list.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">forecastThisWeek</span><span class="o">.</span><span class="py">contains</span><span class="o">(</span><span class="mf">23.7</span><span class="o">))</span>        <span class="c1">// Does the list contain element?</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">forecastThisWeek</span><span class="o">.</span><span class="py">head</span><span class="o">)</span>                  <span class="c1">// The first element of the list.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">forecastThisWeek</span><span class="o">.</span><span class="py">tail</span><span class="o">)</span>                  <span class="c1">// Everything except the first element.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nf">forecastThisWeek</span><span class="o">(</span><span class="mi">3</span><span class="o">))</span>                    <span class="c1">// The n-th element.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">forecastThisWeek</span><span class="o">.</span><span class="py">isEmpty</span><span class="o">)</span>               <span class="c1">// Checks whether the list is emtpy.</span>
-</code></pre></div></div>
+println(23.1 :: forecastThisWeek)               // Prepend element.
+println(forecastThisWeek ::: forecastNextWeek)  // Prepend list.
+println(forecastThisWeek.size)                  // Number of elements in list.
+println(forecastThisWeek.contains(23.7))        // Does the list contain element?
+println(forecastThisWeek.head)                  // The first element of the list.
+println(forecastThisWeek.tail)                  // Everything except the first element.
+println(forecastThisWeek(3))                    // The n-th element.
+println(forecastThisWeek.isEmpty)               // Checks whether the list is emtpy.
+</pre>
 
 <p>The power of collections lies in being able to apply to all of the elements. The
 idea is that if we have a function that applies to one element, e.g., \(sq(x) =
@@ -594,51 +653,54 @@ evaluates to a list where each element computed using <code class="language-plai
   </tbody>
 </table>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Function that computes the square root of x.</span>
-<span class="k">def</span> <span class="nf">sq</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
-<span class="k">val</span> <span class="nv">list</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
+<pre class="mathlib">
+// Function that computes the square root of x.
+def sq(x: Int): Int = x * x
+val list = List(1, 2, 3, 4)
 
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">sq</span><span class="o">))</span>
-</code></pre></div></div>
+println(list.map(sq))
+</pre>
 
 <p>The type of the argument of the function must be the same type as the elements
 in the list, but its output can be of any type. For example, take an <code class="language-plaintext highlighter-rouge">Int</code>
 and return a <code class="language-plaintext highlighter-rouge">String</code>.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Function that creates a String with x "x"s.</span>
-<span class="k">def</span> <span class="nf">xx</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="nf">if</span><span class="o">(</span><span class="n">x</span><span class="o">==</span><span class="mi">1</span><span class="o">)</span> <span class="s">"x"</span>
-  <span class="k">else</span> <span class="s">"x"</span> <span class="o">+</span> <span class="nf">xx</span><span class="o">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="o">)</span>
-<span class="o">}</span>
-<span class="k">val</span> <span class="nv">list</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
+<pre class="mathlib">
+// Function that creates a String with x "x"s.
+def xx(x: Int): String = {
+  if(x==1) "x"
+  else "x" + xx(x-1)
+}
+val list = List(1, 2, 3, 4)
 
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">xx</span><span class="o">))</span>
-</code></pre></div></div>
+println(list.map(xx))
+</pre>
 
 <p>What other useful things can we do with lists? Below are some self-explanatory
 examples.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Function that checks whether x is even.</span>
-<span class="k">def</span> <span class="nf">isEven</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
-<span class="o">}</span>
-<span class="k">val</span> <span class="nv">list</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
+<pre class="mathlib">
+// Function that checks whether x is even.
+def isEven(x: Int): Boolean = {
+  x % 2 == 0
+}
+val list = List(1, 2, 3, 4)
 
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">exists</span><span class="o">(</span><span class="n">isEven</span><span class="o">))</span>    <span class="c1">// Does list contain an element that isEven?</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">exists</span><span class="o">(</span><span class="k">_</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="o">))</span>     <span class="c1">// Implicit function, does the list contain an element larger than 3?</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">forall</span><span class="o">(</span><span class="n">isEven</span><span class="o">))</span>    <span class="c1">// Do all elements in list return true for isEven?</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">forall</span><span class="o">(</span><span class="k">_</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="o">))</span>  <span class="c1">// Implicit function, does the list contain an element larger than 3?</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="n">isEven</span><span class="o">))</span>    <span class="c1">// Filter out all elements that return true for isEven.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="k">_</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="o">))</span>     <span class="c1">// Filter out all elements less than 3.</span>
-</code></pre></div></div>
+list.exists(isEven)    // Does list contain an element that isEven?
+list.exists(_ &gt; 3)     // Implicit function, does the list contain an element larger than 3?
+list.forall(isEven)    // Do all elements in list return true for isEven?
+list.forall(_ &lt;= 100)  // Implicit function, does the list contain an element larger than 3?
+list.filter(isEven)    // Filter out all elements that return true for isEven.
+list.filter(_ &lt; 3)     // Filter out all elements less than 3.
+</pre>
 
 <p>There are some special methods for lists that contain numbers:</p>
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Function that checks whether x is even.</span>
-<span class="k">val</span> <span class="nv">list</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
+<pre class="mathlib">
+val list = List(1, 2, 3, 4)
 
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">sum</span><span class="o">)</span>             <span class="c1">// The sum of all numbers in list.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">product</span><span class="o">)</span>         <span class="c1">// The product of all numbers in list.</span>
-</code></pre></div></div>
+list.sum             // The sum of all numbers in list.
+list.product         // The product of all numbers in list.
+</pre>
 
 <p>Many of the functions and methods that work for lists, also work for other
 collections such as sets. Even a <code>String</code> can be treated as a
@@ -647,20 +709,22 @@ collection as it is essentially a list of characters.</p>
 <div class="question-top"><div class="question" id="question-4"><div class="question-body"><div class="question-header">Question 9.4</div> <p>Look at the code scaffold below. Implement the body of the function
 <code>consonant</code> and choose the method to apply to <code>sentence</code>
 such that the code evaluates to the sentence with only consonants.</p>
-<div class="answer" id="question-.4-heading-1"><a onclick="document.getElementById('question-.4-answer-1').style.display = document.getElementById('question-.4-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.4-answer-1" style="display: none;"><p>The list of (English) vowels is given. Write code that checks if the
+<div class="answer" id="question-.4-heading-1"><a onclick="document.getElementById('question-.4-answer-1').style.display = document.getElementById('question-.4-answer-1').style.display === 'none' ? '' : 'none';">Hint?</a><div id="question-.4-answer-1" style="display: none;"><p>The list of vowels in the Latin alphabet is given. Write code that checks if the
 <code>character</code> does not exist within vowels.</p>
 </div></div>
 </div></div></div>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">sentence</span> <span class="k">=</span> <span class="s">"Hi, you're doing awesome!"</span>
-<span class="k">val</span> <span class="nv">vowels</span>   <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="sc">'a'</span><span class="o">,</span> <span class="sc">'e'</span><span class="o">,</span> <span class="sc">'i'</span><span class="o">,</span> <span class="sc">'o'</span><span class="o">,</span> <span class="sc">'u'</span><span class="o">)</span>
+<pre class="mathlib">
+val sentence = "Hi, you're doing awesome!"
+val vowels   = List('a', 'e', 'i', 'o', 'u')
 
-<span class="k">def</span> <span class="nf">consonant</span><span class="o">(</span><span class="n">character</span><span class="k">:</span> <span class="kt">Char</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="o">???</span>
-<span class="o">}</span>
+def consonant(character: Char): Boolean = {
+  ???
+}
 
-<span class="nv">sentence</span><span class="o">.</span><span class="py">___</span><span class="o">(</span><span class="n">consonant</span><span class="o">)</span>
-</code></pre></div></div>
+//Replace ___ below with one of exists, forall or filter.
+sentence.___(consonant)
+</pre>
 
 <h3 id="generics">Generics</h3>
 
@@ -684,9 +748,10 @@ doubles? No problem <code class="language-plaintext highlighter-rouge">Set[Doubl
 <code class="language-plaintext highlighter-rouge">Set[Boolean]</code>! The type of a collection also grants a level of protection
 to the programmer. You cannot prepend a Boolean to a list of integers:</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">forecast</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span>  <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mf">22.2</span><span class="o">,</span> <span class="mf">23.1</span><span class="o">,</span> <span class="mf">23.7</span><span class="o">,</span> <span class="mf">22.3</span><span class="o">,</span> <span class="mf">24.3</span><span class="o">,</span> <span class="mf">24.7</span><span class="o">,</span> <span class="mf">25.1</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">forecast2</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="kc">true</span> <span class="o">::</span> <span class="n">forecast</span>
-</code></pre></div></div>
+<pre class="mathlib">
+val forecast: List[Double]  = List(22.2, 23.1, 23.7, 22.3, 24.3, 24.7, 25.1)
+val forecast2: List[Double] = true :: forecast
+</pre>
 
 <p>If you could mix different (incompatible) types in a collection, performing
 calculations on that collection would be either undefined (e.g., what does
@@ -714,24 +779,44 @@ implements a formal theory and is easy to understand that it does what we say it
 does. Take a look at the following code implementing <span class="problemtitle">Pizza Toppings
 </span>. (We assume toppings are represented by <code class="language-plaintext highlighter-rouge">Strings</code>.)</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">pizzaToppings</span><span class="o">(</span><span class="n">toppings</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">String</span><span class="o">],</span> <span class="n">budget</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">cost</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
-  <span class="c1">// Helper function to compute the cost of a subset of toppings.</span>
-  <span class="k">def</span> <span class="nf">subsetCost</span><span class="o">(</span><span class="n">subset</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="nv">subset</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">cost</span><span class="o">)</span> <span class="c1">// Transform each element in subset to its cost using the cost function.</span>
-          <span class="o">.</span><span class="py">sum</span>       <span class="c1">// Sum all costs.</span>
-  <span class="o">}</span>
+<pre class="mathlib">
+import mathlib.set.SetTheory._
 
-  <span class="c1">// Helper function to check if a given subset fits within the budget.</span>
-  <span class="k">def</span> <span class="nf">subsetWithinBudget</span><span class="o">(</span><span class="n">subset</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="nf">subsetCost</span><span class="o">(</span><span class="n">subset</span><span class="o">)</span> <span class="o">&lt;=</span> <span class="n">budget</span>
-  <span class="o">}</span>
+def pizzaToppings(
+  toppings: Set[String],
+  budget: Int,
+  cost: String =&gt; Int
+): Set[String] = {
+  // Helper function to compute the cost of a subset of toppings.
+  def subsetCost(subset: Set[String]): Int = {
+    subset.map(cost) // Transform each element in subset to its cost using the cost function.
+          .sum       // Sum all costs.
+  }
 
-  <span class="nf">powerset</span><span class="o">(</span><span class="n">toppings</span><span class="o">)</span>            <span class="c1">// The set of all possible subsets.</span>
-    <span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="n">subsetWithinBudget</span><span class="o">)</span> <span class="c1">// Filter (keep) all subsets that fit the budget.</span>
-    <span class="o">.</span><span class="py">random</span>                     <span class="c1">// Get a random subset.</span>
-    <span class="o">.</span><span class="py">getOrElse</span><span class="o">(</span><span class="nv">Set</span><span class="o">.</span><span class="py">empty</span><span class="o">)</span>       <span class="c1">// If to random subset exists, return the emtpy set.</span>
-<span class="o">}</span>
-</code></pre></div></div>
+  // Helper function to check if a given subset fits within the budget.
+  def subsetWithinBudget(subset: Set[String]): Boolean = {
+    subsetCost(subset) &lt;= budget
+  }
+
+  powerset(toppings)            // The set of all possible subsets.
+    .filter(subsetWithinBudget) // Filter (keep) all subsets that fit the budget.
+    .random                     // Get a random subset.
+    .getOrElse(Set.empty)       // If to random subset exists, return the emtpy set.
+}
+
+val toppings = Set("cheese", "tomato", "basil", "garlic")
+val budget   = 10
+def cost(topping: String): Int = {
+  if(topping=="cheese") 2
+  else if(topping=="tomato") 3
+  else if(topping=="basil") 6
+  else if(topping=="garlic") 1
+  else 0
+}
+
+val res = pizzaToppings(toppings, budget, cost)
+println(res)
+</pre>
 
 <p>This code example combines several expressions we covered earlier, but by
 breaking down the components it is relatively easy to show that the code
@@ -744,16 +829,15 @@ the simulation.</p>
 
 <p>In the next section, we explore how <code class="language-plaintext highlighter-rouge">mathlib</code> allows writing code for formal
 theories using set theory. The library also contains support for probability and
-graph theory. You can find out more at the library <a href="https://github.com/markblokpoel/mathlib">Github
-page</a>, but using these advanced
+graph theory. You can find out more at the library <a href="https://markblokpoel.com/mathlib">website</a>, but using these advanced
 mathematics requires installing a local development environment such as
-Jupyter/Almond or Intellij (see <a href="/lovelace/part_iii/simulating#installing-scala-and-mathlib">Installing Scala and <code class="language-plaintext highlighter-rouge">mathlib</code></a>).</p>
+Jupyter/Almond or Intellij.</p>
 
 <h3 id="set-theory">Set theory</h3>
 
 <p>In this book, set theory plays an important role in formalizing verbal theories,
 so we start exploring <code class="language-plaintext highlighter-rouge">mathlib</code> there. This section follows the same
-structure as <a href="/lovelace/part_i/math">Chapter 3 - Math concepts and notation</a>.</p>
+structure as <a href="/lovelace/part_ii/math">Chapter 3 - Math concepts and notation</a>.</p>
 
 <p>Creating a set is similar to creating other collections such as lists. Set
 membership in Scala is an expression that evaluates to <code class="language-plaintext highlighter-rouge">true</code> if the element
@@ -761,32 +845,41 @@ is within the set or <code class="language-plaintext highlighter-rouge">false</c
 set \(P = \{\text{Ramiro},\text{Brenda},\text{Molly}\}\), then tests if
 \(\text{Ramiro}\in P\) and if \(\text{Saki}\in P\).</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">p</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"Ramiro"</span><span class="o">,</span> <span class="s">"Brenda"</span><span class="o">,</span> <span class="s">"Molly"</span><span class="o">)</span>
+<pre class="mathlib">
+import mathlib.set.SetTheory._
 
-<span class="nf">println</span><span class="o">(</span><span class="s">"Ramiro"</span> <span class="n">in</span> <span class="n">p</span><span class="o">)</span>
-<span class="nf">println</span><span class="o">(</span><span class="s">"Saki"</span> <span class="n">in</span> <span class="n">p</span><span class="o">)</span>
-</code></pre></div></div>
+val p: Set[String] = Set("Ramiro", "Brenda", "Molly")
+
+"Ramiro" in p
+"Saki" in p
+</pre>
 
 <p>Subset and superset expressions also evaluate to <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">animals</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"cat"</span><span class="o">,</span> <span class="s">"cuttlefish"</span><span class="o">,</span> <span class="s">"turtle"</span><span class="o">,</span> <span class="s">"blue whale"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">mammals</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"cat"</span><span class="o">,</span> <span class="s">"blue whale"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">thingsOnEarth</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"cat"</span><span class="o">,</span> <span class="s">"cuttlefish"</span><span class="o">,</span> <span class="s">"turtle"</span><span class="o">,</span> <span class="s">"blue whale"</span><span class="o">,</span> <span class="s">"university"</span><span class="o">,</span> <span class="s">"chair"</span><span class="o">)</span>
+<pre class="mathlib">
+import mathlib.set.SetTheory._
 
-<span class="nf">println</span><span class="o">(</span><span class="n">mammals</span> <span class="o">&lt;</span> <span class="n">animals</span><span class="o">)</span>        <span class="c1">// Mammals is a subset of animals.</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">thingsOnEarth</span> <span class="o">&gt;</span> <span class="n">animals</span><span class="o">)</span>  <span class="c1">// Things on Earth is a superset of animals.</span>
-</code></pre></div></div>
+val animals = Set("cat", "cuttlefish", "turtle", "blue whale")
+val mammals = Set("cat", "blue whale")
+val thingsOnEarth = Set("cat", "cuttlefish", "turtle", "blue whale", "university", "chair")
+
+mammals &lt; animals        // Mammals is a subset of animals.
+thingsOnEarth &gt; animals  // Things on Earth is a superset of animals.
+</pre>
 
 <p>Intersection, union and difference evaluate to the correct super- or
 subset.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">yourFriends</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"John"</span><span class="o">,</span> <span class="s">"Roberto"</span><span class="o">,</span> <span class="s">"Holly"</span><span class="o">,</span> <span class="s">"Doris"</span><span class="o">,</span> <span class="s">"Charlene"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">myFriends</span> <span class="k">=</span>  <span class="nc">Set</span><span class="o">(</span><span class="s">"Vicky"</span><span class="o">,</span> <span class="s">"Charlene"</span><span class="o">,</span> <span class="s">"Ramiro"</span><span class="o">,</span> <span class="s">"Johnnie"</span><span class="o">,</span> <span class="s">"Roberto"</span><span class="o">)</span>
+<pre class="mathlib">
+import mathlib.set.SetTheory._
 
-<span class="nf">println</span><span class="o">(</span><span class="n">yourFriends</span> <span class="o">/\</span> <span class="n">myFriends</span><span class="o">)</span> <span class="c1">// Common friends using intersection.</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">yourFriends</span> <span class="o">\/</span> <span class="n">myFriends</span><span class="o">)</span> <span class="c1">// Friends we know together using union.</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">myFriends</span> <span class="o">\</span> <span class="n">yourFriends</span><span class="o">)</span>  <span class="c1">// Who I know that you don't, using difference.</span>
-</code></pre></div></div>
+val yourFriends = Set("John", "Roberto", "Holly", "Doris", "Charlene")
+val myFriends =  Set("Vicky", "Charlene", "Ramiro", "Johnnie", "Roberto")
+
+println(yourFriends /\ myFriends) // Common friends using intersection.
+println(yourFriends \/ myFriends) // Friends we know together using union.
+println(myFriends \ yourFriends)  // Who I know that you don't, using difference.
+</pre>
 
 <p>Before we look at set builder notation, consider the following. In formal
 theories, we often use set theoretic notation not as Boolean tests, but to
@@ -819,36 +912,49 @@ Then the set of all subsets within budget can be defined as:</p>
 <p>Here, \(\mathcal{P}\) is the powerset notation. It denotes the set consisting of
 all possible subsets and \(T'\) is an element in that set. The set-builder
 notation describes the set of all possible subsets that satisfy the budget
-constraint. Dealing second issue (multiple possible outputs), we make the
-decision to return a random valid output.</p>
+constraint. To deal with the second issue, multiple possible outputs, we make the
+implementation decision to return a random valid output.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">pizzaToppings</span><span class="o">(</span><span class="n">toppings</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">String</span><span class="o">],</span> <span class="n">budget</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">cost</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
-</code></pre></div></div>
+<pre class="mathlib">
+import mathlib.set.SetTheory._
 
-<p>The helper function that computes the cost of a subset is implemented as:</p>
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// Helper function to compute the cost of a subset of toppings.</span>
-  <span class="k">def</span> <span class="nf">subsetCost</span><span class="o">(</span><span class="n">subset</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="nf">sum</span><span class="o">(</span><span class="n">subset</span><span class="o">,</span> <span class="n">cost</span><span class="o">)</span>
-  <span class="o">}</span>
-</code></pre></div></div>
+def pizzaToppings(
+  toppings: Set[String],
+  budget: Int,
+  cost: String =&gt; Int
+): Set[String] = {
+  // A helper function to compute the cost of a subset of toppings.
+  def subsetCost(subset: Set[String]): Int = {
+    sum(subset, cost)
+  }
 
-<p>We add one more helper function to check if a subset fits within the budget.</p>
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// Helper function to check if a given subset fits within the budget.</span>
-  <span class="k">def</span> <span class="nf">subsetWithinBudget</span><span class="o">(</span><span class="n">subset</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="nf">subsetCost</span><span class="o">(</span><span class="n">subset</span><span class="o">)</span> <span class="o">&lt;=</span> <span class="n">budget</span>
-  <span class="o">}</span>
-</code></pre></div></div>
+  // A helper function to check if a given subset fits within the budget.
+  def subsetWithinBudget(subset: Set[String]): Boolean = {
+    subsetCost(subset) &lt;= budget
+  }
 
-<p>Finally, we can define the output of 	 <span style="font-variant: small-caps">Pizza Toppings</span> using set builder notation:</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">{</span> <span class="nf">powerset</span><span class="o">(</span><span class="n">toppings</span><span class="o">)</span> <span class="o">|</span> <span class="n">subsetWithinBudget</span> <span class="k">_</span> <span class="o">}.</span><span class="py">random</span><span class="o">.</span><span class="py">getOrElse</span><span class="o">(</span><span class="nv">Set</span><span class="o">.</span><span class="py">empty</span><span class="o">)</span>
-<span class="o">}</span>
-</code></pre></div></div>
+  // Calculate the output of Pizza Toppings using set builder.
+  { powerset(toppings) | subsetWithinBudget _ }
+    .random
+    .getOrElse(Set.empty)
+}
 
-<p><label for="mn-id-multicode" class="margin-toggle"> ⊕</label><input type="checkbox" id="mn-id-multicode" class="margin-toggle" /><span class="marginnote">You may have noticed this code is different
-from the example given at the start of this section. Similarly to multiple
-mathematical expressions being equivalent, there exist (many) different ways of
-implementing the same function. </span> This is a example implementation uses set
+val toppings = Set("cheese", "tomato", "basil", "garlic")
+val budget   = 10
+def cost(topping: String): Int = {
+  if(topping=="cheese") 2
+  else if(topping=="tomato") 3
+  else if(topping=="basil") 6
+  else if(topping=="garlic") 1
+  else 0
+}
+
+val res = pizzaToppings(toppings, budget, cost)
+println(res)
+</pre>
+
+<p>This new version of <code class="language-plaintext highlighter-rouge">pizzaToppings</code> uses the set
 builder to construct a set of subsets that fit within budget. Set builder, in
 essence, filters out all elements (in the case above the elements are sets) from
 the given set that do not satisfy the evaluation function on the right side.</p>
@@ -856,38 +962,42 @@ the given set that do not satisfy the evaluation function on the right side.</p>
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span> <span class="n">givenSet</span> <span class="o">|</span> <span class="n">evalFun</span> <span class="k">_</span> <span class="o">}</span>
 </code></pre></div></div>
 
-<div class="question-top"><div class="question" id="question-6"><div class="question-body"><div class="question-header">Question 9.6</div> <p>Complete the code scaffold below such that the set builder expression evaluates
+<div class="question-top"><div class="question" id="question-6"><div class="question-body"><div class="question-header">Question 9.6</div> <p>Complete the code below such that the set builder expression evaluates
 to the subset of odd numbers in <code>numbers</code>.</p>
 </div></div></div>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Function that checks if a number is odd.</span>
-<span class="k">def</span> <span class="nf">isOdd</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="o">???</span>
-<span class="o">}</span>
+<pre class="mathlib">
+import mathlib.set.SetTheory._
 
-<span class="k">val</span> <span class="nv">numbers</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">(</span><span class="mi">0</span> <span class="n">to</span> <span class="mi">11</span><span class="o">).</span><span class="py">toSet</span>   <span class="c1">// Set consisting of numbers 0 to 11</span>
+// Function that checks if a number is odd.
+def isOdd(n: Int): Boolean = n % 2 == 0
 
-<span class="o">{</span> <span class="nc">___</span> <span class="o">|</span> <span class="nc">___</span> <span class="o">}</span>
-</code></pre></div></div>
+val numbers: Set[Int] = (0 to 11).toSet   // Set consisting of numbers 0 to 11
 
-<p>The final expression for working with sets is the cardinal product \(\times\). The
-cardinal product between two sets \(A\) and \(B\) returns a set with all
+{ ___ | ___ }
+</pre>
+
+<p>The final expression for working with sets is the cartesian product \(\times\). The
+cartesian product between two sets \(A\) and \(B\) returns a set with all
 possible pairs of elements in \(A\) and \(B\). Pairs, in Scala, are represented
 as tuples.</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">pair</span><span class="k">:</span> <span class="o">(</span><span class="kt">Int</span><span class="o">,</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="s">"Book"</span><span class="o">)</span>
 </code></pre></div></div>
 
-<p>The type of a tuple combines the types of the elements. The cardinal product
-between two sets yields a set with the subtype of the tuple.</p>
+<p>The type of a tuple combines the types of the elements. The cartesian product
+between two sets yields a set with the subtype of the tuple. The resulting set is quite big, hence we use <code class="language-plaintext highlighter-rouge">foreach</code> to print each element in the set on its own line.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">numbers</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span>  <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">items</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"Book"</span><span class="o">,</span> <span class="s">"Candle"</span><span class="o">,</span> <span class="s">"Wine"</span><span class="o">)</span>
+<pre class="mathlib">
+import mathlib.set.SetTheory._
 
-<span class="k">val</span> <span class="nv">itemNumberPairs</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">Int</span><span class="o">)]</span> <span class="k">=</span> <span class="n">items</span> <span class="n">x</span> <span class="n">numbers</span>
+val numbers: Set[Int]  = Set(1, 2, 3, 4)
+val items: Set[String] = Set("Book", "Candle", "Wine")
 
-<span class="nf">println</span><span class="o">(</span><span class="n">itemNumberPairs</span><span class="o">)</span>
-</code></pre></div></div>
+val itemNumberPairs: Set[(String, Int)] = items x numbers
+
+itemNumberPairs.foreach(println)
+</pre>
 
 <h2 id="simulation-architecture">Simulation architecture</h2>
 
@@ -964,92 +1074,95 @@ the generators we provide.</p>
 
 <h2 id="cheat-sheet">Cheat sheet</h2>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="cm">/**** BASIC TYPES ****/</span>
+<pre class="mathlib">
+import mathlib.set.SetTheory._
 
-<span class="k">val</span> <span class="nv">integer</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="k">val</span> <span class="nv">double</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mf">2.7</span>
-<span class="k">val</span> <span class="nv">bool</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">true</span>
-<span class="k">val</span> <span class="nv">character</span><span class="k">:</span> <span class="kt">Char</span> <span class="o">=</span> <span class="sc">'c'</span>
-<span class="k">val</span> <span class="nv">string</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"Awesome"</span>
+/**** BASIC TYPES ****/
 
-<span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">integer</span>
-<span class="k">val</span> <span class="nv">y</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="n">double</span>
+val integer: Int = 3
+val double: Double = 2.7
+val bool: Boolean = true
+val character: Char = 'c'
+val string: String = "Awesome"
 
-<span class="nf">println</span><span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">)</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">)</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">x</span> <span class="o">*</span> <span class="mi">3</span><span class="o">)</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">y</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span>            <span class="c1">// Division.</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">y</span> <span class="o">%</span> <span class="mi">2</span><span class="o">)</span>            <span class="c1">// Remainder or modulo.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">Math</span><span class="o">.</span><span class="py">pow</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">))</span>   <span class="c1">// Exponentiation, x^y.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">Math</span><span class="o">.</span><span class="py">min</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">))</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">Math</span><span class="o">.</span><span class="py">max</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">))</span>
+val x: Int = integer
+val y: Double = double
 
-<span class="nf">println</span><span class="o">(</span><span class="kc">true</span> <span class="o">&amp;&amp;</span> <span class="kc">true</span><span class="o">)</span>   <span class="c1">// Logical and.</span>
-<span class="nf">println</span><span class="o">(</span><span class="kc">true</span> <span class="o">||</span> <span class="kc">false</span><span class="o">)</span>  <span class="c1">// Logical or.</span>
-<span class="nf">println</span><span class="o">(</span><span class="kc">true</span> <span class="o">^</span> <span class="kc">true</span><span class="o">)</span>    <span class="c1">// Logical xor.</span>
-<span class="nf">println</span><span class="o">(!</span><span class="kc">true</span><span class="o">)</span>          <span class="c1">// Negation.</span>
+x + y
+x - y
+x * 3
+y / 2            // Division.
+y % 2            // Remainder or modulo.
+Math.pow(x, y)   // Exponentiation, x^y.
+Math.min(x, y)
+Math.max(x, y)
 
-<span class="cm">/**** Lists ****/</span>
-<span class="k">val</span> <span class="nv">forecastThisWeek</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mf">22.2</span><span class="o">,</span> <span class="mf">23.1</span><span class="o">,</span> <span class="mf">23.7</span><span class="o">,</span> <span class="mf">22.3</span><span class="o">,</span> <span class="mf">24.3</span><span class="o">,</span> <span class="mf">24.7</span><span class="o">,</span> <span class="mf">25.1</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">forecastNextWeek</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mf">22.3</span><span class="o">,</span> <span class="mf">19.8</span><span class="o">,</span> <span class="mf">18.4</span><span class="o">,</span> <span class="mf">18.0</span><span class="o">,</span> <span class="mf">17.6</span><span class="o">,</span> <span class="mf">17.5</span><span class="o">,</span> <span class="mf">17.2</span><span class="o">)</span>
+true &amp;&amp; true   // Logical and.
+true || false  // Logical or.
+true ^ true    // Logical xor.
+!true          // Negation.
 
-<span class="nf">println</span><span class="o">(</span><span class="mf">23.1</span> <span class="o">::</span> <span class="n">forecastThisWeek</span><span class="o">)</span>               <span class="c1">// Prepend element.</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">forecastThisWeek</span> <span class="o">:::</span> <span class="n">forecastNextWeek</span><span class="o">)</span>  <span class="c1">// Prepend list.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">forecastThisWeek</span><span class="o">.</span><span class="py">size</span><span class="o">)</span>                  <span class="c1">// Number of elements in list.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">forecastThisWeek</span><span class="o">.</span><span class="py">contains</span><span class="o">(</span><span class="mf">23.7</span><span class="o">))</span>        <span class="c1">// Does the list contain element?</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">forecastThisWeek</span><span class="o">.</span><span class="py">head</span><span class="o">)</span>                  <span class="c1">// The first element of the list.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">forecastThisWeek</span><span class="o">.</span><span class="py">tail</span><span class="o">)</span>                  <span class="c1">// Everything except the first element.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nf">forecastThisWeek</span><span class="o">(</span><span class="mi">3</span><span class="o">))</span>                    <span class="c1">// The n-th element.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">forecastThisWeek</span><span class="o">.</span><span class="py">isEmpty</span><span class="o">)</span>               <span class="c1">// Checks whether the list is emtpy.</span>
+/**** Lists ****/
+val forecastThisWeek = List(22.2, 23.1, 23.7, 22.3, 24.3, 24.7, 25.1)
+val forecastNextWeek = List(22.3, 19.8, 18.4, 18.0, 17.6, 17.5, 17.2)
 
-<span class="k">val</span> <span class="nv">list</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
-<span class="k">def</span> <span class="nf">sq</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>   <span class="c1">// Function that computes the square root of x.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">sq</span><span class="o">))</span>         <span class="c1">// Map each value in list to sq(_)</span>
+23.1 :: forecastThisWeek               // Prepend element.
+forecastThisWeek ::: forecastNextWeek  // Prepend list.
+forecastThisWeek.size                  // Number of elements in list.
+forecastThisWeek.contains(23.7)        // Does the list contain element?
+forecastThisWeek.head                  // The first element of the list.
+forecastThisWeek.tail                  // Everything except the first element.
+forecastThisWeek(3)                    // The n-th element.
+forecastThisWeek.isEmpty               // Checks whether the list is emtpy.
 
-<span class="k">def</span> <span class="nf">isEven</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>  <span class="c1">// Function that checks whether x is even.</span>
+val list = List(1, 2, 3, 4)
+def sq(x: Int): Int = x * x   // Function that computes the square root of x.
+list.map(sq)                  // Map each value in list to sq(_)
 
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">exists</span><span class="o">(</span><span class="n">isEven</span><span class="o">))</span>    <span class="c1">// Does list contain an element that isEven?</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">exists</span><span class="o">(</span><span class="k">_</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="o">))</span>     <span class="c1">// Implicit function, does the list contain an element larger than 3?</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">forall</span><span class="o">(</span><span class="n">isEven</span><span class="o">))</span>    <span class="c1">// Do all elements in list return true for isEven?</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">forall</span><span class="o">(</span><span class="k">_</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="o">))</span>  <span class="c1">// Implicit function, does the list contain an element larger than 3?</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="n">isEven</span><span class="o">))</span>    <span class="c1">// Filter out all elements that return true for isEven.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="k">_</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="o">))</span>     <span class="c1">// Filter out all elements less than 3.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">sum</span><span class="o">)</span>               <span class="c1">// The sum of all numbers in list.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">list</span><span class="o">.</span><span class="py">product</span><span class="o">)</span>           <span class="c1">// The product of all numbers in list.</span>
+def isEven(x: Int): Boolean = x % 2 == 0  // Function that checks whether x is even.
 
-<span class="cm">/**** Tuples ****/</span>
-<span class="k">val</span> <span class="nv">menuItem</span><span class="k">:</span> <span class="o">(</span><span class="kt">String</span><span class="o">,</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="s">"Vegan pie"</span><span class="o">,</span> <span class="mf">9.90</span><span class="o">)</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">menuItem</span><span class="o">.</span><span class="py">_1</span><span class="o">)</span>            <span class="c1">// Get the first value of the tuple.</span>
-<span class="nf">println</span><span class="o">(</span><span class="nv">menuItem</span><span class="o">.</span><span class="py">_2</span><span class="o">)</span>            <span class="c1">// Get the second value of the tuple.</span>
+list.exists(isEven)    // Does list contain an element that isEven?
+list.exists(_ &gt; 3)     // Implicit function, does the list contain an element larger than 3?
+list.forall(isEven)    // Do all elements in list return true for isEven?
+list.forall(_ &lt;= 100)  // Implicit function, does the list contain an element larger than 3?
+list.filter(isEven)    // Filter out all elements that return true for isEven.
+list.filter(_ &lt; 3)     // Filter out all elements less than 3.
+list.sum               // The sum of all numbers in list.
+list.product           // The product of all numbers in list.
 
-<span class="cm">/**** Sets ****/</span>
-<span class="k">val</span> <span class="nv">animals</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"cat"</span><span class="o">,</span> <span class="s">"cuttlefish"</span><span class="o">,</span> <span class="s">"turtle"</span><span class="o">,</span> <span class="s">"blue whale"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">mammals</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"cat"</span><span class="o">,</span> <span class="s">"blue whale"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">thingsOnEarth</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"cat"</span><span class="o">,</span> <span class="s">"cuttlefish"</span><span class="o">,</span> <span class="s">"turtle"</span><span class="o">,</span> <span class="s">"blue whale"</span><span class="o">,</span> <span class="s">"university"</span><span class="o">,</span> <span class="s">"chair"</span><span class="o">)</span>
+/**** Tuples ****/
+val menuItem: (String, Double) = ("Vegan pie", 9.90)
+menuItem._1            // Get the first value of the tuple.
+menuItem._2            // Get the second value of the tuple.
 
-<span class="nf">println</span><span class="o">(</span><span class="s">"cat"</span> <span class="n">in</span> <span class="n">animals</span><span class="o">)</span>         <span class="c1">// Test if element is in  the set.</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">mammals</span> <span class="o">&lt;</span> <span class="n">animals</span><span class="o">)</span>        <span class="c1">// Mammals is a subset of animals.</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">thingsOnEarth</span> <span class="o">&gt;</span> <span class="n">animals</span><span class="o">)</span>  <span class="c1">// Things on Earth is a superset of animals.</span>
+/**** Sets ****/
+val animals = Set("cat", "cuttlefish", "turtle", "blue whale")
+val mammals = Set("cat", "blue whale")
+val thingsOnEarth = Set("cat", "cuttlefish", "turtle", "blue whale", "university", "chair")
 
-<span class="k">val</span> <span class="nv">yourFriends</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"John"</span><span class="o">,</span> <span class="s">"Roberto"</span><span class="o">,</span> <span class="s">"Holly"</span><span class="o">,</span> <span class="s">"Doris"</span><span class="o">,</span> <span class="s">"Charlene"</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">myFriends</span> <span class="k">=</span>  <span class="nc">Set</span><span class="o">(</span><span class="s">"Vicky"</span><span class="o">,</span> <span class="s">"Charlene"</span><span class="o">,</span> <span class="s">"Ramiro"</span><span class="o">,</span> <span class="s">"Johnnie"</span><span class="o">,</span> <span class="s">"Roberto"</span><span class="o">)</span>
+"cat" in animals         // Test if element is in  the set.
+mammals &lt; animals        // Mammals is a subset of animals.
+thingsOnEarth &gt; animals  // Things on Earth is a superset of animals.
 
-<span class="nf">println</span><span class="o">(</span><span class="n">yourFriends</span> <span class="o">/\</span> <span class="n">myFriends</span><span class="o">)</span> <span class="c1">// Common friends using intersection.</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">yourFriends</span> <span class="o">\/</span> <span class="n">myFriends</span><span class="o">)</span> <span class="c1">// Friends we know together using union.</span>
-<span class="nf">println</span><span class="o">(</span><span class="n">myFriends</span> <span class="o">\</span> <span class="n">yourFriends</span><span class="o">)</span>  <span class="c1">// Who I know that you don't, using difference.</span>
+val yourFriends = Set("John", "Roberto", "Holly", "Doris", "Charlene")
+val myFriends =  Set("Vicky", "Charlene", "Ramiro", "Johnnie", "Roberto")
 
-<span class="nf">println</span><span class="o">({</span> <span class="nc">Set</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">)</span> <span class="o">|</span> <span class="n">isEven</span> <span class="k">_</span> <span class="o">})</span> <span class="c1">// Build a set of even numbers.</span>
+yourFriends /\ myFriends // Common friends using intersection.
+yourFriends \/ myFriends // Friends we know together using union.
+myFriends \ yourFriends  // Who I know that you don't, using difference.
 
-<span class="nf">println</span><span class="o">(</span><span class="n">myFriends</span> <span class="n">x</span> <span class="n">animals</span><span class="o">)</span>      <span class="c1">// Set of all pairs of friends and animals using cardinal product.</span>
-</code></pre></div></div>
+{ Set(0, 1, 2, 3, 4, 5) | isEven _ } // Build a set of even numbers.
+
+myFriends x animals      // Set of all pairs of friends and animals using cardinal product.
+</pre>
 
 <h3 id="references">References</h3>
 
-<p>Guest, O., &amp; Martin, A. E. (2021). <a href="https://doi.org/10.1177/1745691620970585">How computational modeling can force theory building in psychological science.</a> <em>Perspectives on Psychological Science 16</em>(4),789-802.</p>
+<p>Blokpoel, Mark (2024). mathlib: A Scala package for readable, verifiable and sustainable simulations of formal theory. Journal of Open Source Software, 9(99), 6049, <a href="https://doi.org/10.21105/joss.06049">https://doi.org/10.21105/joss.06049</a></p>
 
-<p>Odersky, M., Spoon, L., &amp; Venners, B. (2019). <em>Programming in Scala, 4th
-Edition</em>. Artima.</p>
+<p>Guest, Olivia, &amp; Martin, Andrea E. (2021). <a href="https://doi.org/10.1177/1745691620970585">How computational modeling can force theory building in psychological science.</a> <em>Perspectives on Psychological Science 16</em>(4),789-802.</p>
+
+<p>Odersky, Martin, Spoon, Lex, &amp; Venners, Bill (2019). <em>Programming in Scala, 4th Edition</em>. Artima.</p>
 
 
 <div class="nav-wrapper">
@@ -1066,7 +1179,7 @@ Edition</em>. Artima.</p>
 </div>
 
     </article>
-    <span class="print-footer">Scala and mathlib - September 10, 2025 - Mark Blokpoel and Iris van Rooij</span>
+    <span class="print-footer">Scala and mathlib - December 4, 2025 - Mark Blokpoel and Iris van Rooij</span>
     <footer>
   <hr class="slender">
   <ul class="footer-links">

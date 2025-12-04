@@ -12,7 +12,7 @@
   
     <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
   
-  
+
 
   <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
   
@@ -47,9 +47,28 @@
   <link rel="stylesheet" type="text/css" href="/lovelace/css/tufte.css">
   <!-- <link rel="stylesheet" type="text/css" href="/lovelace/css/print.css" media="print"> -->
 
-  <link rel="canonical" href="http://localhost:4000/lovelace/part_i/foundations">
+  <link rel="canonical" href="/lovelace/part_i/foundations">
 
-  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="http://localhost:4000/lovelace/feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="THEORETICAL MODELING" href="/lovelace/feed.xml" />
+
+
+  <!-- Embedding Script -->
+  <script src="https://scastie.scala-lang.org/embedded.js"></script>
+
+  <script>
+  window.addEventListener('load', function() {
+    scastie.Embedded('.simple');
+
+    scastie.Embedded('.mathlib', {
+    theme: 'light',
+    isWorksheetMode: true,
+    sbtConfig: 'libraryDependencies ++= Seq("com.markblokpoel" %% "mathlib" % "0.9.3", "com.markblokpoel" %% "mathlib-repo" % "0.1.5")',
+    targetType: 'jvm',
+    scalaVersion: '2.13.18'
+    });
+  });
+  </script>
+
 </head>
 
   <body>
@@ -270,7 +289,7 @@ Like the <span style="font-variant:small-caps;">Sorting</span> function can be c
 </div>
 
     </article>
-    <span class="print-footer">Conceptual foundations - September 10, 2025 - Mark Blokpoel and Iris van Rooij</span>
+    <span class="print-footer">Conceptual foundations - December 4, 2025 - Mark Blokpoel and Iris van Rooij</span>
     <footer>
   <hr class="slender">
   <ul class="footer-links">
