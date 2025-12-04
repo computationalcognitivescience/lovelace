@@ -12,7 +12,7 @@ of formal theory in Scala ```mathlib``` (Blokpoel, 2024). At the end of this cha
 able to use (adapt and run) the provided simulation code to compare three formal
 models of subset chocie. You will be able to test your intuitions about the theory and derive qualitative differences between them.
 
-We pick up the conversation between Verbal and Formal from [Chapter 4 - Subset Choice](/lovelace/part_ii/subset#dialogue-1-formalizing-inviting-guests). Formal is very excited to share the computer simulations they implemented of the theoretical models Formal and Verbal created. Formal has some suggestions on how to use the simulations, which they explain to Verbal.
+We pick up the conversation between Verbal and Formal from [Chapter 5 - Subset Choice](/lovelace/part_ii/subset#dialogue-1-formalizing-inviting-guests). Formal is very excited to share the computer simulations they implemented of the theoretical models Formal and Verbal created. Formal has some suggestions on how to use the simulations, which they explain to Verbal.
 
 {% indent 4 %}
 **Formal:** Welcome dr. Verbal! As promised, I have implemented computer simulations for three of our computational-level models.
@@ -40,7 +40,7 @@ We pick up the conversation between Verbal and Formal from [Chapter 4 - Subset C
 
 {% indent 4 %}
 **Formal:**
-Not necessarily. Formalizations that are different may behave the same or very similarly. Sometimes we can analytically derive such equivalence{% sidenote 'sn-id-equivalence' 'You can read about mathematically proving model equivalence in [Chapter 5 - Coherence](/lovelace/part_ii/coherence#Equivalence).' %} but this is not always easy. Computer simulations can come in handy.
+Not necessarily. Formalizations that are different may behave the same or very similarly. Sometimes we can analytically derive such equivalence{% sidenote 'sn-id-equivalence' 'You can read about mathematically proving model equivalence in [Chapter 6 - Coherence](/lovelace/part_ii/coherence#Equivalence).' %} but this is not always easy. Computer simulations can come in handy.
 {% endindent %}
 
 {% indent 0 %}
@@ -51,7 +51,7 @@ Not necessarily. Formalizations that are different may behave the same or very s
 **Formal:** Indeed, that is the idea.
 {% endindent %}
 
-If you jumped here directly from [Chapter 4 - Subset choice](/lovelace/part_ii/subset)
+If you jumped here directly from [Chapter 5 - Subset choice](/lovelace/part_ii/subset)
 you may find it helpful to first read [Chapter 9 - Scala and mathlib](/lovelace/part_ii/mathlib) to learn how to read (and write) Scala code using the ```mathlib``` library. In addition to the default ```mathlib``` library, the simulation code on this page includes supporting code which we explain first.
 
 ## Supporting code
@@ -113,7 +113,7 @@ persons
 </pre>
 
 ### Like-function
-The final support code Formal provided is used to create like relationships between persons. In the formal model this function is defined as $$like: P\times P \rightarrow \{true,false\}$$. After discussing with a colleague (see [Exercise 4.4 in Chapter 4](/lovelace/part_ii/subset#try-again)), Formal recognized that the like function was intended to exclude reflection (i.e., self-liking) and is symmetrical $$like(a,b)=like(b,a)$$ (i.e., it formalizes like or dislike *eachother*).{% sidenote 'sn-id-helper' 'The formalizations in this chapter are updated with these properties.' %}
+The final support code Formal provided is used to create like relationships between persons. In the formal model this function is defined as $$like: P\times P \rightarrow \{true,false\}$$. After discussing with a colleague (see [Exercise 4.4 in Chapter 5](/lovelace/part_ii/subset#try-again)), Formal recognized that the like function was intended to exclude reflection (i.e., self-liking) and is symmetrical $$like(a,b)=like(b,a)$$ (i.e., it formalizes like or dislike *eachother*).{% sidenote 'sn-id-helper' 'The formalizations in this chapter are updated with these properties.' %}
 
 One could specify a like relationship manually. Simply create persons, store them in values so we can refer to them and then use ```likes``` or ```dislikes``` to create like relationships.
 
@@ -254,7 +254,7 @@ more descriptive than the single letters used in math (see Table 1).
 
 {% stopandthink %}
 Take a moment to familiarize yourself again with the
-formalization. If you need more context, you can go back to [Chapter 4 - Subset
+formalization. If you need more context, you can go back to [Chapter 5 - Subset
 choice](/lovelace/part_ii/subset#) where the formalization was introduced.
 {% endstopandthink %}
 
@@ -627,7 +627,7 @@ For Step 1 and 3 some additional (helper) code is introduced. Step 1 introduces
 code that generates input using the same helper functions we've already seen,
 but at a larger scale (i.e., more inputs) and by giving control over input
 properties. This is the *constrained input generator* (see [Chapter
-7](/lovelace/part_iii/mathlib#simulation-architecture)). In Step 3, we perform
+9](/lovelace/part_iii/mathlib#simulation-architecture)). In Step 3, we perform
 an example analysis of the simulation data.
 
 {% question %}
