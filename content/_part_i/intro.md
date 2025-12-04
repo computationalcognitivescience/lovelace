@@ -23,7 +23,7 @@ So what *is* this book about?
 
 In this book you learn concepts and tools that you can use to make *your own* theoretical models in *any* domain of cognitive science or subfield of psychology of interest to you (barring some philosophical assumptions; which we'll get to soon), and to assess and situate existing theoretical models in the cognitive science and psychology literature.
 
-To this end, we will cover the conceptual foundations of computational explanation; mathematical concepts and notation; formalizing verbal theories; implementing and simulating theoretical models; and comparing models at different levels of explanation. We cover these points in Parts I - III using a small number of carefully selected examples. The main goal is to provide a playground and sandbox for practicing the basic conceptual and formal skills with a sufficiently diverse, but not too difficult, set of examples. The examples are constructed in ways that serve specific pedagogical aims. Once the basics are mastered, one can venture into the literature as suggested in our 'Further Reading' sections. Part IV ('Advanced topics') additionally provides examples of how the learned tools can be applied more widely and in non-traditional ways.  
+To this end, we will cover the conceptual foundations of computational explanation; mathematical concepts and notation; formalizing verbal theories; implementing and simulating theoretical models; and comparing models at different levels of explanation. We cover these points in Parts I - III using a small number of carefully selected examples. The main goal is to provide a playground and sandbox for practicing the basic conceptual and formal skills with a sufficiently diverse, but not too difficult, set of examples. The examples are constructed in ways that serve specific pedagogical aims. Once the basics are mastered, one can venture into the literature as suggested in our 'Further Reading' sections.
 
 ## Approach
 
@@ -44,7 +44,7 @@ These days it is probably not controversial to say that NHST{% sidenote 'mn-id-w
 To sculpt theories one needs other types of tools. The theoretician's tools are first and foremost tools for  better *thinking* and more explicitly and precisely *communicating* the resulting theoretical thoughts. These tools include functional analysis ('Can we decompose a system into its component processes and their interactions?'), conceptual analysis ('What do we mean by the words we use when expressing ideas and intuitions?'), formalization ('Can we make our informal intuitions formally precise?'), mathematical proofs ('Can we deduce properties and predictions from formalized ideas'), and computer simulation ('Can we improve our understanding by building a computational system that can mimic what we want to explain?').
 {% marginfigure 'mf-id-whatever' 'assets/img/sculpting_tools.jpeg' 'Sculpting requires a set of dedicated tools.' %}
 
-As with any tools, it takes practice to use these tools effectively and skillfully. This book gives the necessary practice. It starts at the basics and progressively trains you in independent theoretical modeling.   
+As with any tools, it takes practice to use these tools effectively and skillfully. This book gives the necessary practice. It starts at the basics and progressively trains you in independent theoretical modeling.
 
 ## Scala
 
