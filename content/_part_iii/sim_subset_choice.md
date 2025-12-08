@@ -12,7 +12,7 @@ of formal theory in Scala ```mathlib``` (Blokpoel, 2024). At the end of this cha
 able to use (adapt and run) the provided simulation code to compare three formal
 models of subset chocie. You will be able to test your intuitions about the theory and derive qualitative differences between them.
 
-We pick up the conversation between Verbal and Formal from [Chapter 5 - Subset Choice](/lovelace/part_ii/subset#dialogue-1-formalizing-inviting-guests). Formal is very excited to share the computer simulations they implemented of the theoretical models Formal and Verbal created. Formal has some suggestions on how to use the simulations, which they explain to Verbal.
+We pick up the conversation between Verbal and Formal from [Chapter 5 - Subset Choice](/lovelace/part_ii/subset#dialogue-1-formalizing-inviting-guests). Formal is very excited to share the computer simulations they implemented of the theoretical models Formal and Verbal created (this illustration is inspired by van Rooij and Blokpoel, 2020). Formal has some suggestions on how to use the simulations, which they explain to Verbal.
 
 {% indent 4 %}
 **Formal:** Welcome dr. Verbal! As promised, I have implemented computer simulations for three of our computational-level models.
@@ -775,3 +775,5 @@ Blokpoel, Mark (2024). mathlib: A Scala package for readable, verifiable and sus
 O’Leary, Maura, Williams, Rainey, & Peng Lee, Mario (2023). The Diverse Names Generator: An App for Decreasing Bias and Promoting Inclusion. In *Proceedings of the Linguistic Society of America 8*(1): 5541. [https://doi.org/10.3765/plsa.v8i1.5541](https://doi.org/10.3765/plsa.v8i1.5541).
 
 van Rooij, Iris, & Baggio, Giosuè (2021). [Theory before the test: How to build high-verisimilitude explanatory theories in psychological science.](https://journals.sagepub.com/doi/full/10.1177/1745691620970604) *Perspectives on Psychological Science, 16*(4) 682–697.
+
+van Rooij, I., & Blokpoel, M. (2020). Formalizing verbal theories: A tutorial by dialogue. Social Psychology 51(5), 285-298. [https://doi.org/10.1027/1864-9335/a000428](https://doi.org/10.1027/1864-9335/a000428)

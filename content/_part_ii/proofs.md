@@ -71,14 +71,14 @@ However, the list cannot be sorted, because $$n_i\nless n_j$$ and $$n_j\nless n_
 
 ### What to learn from the example?
 
-The constructions of formal proofs is a creative skill, from the sprouting of conjectures to the formal proofs themselves. While there are formal rules and constraints that are navigated, there is no procedure that one can follow to derive a formal property or prove it. With practise and experience, intuitions can be sharpened that will help constructing formal proofs. A further perspective to consider is that proofs are intended to convince others of a particular point, they are arguments. Sometimes an argument requires more formal details, other times a sketch can be convincing enough. Think of the formal nature of a proof not as an obstacle, but rather as a way to strengthen theoretical arguments. 
+The constructions of formal proofs is a creative skill, from the sprouting of conjectures to the formal proofs themselves. While there are formal rules and constraints that are navigated, there is no procedure that one can follow to derive a formal property or prove it. With practise and experience, intuitions can be sharpened that will help constructing formal proofs. A further perspective to consider is that proofs are intended to convince others of a particular point, they are arguments. Sometimes an argument requires more formal details, other times a sketch can be convincing enough. Think of the formal nature of a proof not as an obstacle, but rather as a way to strengthen theoretical arguments.
 
 We next cover some of the fascinating history of formal proofs, after which we illustrate three commonly used formal proof strategies.
 
 
 ## History of formal proofs
 
-Similarly to math and formal notation, the long history of formal proofs often is lost in the shadow of more recent (western) approaches. Yet, formal proofs, formal reasoning and logic have a long history dating back to hundrends of years BC all across the world such as China, India, Eqypt, Babylon, Ancient Greece and the Middle East. Even a short summary of this history would require volumes of books. Here, we highlight several important discoveries in the history of formal proofs so that we may appreciate that our current work is supported by a long tradition that spans millenia and many diverse cultures and people.
+Similarly to math and formal notation, the long history of formal proofs often is lost in the shadow of more recent (western) approaches. Yet, formal proofs, formal reasoning and logic have a long history dating back to hundrends of years BC all across the world such as China, India, Eqypt, Babylon, Ancient Greece and the Syria. Even a short summary of this history would require volumes of books. Here, we highlight several important discoveries in the history of formal proofs so that we may appreciate that our current work is supported by a long tradition that spans millenia and many diverse cultures and people.
 
 
 ### India
@@ -112,7 +112,7 @@ What stirred? Where? In whose protection?<br/>' 'Nasadiya Sukta (Hymn of Creatio
 
 ### China
 
-In the Chinese 墨家 Mohist tradition founded by 墨翟 Mozi (c. 470 BC -- c. 391 BC) logic and argumentation are based on analogies rather than mathematical reasoning. In Mohism the concept of fa is a standard or model, in a broad sense (e.g., fa could be a role model such as a teacher). They used the three *fa* method for statements by which "the distinctions between 'this' and 'not' and benefit and harm...can be clearly known" (Book 35, "Rejecting Fatalism"; Fraser, 2023). 
+In the Chinese 墨家 Mohist tradition founded by 墨翟 Mozi (c. 470 BC -- c. 391 BC) logic and argumentation are based on analogies rather than mathematical reasoning. In Mohism the concept of fa is a standard or model, in a broad sense (e.g., fa could be a role model such as a teacher). They used the three *fa* method for statements by which "the distinctions between 'this' and 'not' and benefit and harm...can be clearly known" (Book 35, "Rejecting Fatalism"; Fraser, 2023).
 {% marginfigure 'mf-id-mozi' 'assets/img/Mozi.jpg' 'Text from 7th volume of Mozi (墨子卷之七).' %}
 
 (1) Does the statement have for precidence and origin?<br/>
@@ -133,7 +133,7 @@ Perhaps most recognizable to people trained in western philosophy are the contri
 
 This formal system allowed Aristotle, for example, to deal with contradicitions in a systematic way (Bochenski, 1970).
 
-### Middle East
+### Syria
 
 {% marginfigure 'mf-id-al_farabi' 'assets/img/al_farabi.jpg' 'Pages from Maqala fi aghrad kitab Ma ba&#39;d al-tabi&#39;a (On the scope of Aristotle&#39;s Metaphysics) The Bodleian Library, University of Oxford, Shelfmark: MS. Arab. d. 84.'%}
 
