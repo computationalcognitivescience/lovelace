@@ -27,9 +27,6 @@ scholar:
   style: apa
   sort_by: author
 
-scalafiddle:
-  theme: light
-
 collections_dir: content
 
 collections:
