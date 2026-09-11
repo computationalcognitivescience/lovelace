@@ -1,7 +1,7 @@
 ---
 
 ---
-@import "../_sass/settings";
+@use "../_sass/settings";
         * {
     -webkit-transition: none !important;
     transition: none !important;
@@ -24,7 +24,7 @@
 
     }
     html body span.print-footer{
-      font-family: $sans-font;
+      font-family: settings.$sans-font;
       font-size: 9pt;
       margin-top: 22.4pt;
       padding-top: 4pt;

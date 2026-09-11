@@ -13,10 +13,11 @@ nav_exclude: true
 
 // Imports to create final
 
-@import "../_sass/fonts";
-@import "../_sass/custom";
-@import "../_sass/settings";
-@import "../_sass/syntax-highlighting";
+@use "sass:color";
+@use "../_sass/fonts";
+@use "../_sass/custom";
+@use "../_sass/settings";
+@use "../_sass/syntax-highlighting";
 
 // Global Resets
 //
@@ -60,26 +61,26 @@ html{
 }
 // sets link style according to values in _settings.scss
 a {
-  color: $contrast-color;
+  color: settings.$contrast-color;
   text-decoration: none;
 }
 
-p > a, cite > a, span > a { @if $link-style == underline
+p > a, cite > a, span > a { @if settings.$link-style == underline
     {
-      color: $text-color;
+      color: settings.$text-color;
       text-decoration: none;
-      background: -webkit-linear-gradient($bg-color, $bg-color), -webkit-linear-gradient($bg-color, $bg-color), -webkit-linear-gradient(currentColor, currentColor);
-      background: linear-gradient($bg-color, $bg-color), linear-gradient($bg-color, $bg-color), linear-gradient(currentColor, currentColor);
+      background: -webkit-linear-gradient(settings.$bg-color, settings.$bg-color), -webkit-linear-gradient(settings.$bg-color, settings.$bg-color), -webkit-linear-gradient(currentColor, currentColor);
+      background: linear-gradient(settings.$bg-color, settings.$bg-color), linear-gradient(settings.$bg-color, settings.$bg-color), linear-gradient(currentColor, currentColor);
       -webkit-background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
       -moz-background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
       background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
       background-repeat: no-repeat, no-repeat, repeat-x;
-      text-shadow: 0.03em 0 $bg-color, -0.03em 0 $bg-color, 0 0.03em $bg-color, 0 -0.03em $bg-color, 0.06em 0 $bg-color, -0.06em 0 $bg-color, 0.09em 0 $bg-color, -0.09em 0 $bg-color, 0.12em 0 $bg-color, -0.12em 0 $bg-color, 0.15em 0 $bg-color, -0.15em 0 $bg-color;
+      text-shadow: 0.03em 0 settings.$bg-color, -0.03em 0 settings.$bg-color, 0 0.03em settings.$bg-color, 0 -0.03em settings.$bg-color, 0.06em 0 settings.$bg-color, -0.06em 0 settings.$bg-color, 0.09em 0 settings.$bg-color, -0.09em 0 settings.$bg-color, 0.12em 0 settings.$bg-color, -0.12em 0 settings.$bg-color, 0.15em 0 settings.$bg-color, -0.15em 0 settings.$bg-color;
       background-position: 0% 93%, 100% 93%, 0% 93%; 
     }
     @else
     {
-      color: $contrast-color;
+      color: settings.$contrast-color;
       text-decoration: none;
     }
   }
@@ -88,9 +89,9 @@ body { width: 87.5%;
        margin-left: auto;
        margin-right: auto;
        padding-left: 12.5%;
-       font-family: $body-font;
-       background-color: $bg-color;
-       color: $text-color;
+       font-family: settings.$body-font;
+       background-color: settings.$bg-color;
+       color: settings.$text-color;
        max-width: 1400px;
        counter-reset: sidenote-counter; }
 
@@ -169,10 +170,10 @@ blockquote footer {  font-size: 1.1rem;
                     text-align: right; }
 */
 
-.sans { font-family: $sans-font;
+.sans { font-family: settings.$sans-font;
         letter-spacing: .03em; }
 
-pre, pre code, p code, p pre code { font-family: $code-font;  // removed .code 'class' since code is an actual html tag
+pre, pre code, p code, p pre code { font-family: settings.$code-font;  // removed .code 'class' since code is an actual html tag
         font-size: 1rem;                   // also added p code, p pre code and pre selector to account for Markdown parsing
         line-height: 1.71428571;        // of triple backticks plus rationalized line-heights and margins
         margin-top: 1.71428571rem; }
@@ -185,10 +186,10 @@ h1 code, h2 code, h3 code { font-size: 0.80em; } //left in for no real reason
 table, table.booktabs { width: auto;  //making booktabs style tables the unstyled default in case someone uses Markdown styling
                  //margin: 0 auto;
                  border-spacing: 0px;
-                 border-top: 2px solid $border-color;
-                 border-bottom: 2px solid $border-color; }
+                 border-top: 2px solid settings.$border-color;
+                 border-bottom: 2px solid settings.$border-color; }
 
-.booktabs th, th { border-bottom: 1px solid $border-color;
+.booktabs th, th { border-bottom: 1px solid settings.$border-color;
                padding: 0.65ex 0.5em 0.4ex 0.5em;
                font-weight: normal;
                //text-align: center; 
@@ -197,7 +198,7 @@ table, table.booktabs { width: auto;  //making booktabs style tables the unstyle
 th, td{ font-size: 1.2rem;
         line-height: 1.71428571;  }
 
-.booktabs th.cmid, th { border-bottom: 1px solid lighten($border-color, 25%); }
+.booktabs th.cmid, th { border-bottom: 1px solid color.adjust(settings.$border-color, $lightness: 25%); }
 
 .booktabs th.nocmid { border-bottom: none; }
 
@@ -286,7 +287,7 @@ blockquote .sidenote, blockquote .marginnote { margin-right: -79% }
 
 .sidenote-number:after, .sidenote:before { content: counter(sidenote-counter) " ";
                                            font-family: et-bembo-roman-old-style;
-                                           color: $contrast-color; //added color
+                                           color: settings.$contrast-color; //added color
                                            position: relative;
                                            vertical-align: baseline; }
 
@@ -296,7 +297,7 @@ blockquote .sidenote, blockquote .marginnote { margin-right: -79% }
                          left: 0.1rem; }
 
 .sidenote:before { content: counter(sidenote-counter) ".\000a0"; // this is unicode for a non-breaking space
-                   color: $contrast-color;
+                   color: settings.$contrast-color;
                    top: 0rem; } //removed superscripting for numerical reference in sidenote
 
 p, footer, div.table-wrapper,  .MJXc-display { width: 55%; }
@@ -334,7 +335,7 @@ label.sidenote-number { display: inline; }
 
 label.margin-toggle:not(.sidenote-number) { display: none; }
 
-@media (max-width: 760px) { label.margin-toggle:not(.sidenote-number) { display: inline; color: $contrast-color; }
+@media (max-width: 760px) { label.margin-toggle:not(.sidenote-number) { display: inline; color: settings.$contrast-color; }
                             .sidenote, .marginnote { display: none; }
                             .margin-toggle:checked + .sidenote,
                             .margin-toggle:checked + .marginnote { display: block;
@@ -369,7 +370,7 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
 /* -- Jekyll specific styling --*/
 //helper classes
 
-.contrast { color: $contrast-color;}
+.contrast { color: settings.$contrast-color;}
 .smaller { font-size: 80%;}
 //Nav and Footer styling area
 
@@ -387,10 +388,10 @@ nav.group a.active{ text-decoration: underline; }
 
 header > nav  a{
   font-size: 1.2rem;
-  font-family: $sans-font;
+  font-family: settings.$sans-font;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: $contrast-color;
+  color: settings.$contrast-color;
   padding-top: 1.5rem;
   text-decoration: none;
   display: inline-block;
@@ -423,9 +424,9 @@ ul.footer-links li{
 //change font color for credit links in footer
 
 .credits{
-  font-family: $sans-font;
+  font-family: settings.$sans-font;
     & a{
-      color: $contrast-color;
+      color: settings.$contrast-color;
     }
 }
 
@@ -521,7 +522,7 @@ hr.slender {
 
     }
     html body span.print-footer{
-      font-family: $sans-font;
+      font-family: settings.$sans-font;
       font-size: 9pt;
       margin-top: 22.4pt;
       padding-top: 4pt;
